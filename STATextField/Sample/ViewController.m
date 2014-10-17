@@ -7,8 +7,11 @@
 //
 
 #import "ViewController.h"
+#import "STATextField.h"
 
 @interface ViewController ()
+
+@property (nonatomic, strong) IBOutlet STATextField *textField;
 
 @end
 

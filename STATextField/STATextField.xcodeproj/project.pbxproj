@@ -7,13 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		93021A0119F0F3670065B144 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 93021A0019F0F3670065B144 /* main.m */; };
-		93021A0419F0F3670065B144 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 93021A0319F0F3670065B144 /* AppDelegate.m */; };
-		93021A0719F0F3670065B144 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93021A0619F0F3670065B144 /* ViewController.m */; };
-		93021A0A19F0F3670065B144 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93021A0819F0F3670065B144 /* Main.storyboard */; };
-		93021A0C19F0F3670065B144 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93021A0B19F0F3670065B144 /* Images.xcassets */; };
-		93021A0F19F0F3670065B144 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93021A0D19F0F3670065B144 /* LaunchScreen.xib */; };
 		93021A1B19F0F3670065B144 /* STATextFieldTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 93021A1A19F0F3670065B144 /* STATextFieldTests.m */; };
+		93021A3019F0F7A50065B144 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 93021A2619F0F7A50065B144 /* AppDelegate.m */; };
+		93021A3119F0F7A50065B144 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93021A2719F0F7A50065B144 /* LaunchScreen.xib */; };
+		93021A3219F0F7A50065B144 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93021A2919F0F7A50065B144 /* Main.storyboard */; };
+		93021A3319F0F7A50065B144 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93021A2B19F0F7A50065B144 /* Images.xcassets */; };
+		93021A3419F0F7A50065B144 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 93021A2C19F0F7A50065B144 /* Info.plist */; };
+		93021A3519F0F7A50065B144 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 93021A2D19F0F7A50065B144 /* main.m */; };
+		93021A3619F0F7A50065B144 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93021A2F19F0F7A50065B144 /* ViewController.m */; };
+		93021A3A19F0F8880065B144 /* STATextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 93021A3919F0F8880065B144 /* STATextField.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,18 +30,20 @@
 
 /* Begin PBXFileReference section */
 		930219FB19F0F3670065B144 /* STATextField.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STATextField.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		930219FF19F0F3670065B144 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		93021A0019F0F3670065B144 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		93021A0219F0F3670065B144 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		93021A0319F0F3670065B144 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		93021A0519F0F3670065B144 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		93021A0619F0F3670065B144 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		93021A0919F0F3670065B144 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		93021A0B19F0F3670065B144 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		93021A0E19F0F3670065B144 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		93021A1419F0F3670065B144 /* STATextFieldTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = STATextFieldTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		93021A1919F0F3670065B144 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		93021A1A19F0F3670065B144 /* STATextFieldTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STATextFieldTests.m; sourceTree = "<group>"; };
+		93021A2519F0F7A50065B144 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		93021A2619F0F7A50065B144 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		93021A2819F0F7A50065B144 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		93021A2A19F0F7A50065B144 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		93021A2B19F0F7A50065B144 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		93021A2C19F0F7A50065B144 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		93021A2D19F0F7A50065B144 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		93021A2E19F0F7A50065B144 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		93021A2F19F0F7A50065B144 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		93021A3819F0F8880065B144 /* STATextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STATextField.h; sourceTree = "<group>"; };
+		93021A3919F0F8880065B144 /* STATextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STATextField.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,7 +67,8 @@
 		930219F219F0F3670065B144 = {
 			isa = PBXGroup;
 			children = (
-				930219FD19F0F3670065B144 /* STATextField */,
+				93021A3719F0F8550065B144 /* STATextField */,
+				93021A2419F0F7A50065B144 /* Sample */,
 				93021A1719F0F3670065B144 /* STATextFieldTests */,
 				930219FC19F0F3670065B144 /* Products */,
 			);
@@ -76,30 +81,6 @@
 				93021A1419F0F3670065B144 /* STATextFieldTests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		930219FD19F0F3670065B144 /* STATextField */ = {
-			isa = PBXGroup;
-			children = (
-				93021A0219F0F3670065B144 /* AppDelegate.h */,
-				93021A0319F0F3670065B144 /* AppDelegate.m */,
-				93021A0519F0F3670065B144 /* ViewController.h */,
-				93021A0619F0F3670065B144 /* ViewController.m */,
-				93021A0819F0F3670065B144 /* Main.storyboard */,
-				93021A0B19F0F3670065B144 /* Images.xcassets */,
-				93021A0D19F0F3670065B144 /* LaunchScreen.xib */,
-				930219FE19F0F3670065B144 /* Supporting Files */,
-			);
-			path = STATextField;
-			sourceTree = "<group>";
-		};
-		930219FE19F0F3670065B144 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				930219FF19F0F3670065B144 /* Info.plist */,
-				93021A0019F0F3670065B144 /* main.m */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		93021A1719F0F3670065B144 /* STATextFieldTests */ = {
@@ -117,6 +98,31 @@
 				93021A1919F0F3670065B144 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		93021A2419F0F7A50065B144 /* Sample */ = {
+			isa = PBXGroup;
+			children = (
+				93021A2519F0F7A50065B144 /* AppDelegate.h */,
+				93021A2619F0F7A50065B144 /* AppDelegate.m */,
+				93021A2719F0F7A50065B144 /* LaunchScreen.xib */,
+				93021A2919F0F7A50065B144 /* Main.storyboard */,
+				93021A2B19F0F7A50065B144 /* Images.xcassets */,
+				93021A2C19F0F7A50065B144 /* Info.plist */,
+				93021A2D19F0F7A50065B144 /* main.m */,
+				93021A2E19F0F7A50065B144 /* ViewController.h */,
+				93021A2F19F0F7A50065B144 /* ViewController.m */,
+			);
+			path = Sample;
+			sourceTree = "<group>";
+		};
+		93021A3719F0F8550065B144 /* STATextField */ = {
+			isa = PBXGroup;
+			children = (
+				93021A3819F0F8880065B144 /* STATextField.h */,
+				93021A3919F0F8880065B144 /* STATextField.m */,
+			);
+			path = STATextField;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,9 +205,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93021A0A19F0F3670065B144 /* Main.storyboard in Resources */,
-				93021A0F19F0F3670065B144 /* LaunchScreen.xib in Resources */,
-				93021A0C19F0F3670065B144 /* Images.xcassets in Resources */,
+				93021A3419F0F7A50065B144 /* Info.plist in Resources */,
+				93021A3319F0F7A50065B144 /* Images.xcassets in Resources */,
+				93021A3119F0F7A50065B144 /* LaunchScreen.xib in Resources */,
+				93021A3219F0F7A50065B144 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,9 +226,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93021A0719F0F3670065B144 /* ViewController.m in Sources */,
-				93021A0419F0F3670065B144 /* AppDelegate.m in Sources */,
-				93021A0119F0F3670065B144 /* main.m in Sources */,
+				93021A3619F0F7A50065B144 /* ViewController.m in Sources */,
+				93021A3519F0F7A50065B144 /* main.m in Sources */,
+				93021A3A19F0F8880065B144 /* STATextField.m in Sources */,
+				93021A3019F0F7A50065B144 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,20 +252,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		93021A0819F0F3670065B144 /* Main.storyboard */ = {
+		93021A2719F0F7A50065B144 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				93021A0919F0F3670065B144 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		93021A0D19F0F3670065B144 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				93021A0E19F0F3670065B144 /* Base */,
+				93021A2819F0F7A50065B144 /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		93021A2919F0F7A50065B144 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				93021A2A19F0F7A50065B144 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -345,7 +353,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = STATextField/Info.plist;
+				INFOPLIST_FILE = Sample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -355,7 +363,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = STATextField/Info.plist;
+				INFOPLIST_FILE = Sample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
