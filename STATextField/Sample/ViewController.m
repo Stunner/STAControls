@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "STATextField.h"
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 @interface ViewController ()
 
@@ -20,6 +21,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    [self.textField.rac_textSignal subscribeNext:^(id x) {
+        NSLog(@"%@", x);
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
