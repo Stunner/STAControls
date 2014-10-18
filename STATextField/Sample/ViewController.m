@@ -22,9 +22,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    [self.textField.rac_textSignal subscribeNext:^(id x) {
-        NSLog(@"%@", x);
-    }];
+//    [self.textField.rac_textSignal subscribeNext:^(id x) {
+//        NSLog(@"%@", x);
+//    }];
+    
+    _textField.placeholder = @"Hello world!";
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning {

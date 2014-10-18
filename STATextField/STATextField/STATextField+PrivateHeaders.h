@@ -14,4 +14,10 @@
 shouldChangeCharactersInRange:(NSRange)range
    replacementString:(NSString *)string;
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField;
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField;
+
+- (void)textFieldDidEndEditing:(UITextField *)textField;
+
 @end
