@@ -74,21 +74,26 @@ replacementString:(NSString *)string
 #pragma mark - STATextField
 
 @interface STATextField () {
-    STATextFieldPrivateDelegate *_myDelegate;
-    NSString *_myPlaceholder;
-    NSAttributedString *_myAttributedPlaceholder;
+    STATextFieldPrivateDelegate *_internalDelegate;
+    NSString *_internalPlaceholder;
+    NSAttributedString *_internalAttributedPlaceholder;
 }
-
-//@property (nonatomic, strong) NSString *myPlaceholder;
-//@property (nonatomic, strong) NSAttributedString *myAttributedPlaceholder;
 
 @end
 
 @implementation STATextField
 
 - (void)initInternal {
-    _myDelegate = [[STATextFieldPrivateDelegate alloc] init];
-    [super setDelegate:_myDelegate];
+    _internalDelegate = [[STATextFieldPrivateDelegate alloc] init];
+    [super setDelegate:_internalDelegate];
+    [self addTarget:self
+             action:@selector(textFieldDidChange:)
+        forControlEvents:UIControlEventEditingChanged];
+}
+
+- (void)textFieldDidChange:(id)sender {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
 }
 
 - (id)initWithFrame:(CGRect)frame {
@@ -102,35 +107,35 @@ replacementString:(NSString *)string
     if (!(self = [super initWithCoder:aDecoder]))
         return nil;
     [self initInternal];
-    _myPlaceholder = self.placeholder;
-    _myAttributedPlaceholder = self.attributedPlaceholder;
+    _internalPlaceholder = self.placeholder;
+    _internalAttributedPlaceholder = self.attributedPlaceholder;
     return self;
 }
 
 - (void)setPlaceholder:(NSString *)placeholder {
-    _myPlaceholder = placeholder;
+    _internalPlaceholder = placeholder;
     [super setPlaceholder:placeholder];
 }
 
 - (void)setAttributedPlaceholder:(NSAttributedString *)attributedPlaceholder {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    _myAttributedPlaceholder = attributedPlaceholder;
+    _internalAttributedPlaceholder = attributedPlaceholder;
     [super setAttributedPlaceholder:attributedPlaceholder];
 }
 
 #pragma mark Delegate Related
 
 - (void)setDelegate:(id<UITextFieldDelegate>)delegate {
-    _myDelegate->_userDelegate = delegate;
+    _internalDelegate->_userDelegate = delegate;
     // Scroll view delegate caches whether the delegate responds to some of the delegate
     // methods, so we need to force it to re-evaluate if the delegate responds to them
     super.delegate = nil;
-    super.delegate = (id)_myDelegate;
+    super.delegate = (id)_internalDelegate;
 }
 
 - (id<UITextFieldDelegate>)delegate {
-    return _myDelegate->_userDelegate;
+    return _internalDelegate->_userDelegate;
 }
 
 - (BOOL)staTextField:(UITextField *)textField
@@ -160,10 +165,10 @@ shouldChangeCharactersInRange:(NSRange)range
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
     if ([textField.text length] < 1) {
-        if (_myAttributedPlaceholder) { //TODO: consider looking at which field was set most recently to detremine which placeholder gets priority
-            textField.attributedPlaceholder = _myAttributedPlaceholder;
-        } else if (_myPlaceholder) {
-            textField.placeholder = _myPlaceholder;
+        if (_internalAttributedPlaceholder) { //TODO: consider looking at which field was set most recently to determine which placeholder gets priority
+            textField.attributedPlaceholder = _internalAttributedPlaceholder;
+        } else if (_internalPlaceholder) {
+            textField.placeholder = _internalPlaceholder;
         }
     }
 }
