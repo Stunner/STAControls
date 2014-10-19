@@ -29,9 +29,15 @@
     _textField.placeholder = @"Hello world!";
 }
 
+
+- (IBAction)hideKeyboard:(id)sender {
+    [_textField resignFirstResponder];
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
+    [_textField resignFirstResponder];
     return YES;
 }
 
