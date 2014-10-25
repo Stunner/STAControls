@@ -7,12 +7,12 @@
 //
 
 #import "ViewController.h"
-#import "STATextField.h"
+#import "STAATMTextField.h"
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
 @interface ViewController ()
 
-@property (nonatomic, strong) IBOutlet STATextField *textField;
+@property (nonatomic, strong) IBOutlet STAATMTextField *textField;
 
 @end
 
@@ -27,6 +27,7 @@
 //    }];
     
     _textField.placeholder = @"Hello world!";
+    _textField.keyboardType = UIKeyboardTypeDecimalPad;
 }
 
 

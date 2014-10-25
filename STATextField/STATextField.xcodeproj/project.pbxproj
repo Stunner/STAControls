@@ -17,6 +17,9 @@
 		93021A3619F0F7A50065B144 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93021A2F19F0F7A50065B144 /* ViewController.m */; };
 		93021A3A19F0F8880065B144 /* STATextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 93021A3919F0F8880065B144 /* STATextField.m */; };
 		93021A3D19F118EC0065B144 /* STATextField+PrivateHeaders.m in Sources */ = {isa = PBXBuildFile; fileRef = 93021A3C19F118EC0065B144 /* STATextField+PrivateHeaders.m */; };
+		9305C73619FA46C40040BF8A /* STATextFieldUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 9305C73519FA46C40040BF8A /* STATextFieldUtility.m */; };
+		9305C73919FA4D090040BF8A /* NSString+STATextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 9305C73819FA4D090040BF8A /* NSString+STATextField.m */; };
+		93A9979319F4F6A700DB1678 /* STAATMTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A9979219F4F6A700DB1678 /* STAATMTextField.m */; };
 		BD7B7A221A1521D9A25AC4EB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6EC54A452CEF08E418A3085 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +51,12 @@
 		93021A3919F0F8880065B144 /* STATextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STATextField.m; sourceTree = "<group>"; };
 		93021A3B19F118EC0065B144 /* STATextField+PrivateHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "STATextField+PrivateHeaders.h"; sourceTree = "<group>"; };
 		93021A3C19F118EC0065B144 /* STATextField+PrivateHeaders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "STATextField+PrivateHeaders.m"; sourceTree = "<group>"; };
+		9305C73419FA46C40040BF8A /* STATextFieldUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STATextFieldUtility.h; sourceTree = "<group>"; };
+		9305C73519FA46C40040BF8A /* STATextFieldUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STATextFieldUtility.m; sourceTree = "<group>"; };
+		9305C73719FA4D090040BF8A /* NSString+STATextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+STATextField.h"; sourceTree = "<group>"; };
+		9305C73819FA4D090040BF8A /* NSString+STATextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+STATextField.m"; sourceTree = "<group>"; };
+		93A9979119F4F6A700DB1678 /* STAATMTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAATMTextField.h; sourceTree = "<group>"; };
+		93A9979219F4F6A700DB1678 /* STAATMTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAATMTextField.m; sourceTree = "<group>"; };
 		A5FAFFD39F9AD1892CBA12CB /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		AF7678045F1F8459FB61CEEA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		B6EC54A452CEF08E418A3085 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,6 +150,12 @@
 				93021A3919F0F8880065B144 /* STATextField.m */,
 				93021A3B19F118EC0065B144 /* STATextField+PrivateHeaders.h */,
 				93021A3C19F118EC0065B144 /* STATextField+PrivateHeaders.m */,
+				93A9979119F4F6A700DB1678 /* STAATMTextField.h */,
+				93A9979219F4F6A700DB1678 /* STAATMTextField.m */,
+				9305C73419FA46C40040BF8A /* STATextFieldUtility.h */,
+				9305C73519FA46C40040BF8A /* STATextFieldUtility.m */,
+				9305C73719FA4D090040BF8A /* NSString+STATextField.h */,
+				9305C73819FA4D090040BF8A /* NSString+STATextField.m */,
 			);
 			path = STATextField;
 			sourceTree = "<group>";
@@ -200,6 +215,7 @@
 		930219F319F0F3670065B144 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = STA;
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Aaron Jubbal";
 				TargetAttributes = {
@@ -292,9 +308,12 @@
 			files = (
 				93021A3619F0F7A50065B144 /* ViewController.m in Sources */,
 				93021A3519F0F7A50065B144 /* main.m in Sources */,
+				9305C73619FA46C40040BF8A /* STATextFieldUtility.m in Sources */,
 				93021A3A19F0F8880065B144 /* STATextField.m in Sources */,
 				93021A3D19F118EC0065B144 /* STATextField+PrivateHeaders.m in Sources */,
 				93021A3019F0F7A50065B144 /* AppDelegate.m in Sources */,
+				9305C73919FA4D090040BF8A /* NSString+STATextField.m in Sources */,
+				93A9979319F4F6A700DB1678 /* STAATMTextField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
