@@ -23,6 +23,7 @@
     
     _textField.placeholder = @"Hello world!";
     _textField.keyboardType = UIKeyboardTypeDecimalPad;
+    _textField.atmEntryEnabled = YES;
 }
 
 

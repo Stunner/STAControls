@@ -17,6 +17,7 @@
     [super initInternal];
     
     [super setText:@"0.00"];
+    _atmEntryEnabled = YES;
 }
 
 - (void)setText:(NSString *)text {
@@ -24,7 +25,9 @@
 }
 
 - (CGRect)caretRectForPosition:(UITextPosition *)position {
-    
+    if (!self.atmEntryEnabled) {
+        return [super caretRectForPosition:position];
+    }
     return CGRectZero;
 }
 
@@ -33,6 +36,10 @@ shouldChangeCharactersInRange:(NSRange)range
    replacementString:(NSString *)string
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    if (!self.atmEntryEnabled) {
+        return YES;
+    }
     
     NSString *newString = [textField.text stringByReplacingCharactersInRange:range
                                                                   withString:string];

@@ -10,4 +10,6 @@
 
 @interface STAATMTextField : STATextField
 
+@property (nonatomic, assign) BOOL atmEntryEnabled;
+
 @end
