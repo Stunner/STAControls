@@ -20,7 +20,6 @@
 		9305C73619FA46C40040BF8A /* STATextFieldUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 9305C73519FA46C40040BF8A /* STATextFieldUtility.m */; };
 		9305C73919FA4D090040BF8A /* NSString+STATextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 9305C73819FA4D090040BF8A /* NSString+STATextField.m */; };
 		93A9979319F4F6A700DB1678 /* STAATMTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A9979219F4F6A700DB1678 /* STAATMTextField.m */; };
-		BD7B7A221A1521D9A25AC4EB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6EC54A452CEF08E418A3085 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,7 +66,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BD7B7A221A1521D9A25AC4EB /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,11 +174,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 93021A1E19F0F3670065B144 /* Build configuration list for PBXNativeTarget "STATextField" */;
 			buildPhases = (
-				B5EA226B8A7B31FC6E35699D /* Check Pods Manifest.lock */,
 				930219F719F0F3670065B144 /* Sources */,
 				930219F819F0F3670065B144 /* Frameworks */,
 				930219F919F0F3670065B144 /* Resources */,
-				F70E79D0A565716C610DD8C1 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -267,39 +263,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		B5EA226B8A7B31FC6E35699D /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		F70E79D0A565716C610DD8C1 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		930219F719F0F3670065B144 /* Sources */ = {
