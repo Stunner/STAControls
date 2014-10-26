@@ -37,13 +37,17 @@
 shouldChangeCharactersInRange:(NSRange)range
 replacementString:(NSString *)string
 {
-    BOOL returnable = [(STATextField *)textField staTextField:textField
-                                shouldChangeCharactersInRange:range
-                                            replacementString:string];
+    BOOL shouldChangeCharacters = [(STATextField *)textField staTextField:textField
+                                            shouldChangeCharactersInRange:range
+                                                        replacementString:string];
     if ([_userDelegate respondsToSelector:_cmd]) {
-        returnable = [_userDelegate textField:textField shouldChangeCharactersInRange:range replacementString:string];
+        if (!shouldChangeCharacters) {
+            [_userDelegate textField:textField shouldChangeCharactersInRange:range replacementString:string];
+        } else {
+            shouldChangeCharacters = [_userDelegate textField:textField shouldChangeCharactersInRange:range replacementString:string];
+        }
     }
-    return returnable;
+    return shouldChangeCharacters;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
