@@ -11,5 +11,6 @@
 @interface STATextField : UITextField
 
 @property (nonatomic, assign) BOOL resignsFirstResponderUponReturnKeyPress;
+@property (nonatomic, strong) UIControl *nextFirstResponderUponReturnKeyPress;
 
 @end

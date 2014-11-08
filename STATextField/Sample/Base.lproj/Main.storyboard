@@ -35,11 +35,19 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n2X-Ju-MQ8" customClass="STATextField">
-                                <rect key="frame" x="107" y="140" width="97" height="30"/>
+                                <rect key="frame" x="16" y="140" width="288" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="1yK-zB-5sS"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eck-lC-lPp" customClass="STATextField">
+                                <rect key="frame" x="16" y="225" width="288" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="8j6-YL-8ob"/>
                                 </connections>
                             </textField>
                         </subviews>
@@ -47,6 +55,7 @@
                     </view>
                     <connections>
                         <outlet property="atmTextField" destination="F77-Td-lj7" id="cnC-3n-zp9"/>
+                        <outlet property="nextTextField" destination="eck-lC-lPp" id="OqM-zR-keC"/>
                         <outlet property="textField" destination="n2X-Ju-MQ8" id="McU-Br-Nsw"/>
                     </connections>
                 </viewController>

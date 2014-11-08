@@ -105,10 +105,16 @@ replacementString:(NSString *)string
     
 }
 
+- (void)postInit {
+    _internalPlaceholder = self.placeholder;
+    _internalAttributedPlaceholder = self.attributedPlaceholder;
+}
+
 - (id)initWithFrame:(CGRect)frame {
     if (!(self = [super initWithFrame:frame]))
         return nil;
     [self initInternal];
+    [self postInit];
     return self;
 }
 
@@ -116,9 +122,15 @@ replacementString:(NSString *)string
     if (!(self = [super initWithCoder:aDecoder]))
         return nil;
     [self initInternal];
-    _internalPlaceholder = self.placeholder;
-    _internalAttributedPlaceholder = self.attributedPlaceholder;
+    [self postInit];
     return self;
+}
+
+#pragma mark - Setters (of Catan)
+
+- (void)setNextFirstResponderUponReturnKeyPress:(UIControl *)nextFirstResponderUponReturnKeyPress {
+    self.resignsFirstResponderUponReturnKeyPress = YES;
+    _nextFirstResponderUponReturnKeyPress = nextFirstResponderUponReturnKeyPress;
 }
 
 - (void)setPlaceholder:(NSString *)placeholder {
@@ -159,8 +171,13 @@ shouldChangeCharactersInRange:(NSRange)range
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    if (_resignsFirstResponderUponReturnKeyPress) {
-        [textField resignFirstResponder];
+    if (self.resignsFirstResponderUponReturnKeyPress) {
+        if (self.nextFirstResponderUponReturnKeyPress) {
+            [textField resignFirstResponder];
+            [self.nextFirstResponderUponReturnKeyPress becomeFirstResponder];
+        } else {
+            [textField resignFirstResponder];
+        }
     }
     return YES;
 }

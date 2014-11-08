@@ -13,6 +13,7 @@
 
 @property (nonatomic, strong) IBOutlet STAATMTextField *atmTextField;
 @property (nonatomic, strong) IBOutlet STATextField *textField;
+@property (nonatomic, strong) IBOutlet STATextField *nextTextField;
 
 @end
 
@@ -27,6 +28,7 @@
     _atmTextField.atmEntryEnabled = YES;
     
     _textField.resignsFirstResponderUponReturnKeyPress = YES;
+    _textField.nextFirstResponderUponReturnKeyPress = _nextTextField;
 }
 
 
