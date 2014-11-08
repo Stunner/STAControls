@@ -11,7 +11,8 @@
 
 @interface ViewController ()
 
-@property (nonatomic, strong) IBOutlet STAATMTextField *textField;
+@property (nonatomic, strong) IBOutlet STAATMTextField *atmTextField;
+@property (nonatomic, strong) IBOutlet STATextField *textField;
 
 @end
 
@@ -21,20 +22,22 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    _textField.placeholder = @"Hello world!";
-    _textField.keyboardType = UIKeyboardTypeDecimalPad;
-    _textField.atmEntryEnabled = YES;
+    _atmTextField.placeholder = @"Hello world!";
+    _atmTextField.keyboardType = UIKeyboardTypeDecimalPad;
+    _atmTextField.atmEntryEnabled = YES;
+    
+    _textField.resignsFirstResponderUponReturnKeyPress = YES;
 }
 
 
 - (IBAction)hideKeyboard:(id)sender {
+    [_atmTextField resignFirstResponder];
     [_textField resignFirstResponder];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    [_textField resignFirstResponder];
     return YES;
 }
 

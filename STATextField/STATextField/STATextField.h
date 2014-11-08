@@ -10,4 +10,6 @@
 
 @interface STATextField : UITextField
 
+@property (nonatomic, assign) BOOL resignsFirstResponderUponReturnKeyPress;
+
 @end

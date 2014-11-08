@@ -51,9 +51,12 @@ replacementString:(NSString *)string
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    BOOL returnable = [(STATextField *)textField textFieldShouldReturn:textField];
+    BOOL returnable = YES;
     if ([_userDelegate respondsToSelector:_cmd]) {
         returnable = [_userDelegate textFieldShouldReturn:textField];
+    }
+    if (returnable) {
+        returnable = [(STATextField *)textField textFieldShouldReturn:textField];
     }
     return returnable;
 }
@@ -88,11 +91,13 @@ replacementString:(NSString *)string
 @implementation STATextField
 
 - (void)initInternal {
+    _resignsFirstResponderUponReturnKeyPress = YES;
+    
     _internalDelegate = [[STATextFieldPrivateDelegate alloc] init];
     [super setDelegate:_internalDelegate];
     [self addTarget:self
              action:@selector(textFieldDidChange:)
-        forControlEvents:UIControlEventEditingChanged];
+   forControlEvents:UIControlEventEditingChanged];
 }
 
 - (void)textFieldDidChange:(id)sender {
@@ -154,6 +159,9 @@ shouldChangeCharactersInRange:(NSRange)range
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
+    if (_resignsFirstResponderUponReturnKeyPress) {
+        [textField resignFirstResponder];
+    }
     return YES;
 }
 
