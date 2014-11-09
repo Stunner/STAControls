@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06455B5E8FB37EB009B44709 /* libPods-STATextFieldTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DB69C93E87FA4E4906D0C87 /* libPods-STATextFieldTests.a */; };
 		93021A1B19F0F3670065B144 /* STATextFieldTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 93021A1A19F0F3670065B144 /* STATextFieldTests.m */; };
 		93021A3019F0F7A50065B144 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 93021A2619F0F7A50065B144 /* AppDelegate.m */; };
 		93021A3119F0F7A50065B144 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93021A2719F0F7A50065B144 /* LaunchScreen.xib */; };
@@ -33,6 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4DB69C93E87FA4E4906D0C87 /* libPods-STATextFieldTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-STATextFieldTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		930219FB19F0F3670065B144 /* STATextField.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STATextField.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93021A1419F0F3670065B144 /* STATextFieldTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = STATextFieldTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		93021A1919F0F3670065B144 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -59,6 +61,8 @@
 		A5FAFFD39F9AD1892CBA12CB /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		AF7678045F1F8459FB61CEEA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		B6EC54A452CEF08E418A3085 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD50B9A22117989EFB42065D /* Pods-STATextFieldTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STATextFieldTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-STATextFieldTests/Pods-STATextFieldTests.debug.xcconfig"; sourceTree = "<group>"; };
+		FC6432355D2E4CF2D56CB41E /* Pods-STATextFieldTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STATextFieldTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-STATextFieldTests/Pods-STATextFieldTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06455B5E8FB37EB009B44709 /* libPods-STATextFieldTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				B6EC54A452CEF08E418A3085 /* libPods.a */,
+				4DB69C93E87FA4E4906D0C87 /* libPods-STATextFieldTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -163,6 +169,8 @@
 			children = (
 				A5FAFFD39F9AD1892CBA12CB /* Pods.debug.xcconfig */,
 				AF7678045F1F8459FB61CEEA /* Pods.release.xcconfig */,
+				DD50B9A22117989EFB42065D /* Pods-STATextFieldTests.debug.xcconfig */,
+				FC6432355D2E4CF2D56CB41E /* Pods-STATextFieldTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -191,9 +199,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 93021A2119F0F3670065B144 /* Build configuration list for PBXNativeTarget "STATextFieldTests" */;
 			buildPhases = (
+				FDEA7BD910BA42B0E5ADFC07 /* Check Pods Manifest.lock */,
 				93021A1019F0F3670065B144 /* Sources */,
 				93021A1119F0F3670065B144 /* Frameworks */,
 				93021A1219F0F3670065B144 /* Resources */,
+				C85CC8A0FCEC809E076DD367 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -263,6 +273,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C85CC8A0FCEC809E076DD367 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-STATextFieldTests/Pods-STATextFieldTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FDEA7BD910BA42B0E5ADFC07 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		930219F719F0F3670065B144 /* Sources */ = {
@@ -422,8 +465,9 @@
 		};
 		93021A2219F0F3670065B144 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DD50B9A22117989EFB42065D /* Pods-STATextFieldTests.debug.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/STATextField.app/STATextField";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -435,14 +479,15 @@
 				INFOPLIST_FILE = STATextFieldTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/STATextField.app/STATextField";
+				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Debug;
 		};
 		93021A2319F0F3670065B144 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FC6432355D2E4CF2D56CB41E /* Pods-STATextFieldTests.release.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/STATextField.app/STATextField";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -450,7 +495,7 @@
 				INFOPLIST_FILE = STATextFieldTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/STATextField.app/STATextField";
+				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Release;
 		};
