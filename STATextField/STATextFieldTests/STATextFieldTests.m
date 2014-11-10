@@ -28,7 +28,7 @@
 - (void)testExample {
     // This is an example of a functional test case.
     [tester enterText:@"1234" intoViewWithAccessibilityLabel:@"ATMTextField" traits:UIAccessibilityTraitNone expectedResult:@"12.34"];
-    [tester enterText:@"This is a test of\n" intoViewWithAccessibilityLabel:@"TextField"];
+    [tester enterText:@"This is a test of\n" intoViewWithAccessibilityLabel:@"TextField" traits:UIAccessibilityTraitNone expectedResult:nil transitionsToViewWithAccessibilityLabel:@"NextTextField" andTraits:UIAccessibilityTraitNone];
     [tester enterText:@"the emergency broadcast system.\n" intoViewWithAccessibilityLabel:@"NextTextField"];
 }
 
