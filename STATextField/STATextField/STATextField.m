@@ -128,6 +128,26 @@ replacementString:(NSString *)string
 
 #pragma mark - Setters (of Catan)
 
+// reference: http://stackoverflow.com/a/20192857/347339
+- (void)setShowDoneButton:(BOOL)showDoneButton {
+    _showDoneButton = showDoneButton;
+    if (_showDoneButton) {
+        UIToolbar *keyboardDoneButtonView = [UIToolbar new];
+        [keyboardDoneButtonView sizeToFit];
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+                                                                       style:UIBarButtonItemStyleBordered target:self
+                                                                      action:@selector(doneClicked:)];
+        [keyboardDoneButtonView setItems:@[doneButton]];
+        self.inputAccessoryView = keyboardDoneButtonView;
+    } else {
+        self.inputAccessoryView = nil;
+    }
+}
+
+- (void)doneClicked:(id)sender {
+    [self endEditing:YES];
+}
+
 - (void)setNextFirstResponderUponReturnKeyPress:(UIControl *)nextFirstResponderUponReturnKeyPress {
     self.resignsFirstResponderUponReturnKeyPress = YES;
     _nextFirstResponderUponReturnKeyPress = nextFirstResponderUponReturnKeyPress;

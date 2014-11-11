@@ -60,11 +60,6 @@ shouldChangeCharactersInRange:(NSRange)range
     }
     
     [super setText:newString];
-//    if (newString.length < textField.text.length) { // update immediately when deleting
-//        [self setText:newString];
-//    } else {
-//        [self performSelector:@selector(setText:) withObject:newString afterDelay:0.08];
-//    }
     
     return NO;
 }

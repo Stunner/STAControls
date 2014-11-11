@@ -25,10 +25,12 @@
     
     _atmTextField.placeholder = @"Hello world!";
     _atmTextField.keyboardType = UIKeyboardTypeDecimalPad;
-    _atmTextField.atmEntryEnabled = YES;
+//    _atmTextField.atmEntryEnabled = YES;
+    _atmTextField.showDoneButton = YES;
     
     _textField.resignsFirstResponderUponReturnKeyPress = YES;
     _textField.nextFirstResponderUponReturnKeyPress = _nextTextField;
+    _textField.showDoneButton = YES;
 }
 
 
