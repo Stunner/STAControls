@@ -13,5 +13,6 @@
 @property (nonatomic, assign) BOOL resignsFirstResponderUponReturnKeyPress;
 @property (nonatomic, strong) UIControl *nextFirstResponderUponReturnKeyPress;
 @property (nonatomic, assign) BOOL showDoneButton;
+@property (nonatomic, assign) BOOL showNextButton;
 
 @end

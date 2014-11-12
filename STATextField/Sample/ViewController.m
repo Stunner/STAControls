@@ -31,12 +31,14 @@
     _textField.resignsFirstResponderUponReturnKeyPress = YES;
     _textField.nextFirstResponderUponReturnKeyPress = _nextTextField;
     _textField.showDoneButton = YES;
+    _textField.showNextButton = YES;
 }
 
 
 - (IBAction)hideKeyboard:(id)sender {
     [_atmTextField resignFirstResponder];
     [_textField resignFirstResponder];
+    [_nextTextField resignFirstResponder];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
