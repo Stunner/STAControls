@@ -126,7 +126,7 @@ replacementString:(NSString *)string
     return self;
 }
 
-#pragma mark - Setters (of Catan)
+#pragma mark Setters (of Catan)
 
 - (void)doneClicked:(id)sender {
     [self endEditing:YES];
