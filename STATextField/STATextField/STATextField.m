@@ -103,6 +103,9 @@ replacementString:(NSString *)string
 - (void)textFieldDidChange:(id)sender {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
+    [UIView animateWithDuration:0.1 animations:^{
+        [self invalidateIntrinsicContentSize];
+    }];
 }
 
 - (void)postInit {

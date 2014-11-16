@@ -8,11 +8,13 @@
 
 #import "ViewController.h"
 #import "STAATMTextField.h"
+#import "STAResizingTextField.h"
 
 @interface ViewController ()
 
 @property (nonatomic, strong) IBOutlet STAATMTextField *atmTextField;
 @property (nonatomic, strong) IBOutlet STATextField *textField;
+@property (nonatomic, strong) STATextField *resizingTextField;
 @property (nonatomic, strong) IBOutlet STATextField *nextTextField;
 
 @end
@@ -32,8 +34,26 @@
     _textField.nextFirstResponderUponReturnKeyPress = _nextTextField;
     _textField.showDoneButton = YES;
     _textField.showNextButton = YES;
+
+    _resizingTextField = [[STAResizingTextField alloc] initWithFrame:CGRectMake(200, 180, 50, 30)];
+    _resizingTextField.borderStyle = UITextBorderStyleRoundedRect;
+    _resizingTextField.placeholder = @"Hello world!";
+    _resizingTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    [self.view addSubview:_resizingTextField];
+    
+    [_resizingTextField addTarget:self
+                           action:@selector(textFieldDidChange:)
+                 forControlEvents:UIControlEventEditingChanged];
 }
 
+- (void) textFieldDidChange: (UITextField*) textField
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+//    [UIView animateWithDuration:0.1 animations:^{
+//        [textField invalidateIntrinsicContentSize];
+//    }];
+}
 
 - (IBAction)hideKeyboard:(id)sender {
     [_atmTextField resignFirstResponder];
