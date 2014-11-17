@@ -9,24 +9,40 @@
 #import "STADateField.h"
 #import "STATextField+PrivateHeaders.h"
 
+@interface STADateField ()
+
+@end
+
 @implementation STADateField
 
 - (void)initInternal {
     [super initInternal];
     
     _datePicker = [[UIDatePicker alloc] init];
+    
     _dateFormatString = @"M/d/yy h:mm a";
+    _dateFormatter = [[NSDateFormatter alloc] init];
+    [_dateFormatter setDateFormat:_dateFormatString];
+    
     [_datePicker addTarget:self
                     action:@selector(datePickerValueChanged:)
           forControlEvents:UIControlEventValueChanged];
     [self setInputView:_datePicker];
 }
 
-- (void)datePickerValueChanged:(UIDatePicker *)sender {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:_dateFormatString];
-    NSString *dateText = [dateFormatter stringFromDate:sender.date];
+- (void)setDate:(NSDate *)date {
+    NSString *dateText = [_dateFormatter stringFromDate:date];
     [self setText:dateText];
+}
+- (void)setDateFormatString:(NSString *)dateFormatString {
+    if (_dateFormatString != dateFormatString) {
+        _dateFormatString = dateFormatString;
+        [_dateFormatter setDateFormat:_dateFormatString];
+    }
+}
+
+- (void)datePickerValueChanged:(UIDatePicker *)sender {
+    [self setDate:sender.date];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {

@@ -10,10 +10,12 @@
 
 @interface STADateField : STATextField
 
+@property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) UIDatePicker *datePicker;
 /**
  Defaults to "M/d/yy h:mm a" ("8/14/13 7:52 AM").
  */
 @property (nonatomic, strong) NSString *dateFormatString;
+@property (nonatomic, strong) NSDateFormatter *dateFormatter;
 
 @end
