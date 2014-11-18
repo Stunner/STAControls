@@ -31,6 +31,7 @@
 }
 
 - (void)setDate:(NSDate *)date {
+    self.datePicker.date = date;
     NSString *dateText = [_dateFormatter stringFromDate:date];
     [self setText:dateText];
 }
