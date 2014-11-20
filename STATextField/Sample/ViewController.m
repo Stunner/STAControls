@@ -13,6 +13,7 @@
 
 @property (nonatomic, strong) IBOutlet STAATMTextField *atmTextField;
 @property (nonatomic, strong) IBOutlet STATextField *textField;
+@property (nonatomic, strong) IBOutlet STATextField *dateTextField;
 @property (nonatomic, strong) IBOutlet STATextField *nextTextField;
 
 @end
@@ -29,15 +30,20 @@
     _atmTextField.showDoneButton = YES;
     
     _textField.resignsFirstResponderUponReturnKeyPress = YES;
-    _textField.nextFirstResponderUponReturnKeyPress = _nextTextField;
+    _textField.nextFirstResponderUponReturnKeyPress = _dateTextField;
     _textField.showDoneButton = YES;
     _textField.showNextButton = YES;
+    
+    _dateTextField.nextFirstResponderUponReturnKeyPress = _nextTextField;
+    _dateTextField.showDoneButton = YES;
+    _dateTextField.showNextButton = YES;
 }
 
 
 - (IBAction)hideKeyboard:(id)sender {
     [_atmTextField resignFirstResponder];
     [_textField resignFirstResponder];
+    [_dateTextField resignFirstResponder];
     [_nextTextField resignFirstResponder];
 }
 

@@ -25,10 +25,14 @@
     
 }
 
-- (void)testExample {
+// general test case, should be split up into separate functions as tests get more elaborate/complex
+- (void)testFields {
     // This is an example of a functional test case.
     [tester enterText:@"1234" intoViewWithAccessibilityLabel:@"ATMTextField" traits:UIAccessibilityTraitNone expectedResult:@"12.34"];
     [tester enterText:@"This is a test of\n" intoViewWithAccessibilityLabel:@"TextField"];
+    [tester waitForFirstResponderWithAccessibilityLabel:@"DateTextField"];
+    [tester selectDatePickerValue:@[@"Nov 7", @"1", @"28", @"PM"]];
+    [tester tapViewWithAccessibilityLabel:@"Next"];
     [tester waitForFirstResponderWithAccessibilityLabel:@"NextTextField"];
     [tester enterText:@"the emergency broadcast system.\n" intoViewWithAccessibilityLabel:@"NextTextField"];
     [tester waitForAbsenceOfKeyboard];
