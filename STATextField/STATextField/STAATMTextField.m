@@ -25,10 +25,22 @@
 }
 
 - (CGRect)caretRectForPosition:(UITextPosition *)position {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
     if (!self.atmEntryEnabled) {
         return [super caretRectForPosition:position];
     }
     return CGRectZero;
+}
+
+- (UITextPosition *)closestPositionToPoint:(CGPoint)point {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    if (!self.atmEntryEnabled) {
+        return [super closestPositionToPoint:point];
+    }
+    // always return last text position to prevent moving of cursor
+    return [self positionFromPosition:self.endOfDocument offset:0];
 }
 
 - (BOOL)staTextField:(UITextField *)textField
