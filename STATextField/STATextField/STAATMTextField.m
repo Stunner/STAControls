@@ -43,9 +43,9 @@
     return [self positionFromPosition:self.endOfDocument offset:0];
 }
 
-- (BOOL)staTextField:(UITextField *)textField
+- (BOOL)textField:(UITextField *)textField
 shouldChangeCharactersInRange:(NSRange)range
-   replacementString:(NSString *)string
+replacementString:(NSString *)string
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     

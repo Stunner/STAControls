@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "STATextFieldBase.h"
 
-@interface STATextField : UITextField
+@interface STATextField : STATextFieldBase
 
 @property (nonatomic, assign) BOOL resignsFirstResponderUponReturnKeyPress;
 @property (nonatomic, strong) UIControl *nextFirstResponderUponReturnKeyPress;
