@@ -92,15 +92,6 @@
     self.animatesToTopOfKeyboard = NO;
     self.nextHideKeyboardNotificationForSelf = NO;
     self.nextShowKeyboardNotificationForSelf = NO;
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShow:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHide:)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:nil];
 }
 
 - (id)initWithFrame:(CGRect)frame {

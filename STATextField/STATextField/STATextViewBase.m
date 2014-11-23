@@ -79,6 +79,16 @@ shouldChangeTextInRange:(NSRange)range
     
     _internalDelegate = [[STATextViewPrivateDelegate alloc] init];
     [super setDelegate:_internalDelegate];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
 }
 
 - (instancetype)init {
@@ -123,5 +133,26 @@ shouldChangeTextInRange:(NSRange)range
     }
     return _internalDelegate->_userDelegate;
 }
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+    
+}
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    return YES;
+}
+
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    return YES;
+}
+
 
 @end

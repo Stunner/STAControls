@@ -12,6 +12,10 @@
 
 - (void)initInternal;
 
+- (void)keyboardWillShow:(NSNotification *)notification;
+
+- (void)keyboardWillHide:(NSNotification *)notification;
+
 - (BOOL)textView:(UITextView *)textView
 shouldChangeTextInRange:(NSRange)range
  replacementText:(NSString *)text;
