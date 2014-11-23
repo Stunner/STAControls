@@ -89,6 +89,34 @@ replacementString:(NSString *)string
 
 @implementation STATextFieldBase
 
+- (instancetype)init {
+    if (!(self = [super init])) {
+        return nil;
+    }
+    [self initInternal];
+    return self;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (!(self = [super initWithFrame:frame])) {
+        return nil;
+    }
+    [self initInternal];
+    return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    if (!(self = [super initWithCoder:aDecoder])) {
+        return nil;
+    }
+    [self initInternal];
+    return self;
+}
+
+/////////////
+// PRIVATE //
+/////////////
+
 - (void)initInternal {
     
     _internalDelegate = [[STATextFieldPrivateDelegate alloc] init];
@@ -96,20 +124,6 @@ replacementString:(NSString *)string
     [self addTarget:self
              action:@selector(textFieldDidChange:)
    forControlEvents:UIControlEventEditingChanged];
-}
-
-- (id)initWithFrame:(CGRect)frame {
-    if (!(self = [super initWithFrame:frame]))
-        return nil;
-    [self initInternal];
-    return self;
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder {
-    if (!(self = [super initWithCoder:aDecoder]))
-        return nil;
-    [self initInternal];
-    return self;
 }
 
 #pragma mark Setters/Getters
@@ -129,7 +143,6 @@ replacementString:(NSString *)string
 #pragma mark Text Field Events
 
 - (void)textFieldDidChange:(id)sender {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
     
 }
 
@@ -137,8 +150,6 @@ replacementString:(NSString *)string
 shouldChangeCharactersInRange:(NSRange)range
 replacementString:(NSString *)string
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    
     return YES;
 }
 

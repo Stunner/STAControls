@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ Responsible for handling the delegate forwarding and establishing methods 
+ that may be overridden.
+ */
 @interface STATextFieldBase : UITextField
-
-- (void)initInternal;
 
 @end

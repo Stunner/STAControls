@@ -10,6 +10,13 @@
 
 @interface STATextFieldBase (ProvideHeaders)
 
+/**
+ Called after initialization occurs (any init... method called).
+ 
+ MUST call this (super's implementation) method from subclasses.
+ */
+- (void)initInternal;
+
 - (BOOL)textField:(UITextField *)textField
 shouldChangeCharactersInRange:(NSRange)range
 replacementString:(NSString *)string;

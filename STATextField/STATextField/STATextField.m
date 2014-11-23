@@ -7,7 +7,7 @@
 //
 
 #import "STATextField.h"
-#import "STATextField+PrivateHeaders.h"
+#import "STATextFieldBase+ProvideHeaders.h"
 
 @interface STATextField () {
     NSString *_internalPlaceholder;
