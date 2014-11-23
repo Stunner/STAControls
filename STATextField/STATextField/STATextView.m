@@ -50,7 +50,13 @@ shouldChangeTextInRange:(NSRange)range
 }
 
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView {
-    return YES;
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    BOOL returnable = [(STATextView *)textView textViewShouldEndEditing:textView];
+    if ([_userDelegate respondsToSelector:_cmd]) {
+        returnable =  [_userDelegate textViewShouldEndEditing:textView];
+    }
+    return returnable;
 }
 
 @end
@@ -63,6 +69,9 @@ shouldChangeTextInRange:(NSRange)range
     NSAttributedString *_internalAttributedPlaceholder;
     CGFloat _initialYPosition;
 }
+
+@property (nonatomic, assign) BOOL nextShowKeyboardNotificationForSelf;
+@property (nonatomic, assign) BOOL nextHideKeyboardNotificationForSelf;
 
 @end
 
@@ -91,6 +100,11 @@ shouldChangeTextInRange:(NSRange)range
 - (void)keyboardWillShow:(NSNotification *)notification {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
+    if (!self.nextShowKeyboardNotificationForSelf) {
+        return;
+    }
+    self.nextShowKeyboardNotificationForSelf = NO;
+    
     if (self.animatesToTopOfKeyboard) {
         dispatch_async(dispatch_get_main_queue(), ^{
             CGRect keyboardEndFrame;
@@ -104,9 +118,24 @@ shouldChangeTextInRange:(NSRange)range
 - (void)keyboardWillHide:(NSNotification *)notification {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
+    if (!self.nextHideKeyboardNotificationForSelf) {
+        return;
+    }
+    self.nextHideKeyboardNotificationForSelf = NO;
+    
     if (self.animatesToTopOfKeyboard) {
         [self animateSelfToPosition:_initialYPosition notification:notification];
     }
+}
+
+- (BOOL)resignFirstResponder {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    [super resignFirstResponder];
+    
+    
+    
+    return YES;
 }
 
 - (void)initInternal {
@@ -117,6 +146,8 @@ shouldChangeTextInRange:(NSRange)range
     
     _initialYPosition = self.frame.origin.y;
     self.animatesToTopOfKeyboard = NO;
+    self.nextHideKeyboardNotificationForSelf = NO;
+    self.nextShowKeyboardNotificationForSelf = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardWillShowNotification
@@ -163,6 +194,16 @@ shouldChangeTextInRange:(NSRange)range
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
     NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    self.nextShowKeyboardNotificationForSelf = YES;
+    
+    return YES;
+}
+
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    self.nextHideKeyboardNotificationForSelf = YES;
     
     return YES;
 }

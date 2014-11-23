@@ -12,4 +12,6 @@
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView;
 
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView;
+
 @end
