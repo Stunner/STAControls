@@ -201,6 +201,9 @@ replacementString:(NSString *)string
 }
 
 - (id<UITextFieldDelegate>)delegate {
+    if (!_internalDelegate) {
+        return nil;
+    }
     return _internalDelegate->_userDelegate;
 }
 

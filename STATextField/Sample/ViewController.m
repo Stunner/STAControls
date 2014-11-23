@@ -8,13 +8,15 @@
 
 #import "ViewController.h"
 #import "STAATMTextField.h"
+#import "STATextView.h"
 
-@interface ViewController ()
+@interface ViewController () <UITextFieldDelegate, UITextViewDelegate>
 
 @property (nonatomic, strong) IBOutlet STAATMTextField *atmTextField;
 @property (nonatomic, strong) IBOutlet STATextField *textField;
 @property (nonatomic, strong) IBOutlet STATextField *dateTextField;
 @property (nonatomic, strong) IBOutlet STATextField *nextTextField;
+@property (nonatomic, strong) IBOutlet STATextView *textView;
 
 @end
 
@@ -45,9 +47,16 @@
     [_textField resignFirstResponder];
     [_dateTextField resignFirstResponder];
     [_nextTextField resignFirstResponder];
+    [_textView resignFirstResponder];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    return YES;
+}
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
     return YES;

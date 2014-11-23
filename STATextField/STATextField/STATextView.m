@@ -9,7 +9,7 @@
 #import "STATextView.h"
 #import "STATextView+PrivateHeaders.h"
 
-#pragma mark - STATextFieldPrivateDelegate
+#pragma mark - STATextViewPrivateDelegate
 
 @interface STATextViewPrivateDelegate : NSObject <UITextViewDelegate> {
 @public
@@ -69,6 +69,8 @@ shouldChangeTextInRange:(NSRange)range
 @implementation STATextView
 
 - (void)initInternal {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
     _internalDelegate = [[STATextViewPrivateDelegate alloc] init];
     [super setDelegate:_internalDelegate];
 }
@@ -81,10 +83,29 @@ shouldChangeTextInRange:(NSRange)range
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
     if (!(self = [super initWithCoder:aDecoder]))
         return nil;
     [self initInternal];
     return self;
+}
+
+- (void)setDelegate:(id<UITextViewDelegate>)delegate {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    _internalDelegate->_userDelegate = delegate;
+    // Scroll view delegate caches whether the delegate responds to some of the delegate
+    // methods, so we need to force it to re-evaluate if the delegate responds to them
+    super.delegate = nil;
+    super.delegate = (id)_internalDelegate;
+}
+
+- (id<UITextViewDelegate>)delegate {
+    if (!_internalDelegate) {
+        return nil;
+    }
+    return _internalDelegate->_userDelegate;
 }
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
