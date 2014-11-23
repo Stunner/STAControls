@@ -10,4 +10,6 @@
 
 @interface STATextView : UITextView
 
+@property (nonatomic, assign) BOOL animatesToTopOfKeyboard;
+
 @end

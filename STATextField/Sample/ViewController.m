@@ -39,6 +39,8 @@
     _dateTextField.nextFirstResponderUponReturnKeyPress = _nextTextField;
     _dateTextField.showDoneButton = YES;
     _dateTextField.showNextButton = YES;
+    
+    _textView.animatesToTopOfKeyboard = YES;
 }
 
 
