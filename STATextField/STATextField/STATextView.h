@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "STATextViewBase.h"
 
-@interface STATextView : UITextView
+@interface STATextView : STATextViewBase
 
 @property (nonatomic, assign) BOOL animatesToTopOfKeyboard;
 
