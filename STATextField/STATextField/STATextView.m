@@ -92,10 +92,12 @@ shouldChangeTextInRange:(NSRange)range
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
     if (self.animatesToTopOfKeyboard) {
-        CGRect keyboardEndFrame;
-        [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardEndFrame];
-        CGFloat newPosition = keyboardEndFrame.origin.y - self.frame.size.height;
-        [self animateSelfToPosition:newPosition notification:notification];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            CGRect keyboardEndFrame;
+            [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardEndFrame];
+            CGFloat newPosition = keyboardEndFrame.origin.y - self.frame.size.height;
+            [self animateSelfToPosition:newPosition notification:notification];
+        });
     }
 }
 
