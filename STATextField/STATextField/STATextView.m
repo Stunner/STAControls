@@ -13,6 +13,9 @@
     NSString *_internalPlaceholder;
     NSAttributedString *_internalAttributedPlaceholder;
     CGFloat _initialYPosition;
+    NSTimeInterval _keyboardAnimationDuration;
+    UIViewAnimationCurve _keyboardanimationCurve;
+    CGFloat _topOfKeyboardYPosition;
 }
 
 @property (nonatomic, assign) BOOL nextShowKeyboardNotificationForSelf;
@@ -23,54 +26,78 @@
 
 @implementation STATextView
 
-- (void)animateSelfToPosition:(CGFloat)position notification:(NSNotification *)notification {
+- (void)animateSelfToPosition:(CGFloat)position {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    NSTimeInterval animationDuration;
-    UIViewAnimationCurve animationCurve;
-    
-    [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] getValue:&animationCurve];
-    [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&animationDuration];
-    
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:animationDuration];
-    [UIView setAnimationCurve:animationCurve];
-    
-    CGRect newTextViewFrame = self.frame;
-    newTextViewFrame.origin.y = position;
-    self.frame = newTextViewFrame;
-    
-    [UIView commitAnimations];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:_keyboardAnimationDuration];
+        [UIView setAnimationCurve:_keyboardanimationCurve];
+        
+        CGRect newTextViewFrame = self.frame;
+        newTextViewFrame.origin.y = position;
+        self.frame = newTextViewFrame;
+        
+        [UIView commitAnimations];
+    });
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    if (!self.nextShowKeyboardNotificationForSelf) {
-        return;
-    }
-    self.nextShowKeyboardNotificationForSelf = NO;
-    
-    if (self.animatesToTopOfKeyboard) {
-        dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] getValue:&_keyboardanimationCurve];
+        [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&_keyboardAnimationDuration];
+        
+        if (!_topOfKeyboardYPosition) {
             CGRect keyboardEndFrame;
             [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardEndFrame];
-            CGFloat newPosition = keyboardEndFrame.origin.y - self.frame.size.height;
-            [self animateSelfToPosition:newPosition notification:notification];
-        });
-    }
+            _topOfKeyboardYPosition = keyboardEndFrame.origin.y - self.frame.size.height;
+        }
+        
+        if (!self.nextShowKeyboardNotificationForSelf) {
+            return;
+        }
+        self.nextShowKeyboardNotificationForSelf = NO;
+        
+        CGRect keyboardEndFrame;
+        [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardEndFrame];
+        _topOfKeyboardYPosition = keyboardEndFrame.origin.y - self.frame.size.height;
+        
+        if (self.animatesToTopOfKeyboard) {
+            [self animateSelfToPosition:_topOfKeyboardYPosition];
+        }
+    });
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    if (!self.nextHideKeyboardNotificationForSelf) {
-        return;
-    }
-    self.nextHideKeyboardNotificationForSelf = NO;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] getValue:&_keyboardanimationCurve];
+        [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&_keyboardAnimationDuration];
+        
+        if (!self.nextHideKeyboardNotificationForSelf) {
+            return;
+        }
+        self.nextHideKeyboardNotificationForSelf = NO;
+        
+        if (self.animatesToTopOfKeyboard) {
+            [self animateSelfToPosition:_initialYPosition];
+        }
+    });
+}
+
+- (BOOL)becomeFirstResponder {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    [super becomeFirstResponder];
     
     if (self.animatesToTopOfKeyboard) {
-        [self animateSelfToPosition:_initialYPosition notification:notification];
+        [self animateSelfToPosition:_topOfKeyboardYPosition];
     }
+    
+    return YES;
 }
 
 - (BOOL)resignFirstResponder {
@@ -78,7 +105,9 @@
     
     [super resignFirstResponder];
     
-    
+    if (self.animatesToTopOfKeyboard) {
+        [self animateSelfToPosition:_initialYPosition];
+    }
     
     return YES;
 }
@@ -92,22 +121,6 @@
     self.animatesToTopOfKeyboard = NO;
     self.nextHideKeyboardNotificationForSelf = NO;
     self.nextShowKeyboardNotificationForSelf = NO;
-}
-
-- (id)initWithFrame:(CGRect)frame {
-    if (!(self = [super initWithFrame:frame]))
-        return nil;
-    [self initInternal];
-    return self;
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    
-    if (!(self = [super initWithCoder:aDecoder]))
-        return nil;
-    [self initInternal];
-    return self;
 }
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
