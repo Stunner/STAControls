@@ -94,6 +94,16 @@ shouldChangeTextInRange:(NSRange)range
                                              selector:@selector(textChanged:)
                                                  name:UITextViewTextDidChangeNotification
                                                object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(textViewBeganEditing:)
+                                                 name:UITextViewTextDidBeginEditingNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(textViewStoppedEditing:)
+                                                 name:UITextViewTextDidEndEditingNotification
+                                               object:nil];
 }
 
 - (instancetype)init {
@@ -123,13 +133,7 @@ shouldChangeTextInRange:(NSRange)range
 }
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardWillShowNotification
-                                                  object:nil];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardWillHideNotification
-                                                  object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)setDelegate:(id<UITextViewDelegate>)delegate {
@@ -150,6 +154,14 @@ shouldChangeTextInRange:(NSRange)range
 }
 
 - (void)textChanged:(NSNotification *)notification {
+    
+}
+
+- (void)textViewBeganEditing:(NSNotification *)notification {
+    
+}
+
+- (void)textViewStoppedEditing:(NSNotification *)notification {
     
 }
 
