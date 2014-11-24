@@ -74,6 +74,12 @@
     NSValue *v = [[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey];
 }
 
+- (void)textChanged:(NSNotification *)notification {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    
+}
+
 - (void)keyboardWillShow:(NSNotification *)notification {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     

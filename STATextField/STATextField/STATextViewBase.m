@@ -89,6 +89,11 @@ shouldChangeTextInRange:(NSRange)range
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(textChanged:)
+                                                 name:UITextViewTextDidChangeNotification
+                                               object:nil];
 }
 
 - (instancetype)init {
@@ -142,6 +147,10 @@ shouldChangeTextInRange:(NSRange)range
         return nil;
     }
     return _internalDelegate->_userDelegate;
+}
+
+- (void)textChanged:(NSNotification *)notification {
+    
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification {
