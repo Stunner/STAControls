@@ -16,6 +16,7 @@
     NSTimeInterval _keyboardAnimationDuration;
     UIViewAnimationCurve _keyboardAnimationCurve;
     CGFloat _topOfKeyboardYPosition;
+    CGFloat _keyboardYPosition;
 }
 
 @property (nonatomic, assign) BOOL nextShowKeyboardNotificationForSelf;
@@ -71,13 +72,30 @@
     NSNumber *animationCurve = [[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey];
     if (animationCurve && [animationCurve isKindOfClass:[NSNumber class]])
         _keyboardAnimationCurve = [animationCurve integerValue];
-    NSValue *v = [[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey];
+//    NSValue *v = [[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey];
 }
 
 - (void)textChanged:(NSNotification *)notification {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    
+    NSDictionary *attributes = @{NSFontAttributeName : self.font};
+    CGSize boundingBox = [self.text boundingRectWithSize:CGSizeMake(self.frame.size.width, 170)
+                                                 options:NSStringDrawingUsesLineFragmentOrigin
+                                              attributes:attributes context:nil].size;
+    CGSize size = CGSizeMake(ceil(boundingBox.width), ceil(boundingBox.height + 11));
+    [UIView animateWithDuration:0.1 animations:^{
+        CGRect newTextViewFrame = self.frame;
+        newTextViewFrame.origin.y = _keyboardYPosition - size.height;
+        newTextViewFrame.size.height = size.height;
+        self.frame = newTextViewFrame;
+    } completion:^(BOOL finished) {
+        if (finished) {
+            CGRect newTextViewFrame = self.frame;
+            newTextViewFrame.origin.y = _keyboardYPosition - size.height;
+            newTextViewFrame.size.height = size.height;
+            self.frame = newTextViewFrame;
+        }
+    }];
 }
 
 - (void)textViewBeganEditing:(NSNotification *)notification {
@@ -105,6 +123,7 @@
         if (!_topOfKeyboardYPosition) {
             CGRect keyboardEndFrame;
             [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardEndFrame];
+            _keyboardYPosition = keyboardEndFrame.origin.y;
             _topOfKeyboardYPosition = keyboardEndFrame.origin.y - self.frame.size.height;
         }
         
