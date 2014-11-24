@@ -14,12 +14,13 @@
     NSAttributedString *_internalAttributedPlaceholder;
     CGFloat _initialYPosition;
     NSTimeInterval _keyboardAnimationDuration;
-    UIViewAnimationCurve _keyboardanimationCurve;
+    UIViewAnimationCurve _keyboardAnimationCurve;
     CGFloat _topOfKeyboardYPosition;
 }
 
 @property (nonatomic, assign) BOOL nextShowKeyboardNotificationForSelf;
 @property (nonatomic, assign) BOOL nextHideKeyboardNotificationForSelf;
+@property (assign) BOOL isAnimating;
 
 @end
 
@@ -30,25 +31,47 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:_keyboardAnimationDuration];
-        [UIView setAnimationCurve:_keyboardanimationCurve];
-        
-        CGRect newTextViewFrame = self.frame;
-        newTextViewFrame.origin.y = position;
-        self.frame = newTextViewFrame;
-        
-        [UIView commitAnimations];
+        NSLog(@"animating to %f", position);
+        if (!self.isAnimating) {
+            [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                self.isAnimating = YES;
+                CGRect newTextViewFrame = self.frame;
+                newTextViewFrame.origin.y = position;
+                self.frame = newTextViewFrame;
+            } completion:^(BOOL finished) {
+                if (finished) {
+                    self.isAnimating = NO;
+                    CGRect newTextViewFrame = self.frame;
+                    newTextViewFrame.origin.y = position;
+                    self.frame = newTextViewFrame;
+                }
+            }];
+        }
     });
+    
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        NSLog(@"animating to %f", position);
+//        
+//        [UIView beginAnimations:nil context:nil];
+//        [UIView setAnimationDuration:_keyboardAnimationDuration];
+//        [UIView setAnimationCurve:_keyboardAnimationCurve];
+//        
+//        CGRect newTextViewFrame = self.frame;
+//        newTextViewFrame.origin.y = position;
+//        self.frame = newTextViewFrame;
+//        
+//        [UIView commitAnimations];
+//    });
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] getValue:&_keyboardanimationCurve];
+        [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] getValue:&_keyboardAnimationCurve];
         [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&_keyboardAnimationDuration];
         
+//        NSLog(@"notification user info: %@", notification);
         if (!_topOfKeyboardYPosition) {
             CGRect keyboardEndFrame;
             [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardEndFrame];
@@ -60,9 +83,11 @@
         }
         self.nextShowKeyboardNotificationForSelf = NO;
         
-        CGRect keyboardEndFrame;
-        [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardEndFrame];
-        _topOfKeyboardYPosition = keyboardEndFrame.origin.y - self.frame.size.height;
+        if (!_topOfKeyboardYPosition) {
+            CGRect keyboardEndFrame;
+            [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardEndFrame];
+            _topOfKeyboardYPosition = keyboardEndFrame.origin.y - self.frame.size.height;
+        }
         
         if (self.animatesToTopOfKeyboard) {
             [self animateSelfToPosition:_topOfKeyboardYPosition];
@@ -74,7 +99,7 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] getValue:&_keyboardanimationCurve];
+        [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] getValue:&_keyboardAnimationCurve];
         [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&_keyboardAnimationDuration];
         
         if (!self.nextHideKeyboardNotificationForSelf) {
@@ -93,7 +118,7 @@
     
     [super becomeFirstResponder];
     
-    if (self.animatesToTopOfKeyboard) {
+    if (self.animatesToTopOfKeyboard && _topOfKeyboardYPosition) {
         [self animateSelfToPosition:_topOfKeyboardYPosition];
     }
     
@@ -121,6 +146,7 @@
     self.animatesToTopOfKeyboard = NO;
     self.nextHideKeyboardNotificationForSelf = NO;
     self.nextShowKeyboardNotificationForSelf = NO;
+    self.isAnimating = NO;
 }
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
