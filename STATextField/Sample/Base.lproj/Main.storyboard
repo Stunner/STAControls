@@ -70,6 +70,15 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="4Up-NI-2GT"/>
                                 </connections>
                             </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oz7-oO-2fl" customClass="STATextView">
+                                <rect key="frame" x="0.0" y="452" width="320" height="28"/>
+                                <color key="backgroundColor" red="0.83319887907608692" green="0.83319887907608692" blue="0.83319887907608692" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="NE0-zX-Myk"/>
+                                </connections>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -78,6 +87,7 @@
                         <outlet property="dateTextField" destination="NDF-IQ-l7b" id="GaC-yJ-Oaq"/>
                         <outlet property="nextTextField" destination="eck-lC-lPp" id="OqM-zR-keC"/>
                         <outlet property="textField" destination="n2X-Ju-MQ8" id="McU-Br-Nsw"/>
+                        <outlet property="textView" destination="Oz7-oO-2fl" id="cTj-Tx-ykH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
