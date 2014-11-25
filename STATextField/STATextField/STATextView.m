@@ -138,8 +138,9 @@
             _topOfKeyboardYPosition = keyboardEndFrame.origin.y - self.frame.size.height;
         }
         
+        CGRect endFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
         if (self.animatesToTopOfKeyboard) {
-            [self animateSelfToPosition:_topOfKeyboardYPosition];
+            [self animateSelfToPosition:self.frame.origin.y - endFrame.size.height];
         }
     });
 }
@@ -158,8 +159,9 @@
         }
         self.nextHideKeyboardNotificationForSelf = NO;
         
+        CGRect beginFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
         if (self.animatesToTopOfKeyboard) {
-            [self animateSelfToPosition:_initialYPosition];
+            [self animateSelfToPosition:self.frame.origin.y + beginFrame.size.height];
         }
     });
 }
@@ -169,9 +171,9 @@
     
     [super becomeFirstResponder];
     
-    if (self.animatesToTopOfKeyboard && _topOfKeyboardYPosition) {
-        [self animateSelfToPosition:_topOfKeyboardYPosition];
-    }
+//    if (self.animatesToTopOfKeyboard && _topOfKeyboardYPosition) {
+//        [self animateSelfToPosition:_topOfKeyboardYPosition];
+//    }
     
     return YES;
 }
@@ -181,9 +183,9 @@
     
     [super resignFirstResponder];
     
-    if (self.animatesToTopOfKeyboard) {
-        [self animateSelfToPosition:_initialYPosition];
-    }
+//    if (self.animatesToTopOfKeyboard) {
+//        [self animateSelfToPosition:_initialYPosition];
+//    }
     
     return YES;
 }
