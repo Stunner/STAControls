@@ -9,7 +9,9 @@
 #import "STATextViewBase.h"
 #import "STATextViewBase+PrivateHeaders.h"
 
-#pragma mark - STATextViewPrivateDelegate
+#pragma mark - STATextField
+
+#pragma mark - STATextFieldPrivateDelegate
 
 @interface STATextViewPrivateDelegate : NSObject <UITextViewDelegate> {
 @public
@@ -23,61 +25,80 @@
     return [_userDelegate respondsToSelector:selector] || [super respondsToSelector:selector];
 }
 
-- (void)forwardInvocation:(NSInvocation *)invocation {
-    // This should only ever be called from `UITextField`, after it has verified
-    // that `_userDelegate` responds to the selector by sending me
-    // `respondsToSelector:`.  So I don't need to check again here.
-    [invocation invokeWithTarget:_userDelegate];
-}
-
 #pragma mark Delegate Overrides
 
-- (BOOL)textView:(UITextView *)textView
-shouldChangeTextInRange:(NSRange)range
- replacementText:(NSString *)text
-{
+- (void)textViewDidChange:(UITextView *)textView {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    return YES;
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    BOOL shouldChangeText = [(STATextViewBase *)textView textView:textView
+                                                shouldChangeTextInRange:range
+                                                        replacementText:text];
+    if ([_userDelegate respondsToSelector:_cmd]) {
+        if (!shouldChangeText) {
+            [_userDelegate textView:textView
+            shouldChangeTextInRange:range
+                    replacementText:text];
+        } else {
+            shouldChangeText = [_userDelegate textView:textView
+                                     shouldChangeTextInRange:range
+                                             replacementText:text];
+        }
+    }
+    return shouldChangeText;
 }
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    BOOL returnable = [(STATextViewBase *)textView textViewShouldBeginEditing:textView];
-    if ([_userDelegate respondsToSelector:_cmd]) {
-        returnable =  [_userDelegate textViewShouldBeginEditing:textView];
-    }
-    return returnable;
+    return YES;
 }
 
-- (BOOL)textViewShouldEndEditing:(UITextView *)textView {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+- (void)textViewBeganEditing:(NSNotification *)notification {
     
-    BOOL returnable = [(STATextViewBase *)textView textViewShouldEndEditing:textView];
-    if ([_userDelegate respondsToSelector:_cmd]) {
-        returnable =  [_userDelegate textViewShouldEndEditing:textView];
-    }
-    return returnable;
+}
+
+- (void)textViewStoppedEditing:(NSNotification *)notification {
+    
 }
 
 @end
 
-#pragma mark - STATextField
-
-@interface STATextViewBase () {
+@interface STATextViewBase () <UITextViewDelegate>{
     STATextViewPrivateDelegate *_internalDelegate;
 }
+
+@property (nonatomic, weak) id<UITextViewDelegate> realDelegate;
 
 @end
 
 
 @implementation STATextViewBase
 
+//reference: https://github.com/steipete/PSPDFTextView
+#pragma mark - Delegate Forwarder
+
+- (BOOL)respondsToSelector:(SEL)s {
+    return [super respondsToSelector:s] || [self.realDelegate respondsToSelector:s];
+}
+
+- (id)forwardingTargetForSelector:(SEL)s {
+    id delegate = self.realDelegate;
+    return [delegate respondsToSelector:s] ? delegate : [super forwardingTargetForSelector:s];
+}
+
+#pragma mark - Initialization
+
 - (void)initInternal {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    _internalDelegate = [[STATextViewPrivateDelegate alloc] init];
+    if (!_internalDelegate) {
+        _internalDelegate = [[STATextViewPrivateDelegate alloc] init];
+    }
     [super setDelegate:_internalDelegate];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -137,24 +158,27 @@ shouldChangeTextInRange:(NSRange)range
 }
 
 - (void)setDelegate:(id<UITextViewDelegate>)delegate {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    
-    _internalDelegate->_userDelegate = delegate;
-    // Scroll view delegate caches whether the delegate responds to some of the delegate
-    // methods, so we need to force it to re-evaluate if the delegate responds to them
-    super.delegate = nil;
-    super.delegate = (id)_internalDelegate;
-}
-
-- (id<UITextViewDelegate>)delegate {
-    if (!_internalDelegate) {
-        return nil;
-    }
-    return _internalDelegate->_userDelegate;
+    // UIScrollView delegate keeps some flags that mark whether the delegate implements some methods (like scrollViewDidScroll:)
+    // setting *the same* delegate doesn't recheck the flags, so it's better to simply nil the previous delegate out
+    // we have to setup the realDelegate at first, since the flag check happens in setter
+    [super setDelegate:nil];
+    _internalDelegate->_userDelegate = delegate != _internalDelegate ? delegate : nil;
+    [super setDelegate:delegate ? _internalDelegate : nil];
 }
 
 - (void)textChanged:(NSNotification *)notification {
     
+}
+
+- (void)textViewDidChange:(UITextView *)textView {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    return YES;
 }
 
 - (void)textViewBeganEditing:(NSNotification *)notification {

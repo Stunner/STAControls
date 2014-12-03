@@ -218,6 +218,12 @@
     return YES;
 }
 
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    return YES;
+}
+
 static inline UIViewAnimationOptions animationOptionsWithCurve(UIViewAnimationCurve curve) {
     UIViewAnimationOptions opt = (UIViewAnimationOptions)curve;
     return opt << 16;
