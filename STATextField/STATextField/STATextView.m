@@ -34,17 +34,18 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         NSLog(@"animating to %f", position);
         if (!self.isAnimating) {
+            __weak STATextView *weakSelf = self;
             [UIView animateWithDuration:0.25 delay:0 options:animationOptionsWithCurve(_keyboardAnimationCurve) animations:^{
-                self.isAnimating = YES;
-                CGRect newTextViewFrame = self.frame;
+                weakSelf.isAnimating = YES;
+                CGRect newTextViewFrame = weakSelf.frame;
                 newTextViewFrame.origin.y = position;
-                self.frame = newTextViewFrame;
+                weakSelf.frame = newTextViewFrame;
             } completion:^(BOOL finished) {
                 if (finished) {
-                    self.isAnimating = NO;
-                    CGRect newTextViewFrame = self.frame;
+                    weakSelf.isAnimating = NO;
+                    CGRect newTextViewFrame = weakSelf.frame;
                     newTextViewFrame.origin.y = position;
-                    self.frame = newTextViewFrame;
+                    weakSelf.frame = newTextViewFrame;
                 }
             }];
         }
