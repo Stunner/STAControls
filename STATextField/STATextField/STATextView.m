@@ -78,24 +78,7 @@
 - (void)textChanged:(NSNotification *)notification {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    NSDictionary *attributes = @{NSFontAttributeName : self.font};
-    CGSize boundingBox = [self.text boundingRectWithSize:CGSizeMake(self.frame.size.width, 170)
-                                                 options:NSStringDrawingUsesLineFragmentOrigin
-                                              attributes:attributes context:nil].size;
-    CGSize size = CGSizeMake(ceil(boundingBox.width), ceil(boundingBox.height + 11));
-    [UIView animateWithDuration:0.1 animations:^{
-        CGRect newTextViewFrame = self.frame;
-        newTextViewFrame.origin.y = _keyboardYPosition - size.height;
-        newTextViewFrame.size.height = size.height;
-        self.frame = newTextViewFrame;
-    } completion:^(BOOL finished) {
-        if (finished) {
-            CGRect newTextViewFrame = self.frame;
-            newTextViewFrame.origin.y = _keyboardYPosition - size.height;
-            newTextViewFrame.size.height = size.height;
-            self.frame = newTextViewFrame;
-        }
-    }];
+    
 }
 
 - (void)textViewBeganEditing:(NSNotification *)notification {
@@ -124,23 +107,23 @@
             CGRect keyboardEndFrame;
             [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardEndFrame];
             _keyboardYPosition = keyboardEndFrame.origin.y;
-            _topOfKeyboardYPosition = keyboardEndFrame.origin.y - self.frame.size.height;
+            _topOfKeyboardYPosition = [UIScreen mainScreen].bounds.size.height - keyboardEndFrame.size.height - self.frame.size.height;
         }
         
-        if (!self.nextShowKeyboardNotificationForSelf) {
-            return;
-        }
-        self.nextShowKeyboardNotificationForSelf = NO;
+//        if (!self.nextShowKeyboardNotificationForSelf) {
+//            return;
+//        }
+//        self.nextShowKeyboardNotificationForSelf = NO;
         
         if (!_topOfKeyboardYPosition) {
             CGRect keyboardEndFrame;
             [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardEndFrame];
-            _topOfKeyboardYPosition = keyboardEndFrame.origin.y - self.frame.size.height;
+            _topOfKeyboardYPosition = [UIScreen mainScreen].bounds.size.height - keyboardEndFrame.size.height - self.frame.size.height;
         }
         
         CGRect endFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
         if (self.animatesToTopOfKeyboard) {
-            [self animateSelfToPosition:self.frame.origin.y - endFrame.size.height];
+            [self animateSelfToPosition:[UIScreen mainScreen].bounds.size.height - endFrame.size.height - self.frame.size.height];
         }
     });
 }
@@ -154,14 +137,14 @@
         [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] getValue:&_keyboardAnimationCurve];
         [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&_keyboardAnimationDuration];
         
-        if (!self.nextHideKeyboardNotificationForSelf) {
-            return;
-        }
-        self.nextHideKeyboardNotificationForSelf = NO;
+//        if (!self.nextHideKeyboardNotificationForSelf) {
+//            return;
+//        }
+//        self.nextHideKeyboardNotificationForSelf = NO;
         
         CGRect beginFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
         if (self.animatesToTopOfKeyboard) {
-            [self animateSelfToPosition:self.frame.origin.y + beginFrame.size.height];
+            [self animateSelfToPosition:_initialYPosition];
         }
     });
 }
@@ -221,6 +204,28 @@
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSDictionary *attributes = @{NSFontAttributeName : self.font};
+        CGSize boundingBox = [self.text boundingRectWithSize:CGSizeMake(self.frame.size.width, 170)
+                                                     options:NSStringDrawingUsesLineFragmentOrigin
+                                                  attributes:attributes context:nil].size;
+        CGSize size = CGSizeMake(ceil(boundingBox.width), ceil(boundingBox.height + 11));
+        __weak STATextView *weakSelf = self;
+        [UIView animateWithDuration:0.1 animations:^{
+            CGRect newTextViewFrame = weakSelf.frame;
+            newTextViewFrame.origin.y = _keyboardYPosition - size.height;
+            newTextViewFrame.size.height = size.height;
+            weakSelf.frame = newTextViewFrame;
+        } completion:^(BOOL finished) {
+            if (finished) {
+                CGRect newTextViewFrame = weakSelf.frame;
+                newTextViewFrame.origin.y = _keyboardYPosition - size.height;
+                newTextViewFrame.size.height = size.height;
+                weakSelf.frame = newTextViewFrame;
+            }
+        }];
+    });
+        
     return YES;
 }
 
