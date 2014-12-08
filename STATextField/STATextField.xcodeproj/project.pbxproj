@@ -16,14 +16,22 @@
 		93021A3419F0F7A50065B144 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 93021A2C19F0F7A50065B144 /* Info.plist */; };
 		93021A3519F0F7A50065B144 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 93021A2D19F0F7A50065B144 /* main.m */; };
 		93021A3619F0F7A50065B144 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93021A2F19F0F7A50065B144 /* ViewController.m */; };
-		93021A3A19F0F8880065B144 /* STATextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 93021A3919F0F8880065B144 /* STATextField.m */; };
-		93048CED1A18AB9800DCE5DC /* STADateField.m in Sources */ = {isa = PBXBuildFile; fileRef = 93048CEC1A18AB9800DCE5DC /* STADateField.m */; };
-		9305C73619FA46C40040BF8A /* STATextFieldUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 9305C73519FA46C40040BF8A /* STATextFieldUtility.m */; };
-		9305C73919FA4D090040BF8A /* NSString+STATextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 9305C73819FA4D090040BF8A /* NSString+STATextField.m */; };
-		93A9979319F4F6A700DB1678 /* STAATMTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A9979219F4F6A700DB1678 /* STAATMTextField.m */; };
-		93AF8E421A201CFF00D0C9C0 /* STATextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93AF8E411A201CFF00D0C9C0 /* STATextView.m */; };
-		93B72ACD1A22050F0007100A /* STATextFieldBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 93B72ACC1A22050F0007100A /* STATextFieldBase.m */; };
-		93B72AD31A2217660007100A /* STATextViewBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 93B72AD21A2217660007100A /* STATextViewBase.m */; };
+		93F951701A35C9CE003F8485 /* NSString+STATextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F9515D1A35C9CE003F8485 /* NSString+STATextField.m */; };
+		93F951711A35C9CE003F8485 /* NSString+STATextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F9515D1A35C9CE003F8485 /* NSString+STATextField.m */; };
+		93F951721A35C9CE003F8485 /* STAATMTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F9515F1A35C9CE003F8485 /* STAATMTextField.m */; };
+		93F951731A35C9CE003F8485 /* STAATMTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F9515F1A35C9CE003F8485 /* STAATMTextField.m */; };
+		93F951741A35C9CE003F8485 /* STADateField.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F951611A35C9CE003F8485 /* STADateField.m */; };
+		93F951751A35C9CE003F8485 /* STADateField.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F951611A35C9CE003F8485 /* STADateField.m */; };
+		93F951761A35C9CE003F8485 /* STATextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F951641A35C9CE003F8485 /* STATextField.m */; };
+		93F951771A35C9CE003F8485 /* STATextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F951641A35C9CE003F8485 /* STATextField.m */; };
+		93F951781A35C9CE003F8485 /* STATextFieldBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F951671A35C9CE003F8485 /* STATextFieldBase.m */; };
+		93F951791A35C9CE003F8485 /* STATextFieldBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F951671A35C9CE003F8485 /* STATextFieldBase.m */; };
+		93F9517A1A35C9CE003F8485 /* STATextFieldUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F951691A35C9CE003F8485 /* STATextFieldUtility.m */; };
+		93F9517B1A35C9CE003F8485 /* STATextFieldUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F951691A35C9CE003F8485 /* STATextFieldUtility.m */; };
+		93F9517C1A35C9CE003F8485 /* STATextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F9516C1A35C9CE003F8485 /* STATextView.m */; };
+		93F9517D1A35C9CE003F8485 /* STATextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F9516C1A35C9CE003F8485 /* STATextView.m */; };
+		93F9517E1A35C9CE003F8485 /* STATextViewBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F9516F1A35C9CE003F8485 /* STATextViewBase.m */; };
+		93F9517F1A35C9CE003F8485 /* STATextViewBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F9516F1A35C9CE003F8485 /* STATextViewBase.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,25 +59,25 @@
 		93021A2D19F0F7A50065B144 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		93021A2E19F0F7A50065B144 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		93021A2F19F0F7A50065B144 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		93021A3819F0F8880065B144 /* STATextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STATextField.h; sourceTree = "<group>"; };
-		93021A3919F0F8880065B144 /* STATextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STATextField.m; sourceTree = "<group>"; };
-		93021A3B19F118EC0065B144 /* STATextField+PrivateHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "STATextField+PrivateHeaders.h"; sourceTree = "<group>"; };
-		93048CEB1A18AB9800DCE5DC /* STADateField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STADateField.h; sourceTree = "<group>"; };
-		93048CEC1A18AB9800DCE5DC /* STADateField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STADateField.m; sourceTree = "<group>"; };
-		9305C73419FA46C40040BF8A /* STATextFieldUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STATextFieldUtility.h; sourceTree = "<group>"; };
-		9305C73519FA46C40040BF8A /* STATextFieldUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STATextFieldUtility.m; sourceTree = "<group>"; };
-		9305C73719FA4D090040BF8A /* NSString+STATextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+STATextField.h"; sourceTree = "<group>"; };
-		9305C73819FA4D090040BF8A /* NSString+STATextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+STATextField.m"; sourceTree = "<group>"; };
-		93A9979119F4F6A700DB1678 /* STAATMTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAATMTextField.h; sourceTree = "<group>"; };
-		93A9979219F4F6A700DB1678 /* STAATMTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAATMTextField.m; sourceTree = "<group>"; };
-		93AF8E401A201CFF00D0C9C0 /* STATextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STATextView.h; sourceTree = "<group>"; };
-		93AF8E411A201CFF00D0C9C0 /* STATextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STATextView.m; sourceTree = "<group>"; };
-		93B72ACB1A22050F0007100A /* STATextFieldBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STATextFieldBase.h; sourceTree = "<group>"; };
-		93B72ACC1A22050F0007100A /* STATextFieldBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STATextFieldBase.m; sourceTree = "<group>"; };
-		93B72ACE1A2206580007100A /* STATextFieldBase+ProvideHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "STATextFieldBase+ProvideHeaders.h"; sourceTree = "<group>"; };
-		93B72AD11A2217660007100A /* STATextViewBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STATextViewBase.h; sourceTree = "<group>"; };
-		93B72AD21A2217660007100A /* STATextViewBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STATextViewBase.m; sourceTree = "<group>"; };
-		93B72AD71A2218B50007100A /* STATextViewBase+PrivateHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "STATextViewBase+PrivateHeaders.h"; sourceTree = "<group>"; };
+		93F9515C1A35C9CE003F8485 /* NSString+STATextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+STATextField.h"; sourceTree = "<group>"; };
+		93F9515D1A35C9CE003F8485 /* NSString+STATextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+STATextField.m"; sourceTree = "<group>"; };
+		93F9515E1A35C9CE003F8485 /* STAATMTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAATMTextField.h; sourceTree = "<group>"; };
+		93F9515F1A35C9CE003F8485 /* STAATMTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAATMTextField.m; sourceTree = "<group>"; };
+		93F951601A35C9CE003F8485 /* STADateField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STADateField.h; sourceTree = "<group>"; };
+		93F951611A35C9CE003F8485 /* STADateField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STADateField.m; sourceTree = "<group>"; };
+		93F951621A35C9CE003F8485 /* STATextField+PrivateHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "STATextField+PrivateHeaders.h"; sourceTree = "<group>"; };
+		93F951631A35C9CE003F8485 /* STATextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STATextField.h; sourceTree = "<group>"; };
+		93F951641A35C9CE003F8485 /* STATextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STATextField.m; sourceTree = "<group>"; };
+		93F951651A35C9CE003F8485 /* STATextFieldBase+ProvideHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "STATextFieldBase+ProvideHeaders.h"; sourceTree = "<group>"; };
+		93F951661A35C9CE003F8485 /* STATextFieldBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STATextFieldBase.h; sourceTree = "<group>"; };
+		93F951671A35C9CE003F8485 /* STATextFieldBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STATextFieldBase.m; sourceTree = "<group>"; };
+		93F951681A35C9CE003F8485 /* STATextFieldUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STATextFieldUtility.h; sourceTree = "<group>"; };
+		93F951691A35C9CE003F8485 /* STATextFieldUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STATextFieldUtility.m; sourceTree = "<group>"; };
+		93F9516B1A35C9CE003F8485 /* STATextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STATextView.h; sourceTree = "<group>"; };
+		93F9516C1A35C9CE003F8485 /* STATextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STATextView.m; sourceTree = "<group>"; };
+		93F9516D1A35C9CE003F8485 /* STATextViewBase+PrivateHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "STATextViewBase+PrivateHeaders.h"; sourceTree = "<group>"; };
+		93F9516E1A35C9CE003F8485 /* STATextViewBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STATextViewBase.h; sourceTree = "<group>"; };
+		93F9516F1A35C9CE003F8485 /* STATextViewBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STATextViewBase.m; sourceTree = "<group>"; };
 		A5FAFFD39F9AD1892CBA12CB /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		AF7678045F1F8459FB61CEEA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		B6EC54A452CEF08E418A3085 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -162,27 +170,43 @@
 		93021A3719F0F8550065B144 /* STATextField */ = {
 			isa = PBXGroup;
 			children = (
-				93021A3819F0F8880065B144 /* STATextField.h */,
-				93021A3919F0F8880065B144 /* STATextField.m */,
-				93021A3B19F118EC0065B144 /* STATextField+PrivateHeaders.h */,
-				93A9979119F4F6A700DB1678 /* STAATMTextField.h */,
-				93A9979219F4F6A700DB1678 /* STAATMTextField.m */,
-				9305C73419FA46C40040BF8A /* STATextFieldUtility.h */,
-				9305C73519FA46C40040BF8A /* STATextFieldUtility.m */,
-				9305C73719FA4D090040BF8A /* NSString+STATextField.h */,
-				9305C73819FA4D090040BF8A /* NSString+STATextField.m */,
-				93048CEB1A18AB9800DCE5DC /* STADateField.h */,
-				93048CEC1A18AB9800DCE5DC /* STADateField.m */,
-				93B72ACB1A22050F0007100A /* STATextFieldBase.h */,
-				93B72ACC1A22050F0007100A /* STATextFieldBase.m */,
-				93B72ACE1A2206580007100A /* STATextFieldBase+ProvideHeaders.h */,
-				93AF8E401A201CFF00D0C9C0 /* STATextView.h */,
-				93AF8E411A201CFF00D0C9C0 /* STATextView.m */,
-				93B72AD11A2217660007100A /* STATextViewBase.h */,
-				93B72AD21A2217660007100A /* STATextViewBase.m */,
-				93B72AD71A2218B50007100A /* STATextViewBase+PrivateHeaders.h */,
+				93F9515B1A35C9CE003F8485 /* TextField */,
+				93F9516A1A35C9CE003F8485 /* TextView */,
 			);
 			path = STATextField;
+			sourceTree = "<group>";
+		};
+		93F9515B1A35C9CE003F8485 /* TextField */ = {
+			isa = PBXGroup;
+			children = (
+				93F9515C1A35C9CE003F8485 /* NSString+STATextField.h */,
+				93F9515D1A35C9CE003F8485 /* NSString+STATextField.m */,
+				93F9515E1A35C9CE003F8485 /* STAATMTextField.h */,
+				93F9515F1A35C9CE003F8485 /* STAATMTextField.m */,
+				93F951601A35C9CE003F8485 /* STADateField.h */,
+				93F951611A35C9CE003F8485 /* STADateField.m */,
+				93F951621A35C9CE003F8485 /* STATextField+PrivateHeaders.h */,
+				93F951631A35C9CE003F8485 /* STATextField.h */,
+				93F951641A35C9CE003F8485 /* STATextField.m */,
+				93F951651A35C9CE003F8485 /* STATextFieldBase+ProvideHeaders.h */,
+				93F951661A35C9CE003F8485 /* STATextFieldBase.h */,
+				93F951671A35C9CE003F8485 /* STATextFieldBase.m */,
+				93F951681A35C9CE003F8485 /* STATextFieldUtility.h */,
+				93F951691A35C9CE003F8485 /* STATextFieldUtility.m */,
+			);
+			path = TextField;
+			sourceTree = "<group>";
+		};
+		93F9516A1A35C9CE003F8485 /* TextView */ = {
+			isa = PBXGroup;
+			children = (
+				93F9516B1A35C9CE003F8485 /* STATextView.h */,
+				93F9516C1A35C9CE003F8485 /* STATextView.m */,
+				93F9516D1A35C9CE003F8485 /* STATextViewBase+PrivateHeaders.h */,
+				93F9516E1A35C9CE003F8485 /* STATextViewBase.h */,
+				93F9516F1A35C9CE003F8485 /* STATextViewBase.m */,
+			);
+			path = TextView;
 			sourceTree = "<group>";
 		};
 		B5AEFBC70A7CAFD777CB9F85 /* Pods */ = {
@@ -334,16 +358,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				93021A3619F0F7A50065B144 /* ViewController.m in Sources */,
+				93F951781A35C9CE003F8485 /* STATextFieldBase.m in Sources */,
+				93F9517E1A35C9CE003F8485 /* STATextViewBase.m in Sources */,
+				93F951761A35C9CE003F8485 /* STATextField.m in Sources */,
+				93F951741A35C9CE003F8485 /* STADateField.m in Sources */,
+				93F9517C1A35C9CE003F8485 /* STATextView.m in Sources */,
 				93021A3519F0F7A50065B144 /* main.m in Sources */,
-				9305C73619FA46C40040BF8A /* STATextFieldUtility.m in Sources */,
-				93B72AD31A2217660007100A /* STATextViewBase.m in Sources */,
-				93021A3A19F0F8880065B144 /* STATextField.m in Sources */,
-				93AF8E421A201CFF00D0C9C0 /* STATextView.m in Sources */,
-				93048CED1A18AB9800DCE5DC /* STADateField.m in Sources */,
+				93F951701A35C9CE003F8485 /* NSString+STATextField.m in Sources */,
+				93F951721A35C9CE003F8485 /* STAATMTextField.m in Sources */,
 				93021A3019F0F7A50065B144 /* AppDelegate.m in Sources */,
-				93B72ACD1A22050F0007100A /* STATextFieldBase.m in Sources */,
-				9305C73919FA4D090040BF8A /* NSString+STATextField.m in Sources */,
-				93A9979319F4F6A700DB1678 /* STAATMTextField.m in Sources */,
+				93F9517A1A35C9CE003F8485 /* STATextFieldUtility.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,7 +375,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93F9517D1A35C9CE003F8485 /* STATextView.m in Sources */,
+				93F9517B1A35C9CE003F8485 /* STATextFieldUtility.m in Sources */,
+				93F951771A35C9CE003F8485 /* STATextField.m in Sources */,
+				93F951791A35C9CE003F8485 /* STATextFieldBase.m in Sources */,
+				93F951711A35C9CE003F8485 /* NSString+STATextField.m in Sources */,
 				93021A1B19F0F3670065B144 /* STATextFieldTests.m in Sources */,
+				93F9517F1A35C9CE003F8485 /* STATextViewBase.m in Sources */,
+				93F951731A35C9CE003F8485 /* STAATMTextField.m in Sources */,
+				93F951751A35C9CE003F8485 /* STADateField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
