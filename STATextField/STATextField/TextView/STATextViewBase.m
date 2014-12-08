@@ -27,6 +27,52 @@
 
 #pragma mark Delegate Overrides
 
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    BOOL shouldChangeText = [(STATextViewBase *)textView textViewShouldBeginEditing:textView];
+    if ([_userDelegate respondsToSelector:_cmd]) {
+        if (!shouldChangeText) {
+            [_userDelegate textViewShouldBeginEditing:textView];
+        } else {
+            shouldChangeText = [_userDelegate textViewShouldBeginEditing:textView];
+        }
+    }
+    return shouldChangeText;
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    [(STATextViewBase *)textView textViewDidBeginEditing:textView];
+    if ([_userDelegate respondsToSelector:_cmd]) {
+        [_userDelegate textViewDidBeginEditing:textView];
+    }
+}
+
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    BOOL shouldChangeText = [(STATextViewBase *)textView textViewShouldEndEditing:textView];
+    if ([_userDelegate respondsToSelector:_cmd]) {
+        if (!shouldChangeText) {
+            [_userDelegate textViewShouldEndEditing:textView];
+        } else {
+            shouldChangeText = [_userDelegate textViewShouldEndEditing:textView];
+        }
+    }
+    return shouldChangeText;
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    [(STATextViewBase *)textView textViewDidEndEditing:textView];
+    if ([_userDelegate respondsToSelector:_cmd]) {
+        [_userDelegate textViewDidEndEditing:textView];
+    }
+}
+
 - (void)textViewDidChange:(UITextView *)textView {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
@@ -51,34 +97,6 @@
             shouldChangeText = [_userDelegate textView:textView
                                      shouldChangeTextInRange:range
                                              replacementText:text];
-        }
-    }
-    return shouldChangeText;
-}
-
-- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    
-    BOOL shouldChangeText = [(STATextViewBase *)textView textViewShouldBeginEditing:textView];
-    if ([_userDelegate respondsToSelector:_cmd]) {
-        if (!shouldChangeText) {
-            [_userDelegate textViewShouldBeginEditing:textView];
-        } else {
-            shouldChangeText = [_userDelegate textViewShouldBeginEditing:textView];
-        }
-    }
-    return shouldChangeText;
-}
-
-- (BOOL)textViewShouldEndEditing:(UITextView *)textView {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    
-    BOOL shouldChangeText = [(STATextViewBase *)textView textViewShouldEndEditing:textView];
-    if ([_userDelegate respondsToSelector:_cmd]) {
-        if (!shouldChangeText) {
-            [_userDelegate textViewShouldEndEditing:textView];
-        } else {
-            shouldChangeText = [_userDelegate textViewShouldEndEditing:textView];
         }
     }
     return shouldChangeText;
@@ -229,10 +247,20 @@
     return YES;
 }
 
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+}
+
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
     return YES;
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
 }
 
 
