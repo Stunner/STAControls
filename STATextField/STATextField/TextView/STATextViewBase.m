@@ -27,6 +27,8 @@
 
 #pragma mark Delegate Overrides
 
+// Responding to Editing Notifications
+
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
@@ -73,14 +75,7 @@
     }
 }
 
-- (void)textViewDidChange:(UITextView *)textView {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    
-    [(STATextViewBase *)textView textViewDidChange:textView];
-    if ([_userDelegate respondsToSelector:_cmd]) {
-        [_userDelegate textViewDidChange:textView];
-    }
-}
+// Responding to Text Changes
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     NSLog(@"%s", __PRETTY_FUNCTION__);
@@ -100,6 +95,74 @@
         }
     }
     return shouldChangeText;
+}
+
+- (void)textViewDidChange:(UITextView *)textView {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    [(STATextViewBase *)textView textViewDidChange:textView];
+    if ([_userDelegate respondsToSelector:_cmd]) {
+        [_userDelegate textViewDidChange:textView];
+    }
+}
+
+// Responding to Selection Changes
+
+- (void)textViewDidChangeSelection:(UITextView *)textView {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    [(STATextViewBase *)textView textViewDidChangeSelection:textView];
+    if ([_userDelegate respondsToSelector:_cmd]) {
+        [_userDelegate textViewDidChangeSelection:textView];
+    }
+}
+
+// Interacting with Text Data
+
+- (BOOL)textView:(UITextView *)textView
+shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment
+         inRange:(NSRange)characterRange
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    BOOL shouldInteractWithText = [(STATextViewBase *)textView textView:textView
+                                       shouldInteractWithTextAttachment:textAttachment
+                                                                inRange:characterRange];
+    if ([_userDelegate respondsToSelector:_cmd]) {
+        if (!shouldInteractWithText) {
+            [_userDelegate textView:textView
+   shouldInteractWithTextAttachment:textAttachment
+                            inRange:characterRange];
+        } else {
+            shouldInteractWithText = [_userDelegate textView:textView
+                            shouldInteractWithTextAttachment:textAttachment
+                                                     inRange:characterRange];
+        }
+    }
+    return shouldInteractWithText;
+}
+
+- (BOOL)textView:(UITextView *)textView
+shouldInteractWithURL:(NSURL *)URL
+         inRange:(NSRange)characterRange
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    BOOL shouldInteractWithURL = [(STATextViewBase *)textView textView:textView
+                                                 shouldInteractWithURL:URL
+                                                               inRange:characterRange];
+    if ([_userDelegate respondsToSelector:_cmd]) {
+        if (!shouldInteractWithURL) {
+            [_userDelegate textView:textView
+              shouldInteractWithURL:URL
+                            inRange:characterRange];
+        } else {
+            shouldInteractWithURL = [_userDelegate textView:textView
+                                      shouldInteractWithURL:URL
+                                                    inRange:characterRange];
+        }
+    }
+    return shouldInteractWithURL;
 }
 
 //- (void)textViewBeganEditing:(NSNotification *)notification {
@@ -214,17 +277,6 @@
     
 }
 
-- (void)textViewDidChange:(UITextView *)textView {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    
-}
-
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    
-    return YES;
-}
-
 - (void)textViewBeganEditing:(NSNotification *)notification {
     
 }
@@ -240,6 +292,8 @@
 - (void)keyboardWillHide:(NSNotification *)notification {
     
 }
+
+// Responding to Editing Notifications
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
     NSLog(@"%s", __PRETTY_FUNCTION__);
@@ -263,5 +317,45 @@
     
 }
 
+// Responding to Text Changes
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    return YES;
+}
+
+- (void)textViewDidChange:(UITextView *)textView {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+}
+
+// Responding to Selection Changes
+
+- (void)textViewDidChangeSelection:(UITextView *)textView {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    
+}
+
+// Interacting with Text Data
+
+- (BOOL)textView:(UITextView *)textView
+shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment
+         inRange:(NSRange)characterRange
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    return YES;
+}
+
+- (BOOL)textView:(UITextView *)textView
+shouldInteractWithURL:(NSURL *)URL
+         inRange:(NSRange)characterRange
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    return YES;
+}
 
 @end
