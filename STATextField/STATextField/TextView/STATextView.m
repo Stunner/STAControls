@@ -207,10 +207,11 @@
     
     NSDictionary *attributes = @{NSFontAttributeName : self.font};
     NSString *newText = [self.text stringByReplacingCharactersInRange:range withString:text];
-    CGSize boundingBox = [newText boundingRectWithSize:CGSizeMake(self.frame.size.width, 170)
+    UIEdgeInsets textContainerInset = self.textContainerInset;
+    CGSize boundingBox = [newText boundingRectWithSize:CGSizeMake(self.bounds.size.width - (textContainerInset.left + textContainerInset.right), 170)
                                                  options:NSStringDrawingUsesLineFragmentOrigin
                                               attributes:attributes context:nil].size;
-    CGSize size = CGSizeMake(ceil(boundingBox.width), ceil(boundingBox.height + 11));
+    CGSize size = CGSizeMake(ceil(boundingBox.width + (textContainerInset.left + textContainerInset.right)), ceil(boundingBox.height + textContainerInset.top + textContainerInset.bottom));
     __weak STATextView *weakSelf = self;
     [UIView animateWithDuration:0.1 animations:^{
         CGRect newTextViewFrame = weakSelf.frame;
