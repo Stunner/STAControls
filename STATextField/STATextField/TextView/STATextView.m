@@ -205,28 +205,27 @@
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSDictionary *attributes = @{NSFontAttributeName : self.font};
-        CGSize boundingBox = [self.text boundingRectWithSize:CGSizeMake(self.frame.size.width, 170)
-                                                     options:NSStringDrawingUsesLineFragmentOrigin
-                                                  attributes:attributes context:nil].size;
-        CGSize size = CGSizeMake(ceil(boundingBox.width), ceil(boundingBox.height + 11));
-        __weak STATextView *weakSelf = self;
-        [UIView animateWithDuration:0.1 animations:^{
+    NSDictionary *attributes = @{NSFontAttributeName : self.font};
+    NSString *newText = [self.text stringByReplacingCharactersInRange:range withString:text];
+    CGSize boundingBox = [newText boundingRectWithSize:CGSizeMake(self.frame.size.width, 170)
+                                                 options:NSStringDrawingUsesLineFragmentOrigin
+                                              attributes:attributes context:nil].size;
+    CGSize size = CGSizeMake(ceil(boundingBox.width), ceil(boundingBox.height + 11));
+    __weak STATextView *weakSelf = self;
+    [UIView animateWithDuration:0.1 animations:^{
+        CGRect newTextViewFrame = weakSelf.frame;
+        newTextViewFrame.origin.y = _keyboardYPosition - size.height;
+        newTextViewFrame.size.height = size.height;
+        weakSelf.frame = newTextViewFrame;
+    } completion:^(BOOL finished) {
+        if (finished) {
             CGRect newTextViewFrame = weakSelf.frame;
             newTextViewFrame.origin.y = _keyboardYPosition - size.height;
             newTextViewFrame.size.height = size.height;
             weakSelf.frame = newTextViewFrame;
-        } completion:^(BOOL finished) {
-            if (finished) {
-                CGRect newTextViewFrame = weakSelf.frame;
-                newTextViewFrame.origin.y = _keyboardYPosition - size.height;
-                newTextViewFrame.size.height = size.height;
-                weakSelf.frame = newTextViewFrame;
-            }
-        }];
-    });
-        
+        }
+    }];
+    
     return YES;
 }
 
