@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ Responsible for handling the delegate forwarding/overriding and establishing methods
+ that may be overridden.
+ */
 @interface STATextViewBase : UITextView
 
 @end

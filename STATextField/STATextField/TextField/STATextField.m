@@ -39,7 +39,7 @@
         UIToolbar *keyboardDoneButtonView = [UIToolbar new];
         [keyboardDoneButtonView sizeToFit];
         UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
-                                                                       style:UIBarButtonItemStyleBordered target:self
+                                                                       style:UIBarButtonItemStyleDone target:self
                                                                       action:@selector(doneClicked:)];
         UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
         [keyboardDoneButtonView setItems:@[flexibleSpace, doneButton]];
@@ -60,10 +60,10 @@
         UIToolbar *keyboardDoneButtonView = [UIToolbar new];
         [keyboardDoneButtonView sizeToFit];
         UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
-                                                                       style:UIBarButtonItemStyleBordered target:self
+                                                                       style:UIBarButtonItemStyleDone target:self
                                                                       action:@selector(doneClicked:)];
         UIBarButtonItem *nextButton = [[UIBarButtonItem alloc] initWithTitle:@"Next"
-                                                                       style:UIBarButtonItemStyleBordered target:self
+                                                                       style:UIBarButtonItemStyleDone target:self
                                                                       action:@selector(nextClicked:)];
         UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
         [keyboardDoneButtonView setItems:@[doneButton, flexibleSpace, nextButton]];

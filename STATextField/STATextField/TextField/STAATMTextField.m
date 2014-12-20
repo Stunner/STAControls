@@ -62,7 +62,7 @@ replacementString:(NSString *)string
     NSString *cleansedString = [[newString componentsSeparatedByCharactersInSet:excludedCharacters] componentsJoinedByString:@""];
     cleansedString = [cleansedString stringByTrimmingLeadingZeroes];
     if (cleansedString.length < 3) {
-        NSUInteger zeroesCount = 3-cleansedString.length;
+        NSUInteger zeroesCount = 3 - cleansedString.length;
         NSString *zeroes = [STATextFieldUtility insertDecimalInString:[@"0" repeatTimes:zeroesCount]
                                                     atPositionFromEnd:(zeroesCount - 1)];
         newString = [STATextFieldUtility append:zeroes, cleansedString, nil];

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 /**
- Responsible for handling the delegate forwarding and establishing methods 
+ Responsible for handling the delegate forwarding/overriding and establishing methods
  that may be overridden.
  */
 @interface STATextFieldBase : UITextField
