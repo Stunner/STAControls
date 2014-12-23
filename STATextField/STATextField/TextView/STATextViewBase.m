@@ -219,11 +219,6 @@ shouldInteractWithURL:(NSURL *)URL
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(textChanged:)
-                                                 name:UITextViewTextDidChangeNotification
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(textViewBeganEditing:)
                                                  name:UITextViewTextDidBeginEditingNotification
                                                object:nil];
@@ -231,6 +226,11 @@ shouldInteractWithURL:(NSURL *)URL
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(textViewStoppedEditing:)
                                                  name:UITextViewTextDidEndEditingNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(textChanged:)
+                                                 name:UITextViewTextDidChangeNotification
                                                object:nil];
 }
 
@@ -273,7 +273,13 @@ shouldInteractWithURL:(NSURL *)URL
     [super setDelegate:delegate ? _internalDelegate : nil];
 }
 
-- (void)textChanged:(NSNotification *)notification {
+// Notifications
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
     
 }
 
@@ -285,11 +291,7 @@ shouldInteractWithURL:(NSURL *)URL
     
 }
 
-- (void)keyboardWillShow:(NSNotification *)notification {
-    
-}
-
-- (void)keyboardWillHide:(NSNotification *)notification {
+- (void)textChanged:(NSNotification *)notification {
     
 }
 

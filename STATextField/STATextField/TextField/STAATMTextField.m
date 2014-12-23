@@ -43,6 +43,7 @@
     return [self positionFromPosition:self.endOfDocument offset:0];
 }
 
+// TODO: add capability to type . and have text field compensate by shifting without having to enter '0'
 - (BOOL)textField:(UITextField *)textField
 shouldChangeCharactersInRange:(NSRange)range
 replacementString:(NSString *)string
