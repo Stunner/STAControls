@@ -123,9 +123,9 @@
         }
         
         CGRect endFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-        if (self.animatesToTopOfKeyboard) {
-            [self animateSelfToPosition:[UIScreen mainScreen].bounds.size.height - endFrame.size.height - self.frame.size.height];
-        }
+//        if (self.animatesToTopOfKeyboard) {
+//            [self animateSelfToPosition:[UIScreen mainScreen].bounds.size.height - endFrame.size.height - self.frame.size.height];
+//        }
     });
 }
 
@@ -144,9 +144,9 @@
 //        self.nextHideKeyboardNotificationForSelf = NO;
         
         CGRect beginFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
-        if (self.animatesToTopOfKeyboard) {
-            [self animateSelfToPosition:_initialYPosition];
-        }
+//        if (self.animatesToTopOfKeyboard) {
+//            [self animateSelfToPosition:_initialYPosition];
+//        }
     });
 }
 
@@ -224,13 +224,13 @@
     __weak STATextView *weakSelf = self;
     [UIView animateWithDuration:0.1 animations:^{
         CGRect newTextViewFrame = weakSelf.frame;
-        newTextViewFrame.origin.y = _keyboardYPosition - size.height;
+//        newTextViewFrame.origin.y = _keyboardYPosition - size.height;
         newTextViewFrame.size.height = size.height;
         weakSelf.frame = newTextViewFrame;
     } completion:^(BOOL finished) {
         if (finished) {
             CGRect newTextViewFrame = weakSelf.frame;
-            newTextViewFrame.origin.y = _keyboardYPosition - size.height;
+//            newTextViewFrame.origin.y = _keyboardYPosition - size.height;
             newTextViewFrame.size.height = size.height;
             weakSelf.frame = newTextViewFrame;
         }

@@ -71,7 +71,7 @@
                                 </connections>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oz7-oO-2fl" customClass="STATextView">
-                                <rect key="frame" x="0.0" y="452" width="320" height="28"/>
+                                <rect key="frame" x="0.0" y="263" width="320" height="28"/>
                                 <color key="backgroundColor" red="0.83319887907608692" green="0.83319887907608692" blue="0.83319887907608692" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
