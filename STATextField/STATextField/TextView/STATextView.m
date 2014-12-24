@@ -31,39 +31,39 @@
 - (void)animateSelfToPosition:(CGFloat)position {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSLog(@"animating to %f", position);
-        if (!self.isAnimating) {
-            __weak STATextView *weakSelf = self;
-            [UIView animateWithDuration:0.25 delay:0 options:animationOptionsWithCurve(_keyboardAnimationCurve) animations:^{
-                weakSelf.isAnimating = YES;
-                CGRect newTextViewFrame = weakSelf.frame;
-                newTextViewFrame.origin.y = position;
-                weakSelf.frame = newTextViewFrame;
-            } completion:^(BOOL finished) {
-                if (finished) {
-                    weakSelf.isAnimating = NO;
-                    CGRect newTextViewFrame = weakSelf.frame;
-                    newTextViewFrame.origin.y = position;
-                    weakSelf.frame = newTextViewFrame;
-                }
-            }];
-        }
-    });
-    
 //    dispatch_async(dispatch_get_main_queue(), ^{
 //        NSLog(@"animating to %f", position);
-//
-//        [UIView beginAnimations:nil context:nil];
-//        [UIView setAnimationDuration:_keyboardAnimationDuration];
-//        [UIView setAnimationCurve:_keyboardAnimationCurve];
-//
-//        CGRect newTextViewFrame = self.frame;
-//        newTextViewFrame.origin.y = position;
-//        self.frame = newTextViewFrame;
-//
-//        [UIView commitAnimations];
+//        if (!self.isAnimating) {
+//            __weak STATextView *weakSelf = self;
+//            [UIView animateWithDuration:0.25 delay:0 options:animationOptionsWithCurve(_keyboardAnimationCurve) animations:^{
+//                weakSelf.isAnimating = YES;
+//                CGRect newTextViewFrame = weakSelf.frame;
+//                newTextViewFrame.origin.y = position;
+//                weakSelf.frame = newTextViewFrame;
+//            } completion:^(BOOL finished) {
+//                if (finished) {
+//                    weakSelf.isAnimating = NO;
+//                    CGRect newTextViewFrame = weakSelf.frame;
+//                    newTextViewFrame.origin.y = position;
+//                    weakSelf.frame = newTextViewFrame;
+//                }
+//            }];
+//        }
 //    });
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSLog(@"animating to %f", position);
+
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:_keyboardAnimationDuration];
+        [UIView setAnimationCurve:_keyboardAnimationCurve];
+
+        CGRect newTextViewFrame = self.frame;
+        newTextViewFrame.origin.y = position;
+        self.frame = newTextViewFrame;
+
+        [UIView commitAnimations];
+    });
 }
 
 - (void)parseUserInfoForNotification:(NSNotification *)notification {
