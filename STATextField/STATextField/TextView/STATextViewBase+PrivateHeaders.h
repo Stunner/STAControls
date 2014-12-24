@@ -10,11 +10,24 @@
 
 @interface STATextViewBase (PrivateHeaders)
 
+/**
+ Called during initialization, between the call to super's init and returning of self.
+ 
+ Use this method to specify any initial configuration.
+ */
 - (void)initInternal;
+
+// Notifications
 
 - (void)keyboardWillShow:(NSNotification *)notification;
 
 - (void)keyboardWillHide:(NSNotification *)notification;
+
+- (void)textViewBeganEditing:(NSNotification *)notification;
+
+- (void)textViewStoppedEditing:(NSNotification *)notification;
+
+- (void)textChanged:(NSNotification *)notification;
 
 // Responding to Editing Notifications
 
