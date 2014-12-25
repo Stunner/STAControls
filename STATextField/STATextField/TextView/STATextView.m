@@ -117,8 +117,8 @@
                                                 textContainerInset.bottom + contentInset.bottom,
                                                 textContainerInset.right + contentInset.right);
     CGSize boundingBox = [newText boundingRectWithSize:CGSizeMake(self.bounds.size.width - (totalInsets.left + totalInsets.right), 170)
-                                                 options:NSStringDrawingUsesLineFragmentOrigin
-                                              attributes:attributes context:nil].size;
+                                               options:NSStringDrawingUsesLineFragmentOrigin
+                                            attributes:attributes context:nil].size;
     CGSize size = CGSizeMake(ceil(boundingBox.width + (totalInsets.left + totalInsets.right)), ceil(boundingBox.height + totalInsets.top + totalInsets.bottom));
     
     __weak STATextView *weakSelf = self;
