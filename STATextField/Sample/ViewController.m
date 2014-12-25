@@ -41,6 +41,9 @@
     _dateTextField.showNextButton = YES;
     
     _textView.animatesToTopOfKeyboard = YES;
+    _textView.layer.borderWidth = 1.0f;
+    _textView.layer.cornerRadius = 5;
+    _textView.layer.borderColor = [[UIColor grayColor] CGColor];
 }
 
 
