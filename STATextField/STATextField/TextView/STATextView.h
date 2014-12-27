@@ -11,6 +11,7 @@
 
 @interface STATextView : STATextViewBase
 
+@property (nonatomic, assign) BOOL expandsUpward;
 @property (nonatomic, assign) BOOL animatesToTopOfKeyboard;
 
 @end

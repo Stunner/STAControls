@@ -80,6 +80,7 @@
     [super initInternal];
     
     _initialYPosition = self.frame.origin.y;
+    self.expandsUpward = NO;
     self.animatesToTopOfKeyboard = NO;
     self.nextHideKeyboardNotificationForSelf = NO;
     self.nextShowKeyboardNotificationForSelf = NO;
@@ -124,11 +125,19 @@
     __weak STATextView *weakSelf = self;
     [UIView animateWithDuration:0.1 animations:^{
         CGRect newTextViewFrame = weakSelf.frame;
+        if (self.expandsUpward) {
+            CGFloat heightDelta = newTextViewFrame.size.height - size.height;
+            newTextViewFrame.origin.y += heightDelta;
+        }
         newTextViewFrame.size.height = size.height;
         weakSelf.frame = newTextViewFrame;
     } completion:^(BOOL finished) {
         if (finished) {
             CGRect newTextViewFrame = weakSelf.frame;
+            if (self.expandsUpward) {
+                CGFloat heightDelta = newTextViewFrame.size.height - size.height;
+                newTextViewFrame.origin.y += heightDelta;
+            }
             newTextViewFrame.size.height = size.height;
             weakSelf.frame = newTextViewFrame;
         }
