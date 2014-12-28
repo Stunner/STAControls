@@ -103,23 +103,20 @@
     return YES;
 }
 
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    
+- (void)resizeSelfForText:(NSString *)text {
     //TODO: override text inset in order to update appropriately
     //TODO: compensate for default text being more than one line long
     // TODO: look at typing attributes
     NSDictionary *attributes = @{NSFontAttributeName : self.font}; //scan through nsttributed text and acount for characters with nsattributed font
-    NSString *newText = [self.text stringByReplacingCharactersInRange:range withString:text];
     UIEdgeInsets textContainerInset = self.textContainerInset;
     UIEdgeInsets contentInset = self.contentInset;
     UIEdgeInsets totalInsets = UIEdgeInsetsMake(textContainerInset.top + contentInset.top,
                                                 textContainerInset.left + contentInset.left,
                                                 textContainerInset.bottom + contentInset.bottom,
                                                 textContainerInset.right + contentInset.right);
-    CGSize boundingBox = [newText boundingRectWithSize:CGSizeMake(self.bounds.size.width - (totalInsets.left + totalInsets.right), 170)
-                                               options:NSStringDrawingUsesLineFragmentOrigin
-                                            attributes:attributes context:nil].size;
+    CGSize boundingBox = [text boundingRectWithSize:CGSizeMake(self.bounds.size.width - (totalInsets.left + totalInsets.right), 170)
+                                            options:NSStringDrawingUsesLineFragmentOrigin
+                                         attributes:attributes context:nil].size;
     CGSize size = CGSizeMake(ceil(boundingBox.width + (totalInsets.left + totalInsets.right)), ceil(boundingBox.height + totalInsets.top + totalInsets.bottom));
     
     __weak STATextView *weakSelf = self;
@@ -142,6 +139,13 @@
             weakSelf.frame = newTextViewFrame;
         }
     }];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    NSString *newText = [self.text stringByReplacingCharactersInRange:range withString:text];
+    [self resizeSelfForText:newText];
     
     return YES;
 }

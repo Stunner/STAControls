@@ -20,9 +20,30 @@
 */
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    [super textView:textView shouldChangeTextInRange:range replacementText:text];
     
-    return YES;
+    NSString *oldText = self.text;
+    NSString *newText = [self.text stringByReplacingCharactersInRange:range withString:text];
+    
+    NSCharacterSet *expressionCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789.+-*/()"];
+    if (text.length > 0 && [expressionCharacterSet characterIsMember:[text characterAtIndex:0]]) {
+        [super resizeSelfForText:newText];
+        return YES;
+    } else if (text.length == 0) { // deletion case
+        [super resizeSelfForText:newText];
+        return YES;
+    }
+    
+//    if ([text isEqualToString:@"("]) {
+//        self.text = [newText stringByAppendingString:@")"];
+//    }
+    
+    return NO;
+}
+
+- (void)textViewDidChange:(UITextView *)textView {
+    NSLog(@"selected range: %@", NSStringFromRange(self.selectedRange));
+    
+    
 }
 
 @end

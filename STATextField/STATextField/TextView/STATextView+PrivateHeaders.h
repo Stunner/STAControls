@@ -10,6 +10,10 @@
 
 @interface STATextView (PrivateHeaders)
 
+- (void)resizeSelfForText:(NSString *)text;
+
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text;
+
+- (void)textViewDidChange:(UITextView *)textView;
 
 @end
