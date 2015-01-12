@@ -13,5 +13,6 @@
 
 @property (nonatomic, assign) BOOL expandsUpward;
 @property (nonatomic, assign) BOOL animatesToTopOfKeyboard;
+@property (nonatomic, assign) BOOL autoDeterminesHeight;
 
 @end

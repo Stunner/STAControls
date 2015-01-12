@@ -21,12 +21,47 @@
 
 @property (nonatomic, assign) BOOL nextShowKeyboardNotificationForSelf;
 @property (nonatomic, assign) BOOL nextHideKeyboardNotificationForSelf;
+@property (nonatomic, assign) BOOL layoutSubviewsHasBeenCalled;
 @property (assign) BOOL isAnimating;
 
 @end
 
 
 @implementation STATextView
+
+- (CGSize)sizeForText:(NSString *)text {
+    //TODO: override text inset in order to update appropriately
+    //TODO: compensate for default text being more than one line long
+    // TODO: look at typing attributes
+    NSDictionary *attributes = @{NSFontAttributeName : self.font}; //scan through nsttributed text and acount for characters with nsattributed font
+    UIEdgeInsets textContainerInset = self.textContainerInset;
+    UIEdgeInsets contentInset = self.contentInset;
+    UIEdgeInsets totalInsets = UIEdgeInsetsMake(textContainerInset.top + contentInset.top,
+                                                textContainerInset.left + contentInset.left,
+                                                textContainerInset.bottom + contentInset.bottom,
+                                                textContainerInset.right + contentInset.right);
+    CGSize boundingBox = [text boundingRectWithSize:CGSizeMake(self.bounds.size.width - (totalInsets.left + totalInsets.right), 170)
+                                            options:NSStringDrawingUsesLineFragmentOrigin
+                                         attributes:attributes context:nil].size;
+    CGSize size = CGSizeMake(ceil(boundingBox.width + (totalInsets.left + totalInsets.right)), ceil(boundingBox.height + totalInsets.top + totalInsets.bottom));
+    return size;
+}
+
+#pragma mark - Subclassed Methods
+
+- (void)layoutSubviews {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    [super layoutSubviews];
+    
+    if (self.autoDeterminesHeight && !self.layoutSubviewsHasBeenCalled) {
+        CGSize size = [self sizeForText:@"A"]; // placeholder text
+        CGRect newFrame = self.frame;
+        newFrame.size.height = size.height;
+        self.frame = newFrame;
+    }
+    self.layoutSubviewsHasBeenCalled = YES;
+}
 
 - (void)textChanged:(NSNotification *)notification {
     NSLog(@"%s", __PRETTY_FUNCTION__);
@@ -106,21 +141,8 @@
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    //TODO: override text inset in order to update appropriately
-    //TODO: compensate for default text being more than one line long
-    // TODO: look at typing attributes
-    NSDictionary *attributes = @{NSFontAttributeName : self.font}; //scan through nsttributed text and acount for characters with nsattributed font
     NSString *newText = [self.text stringByReplacingCharactersInRange:range withString:text];
-    UIEdgeInsets textContainerInset = self.textContainerInset;
-    UIEdgeInsets contentInset = self.contentInset;
-    UIEdgeInsets totalInsets = UIEdgeInsetsMake(textContainerInset.top + contentInset.top,
-                                                textContainerInset.left + contentInset.left,
-                                                textContainerInset.bottom + contentInset.bottom,
-                                                textContainerInset.right + contentInset.right);
-    CGSize boundingBox = [newText boundingRectWithSize:CGSizeMake(self.bounds.size.width - (totalInsets.left + totalInsets.right), 170)
-                                               options:NSStringDrawingUsesLineFragmentOrigin
-                                            attributes:attributes context:nil].size;
-    CGSize size = CGSizeMake(ceil(boundingBox.width + (totalInsets.left + totalInsets.right)), ceil(boundingBox.height + totalInsets.top + totalInsets.bottom));
+    CGSize size = [self sizeForText:newText];
     
     __weak STATextView *weakSelf = self;
     [UIView animateWithDuration:0.1 animations:^{
