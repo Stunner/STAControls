@@ -7,81 +7,9 @@
 //
 
 #import "STATextField.h"
-#import "STATextField+PrivateHeaders.h"
-
-// reference: http://stackoverflow.com/a/9986842/347339
-#pragma mark - STATextFieldPrivateDelegate
-
-@interface STATextFieldPrivateDelegate : NSObject <UITextFieldDelegate> {
-@public
-    __weak id<UITextFieldDelegate> _userDelegate;
-}
-@end
-
-@implementation STATextFieldPrivateDelegate
-
-- (BOOL)respondsToSelector:(SEL)selector {
-    return [_userDelegate respondsToSelector:selector] || [super respondsToSelector:selector];
-}
-
-- (void)forwardInvocation:(NSInvocation *)invocation {
-    // This should only ever be called from `UITextField`, after it has verified
-    // that `_userDelegate` responds to the selector by sending me
-    // `respondsToSelector:`.  So I don't need to check again here.
-    [invocation invokeWithTarget:_userDelegate];
-}
-
-#pragma mark Delegate Overrides
-
-- (BOOL)textField:(UITextField *)textField
-shouldChangeCharactersInRange:(NSRange)range
-replacementString:(NSString *)string
-{
-    BOOL shouldChangeCharacters = [(STATextField *)textField staTextField:textField
-                                            shouldChangeCharactersInRange:range
-                                                        replacementString:string];
-    if ([_userDelegate respondsToSelector:_cmd]) {
-        if (!shouldChangeCharacters) {
-            [_userDelegate textField:textField shouldChangeCharactersInRange:range replacementString:string];
-        } else {
-            shouldChangeCharacters = [_userDelegate textField:textField shouldChangeCharactersInRange:range replacementString:string];
-        }
-    }
-    return shouldChangeCharacters;
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    BOOL returnable = YES;
-    if ([_userDelegate respondsToSelector:_cmd]) {
-        returnable = [_userDelegate textFieldShouldReturn:textField];
-    }
-    if (returnable) {
-        returnable = [(STATextField *)textField textFieldShouldReturn:textField];
-    }
-    return returnable;
-}
-
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    [(STATextField *)textField textFieldDidBeginEditing:textField];
-    if ([_userDelegate respondsToSelector:_cmd]) {
-        [_userDelegate textFieldDidBeginEditing:textField];
-    }
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-    [(STATextField *)textField textFieldDidEndEditing:textField];
-    if ([_userDelegate respondsToSelector:_cmd]) {
-        [_userDelegate textFieldDidEndEditing:textField];
-    }
-}
-
-@end
-
-#pragma mark - STATextField
+#import "STATextFieldBase+ProvideHeaders.h"
 
 @interface STATextField () {
-    STATextFieldPrivateDelegate *_internalDelegate;
     NSString *_internalPlaceholder;
     NSAttributedString *_internalAttributedPlaceholder;
 }
@@ -91,45 +19,14 @@ replacementString:(NSString *)string
 @implementation STATextField
 
 - (void)initInternal {
+    [super initInternal];
+    
     _resignsFirstResponderUponReturnKeyPress = YES;
-    
-    _internalDelegate = [[STATextFieldPrivateDelegate alloc] init];
-    [super setDelegate:_internalDelegate];
-    [self addTarget:self
-             action:@selector(textFieldDidChange:)
-   forControlEvents:UIControlEventEditingChanged];
-}
-
-- (void)textFieldDidChange:(id)sender {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    
-    [UIView animateWithDuration:0.1 animations:^{
-        [self invalidateIntrinsicContentSize];
-    }];
-}
-
-- (void)postInit {
     _internalPlaceholder = self.placeholder;
     _internalAttributedPlaceholder = self.attributedPlaceholder;
 }
 
-- (id)initWithFrame:(CGRect)frame {
-    if (!(self = [super initWithFrame:frame]))
-        return nil;
-    [self initInternal];
-    [self postInit];
-    return self;
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder {
-    if (!(self = [super initWithCoder:aDecoder]))
-        return nil;
-    [self initInternal];
-    [self postInit];
-    return self;
-}
-
-#pragma mark - Setters (of Catan)
+#pragma mark Setters (of Catan)
 
 - (void)doneClicked:(id)sender {
     [self endEditing:YES];
@@ -142,7 +39,7 @@ replacementString:(NSString *)string
         UIToolbar *keyboardDoneButtonView = [UIToolbar new];
         [keyboardDoneButtonView sizeToFit];
         UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
-                                                                       style:UIBarButtonItemStyleBordered target:self
+                                                                       style:UIBarButtonItemStyleDone target:self
                                                                       action:@selector(doneClicked:)];
         UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
         [keyboardDoneButtonView setItems:@[flexibleSpace, doneButton]];
@@ -163,10 +60,10 @@ replacementString:(NSString *)string
         UIToolbar *keyboardDoneButtonView = [UIToolbar new];
         [keyboardDoneButtonView sizeToFit];
         UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
-                                                                       style:UIBarButtonItemStyleBordered target:self
+                                                                       style:UIBarButtonItemStyleDone target:self
                                                                       action:@selector(doneClicked:)];
         UIBarButtonItem *nextButton = [[UIBarButtonItem alloc] initWithTitle:@"Next"
-                                                                       style:UIBarButtonItemStyleBordered target:self
+                                                                       style:UIBarButtonItemStyleDone target:self
                                                                       action:@selector(nextClicked:)];
         UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
         [keyboardDoneButtonView setItems:@[doneButton, flexibleSpace, nextButton]];
@@ -193,21 +90,14 @@ replacementString:(NSString *)string
     [super setAttributedPlaceholder:attributedPlaceholder];
 }
 
-#pragma mark Delegate Related
+#pragma mark Text Field Events
 
-- (void)setDelegate:(id<UITextFieldDelegate>)delegate {
-    _internalDelegate->_userDelegate = delegate;
-    // Scroll view delegate caches whether the delegate responds to some of the delegate
-    // methods, so we need to force it to re-evaluate if the delegate responds to them
-    super.delegate = nil;
-    super.delegate = (id)_internalDelegate;
+- (void)textFieldDidChange:(id)sender {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
 }
 
-- (id<UITextFieldDelegate>)delegate {
-    return _internalDelegate->_userDelegate;
-}
-
-- (BOOL)staTextField:(UITextField *)textField
+- (BOOL)textField:(UITextField *)textField
 shouldChangeCharactersInRange:(NSRange)range
    replacementString:(NSString *)string
 {

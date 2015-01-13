@@ -8,8 +8,16 @@
 
 #import "STATextField.h"
 
+/**
+ Provides a text field that mimics ATM machine input behavior.
+ */
 @interface STAATMTextField : STATextField
 
+/**
+ Allows for enabling/disabling of ATM text entry behavior.
+ 
+ Comes in use if you provide settings for the user to (en/dis)able this behavior within your app.
+ */
 @property (nonatomic, assign) BOOL atmEntryEnabled;
 
 @end

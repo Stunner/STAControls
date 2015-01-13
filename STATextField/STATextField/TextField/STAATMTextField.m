@@ -25,15 +25,28 @@
 }
 
 - (CGRect)caretRectForPosition:(UITextPosition *)position {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
     if (!self.atmEntryEnabled) {
         return [super caretRectForPosition:position];
     }
     return CGRectZero;
 }
 
-- (BOOL)staTextField:(UITextField *)textField
+- (UITextPosition *)closestPositionToPoint:(CGPoint)point {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    if (!self.atmEntryEnabled) {
+        return [super closestPositionToPoint:point];
+    }
+    // always return last text position to prevent moving of cursor
+    return [self positionFromPosition:self.endOfDocument offset:0];
+}
+
+// TODO: add capability to type . and have text field compensate by shifting without having to enter '0'
+- (BOOL)textField:(UITextField *)textField
 shouldChangeCharactersInRange:(NSRange)range
-   replacementString:(NSString *)string
+replacementString:(NSString *)string
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
@@ -50,7 +63,7 @@ shouldChangeCharactersInRange:(NSRange)range
     NSString *cleansedString = [[newString componentsSeparatedByCharactersInSet:excludedCharacters] componentsJoinedByString:@""];
     cleansedString = [cleansedString stringByTrimmingLeadingZeroes];
     if (cleansedString.length < 3) {
-        NSUInteger zeroesCount = 3-cleansedString.length;
+        NSUInteger zeroesCount = 3 - cleansedString.length;
         NSString *zeroes = [STATextFieldUtility insertDecimalInString:[@"0" repeatTimes:zeroesCount]
                                                     atPositionFromEnd:(zeroesCount - 1)];
         newString = [STATextFieldUtility append:zeroes, cleansedString, nil];
