@@ -21,6 +21,8 @@
 shouldChangeCharactersInRange:(NSRange)range
 replacementString:(NSString *)string;
 
+- (BOOL)textFieldShouldClear:(UITextField *)textField;
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField;
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField;

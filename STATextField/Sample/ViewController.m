@@ -15,7 +15,7 @@
 
 @property (nonatomic, strong) IBOutlet STAATMTextField *atmTextField;
 @property (nonatomic, strong) IBOutlet STATextField *textField;
-@property (nonatomic, strong) STATextField *resizingTextField;
+@property (nonatomic, strong) IBOutlet STAResizingTextField *resizingTextField;
 @property (nonatomic, strong) IBOutlet STATextField *dateTextField;
 @property (nonatomic, strong) IBOutlet STATextField *nextTextField;
 @property (nonatomic, strong) IBOutlet STATextView *textView;
@@ -38,11 +38,11 @@
     _textField.showDoneButton = YES;
     _textField.showNextButton = YES;
 
-    _resizingTextField = [[STAResizingTextField alloc] initWithFrame:CGRectMake(200, 180, 50, 30)];
+//    _resizingTextField = [[STAResizingTextField alloc] initWithFrame:CGRectMake(200, 180, 50, 30)];
     _resizingTextField.borderStyle = UITextBorderStyleRoundedRect;
     _resizingTextField.placeholder = @"Hello world!";
     _resizingTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
-    [self.view addSubview:_resizingTextField];
+//    [self.view addSubview:_resizingTextField];
     
     [_resizingTextField addTarget:self
                            action:@selector(textFieldDidChange:)
@@ -71,6 +71,7 @@
 - (IBAction)hideKeyboard:(id)sender {
     [_atmTextField resignFirstResponder];
     [_textField resignFirstResponder];
+    [_resizingTextField resignFirstResponder];
     [_dateTextField resignFirstResponder];
     [_nextTextField resignFirstResponder];
     [_textView resignFirstResponder];

@@ -12,6 +12,8 @@
 
 - (void)initInternal;
 
+- (BOOL)resignFirstResponderUponReturnKeyPress;
+
 - (BOOL)staTextField:(UITextField *)textField
 shouldChangeCharactersInRange:(NSRange)range
    replacementString:(NSString *)string;

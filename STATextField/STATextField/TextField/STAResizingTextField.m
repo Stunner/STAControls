@@ -31,57 +31,84 @@
     _initialTextFieldWidth = self.frame.size.width;
 }
 
-//- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-//    NSLog(@"%s", __PRETTY_FUNCTION__);
-//    
-//    return YES;
-//}
+- (BOOL)becomeFirstResponder {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    [super becomeFirstResponder];
+    
+    [self resizeSelfForClearButton:self.text];
+    return YES;
+}
 
-- (BOOL)staTextField:(UITextField *)textField
+- (BOOL)resignFirstResponder {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    [super resignFirstResponder];
+    
+    [self resizeSelfToWidthWithoutShrinking:_initialTextFieldWidth];
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField
 shouldChangeCharactersInRange:(NSRange)range
    replacementString:(NSString *)string
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    [self resizeSelfForClearButton:textField.text];
+    NSString *newText = [self.text stringByReplacingCharactersInRange:range withString:string];
+    [self resizeSelfForClearButton:newText];
     
     return YES;
 }
 
-- (void)resizeSelfToWidth:(NSInteger)width {
-#ifdef LOGGING_ENABLED
-    LogTrace(@"%s", __PRETTY_FUNCTION__);
-#endif
+- (BOOL)textFieldShouldClear:(UITextField *)textField {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    if (width == self.frame.size.width) {
-        return;
+    [self resizeSelfToWidthWithoutShrinking:_initialTextFieldWidth];
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    if ([super resignFirstResponderUponReturnKeyPress]) {
+        [self resizeSelfToWidthWithoutShrinking:_initialTextFieldWidth];
     }
+    return YES;
+}
+
+- (void)resizeSelfToWidth:(NSInteger)width {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    CGRect selfFrame = self.frame;
-    //                         CGRect textFieldFrame = _textField.frame;
-    NSInteger changeInLength = width - self.frame.size.width;
-    //                         textFieldFrame.size.width = width;
-    selfFrame.origin.x -= changeInLength;
-    selfFrame.size.width = width;
-    //                         _textField.frame = textFieldFrame;
-    [UIView animateWithDuration:0.15
-                          delay:0.0
-                        options:(UIViewAnimationOptions)UIViewAnimationCurveEaseOut
-                     animations:^{
-                         
-                         self.frame = selfFrame;
-                     }
-                     completion:^(BOOL finished){
-                         if (finished) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (width == self.frame.size.width) {
+            return;
+        }
+        
+        CGRect selfFrame = self.frame;
+        //                         CGRect textFieldFrame = _textField.frame;
+        NSInteger changeInLength = width - self.frame.size.width;
+        //                         textFieldFrame.size.width = width;
+        selfFrame.origin.x -= changeInLength;
+        selfFrame.size.width = width;
+        //                         _textField.frame = textFieldFrame;
+        [UIView animateWithDuration:0.15
+                              delay:0.0
+                            options:(UIViewAnimationOptions)UIViewAnimationCurveEaseOut
+                         animations:^{
+                             
                              self.frame = selfFrame;
                          }
-                     }];
+                         completion:^(BOOL finished){
+                             if (finished) {
+                                 self.frame = selfFrame;
+                             }
+                         }];
+    });
 }
 
 - (void)resizeSelfToWidthWithoutShrinking:(CGFloat)width {
-#ifdef LOGGING_ENABLED
-    LogTrace(@"%s", __PRETTY_FUNCTION__);
-#endif
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     
     if (width < _initialTextFieldWidth) {
         width = _initialTextFieldWidth;
@@ -91,9 +118,7 @@ shouldChangeCharactersInRange:(NSRange)range
 }
 
 - (void)resizeSelfToText:(NSString *)text {
-#ifdef LOGGING_ENABLED
-    LogTrace(@"%s", __PRETTY_FUNCTION__);
-#endif
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     
     CGFloat textWidth = [text sizeWithFont:self.font].width;
     if (self.clearButtonMode == UITextFieldViewModeNever) {
@@ -108,9 +133,7 @@ shouldChangeCharactersInRange:(NSRange)range
 }
 
 - (void)resizeSelfForClearButton:(NSString *)text {
-#ifdef LOGGING_ENABLED
-    LogTrace(@"%s", __PRETTY_FUNCTION__);
-#endif
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     
     if (text.length > 0 && self.isEditing) {
         [self resizeSelfToWidthWithoutShrinking:_initialTextFieldWidth + kDefaultClearTextButtonOffset];

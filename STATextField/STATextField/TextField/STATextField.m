@@ -90,6 +90,21 @@
     [super setAttributedPlaceholder:attributedPlaceholder];
 }
 
+#pragma mark Helpers
+
+- (BOOL)resignFirstResponderUponReturnKeyPress {
+    BOOL resignedFirstResponderStatus = NO;
+    if (self.resignsFirstResponderUponReturnKeyPress) {
+        if (self.nextFirstResponderUponReturnKeyPress) {
+            resignedFirstResponderStatus = [self resignFirstResponder];
+            [self.nextFirstResponderUponReturnKeyPress becomeFirstResponder];
+        } else {
+            resignedFirstResponderStatus =[self resignFirstResponder];
+        }
+    }
+    return resignedFirstResponderStatus;
+}
+
 #pragma mark Text Field Events
 
 - (void)textFieldDidChange:(id)sender {
@@ -109,14 +124,7 @@ shouldChangeCharactersInRange:(NSRange)range
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    if (self.resignsFirstResponderUponReturnKeyPress) {
-        if (self.nextFirstResponderUponReturnKeyPress) {
-            [textField resignFirstResponder];
-            [self.nextFirstResponderUponReturnKeyPress becomeFirstResponder];
-        } else {
-            [textField resignFirstResponder];
-        }
-    }
+    [self resignFirstResponderUponReturnKeyPress];
     return YES;
 }
 
