@@ -9,12 +9,13 @@
 #import "ViewController.h"
 #import "STAATMTextField.h"
 #import "STATextView.h"
+#import "STAPickerField.h"
 
 @interface ViewController () <UITextFieldDelegate, UITextViewDelegate>
 
 @property (nonatomic, strong) IBOutlet STAATMTextField *atmTextField;
 @property (nonatomic, strong) IBOutlet STATextField *textField;
-@property (nonatomic, strong) IBOutlet STATextField *dateTextField;
+@property (nonatomic, strong) IBOutlet STAPickerField *dateTextField;
 @property (nonatomic, strong) IBOutlet STATextField *nextTextField;
 @property (nonatomic, strong) IBOutlet STATextView *textView;
 
