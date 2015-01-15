@@ -32,58 +32,69 @@
 
 #pragma mark Delegate Overrides
 
-//- (CGFloat)pickerView:(UIPickerView *)pickerView
-//rowHeightForComponent:(NSInteger)component
-//{
-//    NSLog(@"%s", __PRETTY_FUNCTION__);
-//    
-//    
-//}
-//
-//- (CGFloat)pickerView:(UIPickerView *)pickerView
-//    widthForComponent:(NSInteger)component
-//{
-//    NSLog(@"%s", __PRETTY_FUNCTION__);
-//    
-//    
-//}
-//
-//- (NSString *)pickerView:(UIPickerView *)pickerView
-//             titleForRow:(NSInteger)row
-//            forComponent:(NSInteger)component
-//{
-//    NSLog(@"%s", __PRETTY_FUNCTION__);
-//    
-//    
-//}
-//
-//- (NSAttributedString *)pickerView:(UIPickerView *)pickerView
-//             attributedTitleForRow:(NSInteger)row
-//                      forComponent:(NSInteger)component
-//{
-//    NSLog(@"%s", __PRETTY_FUNCTION__);
-//    
-//    
-//}
-//
-//- (UIView *)pickerView:(UIPickerView *)pickerView
-//            viewForRow:(NSInteger)row
-//          forComponent:(NSInteger)component
-//           reusingView:(UIView *)view
-//{
-//    NSLog(@"%s", __PRETTY_FUNCTION__);
-//    
-//    
-//}
-//
-//- (void)pickerView:(UIPickerView *)pickerView
-//      didSelectRow:(NSInteger)row
-//       inComponent:(NSInteger)component
-//{
-//    NSLog(@"%s", __PRETTY_FUNCTION__);
-//    
-//    
-//}
+- (CGFloat)pickerView:(UIPickerView *)pickerView
+rowHeightForComponent:(NSInteger)component
+{
+    CGFloat rowHeight = [(STAPickerView *)pickerView pickerView:pickerView rowHeightForComponent:component];
+    if ([_userDelegate respondsToSelector:_cmd]) {
+        rowHeight = [_userDelegate pickerView:pickerView rowHeightForComponent:component];
+    }
+    return rowHeight;
+}
+
+- (CGFloat)pickerView:(UIPickerView *)pickerView
+    widthForComponent:(NSInteger)component
+{
+    CGFloat rowWidth = [(STAPickerView *)pickerView pickerView:pickerView widthForComponent:component];
+    if ([_userDelegate respondsToSelector:_cmd]) {
+        rowWidth = [_userDelegate pickerView:pickerView widthForComponent:component];
+    }
+    return rowWidth;
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView
+             titleForRow:(NSInteger)row
+            forComponent:(NSInteger)component
+{
+    NSString *title = [(STAPickerView *)pickerView pickerView:pickerView titleForRow:row forComponent:component];
+    if ([_userDelegate respondsToSelector:_cmd]) {
+        title = [_userDelegate pickerView:pickerView titleForRow:row forComponent:component];
+    }
+    return title;
+}
+
+- (NSAttributedString *)pickerView:(UIPickerView *)pickerView
+             attributedTitleForRow:(NSInteger)row
+                      forComponent:(NSInteger)component
+{
+    NSAttributedString *attributedTitle = [(STAPickerView *)pickerView pickerView:pickerView attributedTitleForRow:row forComponent:component];
+    if ([_userDelegate respondsToSelector:_cmd]) {
+        attributedTitle = [_userDelegate pickerView:pickerView attributedTitleForRow:row forComponent:component];
+    }
+    return attributedTitle;
+}
+
+- (UIView *)pickerView:(UIPickerView *)pickerView
+            viewForRow:(NSInteger)row
+          forComponent:(NSInteger)component
+           reusingView:(UIView *)view
+{
+    UIView *rowView = [(STAPickerView *)pickerView pickerView:pickerView viewForRow:row forComponent:component reusingView:view];
+    if ([_userDelegate respondsToSelector:_cmd]) {
+        rowView = [_userDelegate pickerView:pickerView viewForRow:row forComponent:component reusingView:view];
+    }
+    return rowView;
+}
+
+- (void)pickerView:(UIPickerView *)pickerView
+      didSelectRow:(NSInteger)row
+       inComponent:(NSInteger)component
+{
+    [(STAPickerView *)pickerView pickerView:pickerView didSelectRow:row inComponent:component];
+    if ([_userDelegate respondsToSelector:_cmd]) {
+        [_userDelegate pickerView:pickerView didSelectRow:row inComponent:component];
+    }
+}
 
 @end
 
@@ -206,6 +217,61 @@ numberOfRowsInComponent:(NSInteger)component
 }
 
 #pragma mark Delegate Methods
+
+- (CGFloat)pickerView:(UIPickerView *)pickerView
+rowHeightForComponent:(NSInteger)component
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    return 44.0; // TODO: make this a constant
+}
+
+- (CGFloat)pickerView:(UIPickerView *)pickerView
+    widthForComponent:(NSInteger)component
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    return [UIScreen mainScreen].bounds.size.width;
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView
+             titleForRow:(NSInteger)row
+            forComponent:(NSInteger)component
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    return nil;
+}
+
+- (NSAttributedString *)pickerView:(UIPickerView *)pickerView
+             attributedTitleForRow:(NSInteger)row
+                      forComponent:(NSInteger)component
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    return nil;
+}
+
+- (UIView *)pickerView:(UIPickerView *)pickerView
+            viewForRow:(NSInteger)row
+          forComponent:(NSInteger)component
+           reusingView:(UIView *)view
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    return nil;
+}
+
+- (void)pickerView:(UIPickerView *)pickerView
+      didSelectRow:(NSInteger)row
+       inComponent:(NSInteger)component
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    
+}
+
+#pragma mark Data Source Overrides
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     NSLog(@"%s", __PRETTY_FUNCTION__);
