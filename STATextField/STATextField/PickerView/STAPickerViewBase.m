@@ -63,28 +63,28 @@ rowHeightForComponent:(NSInteger)component
     return title;
 }
 
-- (NSAttributedString *)pickerView:(UIPickerView *)pickerView
-             attributedTitleForRow:(NSInteger)row
-                      forComponent:(NSInteger)component
-{
-    NSAttributedString *attributedTitle = [(STAPickerViewBase *)pickerView pickerView:pickerView attributedTitleForRow:row forComponent:component];
-    if ([_userDelegate respondsToSelector:_cmd]) {
-        attributedTitle = [_userDelegate pickerView:pickerView attributedTitleForRow:row forComponent:component];
-    }
-    return attributedTitle;
-}
-
-- (UIView *)pickerView:(UIPickerView *)pickerView
-            viewForRow:(NSInteger)row
-          forComponent:(NSInteger)component
-           reusingView:(UIView *)view
-{
-    UIView *rowView = [(STAPickerViewBase *)pickerView pickerView:pickerView viewForRow:row forComponent:component reusingView:view];
-    if ([_userDelegate respondsToSelector:_cmd]) {
-        rowView = [_userDelegate pickerView:pickerView viewForRow:row forComponent:component reusingView:view];
-    }
-    return rowView;
-}
+//- (NSAttributedString *)pickerView:(UIPickerView *)pickerView
+//             attributedTitleForRow:(NSInteger)row
+//                      forComponent:(NSInteger)component
+//{
+//    NSAttributedString *attributedTitle = [(STAPickerViewBase *)pickerView pickerView:pickerView attributedTitleForRow:row forComponent:component];
+//    if ([_userDelegate respondsToSelector:_cmd]) {
+//        attributedTitle = [_userDelegate pickerView:pickerView attributedTitleForRow:row forComponent:component];
+//    }
+//    return attributedTitle;
+//}
+//
+//- (UIView *)pickerView:(UIPickerView *)pickerView
+//            viewForRow:(NSInteger)row
+//          forComponent:(NSInteger)component
+//           reusingView:(UIView *)view
+//{
+//    UIView *rowView = [(STAPickerViewBase *)pickerView pickerView:pickerView viewForRow:row forComponent:component reusingView:view];
+//    if ([_userDelegate respondsToSelector:_cmd]) {
+//        rowView = [_userDelegate pickerView:pickerView viewForRow:row forComponent:component reusingView:view];
+//    }
+//    return rowView;
+//}
 
 - (void)pickerView:(UIPickerView *)pickerView
       didSelectRow:(NSInteger)row
@@ -243,24 +243,24 @@ rowHeightForComponent:(NSInteger)component
     return nil;
 }
 
-- (NSAttributedString *)pickerView:(UIPickerView *)pickerView
-             attributedTitleForRow:(NSInteger)row
-                      forComponent:(NSInteger)component
-{
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    
-    return nil;
-}
+//- (NSAttributedString *)pickerView:(UIPickerView *)pickerView
+//             attributedTitleForRow:(NSInteger)row
+//                      forComponent:(NSInteger)component
+//{
+//    NSLog(@"%s", __PRETTY_FUNCTION__);
+//    
+//    return nil;
+//}
 
-- (UIView *)pickerView:(UIPickerView *)pickerView
-            viewForRow:(NSInteger)row
-          forComponent:(NSInteger)component
-           reusingView:(UIView *)view
-{
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    
-    return nil;
-}
+//- (UIView *)pickerView:(UIPickerView *)pickerView
+//            viewForRow:(NSInteger)row
+//          forComponent:(NSInteger)component
+//           reusingView:(UIView *)view
+//{
+//    NSLog(@"%s", __PRETTY_FUNCTION__);
+//    
+//    return nil;
+//}
 
 - (void)pickerView:(UIPickerView *)pickerView
       didSelectRow:(NSInteger)row

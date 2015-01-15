@@ -10,4 +10,7 @@
 
 @interface STAPickerView : STAPickerViewBase
 
+@property (nonatomic, strong) NSArray *titleArray;
+@property (nonatomic, copy) void (^pickerViewSelectionBlock)(UIPickerView *pickerView, NSInteger component, NSInteger row, NSString *title);
+
 @end
