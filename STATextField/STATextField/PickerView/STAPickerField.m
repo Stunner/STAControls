@@ -31,6 +31,11 @@
     self.pickerView.dataSource = self;
     self.pickerView.delegate = self;
     [self setInputView:self.pickerView];
+    
+    __weak STAPickerField *weakSelf = self;
+    self.pickerView.pickerViewSelectionBlock = ^void(UIPickerView *pickerView, NSInteger component, NSInteger row, NSString *title){
+        weakSelf.text = title;
+    };
 }
 
 //- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
@@ -43,18 +48,18 @@
 //    
 //}
 
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    
-    return 1;
-}
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView
-numberOfRowsInComponent:(NSInteger)component
-{
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    
-    return 0;
-}
+//- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+//    NSLog(@"%s", __PRETTY_FUNCTION__);
+//    
+//    return 1;
+//}
+//
+//- (NSInteger)pickerView:(UIPickerView *)pickerView
+//numberOfRowsInComponent:(NSInteger)component
+//{
+//    NSLog(@"%s", __PRETTY_FUNCTION__);
+//    
+//    return 0;
+//}
 
 @end

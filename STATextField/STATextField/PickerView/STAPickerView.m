@@ -13,7 +13,7 @@
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    NSLog(@"# comonents: %d", self.titleArray.count);
+//    NSLog(@"# comonents: %d", self.titleArray.count);
     return self.titleArray.count;
 }
 
@@ -22,7 +22,7 @@ numberOfRowsInComponent:(NSInteger)component
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    NSLog(@"# rows in component %d: %lu", component, [(NSArray *)[self.titleArray objectAtIndex:component] count]);
+//    NSLog(@"# rows in component %d: %lu", component, [(NSArray *)[self.titleArray objectAtIndex:component] count]);
     return [(NSArray *)[self.titleArray objectAtIndex:component] count];
 }
 

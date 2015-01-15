@@ -16,9 +16,9 @@
 		93021A3419F0F7A50065B144 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 93021A2C19F0F7A50065B144 /* Info.plist */; };
 		93021A3519F0F7A50065B144 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 93021A2D19F0F7A50065B144 /* main.m */; };
 		93021A3619F0F7A50065B144 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93021A2F19F0F7A50065B144 /* ViewController.m */; };
-		9337C9ED1A64C117004A19A7 /* STAPickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 9337C9EC1A64C117004A19A7 /* STAPickerField.m */; };
 		9337C9FB1A679CA8004A19A7 /* STAPickerViewBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 9337C9FA1A679CA8004A19A7 /* STAPickerViewBase.m */; };
 		9337C9FE1A679DA7004A19A7 /* STAPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9337C9FD1A679DA7004A19A7 /* STAPickerView.m */; };
+		9337CA011A67CD83004A19A7 /* STAPickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 9337CA001A67CD83004A19A7 /* STAPickerField.m */; };
 		93F951701A35C9CE003F8485 /* NSString+STATextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F9515D1A35C9CE003F8485 /* NSString+STATextField.m */; };
 		93F951711A35C9CE003F8485 /* NSString+STATextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F9515D1A35C9CE003F8485 /* NSString+STATextField.m */; };
 		93F951721A35C9CE003F8485 /* STAATMTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F9515F1A35C9CE003F8485 /* STAATMTextField.m */; };
@@ -62,13 +62,13 @@
 		93021A2D19F0F7A50065B144 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		93021A2E19F0F7A50065B144 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		93021A2F19F0F7A50065B144 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		9337C9EB1A64C117004A19A7 /* STAPickerField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAPickerField.h; sourceTree = "<group>"; };
-		9337C9EC1A64C117004A19A7 /* STAPickerField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAPickerField.m; sourceTree = "<group>"; };
 		9337C9F81A679CA8004A19A7 /* STAPickerView+PrivateHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "STAPickerView+PrivateHeaders.h"; sourceTree = "<group>"; };
 		9337C9F91A679CA8004A19A7 /* STAPickerViewBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAPickerViewBase.h; sourceTree = "<group>"; };
 		9337C9FA1A679CA8004A19A7 /* STAPickerViewBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAPickerViewBase.m; sourceTree = "<group>"; };
 		9337C9FC1A679DA7004A19A7 /* STAPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAPickerView.h; sourceTree = "<group>"; };
 		9337C9FD1A679DA7004A19A7 /* STAPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAPickerView.m; sourceTree = "<group>"; };
+		9337C9FF1A67CD83004A19A7 /* STAPickerField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAPickerField.h; sourceTree = "<group>"; };
+		9337CA001A67CD83004A19A7 /* STAPickerField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAPickerField.m; sourceTree = "<group>"; };
 		93F9515C1A35C9CE003F8485 /* NSString+STATextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+STATextField.h"; sourceTree = "<group>"; };
 		93F9515D1A35C9CE003F8485 /* NSString+STATextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+STATextField.m"; sourceTree = "<group>"; };
 		93F9515E1A35C9CE003F8485 /* STAATMTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAATMTextField.h; sourceTree = "<group>"; };
@@ -190,6 +190,8 @@
 		9337C9F71A679CA8004A19A7 /* PickerView */ = {
 			isa = PBXGroup;
 			children = (
+				9337C9FF1A67CD83004A19A7 /* STAPickerField.h */,
+				9337CA001A67CD83004A19A7 /* STAPickerField.m */,
 				9337C9F81A679CA8004A19A7 /* STAPickerView+PrivateHeaders.h */,
 				9337C9F91A679CA8004A19A7 /* STAPickerViewBase.h */,
 				9337C9FA1A679CA8004A19A7 /* STAPickerViewBase.m */,
@@ -216,8 +218,6 @@
 				93F951671A35C9CE003F8485 /* STATextFieldBase.m */,
 				93F951681A35C9CE003F8485 /* STATextFieldUtility.h */,
 				93F951691A35C9CE003F8485 /* STATextFieldUtility.m */,
-				9337C9EB1A64C117004A19A7 /* STAPickerField.h */,
-				9337C9EC1A64C117004A19A7 /* STAPickerField.m */,
 			);
 			path = TextField;
 			sourceTree = "<group>";
@@ -393,7 +393,7 @@
 				93F951701A35C9CE003F8485 /* NSString+STATextField.m in Sources */,
 				9337C9FE1A679DA7004A19A7 /* STAPickerView.m in Sources */,
 				93F951721A35C9CE003F8485 /* STAATMTextField.m in Sources */,
-				9337C9ED1A64C117004A19A7 /* STAPickerField.m in Sources */,
+				9337CA011A67CD83004A19A7 /* STAPickerField.m in Sources */,
 				93021A3019F0F7A50065B144 /* AppDelegate.m in Sources */,
 				93F9517A1A35C9CE003F8485 /* STATextFieldUtility.m in Sources */,
 			);
