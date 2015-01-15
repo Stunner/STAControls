@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Aaron Jubbal. All rights reserved.
 //
 
-#import "STAPickerView.h"
+#import "STAPickerViewBase.h"
 
-@interface STAPickerView (PrivateHeaders)
+@interface STAPickerViewBase (PrivateHeaders)
 
 /**
  Called after initialization occurs (any init... method called).

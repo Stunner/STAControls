@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STAPickerView : UIPickerView
+@interface STAPickerViewBase : UIPickerView
 
 @end

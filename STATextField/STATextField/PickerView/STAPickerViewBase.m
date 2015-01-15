@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Aaron Jubbal. All rights reserved.
 //
 
-#import "STAPickerView.h"
+#import "STAPickerViewBase.h"
 #import "STAPickerView+PrivateHeaders.h"
 
 #pragma mark - Private Delegate
@@ -35,7 +35,7 @@
 - (CGFloat)pickerView:(UIPickerView *)pickerView
 rowHeightForComponent:(NSInteger)component
 {
-    CGFloat rowHeight = [(STAPickerView *)pickerView pickerView:pickerView rowHeightForComponent:component];
+    CGFloat rowHeight = [(STAPickerViewBase *)pickerView pickerView:pickerView rowHeightForComponent:component];
     if ([_userDelegate respondsToSelector:_cmd]) {
         rowHeight = [_userDelegate pickerView:pickerView rowHeightForComponent:component];
     }
@@ -45,7 +45,7 @@ rowHeightForComponent:(NSInteger)component
 - (CGFloat)pickerView:(UIPickerView *)pickerView
     widthForComponent:(NSInteger)component
 {
-    CGFloat rowWidth = [(STAPickerView *)pickerView pickerView:pickerView widthForComponent:component];
+    CGFloat rowWidth = [(STAPickerViewBase *)pickerView pickerView:pickerView widthForComponent:component];
     if ([_userDelegate respondsToSelector:_cmd]) {
         rowWidth = [_userDelegate pickerView:pickerView widthForComponent:component];
     }
@@ -56,7 +56,7 @@ rowHeightForComponent:(NSInteger)component
              titleForRow:(NSInteger)row
             forComponent:(NSInteger)component
 {
-    NSString *title = [(STAPickerView *)pickerView pickerView:pickerView titleForRow:row forComponent:component];
+    NSString *title = [(STAPickerViewBase *)pickerView pickerView:pickerView titleForRow:row forComponent:component];
     if ([_userDelegate respondsToSelector:_cmd]) {
         title = [_userDelegate pickerView:pickerView titleForRow:row forComponent:component];
     }
@@ -67,7 +67,7 @@ rowHeightForComponent:(NSInteger)component
              attributedTitleForRow:(NSInteger)row
                       forComponent:(NSInteger)component
 {
-    NSAttributedString *attributedTitle = [(STAPickerView *)pickerView pickerView:pickerView attributedTitleForRow:row forComponent:component];
+    NSAttributedString *attributedTitle = [(STAPickerViewBase *)pickerView pickerView:pickerView attributedTitleForRow:row forComponent:component];
     if ([_userDelegate respondsToSelector:_cmd]) {
         attributedTitle = [_userDelegate pickerView:pickerView attributedTitleForRow:row forComponent:component];
     }
@@ -79,7 +79,7 @@ rowHeightForComponent:(NSInteger)component
           forComponent:(NSInteger)component
            reusingView:(UIView *)view
 {
-    UIView *rowView = [(STAPickerView *)pickerView pickerView:pickerView viewForRow:row forComponent:component reusingView:view];
+    UIView *rowView = [(STAPickerViewBase *)pickerView pickerView:pickerView viewForRow:row forComponent:component reusingView:view];
     if ([_userDelegate respondsToSelector:_cmd]) {
         rowView = [_userDelegate pickerView:pickerView viewForRow:row forComponent:component reusingView:view];
     }
@@ -90,7 +90,7 @@ rowHeightForComponent:(NSInteger)component
       didSelectRow:(NSInteger)row
        inComponent:(NSInteger)component
 {
-    [(STAPickerView *)pickerView pickerView:pickerView didSelectRow:row inComponent:component];
+    [(STAPickerViewBase *)pickerView pickerView:pickerView didSelectRow:row inComponent:component];
     if ([_userDelegate respondsToSelector:_cmd]) {
         [_userDelegate pickerView:pickerView didSelectRow:row inComponent:component];
     }
@@ -124,7 +124,7 @@ rowHeightForComponent:(NSInteger)component
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    NSInteger numberOfComponents = [(STAPickerView *)pickerView numberOfComponentsInPickerView:pickerView];
+    NSInteger numberOfComponents = [(STAPickerViewBase *)pickerView numberOfComponentsInPickerView:pickerView];
     if ([_userDataSource respondsToSelector:_cmd]) {
         [_userDataSource numberOfComponentsInPickerView:pickerView];
     }
@@ -136,7 +136,7 @@ numberOfRowsInComponent:(NSInteger)component
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    NSInteger numberOfRows = [(STAPickerView *)pickerView pickerView:pickerView numberOfRowsInComponent:component];
+    NSInteger numberOfRows = [(STAPickerViewBase *)pickerView pickerView:pickerView numberOfRowsInComponent:component];
     if ([_userDataSource respondsToSelector:_cmd]) {
         [_userDataSource pickerView:pickerView numberOfRowsInComponent:component];
     }
@@ -147,14 +147,14 @@ numberOfRowsInComponent:(NSInteger)component
 
 #pragma mark - STAPickerView
 
-@interface STAPickerView () {
+@interface STAPickerViewBase () {
     STAPickerViewPrivateDelegate *_internalDelegate;
     STAPickerViewPrivateDataSource *_internalDataSource;
 }
 
 @end
 
-@implementation STAPickerView
+@implementation STAPickerViewBase
 
 - (void)initInternal {
     
