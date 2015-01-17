@@ -6,8 +6,18 @@
 //  Copyright (c) 2014 Aaron Jubbal. All rights reserved.
 //
 
-#import "STATextField.h"
+#import "STATextFieldBase.h"
 
-@interface STAResizingTextField : STATextField
+@interface STAResizingTextField : STATextFieldBase
+
+/**
+ Denotes whether firstResponder status should be resigned upon return key press.
+ */
+@property (nonatomic, assign) BOOL resignsFirstResponderUponReturnKeyPress;
+
+/**
+ The next UIControl object that is to claim firstResponder status upon return key press.
+ */
+@property (nonatomic, strong) UIControl *nextFirstResponderUponReturnKeyPress;
 
 @end

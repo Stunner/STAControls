@@ -7,8 +7,7 @@
 //
 
 #import "STAResizingTextField.h"
-#import "STATextField+PrivateHeaders.h"
-
+#import "STATextFieldBase+ProvideHeaders.h"
 #define kDynamicResizeThresholdOffset 4
 
 #define kDefaultClearTextButtonOffset 28
@@ -28,7 +27,28 @@
 - (void)initInternal {
     [super initInternal];
     
+    _resignsFirstResponderUponReturnKeyPress = YES;
     _initialTextFieldWidth = self.frame.size.width;
+}
+
+- (void)setNextFirstResponderUponReturnKeyPress:(UIControl *)nextFirstResponderUponReturnKeyPress {
+    self.resignsFirstResponderUponReturnKeyPress = YES;
+    _nextFirstResponderUponReturnKeyPress = nextFirstResponderUponReturnKeyPress;
+}
+
+#pragma mark Helpers
+
+- (BOOL)resignFirstResponderUponReturnKeyPress {
+    BOOL resignedFirstResponderStatus = NO;
+    if (self.resignsFirstResponderUponReturnKeyPress) {
+        if (self.nextFirstResponderUponReturnKeyPress) {
+            resignedFirstResponderStatus = [self resignFirstResponder];
+            [self.nextFirstResponderUponReturnKeyPress becomeFirstResponder];
+        } else {
+            resignedFirstResponderStatus =[self resignFirstResponder];
+        }
+    }
+    return resignedFirstResponderStatus;
 }
 
 - (BOOL)becomeFirstResponder {
@@ -71,7 +91,7 @@ shouldChangeCharactersInRange:(NSRange)range
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    if ([super resignFirstResponderUponReturnKeyPress]) {
+    if ([self resignFirstResponderUponReturnKeyPress]) {
         [self resizeSelfToWidthWithoutShrinking:_initialTextFieldWidth];
     }
     return YES;

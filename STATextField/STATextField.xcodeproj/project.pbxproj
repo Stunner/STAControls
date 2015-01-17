@@ -62,6 +62,7 @@
 		93021A2F19F0F7A50065B144 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		9399DD311A6542B700E0C0C1 /* STAResizingTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAResizingTextField.h; sourceTree = "<group>"; };
 		9399DD321A6542B700E0C0C1 /* STAResizingTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAResizingTextField.m; sourceTree = "<group>"; };
+		9399DD341A6B28B200E0C0C1 /* STAResizingTextField+PrivateHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "STAResizingTextField+PrivateHeaders.h"; sourceTree = "<group>"; };
 		93F9515C1A35C9CE003F8485 /* NSString+STATextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+STATextField.h"; sourceTree = "<group>"; };
 		93F9515D1A35C9CE003F8485 /* NSString+STATextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+STATextField.m"; sourceTree = "<group>"; };
 		93F9515E1A35C9CE003F8485 /* STAATMTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAATMTextField.h; sourceTree = "<group>"; };
@@ -182,6 +183,7 @@
 		93F9515B1A35C9CE003F8485 /* TextField */ = {
 			isa = PBXGroup;
 			children = (
+				9399DD341A6B28B200E0C0C1 /* STAResizingTextField+PrivateHeaders.h */,
 				9399DD311A6542B700E0C0C1 /* STAResizingTextField.h */,
 				9399DD321A6542B700E0C0C1 /* STAResizingTextField.m */,
 				93F9515C1A35C9CE003F8485 /* NSString+STATextField.h */,

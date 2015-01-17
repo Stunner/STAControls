@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "STATextFieldBase.h"
+#import "STAResizingTextField.h"
 
 /**
  Provides following capabilities:
@@ -17,16 +17,16 @@
  - switching to another text field when the *return* key is pressed
  - display an accessory view atop keyboard that allows for fast switching between adjacent UIControls
  */
-@interface STATextField : STATextFieldBase
+@interface STATextField : STAResizingTextField
 
 /**
  Denotes whether firstResponder status should be resigned upon return key press.
  */
-@property (nonatomic, assign) BOOL resignsFirstResponderUponReturnKeyPress;
+//@property (nonatomic, assign) BOOL resignsFirstResponderUponReturnKeyPress;
 /**
  The next UIControl object that is to claim firstResponder status upon return key press.
  */
-@property (nonatomic, strong) UIControl *nextFirstResponderUponReturnKeyPress;
+//@property (nonatomic, strong) UIControl *nextFirstResponderUponReturnKeyPress;
 @property (nonatomic, assign) BOOL showDoneButton;
 @property (nonatomic, assign) BOOL showNextButton;
 

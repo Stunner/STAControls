@@ -7,7 +7,7 @@
 //
 
 #import "STATextField.h"
-#import "STATextFieldBase+ProvideHeaders.h"
+#import "STAResizingTextField+PrivateHeaders.h"
 
 @interface STATextField () {
     NSString *_internalPlaceholder;
@@ -21,7 +21,6 @@
 - (void)initInternal {
     [super initInternal];
     
-    _resignsFirstResponderUponReturnKeyPress = YES;
     _internalPlaceholder = self.placeholder;
     _internalAttributedPlaceholder = self.attributedPlaceholder;
 }
@@ -73,10 +72,7 @@
     }
 }
 
-- (void)setNextFirstResponderUponReturnKeyPress:(UIControl *)nextFirstResponderUponReturnKeyPress {
-    self.resignsFirstResponderUponReturnKeyPress = YES;
-    _nextFirstResponderUponReturnKeyPress = nextFirstResponderUponReturnKeyPress;
-}
+
 
 - (void)setPlaceholder:(NSString *)placeholder {
     _internalPlaceholder = placeholder;
@@ -92,18 +88,18 @@
 
 #pragma mark Helpers
 
-- (BOOL)resignFirstResponderUponReturnKeyPress {
-    BOOL resignedFirstResponderStatus = NO;
-    if (self.resignsFirstResponderUponReturnKeyPress) {
-        if (self.nextFirstResponderUponReturnKeyPress) {
-            resignedFirstResponderStatus = [self resignFirstResponder];
-            [self.nextFirstResponderUponReturnKeyPress becomeFirstResponder];
-        } else {
-            resignedFirstResponderStatus =[self resignFirstResponder];
-        }
-    }
-    return resignedFirstResponderStatus;
-}
+//- (BOOL)resignFirstResponderUponReturnKeyPress {
+//    BOOL resignedFirstResponderStatus = NO;
+//    if (self.resignsFirstResponderUponReturnKeyPress) {
+//        if (self.nextFirstResponderUponReturnKeyPress) {
+//            resignedFirstResponderStatus = [self resignFirstResponder];
+//            [self.nextFirstResponderUponReturnKeyPress becomeFirstResponder];
+//        } else {
+//            resignedFirstResponderStatus =[self resignFirstResponder];
+//        }
+//    }
+//    return resignedFirstResponderStatus;
+//}
 
 #pragma mark Text Field Events
 
@@ -124,7 +120,7 @@ shouldChangeCharactersInRange:(NSRange)range
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    [self resignFirstResponderUponReturnKeyPress];
+    [super resignFirstResponderUponReturnKeyPress];
     return YES;
 }
 
