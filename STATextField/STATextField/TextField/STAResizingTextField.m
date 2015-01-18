@@ -39,21 +39,6 @@
     _nextFirstResponderUponReturnKeyPress = nextFirstResponderUponReturnKeyPress;
 }
 
-#pragma mark Helpers
-
-- (BOOL)resignFirstResponderUponReturnKeyPress {
-    BOOL resignedFirstResponderStatus = NO;
-    if (self.resignsFirstResponderUponReturnKeyPress) {
-        if (self.nextFirstResponderUponReturnKeyPress) {
-            resignedFirstResponderStatus = [self resignFirstResponder];
-            [self.nextFirstResponderUponReturnKeyPress becomeFirstResponder];
-        } else {
-            resignedFirstResponderStatus =[self resignFirstResponder];
-        }
-    }
-    return resignedFirstResponderStatus;
-}
-
 - (BOOL)becomeFirstResponder {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
@@ -91,6 +76,10 @@
         self.clearButtonIsVisible = (sender.text.length > 0);
     }
     NSLog(@"clear button visible: %d", self.clearButtonIsVisible);
+    
+    if (self.resizesForClearTextButton) {
+        [self resizeSelfForClearButton:self.text];
+    }
 }
 
 - (BOOL)textField:(UITextField *)textField
@@ -99,11 +88,11 @@ shouldChangeCharactersInRange:(NSRange)range
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    if (self.resizesForClearTextButton) {
-        NSString *newText = [self.text stringByReplacingCharactersInRange:range
-                                                               withString:string];
-        [self resizeSelfForClearButton:newText];
-    }
+//    if (self.resizesForClearTextButton) {
+//        NSString *newText = [self.text stringByReplacingCharactersInRange:range
+//                                                               withString:string];
+//        [self resizeSelfForClearButton:newText];
+//    }
     
     return YES;
 }
@@ -123,6 +112,23 @@ shouldChangeCharactersInRange:(NSRange)range
     }
     return YES;
 }
+
+#pragma mark Helpers
+
+- (BOOL)resignFirstResponderUponReturnKeyPress {
+    BOOL resignedFirstResponderStatus = NO;
+    if (self.resignsFirstResponderUponReturnKeyPress) {
+        if (self.nextFirstResponderUponReturnKeyPress) {
+            resignedFirstResponderStatus = [self resignFirstResponder];
+            [self.nextFirstResponderUponReturnKeyPress becomeFirstResponder];
+        } else {
+            resignedFirstResponderStatus =[self resignFirstResponder];
+        }
+    }
+    return resignedFirstResponderStatus;
+}
+
+#pragma mark Resizing Helpers
 
 - (void)resizeSelfToWidth:(NSInteger)width {
     NSLog(@"%s", __PRETTY_FUNCTION__);
@@ -182,7 +188,7 @@ shouldChangeCharactersInRange:(NSRange)range
 - (void)resizeSelfForClearButton:(NSString *)text {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    if (text.length > 0 && self.isEditing) {
+    if (text.length > 0 && self.isEditing && self.clearButtonIsVisible) {
         [self resizeSelfToWidthWithoutShrinking:_initialTextFieldWidth + kDefaultClearTextButtonOffset];
     } else {
         [self resizeSelfToWidthWithoutShrinking:_initialTextFieldWidth];

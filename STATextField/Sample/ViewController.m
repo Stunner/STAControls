@@ -42,6 +42,7 @@
     _resizingTextField.borderStyle = UITextBorderStyleRoundedRect;
     _resizingTextField.placeholder = @"Hello world!";
     _resizingTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    _resizingTextField.resizesForClearTextButton = YES;
 //    [self.view addSubview:_resizingTextField];
     
     [_resizingTextField addTarget:self
