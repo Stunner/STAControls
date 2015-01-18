@@ -20,6 +20,8 @@
     CGFloat _initialTextFieldWidth;
 }
 
+@property (nonatomic, assign) BOOL clearButtonIsVisible;
+
 @end
 
 @implementation STAResizingTextField
@@ -56,6 +58,12 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
     [super becomeFirstResponder];
+    
+    if (self.clearButtonMode == UITextFieldViewModeWhileEditing) {
+        self.clearButtonIsVisible = (self.text.length > 0);
+    }
+    NSLog(@"clear button visible: %d", self.clearButtonIsVisible);
+    
     if (self.resizesForClearTextButton) {
         [self resizeSelfForClearButton:self.text];
     }
@@ -67,8 +75,22 @@
     
     [super resignFirstResponder];
     
+    if (self.clearButtonMode == UITextFieldViewModeWhileEditing) {
+        self.clearButtonIsVisible = NO;
+    }
+    NSLog(@"clear button visible: %d", self.clearButtonIsVisible);
+    
     [self resizeSelfToWidthWithoutShrinking:_initialTextFieldWidth];
     return YES;
+}
+
+- (void)textFieldDidChange:(STATextFieldBase *)sender {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    if (self.clearButtonMode == UITextFieldViewModeWhileEditing) {
+        self.clearButtonIsVisible = (sender.text.length > 0);
+    }
+    NSLog(@"clear button visible: %d", self.clearButtonIsVisible);
 }
 
 - (BOOL)textField:(UITextField *)textField

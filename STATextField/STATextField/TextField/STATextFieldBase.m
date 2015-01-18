@@ -153,7 +153,7 @@ replacementString:(NSString *)string
 
 #pragma mark Text Field Events
 
-- (void)textFieldDidChange:(id)sender {
+- (void)textFieldDidChange:(STATextFieldBase *)sender {
     
 }
 

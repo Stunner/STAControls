@@ -25,4 +25,6 @@
  */
 @property (nonatomic, assign) BOOL resizesForClearTextButton;
 
+@property (nonatomic, readonly) BOOL clearButtonIsVisible;
+
 @end
