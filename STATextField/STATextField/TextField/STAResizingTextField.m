@@ -39,6 +39,17 @@
     _nextFirstResponderUponReturnKeyPress = nextFirstResponderUponReturnKeyPress;
 }
 
+- (void)setClearButtonMode:(UITextFieldViewMode)clearButtonMode {
+    if (clearButtonMode == UITextFieldViewModeAlways) {
+        self.clearButtonIsVisible = YES;
+    } else if (clearButtonMode == UITextFieldViewModeNever) {
+        self.clearButtonIsVisible = NO;
+    } else if (clearButtonMode == UITextFieldViewModeWhileEditing) {
+        self.clearButtonIsVisible = NO;
+    }
+    [super setClearButtonMode:clearButtonMode];
+}
+
 - (BOOL)becomeFirstResponder {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
@@ -46,6 +57,8 @@
     
     if (self.clearButtonMode == UITextFieldViewModeWhileEditing) {
         self.clearButtonIsVisible = (self.text.length > 0);
+    } else if (self.clearButtonMode == UITextFieldViewModeUnlessEditing) {
+        self.clearButtonIsVisible = NO;
     }
     NSLog(@"clear button visible: %d", self.clearButtonIsVisible);
     
@@ -62,7 +75,10 @@
     
     if (self.clearButtonMode == UITextFieldViewModeWhileEditing) {
         self.clearButtonIsVisible = NO;
+    } else if (self.clearButtonMode == UITextFieldViewModeUnlessEditing) {
+        self.clearButtonIsVisible = (self.text.length > 0);;
     }
+    
     NSLog(@"clear button visible: %d", self.clearButtonIsVisible);
     
     [self resizeSelfToWidthWithoutShrinking:_initialTextFieldWidth];
@@ -73,6 +89,8 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
     if (self.clearButtonMode == UITextFieldViewModeWhileEditing) {
+        self.clearButtonIsVisible = (sender.text.length > 0);
+    } else if (self.clearButtonMode == UITextFieldViewModeAlways) {
         self.clearButtonIsVisible = (sender.text.length > 0);
     }
     NSLog(@"clear button visible: %d", self.clearButtonIsVisible);

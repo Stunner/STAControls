@@ -26,21 +26,62 @@
     
 }
 
+- (void)tapClearButtonInTextField:(UITextField *)textField {
+    CGFloat textFieldRightEdge = textField.frame.origin.x + textField.frame.size.width;
+    CGFloat textFieldYCenter = textField.frame.origin.y + textField.frame.size.height / 2;
+    [tester tapScreenAtPoint:CGPointMake(textFieldRightEdge - 3.0, textFieldYCenter)]; // tap clear button
+}
+
 - (void)testClearButtonState {
     STAResizingTextField *resizingTextField = (STAResizingTextField *)[tester waitForViewWithAccessibilityLabel:@"ResizingTextField"];
+    
+    resizingTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     XCTAssert(!resizingTextField.clearButtonIsVisible, @"Improper clearButtonIsVisible value.");
     [tester enterText:@"R" intoViewWithAccessibilityLabel:@"ResizingTextField"];
     XCTAssert(resizingTextField.clearButtonIsVisible, @"Improper clearButtonIsVisible value.");
-    [tester enterText:@"esizing test" intoViewWithAccessibilityLabel:@"ResizingTextField" traits:UIAccessibilityTraitNone expectedResult:@"Resizing test"];
+    [tester enterText:@"esizing test" intoViewWithAccessibilityLabel:@"ResizingTextField"
+               traits:UIAccessibilityTraitNone
+       expectedResult:@"Resizing test"];
     
     [tester tapViewWithAccessibilityLabel:@"HideKeyboard"];
     XCTAssert(!resizingTextField.clearButtonIsVisible, @"Improper clearButtonIsVisible value.");
     
     [tester tapViewWithAccessibilityLabel:@"ResizingTextField"];
     XCTAssert(resizingTextField.clearButtonIsVisible, @"Improper clearButtonIsVisible value.");
-    CGFloat textFieldRightEdge = resizingTextField.frame.origin.x + resizingTextField.frame.size.width;
-    CGFloat textFieldYCenter = resizingTextField.frame.origin.y + resizingTextField.frame.size.height / 2;
-    [tester tapScreenAtPoint:CGPointMake(textFieldRightEdge - 3.0, textFieldYCenter)];
+    
+    [self tapClearButtonInTextField:resizingTextField];
+    [tester waitForViewWithAccessibilityLabel:@"ResizingTextField" value:@"" traits:UIAccessibilityTraitNone];
+    XCTAssert(!resizingTextField.clearButtonIsVisible, @"Improper clearButtonIsVisible value.");
+    
+    resizingTextField.clearButtonMode = UITextFieldViewModeAlways;
+    XCTAssert(resizingTextField.clearButtonIsVisible, @"Improper clearButtonIsVisible value.");
+    [tester enterText:@"Clear button is now always visible" intoViewWithAccessibilityLabel:@"ResizingTextField"];
+    XCTAssert(resizingTextField.clearButtonIsVisible, @"Improper clearButtonIsVisible value.");
+    [tester tapViewWithAccessibilityLabel:@"HideKeyboard"];
+    XCTAssert(resizingTextField.clearButtonIsVisible, @"Improper clearButtonIsVisible value.");
+    [self tapClearButtonInTextField:resizingTextField];
+    [tester waitForViewWithAccessibilityLabel:@"ResizingTextField" value:@"" traits:UIAccessibilityTraitNone];
+    XCTAssert(!resizingTextField.clearButtonIsVisible, @"Improper clearButtonIsVisible value.");
+    
+    resizingTextField.clearButtonMode = UITextFieldViewModeNever;
+    XCTAssert(!resizingTextField.clearButtonIsVisible, @"Improper clearButtonIsVisible value.");
+    [tester enterText:@"Clear button is now never visible" intoViewWithAccessibilityLabel:@"ResizingTextField"];
+    XCTAssert(!resizingTextField.clearButtonIsVisible, @"Improper clearButtonIsVisible value.");
+    [tester tapViewWithAccessibilityLabel:@"HideKeyboard"];
+    XCTAssert(!resizingTextField.clearButtonIsVisible, @"Improper clearButtonIsVisible value.");
+    [tester enterText:@"\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b"
+intoViewWithAccessibilityLabel:@"ResizingTextField"
+               traits:UIAccessibilityTraitNone
+       expectedResult:@""];
+    XCTAssert(!resizingTextField.clearButtonIsVisible, @"Improper clearButtonIsVisible value.");
+    
+    resizingTextField.clearButtonMode = UITextFieldViewModeUnlessEditing;
+    XCTAssert(!resizingTextField.clearButtonIsVisible, @"Improper clearButtonIsVisible value.");
+    [tester enterText:@"Clear button is now visible when not first responder" intoViewWithAccessibilityLabel:@"ResizingTextField"];
+    XCTAssert(!resizingTextField.clearButtonIsVisible, @"Improper clearButtonIsVisible value.");
+    [tester tapViewWithAccessibilityLabel:@"HideKeyboard"];
+    XCTAssert(resizingTextField.clearButtonIsVisible, @"Improper clearButtonIsVisible value.");
+    [self tapClearButtonInTextField:resizingTextField];
     [tester waitForViewWithAccessibilityLabel:@"ResizingTextField" value:@"" traits:UIAccessibilityTraitNone];
     XCTAssert(!resizingTextField.clearButtonIsVisible, @"Improper clearButtonIsVisible value.");
 }
