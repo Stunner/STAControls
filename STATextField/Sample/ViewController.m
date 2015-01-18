@@ -8,12 +8,14 @@
 
 #import "ViewController.h"
 #import "STAATMTextField.h"
+#import "STAResizingTextField.h"
 #import "STATextView.h"
 
 @interface ViewController () <UITextFieldDelegate, UITextViewDelegate>
 
 @property (nonatomic, strong) IBOutlet STAATMTextField *atmTextField;
 @property (nonatomic, strong) IBOutlet STATextField *textField;
+@property (nonatomic, strong) IBOutlet STAResizingTextField *resizingTextField;
 @property (nonatomic, strong) IBOutlet STATextField *dateTextField;
 @property (nonatomic, strong) IBOutlet STATextField *nextTextField;
 @property (nonatomic, strong) IBOutlet STATextView *textView;
@@ -35,6 +37,17 @@
     _textField.nextFirstResponderUponReturnKeyPress = _dateTextField;
     _textField.showDoneButton = YES;
     _textField.showNextButton = YES;
+
+//    _resizingTextField = [[STAResizingTextField alloc] initWithFrame:CGRectMake(200, 180, 50, 30)];
+    _resizingTextField.borderStyle = UITextBorderStyleRoundedRect;
+    _resizingTextField.placeholder = @"Hello world!";
+    _resizingTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    _resizingTextField.resizesForClearTextButton = YES;
+//    [self.view addSubview:_resizingTextField];
+    
+    [_resizingTextField addTarget:self
+                           action:@selector(textFieldDidChange:)
+                 forControlEvents:UIControlEventEditingChanged];
     
     _dateTextField.nextFirstResponderUponReturnKeyPress = _nextTextField;
     _dateTextField.showDoneButton = YES;
@@ -47,10 +60,19 @@
     _textView.autoDeterminesHeight = YES;
 }
 
+- (void) textFieldDidChange: (UITextField*) textField
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+//    [UIView animateWithDuration:0.1 animations:^{
+//        [textField invalidateIntrinsicContentSize];
+//    }];
+}
 
 - (IBAction)hideKeyboard:(id)sender {
     [_atmTextField resignFirstResponder];
     [_textField resignFirstResponder];
+    [_resizingTextField resignFirstResponder];
     [_dateTextField resignFirstResponder];
     [_nextTextField resignFirstResponder];
     [_textView resignFirstResponder];

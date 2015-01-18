@@ -17,9 +17,13 @@
  */
 - (void)initInternal;
 
+- (void)textFieldDidChange:(STATextFieldBase *)sender;
+
 - (BOOL)textField:(UITextField *)textField
 shouldChangeCharactersInRange:(NSRange)range
 replacementString:(NSString *)string;
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField;
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField;
 

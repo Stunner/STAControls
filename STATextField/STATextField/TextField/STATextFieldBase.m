@@ -50,6 +50,17 @@ replacementString:(NSString *)string
     return shouldChangeCharacters;
 }
 
+- (BOOL)textFieldShouldClear:(UITextField *)textField {
+    BOOL returnable = YES;
+    if ([_userDelegate respondsToSelector:_cmd]) {
+        returnable = [_userDelegate textFieldShouldClear:textField];
+    }
+    if (returnable) {
+        returnable = [(STATextFieldBase *)textField textFieldShouldClear:textField];
+    }
+    return returnable;
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     BOOL returnable = YES;
     if ([_userDelegate respondsToSelector:_cmd]) {
@@ -142,7 +153,7 @@ replacementString:(NSString *)string
 
 #pragma mark Text Field Events
 
-- (void)textFieldDidChange:(id)sender {
+- (void)textFieldDidChange:(STATextFieldBase *)sender {
     
 }
 
@@ -150,6 +161,10 @@ replacementString:(NSString *)string
 shouldChangeCharactersInRange:(NSRange)range
 replacementString:(NSString *)string
 {
+    return YES;
+}
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField {
     return YES;
 }
 
