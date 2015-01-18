@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 #import <KIF/KIF.h>
+#import "STAResizingTextField.h"
 
 @interface STATextFieldTests : KIFTestCase
 
@@ -23,6 +24,25 @@
 - (void)tearDown {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     
+}
+
+- (void)testClearButtonState {
+    STAResizingTextField *resizingTextField = (STAResizingTextField *)[tester waitForViewWithAccessibilityLabel:@"ResizingTextField"];
+    XCTAssert(!resizingTextField.clearButtonIsVisible, @"Improper clearButtonIsVisible value.");
+    [tester enterText:@"R" intoViewWithAccessibilityLabel:@"ResizingTextField"];
+    XCTAssert(resizingTextField.clearButtonIsVisible, @"Improper clearButtonIsVisible value.");
+    [tester enterText:@"esizing test" intoViewWithAccessibilityLabel:@"ResizingTextField" traits:UIAccessibilityTraitNone expectedResult:@"Resizing test"];
+    
+    [tester tapViewWithAccessibilityLabel:@"HideKeyboard"];
+    XCTAssert(!resizingTextField.clearButtonIsVisible, @"Improper clearButtonIsVisible value.");
+    
+    [tester tapViewWithAccessibilityLabel:@"ResizingTextField"];
+    XCTAssert(resizingTextField.clearButtonIsVisible, @"Improper clearButtonIsVisible value.");
+    CGFloat textFieldRightEdge = resizingTextField.frame.origin.x + resizingTextField.frame.size.width;
+    CGFloat textFieldYCenter = resizingTextField.frame.origin.y + resizingTextField.frame.size.height / 2;
+    [tester tapScreenAtPoint:CGPointMake(textFieldRightEdge - 3.0, textFieldYCenter)];
+    [tester waitForViewWithAccessibilityLabel:@"ResizingTextField" value:@"" traits:UIAccessibilityTraitNone];
+    XCTAssert(!resizingTextField.clearButtonIsVisible, @"Improper clearButtonIsVisible value.");
 }
 
 // general test case, should be split up into separate functions as tests get more elaborate/complex
