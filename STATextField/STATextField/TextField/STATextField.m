@@ -114,7 +114,7 @@ shouldChangeCharactersInRange:(NSRange)range
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    return YES;
+    return [super textField:textField shouldChangeCharactersInRange:range replacementString:string];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

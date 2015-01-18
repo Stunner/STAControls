@@ -20,4 +20,9 @@
  */
 @property (nonatomic, strong) UIControl *nextFirstResponderUponReturnKeyPress;
 
+/**
+ Defaults to NO.
+ */
+@property (nonatomic, assign) BOOL resizesForClearTextButton;
+
 @end

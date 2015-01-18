@@ -27,6 +27,7 @@
 - (void)initInternal {
     [super initInternal];
     
+    _resizesForClearTextButton = NO;
     _resignsFirstResponderUponReturnKeyPress = YES;
     _initialTextFieldWidth = self.frame.size.width;
 }
@@ -55,8 +56,9 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
     [super becomeFirstResponder];
-    
-    [self resizeSelfForClearButton:self.text];
+    if (self.resizesForClearTextButton) {
+        [self resizeSelfForClearButton:self.text];
+    }
     return YES;
 }
 
@@ -75,8 +77,11 @@ shouldChangeCharactersInRange:(NSRange)range
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    NSString *newText = [self.text stringByReplacingCharactersInRange:range withString:string];
-    [self resizeSelfForClearButton:newText];
+    if (self.resizesForClearTextButton) {
+        NSString *newText = [self.text stringByReplacingCharactersInRange:range
+                                                               withString:string];
+        [self resizeSelfForClearButton:newText];
+    }
     
     return YES;
 }
