@@ -43,6 +43,12 @@
     return [self positionFromPosition:self.endOfDocument offset:0];
 }
 
+- (void)textFieldDidChange:(STATextFieldBase *)sender {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    [super textFieldDidChange:sender];
+}
+
 // TODO: add capability to type . and have text field compensate by shifting without having to enter '0'
 - (BOOL)textField:(UITextField *)textField
 shouldChangeCharactersInRange:(NSRange)range

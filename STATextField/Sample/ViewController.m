@@ -39,6 +39,7 @@
     _textField.nextFirstResponderUponReturnKeyPress = _dateTextField;
     _textField.showDoneButton = YES;
     _textField.showNextButton = YES;
+    _textField.placeholder = @"placeholder text";
 
 //    _resizingTextField = [[STAResizingTextField alloc] initWithFrame:CGRectMake(200, 180, 50, 30)];
     _resizingTextField.borderStyle = UITextBorderStyleRoundedRect;

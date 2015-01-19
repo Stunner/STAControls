@@ -30,4 +30,6 @@
 @property (nonatomic, assign) BOOL showDoneButton;
 @property (nonatomic, assign) BOOL showNextButton;
 
+@property (nonatomic, readonly) NSString *textValue;
+
 @end

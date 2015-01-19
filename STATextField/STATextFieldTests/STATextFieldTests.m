@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 #import <KIF/KIF.h>
+#import "STATextField.h"
 #import "STAResizingTextField.h"
 
 @interface STATextFieldTests : KIFTestCase
@@ -24,6 +25,9 @@
 - (void)tearDown {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     
+    STATextField *textField = (STATextField *)[tester waitForViewWithAccessibilityLabel:@"TextField"];
+    textField.clearButtonMode = UITextFieldViewModeAlways;
+    [self tapClearButtonInTextField:textField];
 }
 
 - (void)tapClearButtonInTextField:(UITextField *)textField {
@@ -89,16 +93,25 @@ intoViewWithAccessibilityLabel:@"ResizingTextField"
     XCTAssert(!resizingTextField.clearButtonIsVisible, @"Improper clearButtonIsVisible value.");
     resizingTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     XCTAssert(resizingTextField.clearButtonIsVisible, @"Improper clearButtonIsVisible value.");
+    
     [tester tapViewWithAccessibilityLabel:@"HideKeyboard"];
     XCTAssert(!resizingTextField.clearButtonIsVisible, @"Improper clearButtonIsVisible value.");
     resizingTextField.clearButtonMode = UITextFieldViewModeUnlessEditing;
     XCTAssert(resizingTextField.clearButtonIsVisible, @"Improper clearButtonIsVisible value.");
+    
     [tester tapViewWithAccessibilityLabel:@"ResizingTextField"];
     XCTAssert(!resizingTextField.clearButtonIsVisible, @"Improper clearButtonIsVisible value.");
     resizingTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     XCTAssert(resizingTextField.clearButtonIsVisible, @"Improper clearButtonIsVisible value.");
     resizingTextField.clearButtonMode = UITextFieldViewModeUnlessEditing;
     XCTAssert(!resizingTextField.clearButtonIsVisible, @"Improper clearButtonIsVisible value.");
+}
+
+- (void)testTextValue {
+    STATextField *textField = (STATextField *)[tester waitForViewWithAccessibilityLabel:@"TextField"];
+    XCTAssert([textField.textValue isEqualToString:@"placeholder text"], @"Improper textValue value.");
+    [tester enterText:@"Testing text value now" intoViewWithAccessibilityLabel:@"TextField"];
+    XCTAssert([textField.textValue isEqualToString:@"Testing text value now"], @"Improper textValue value.");
 }
 
 // general test case, should be split up into separate functions as tests get more elaborate/complex

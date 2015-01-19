@@ -14,6 +14,8 @@
     NSAttributedString *_internalAttributedPlaceholder;
 }
 
+@property (nonatomic, strong) NSString *textValue;
+
 @end
 
 @implementation STATextField
@@ -23,6 +25,12 @@
     
     _internalPlaceholder = self.placeholder;
     _internalAttributedPlaceholder = self.attributedPlaceholder;
+    
+    if (_internalAttributedPlaceholder) { //TODO: consider looking at which field was set most recently to determine which placeholder gets priority
+        self.textValue = [_internalAttributedPlaceholder string];
+    } else if (_internalPlaceholder) {
+        self.textValue = _internalPlaceholder;
+    }
 }
 
 #pragma mark Setters (of Catan)
@@ -103,9 +111,18 @@
 
 #pragma mark Text Field Events
 
-- (void)textFieldDidChange:(id)sender {
+- (void)textFieldDidChange:(STATextFieldBase *)sender {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
+    if ([sender.text length] < 1) {
+        if (_internalAttributedPlaceholder) { //TODO: consider looking at which field was set most recently to determine which placeholder gets priority
+            self.textValue = [_internalAttributedPlaceholder string];
+        } else if (_internalPlaceholder) {
+            self.textValue = _internalPlaceholder;
+        }
+    } else {
+        self.textValue = sender.text;
+    }
 }
 
 - (BOOL)textField:(UITextField *)textField
