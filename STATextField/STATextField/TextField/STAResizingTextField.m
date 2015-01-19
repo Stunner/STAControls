@@ -45,7 +45,9 @@
     } else if (clearButtonMode == UITextFieldViewModeNever) {
         self.clearButtonIsVisible = NO;
     } else if (clearButtonMode == UITextFieldViewModeWhileEditing) {
-        self.clearButtonIsVisible = NO;
+        self.clearButtonIsVisible = (self.isEditing && self.text.length > 0);
+    } else if (clearButtonMode == UITextFieldViewModeUnlessEditing) {
+        self.clearButtonIsVisible = (!self.isEditing && self.text.length > 0);
     }
     [super setClearButtonMode:clearButtonMode];
 }
