@@ -35,6 +35,7 @@
     NSString *dateText = [_dateFormatter stringFromDate:date];
     [self setText:dateText];
 }
+
 - (void)setDateFormatString:(NSString *)dateFormatString {
     if (_dateFormatString != dateFormatString) {
         _dateFormatString = dateFormatString;

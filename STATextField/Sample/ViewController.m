@@ -10,6 +10,7 @@
 #import "STAATMTextField.h"
 #import "STAResizingTextField.h"
 #import "STATextView.h"
+#import "STAPickerField.h"
 
 @interface ViewController () <UITextFieldDelegate, UITextViewDelegate>
 
@@ -17,6 +18,7 @@
 @property (nonatomic, strong) IBOutlet STATextField *textField;
 @property (nonatomic, strong) IBOutlet STAResizingTextField *resizingTextField;
 @property (nonatomic, strong) IBOutlet STATextField *dateTextField;
+//@property (nonatomic, strong) IBOutlet STAPickerField *dateTextField;
 @property (nonatomic, strong) IBOutlet STATextField *nextTextField;
 @property (nonatomic, strong) IBOutlet STATextView *textView;
 
@@ -52,6 +54,11 @@
     _dateTextField.nextFirstResponderUponReturnKeyPress = _nextTextField;
     _dateTextField.showDoneButton = YES;
     _dateTextField.showNextButton = YES;
+//    _dateTextField.pickerView.titleArray = @[@[@"Geometry", @"Trigonometry", @"Calculus", @"Chemistry"]];
+    
+//    _dateTextField.pickerView.pickerViewSelectionBlock = ^void(UIPickerView *pickerView, NSInteger component, NSInteger row, NSString *title){
+//        NSLog(@"\npickerView: %@ \ncomponent: %lu\nrow: %lu\ntitle: %@", pickerView, component, row, title);
+//    };
     
 //    _textView.expandsUpward = YES;
     _textView.layer.borderWidth = 1.0f;
