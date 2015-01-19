@@ -296,32 +296,14 @@
 
 - (void)enterText:(NSString *)text intoViewWithAccessibilityLabel:(NSString *)label traits:(UIAccessibilityTraits)traits expectedResult:(NSString *)expectedResult
 {
-    [self enterText:text intoViewWithAccessibilityLabel:label traits:traits expectedResult:expectedResult transitionsToViewWithAccessibilityLabel:nil andTraits:UIAccessibilityTraitNone];
-}
-
-- (void)enterText:(NSString *)text intoViewWithAccessibilityLabel:(NSString *)label traits:(UIAccessibilityTraits)traits expectedResult:(NSString *)expectedResult transitionsToViewWithAccessibilityLabel:(NSString *)nextLabel andTraits:(UIAccessibilityTraits)nextTraits
-{
     UIView *view = nil;
     UIAccessibilityElement *element = nil;
     
     [self waitForAccessibilityElement:&element view:&view withLabel:label value:nil traits:traits tappable:YES];
     [self tapAccessibilityElement:element inView:view];
-    [self waitForTimeInterval:0.25];
+    [self waitForKeyboard];
     [self enterTextIntoCurrentFirstResponder:text fallbackView:view];
     [self expectView:view toContainText:expectedResult ?: text];
-    if (nextLabel && nextTraits != UIAccessibilityTraitNone) {
-        [self waitForFirstResponderWithAccessibilityLabel:nextLabel traits:nextTraits];
-    } else if (nextLabel) {
-        [self waitForFirstResponderWithAccessibilityLabel:nextLabel];
-    }
-}
-
-- (void)expectText:(NSString *)text inViewWithAccessibilityLabel:(NSString *)label traits:(UIAccessibilityTraits)traits
-{
-    UIView *view = nil;
-    UIAccessibilityElement *element = nil;
-    [self waitForAccessibilityElement:&element view:&view withLabel:label value:nil traits:traits tappable:NO];
-    [self expectView:view toContainText:text];
 }
 
 - (void)expectView:(UIView *)view toContainText:(NSString *)expectedResult
