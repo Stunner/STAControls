@@ -2,5 +2,5 @@
 #import <UIKit/UIKit.h>
 #endif
 
-#import "Pods-STATextFieldTests-environment.h"
+#import "Pods-STAControlsTests-environment.h"
 #import <CoreGraphics/CoreGraphics.h>

@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		06455B5E8FB37EB009B44709 /* libPods-STATextFieldTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DB69C93E87FA4E4906D0C87 /* libPods-STATextFieldTests.a */; };
+		06455B5E8FB37EB009B44709 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		21DED687A4DD04037734377A /* libPods-STAControlsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F936BDAFC29480EF8581F0 /* libPods-STAControlsTests.a */; };
 		93021A1B19F0F3670065B144 /* STATextFieldTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 93021A1A19F0F3670065B144 /* STATextFieldTests.m */; };
 		93021A3019F0F7A50065B144 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 93021A2619F0F7A50065B144 /* AppDelegate.m */; };
 		93021A3119F0F7A50065B144 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93021A2719F0F7A50065B144 /* LaunchScreen.xib */; };
@@ -49,9 +50,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4DB69C93E87FA4E4906D0C87 /* libPods-STATextFieldTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-STATextFieldTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		930219FB19F0F3670065B144 /* STATextField.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STATextField.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		93021A1419F0F3670065B144 /* STATextFieldTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = STATextFieldTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C1BA466BE4F3A687AD837BE /* Pods-STAControlsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STAControlsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-STAControlsTests/Pods-STAControlsTests.release.xcconfig"; sourceTree = "<group>"; };
+		930219FB19F0F3670065B144 /* STAControls.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STAControls.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		93021A1419F0F3670065B144 /* STAControlsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = STAControlsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		93021A1919F0F3670065B144 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		93021A1A19F0F3670065B144 /* STATextFieldTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STATextFieldTests.m; sourceTree = "<group>"; };
 		93021A2519F0F7A50065B144 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -73,6 +74,7 @@
 		9399DD311A6542B700E0C0C1 /* STAResizingTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAResizingTextField.h; sourceTree = "<group>"; };
 		9399DD321A6542B700E0C0C1 /* STAResizingTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAResizingTextField.m; sourceTree = "<group>"; };
 		9399DD341A6B28B200E0C0C1 /* STAResizingTextField+PrivateHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "STAResizingTextField+PrivateHeaders.h"; sourceTree = "<group>"; };
+		93F936BDAFC29480EF8581F0 /* libPods-STAControlsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-STAControlsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93F9515C1A35C9CE003F8485 /* NSString+STATextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+STATextField.h"; sourceTree = "<group>"; };
 		93F9515D1A35C9CE003F8485 /* NSString+STATextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+STATextField.m"; sourceTree = "<group>"; };
 		93F9515E1A35C9CE003F8485 /* STAATMTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAATMTextField.h; sourceTree = "<group>"; };
@@ -92,11 +94,7 @@
 		93F9516D1A35C9CE003F8485 /* STATextViewBase+PrivateHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "STATextViewBase+PrivateHeaders.h"; sourceTree = "<group>"; };
 		93F9516E1A35C9CE003F8485 /* STATextViewBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STATextViewBase.h; sourceTree = "<group>"; };
 		93F9516F1A35C9CE003F8485 /* STATextViewBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STATextViewBase.m; sourceTree = "<group>"; };
-		A5FAFFD39F9AD1892CBA12CB /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		AF7678045F1F8459FB61CEEA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		B6EC54A452CEF08E418A3085 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		DD50B9A22117989EFB42065D /* Pods-STATextFieldTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STATextFieldTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-STATextFieldTests/Pods-STATextFieldTests.debug.xcconfig"; sourceTree = "<group>"; };
-		FC6432355D2E4CF2D56CB41E /* Pods-STATextFieldTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STATextFieldTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-STATextFieldTests/Pods-STATextFieldTests.release.xcconfig"; sourceTree = "<group>"; };
+		DABDECF76F239E1DF0748E4B /* Pods-STAControlsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STAControlsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-STAControlsTests/Pods-STAControlsTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,7 +109,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				06455B5E8FB37EB009B44709 /* libPods-STATextFieldTests.a in Frameworks */,
+				06455B5E8FB37EB009B44709 /* (null) in Frameworks */,
+				21DED687A4DD04037734377A /* libPods-STAControlsTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,10 +120,18 @@
 		39C257CD713E7FBC0BA7AAEE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B6EC54A452CEF08E418A3085 /* libPods.a */,
-				4DB69C93E87FA4E4906D0C87 /* libPods-STATextFieldTests.a */,
+				93F936BDAFC29480EF8581F0 /* libPods-STAControlsTests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7E44DDC7364F0D8A4EA85A1E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DABDECF76F239E1DF0748E4B /* Pods-STAControlsTests.debug.xcconfig */,
+				2C1BA466BE4F3A687AD837BE /* Pods-STAControlsTests.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		930219F219F0F3670065B144 = {
@@ -134,16 +141,16 @@
 				93021A2419F0F7A50065B144 /* Sample */,
 				93021A1719F0F3670065B144 /* STATextFieldTests */,
 				930219FC19F0F3670065B144 /* Products */,
-				B5AEFBC70A7CAFD777CB9F85 /* Pods */,
 				39C257CD713E7FBC0BA7AAEE /* Frameworks */,
+				7E44DDC7364F0D8A4EA85A1E /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
 		930219FC19F0F3670065B144 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				930219FB19F0F3670065B144 /* STATextField.app */,
-				93021A1419F0F3670065B144 /* STATextFieldTests.xctest */,
+				930219FB19F0F3670065B144 /* STAControls.app */,
+				93021A1419F0F3670065B144 /* STAControlsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -241,23 +248,12 @@
 			path = TextView;
 			sourceTree = "<group>";
 		};
-		B5AEFBC70A7CAFD777CB9F85 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				A5FAFFD39F9AD1892CBA12CB /* Pods.debug.xcconfig */,
-				AF7678045F1F8459FB61CEEA /* Pods.release.xcconfig */,
-				DD50B9A22117989EFB42065D /* Pods-STATextFieldTests.debug.xcconfig */,
-				FC6432355D2E4CF2D56CB41E /* Pods-STATextFieldTests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		930219FA19F0F3670065B144 /* STATextField */ = {
+		930219FA19F0F3670065B144 /* STAControls */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 93021A1E19F0F3670065B144 /* Build configuration list for PBXNativeTarget "STATextField" */;
+			buildConfigurationList = 93021A1E19F0F3670065B144 /* Build configuration list for PBXNativeTarget "STAControls" */;
 			buildPhases = (
 				930219F719F0F3670065B144 /* Sources */,
 				930219F819F0F3670065B144 /* Frameworks */,
@@ -267,29 +263,29 @@
 			);
 			dependencies = (
 			);
-			name = STATextField;
+			name = STAControls;
 			productName = STATextField;
-			productReference = 930219FB19F0F3670065B144 /* STATextField.app */;
+			productReference = 930219FB19F0F3670065B144 /* STAControls.app */;
 			productType = "com.apple.product-type.application";
 		};
-		93021A1319F0F3670065B144 /* STATextFieldTests */ = {
+		93021A1319F0F3670065B144 /* STAControlsTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 93021A2119F0F3670065B144 /* Build configuration list for PBXNativeTarget "STATextFieldTests" */;
+			buildConfigurationList = 93021A2119F0F3670065B144 /* Build configuration list for PBXNativeTarget "STAControlsTests" */;
 			buildPhases = (
-				FDEA7BD910BA42B0E5ADFC07 /* Check Pods Manifest.lock */,
+				65A9AE7ECCAC47BA3A426CDD /* Check Pods Manifest.lock */,
 				93021A1019F0F3670065B144 /* Sources */,
 				93021A1119F0F3670065B144 /* Frameworks */,
 				93021A1219F0F3670065B144 /* Resources */,
-				C85CC8A0FCEC809E076DD367 /* Copy Pods Resources */,
+				077228B4838094DE6F2E2ECF /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				93021A1619F0F3670065B144 /* PBXTargetDependency */,
 			);
-			name = STATextFieldTests;
+			name = STAControlsTests;
 			productName = STATextFieldTests;
-			productReference = 93021A1419F0F3670065B144 /* STATextFieldTests.xctest */;
+			productReference = 93021A1419F0F3670065B144 /* STAControlsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -311,7 +307,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 930219F619F0F3670065B144 /* Build configuration list for PBXProject "STATextField" */;
+			buildConfigurationList = 930219F619F0F3670065B144 /* Build configuration list for PBXProject "STAControls" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -324,8 +320,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				930219FA19F0F3670065B144 /* STATextField */,
-				93021A1319F0F3670065B144 /* STATextFieldTests */,
+				930219FA19F0F3670065B144 /* STAControls */,
+				93021A1319F0F3670065B144 /* STAControlsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -352,7 +348,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		C85CC8A0FCEC809E076DD367 /* Copy Pods Resources */ = {
+		077228B4838094DE6F2E2ECF /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -364,10 +360,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-STATextFieldTests/Pods-STATextFieldTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-STAControlsTests/Pods-STAControlsTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FDEA7BD910BA42B0E5ADFC07 /* Check Pods Manifest.lock */ = {
+		65A9AE7ECCAC47BA3A426CDD /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -428,7 +424,7 @@
 /* Begin PBXTargetDependency section */
 		93021A1619F0F3670065B144 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 930219FA19F0F3670065B144 /* STATextField */;
+			target = 930219FA19F0F3670065B144 /* STAControls */;
 			targetProxy = 93021A1519F0F3670065B144 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -533,33 +529,31 @@
 		};
 		93021A1F19F0F3670065B144 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A5FAFFD39F9AD1892CBA12CB /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Sample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = STAControls;
 			};
 			name = Debug;
 		};
 		93021A2019F0F3670065B144 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AF7678045F1F8459FB61CEEA /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Sample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = STAControls;
 			};
 			name = Release;
 		};
 		93021A2219F0F3670065B144 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DD50B9A22117989EFB42065D /* Pods-STATextFieldTests.debug.xcconfig */;
+			baseConfigurationReference = DABDECF76F239E1DF0748E4B /* Pods-STAControlsTests.debug.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/STATextField.app/STATextField";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/STAControls.app/STAControls";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -570,23 +564,23 @@
 				);
 				INFOPLIST_FILE = STATextFieldTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = STAControlsTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Debug;
 		};
 		93021A2319F0F3670065B144 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FC6432355D2E4CF2D56CB41E /* Pods-STATextFieldTests.release.xcconfig */;
+			baseConfigurationReference = 2C1BA466BE4F3A687AD837BE /* Pods-STAControlsTests.release.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/STATextField.app/STATextField";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/STAControls.app/STAControls";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = STATextFieldTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = STAControlsTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Release;
@@ -594,7 +588,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		930219F619F0F3670065B144 /* Build configuration list for PBXProject "STATextField" */ = {
+		930219F619F0F3670065B144 /* Build configuration list for PBXProject "STAControls" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				93021A1C19F0F3670065B144 /* Debug */,
@@ -603,7 +597,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		93021A1E19F0F3670065B144 /* Build configuration list for PBXNativeTarget "STATextField" */ = {
+		93021A1E19F0F3670065B144 /* Build configuration list for PBXNativeTarget "STAControls" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				93021A1F19F0F3670065B144 /* Debug */,
@@ -612,7 +606,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		93021A2119F0F3670065B144 /* Build configuration list for PBXNativeTarget "STATextFieldTests" */ = {
+		93021A2119F0F3670065B144 /* Build configuration list for PBXNativeTarget "STAControlsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				93021A2219F0F3670065B144 /* Debug */,
