@@ -13,7 +13,6 @@
 		93021A3119F0F7A50065B144 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93021A2719F0F7A50065B144 /* LaunchScreen.xib */; };
 		93021A3219F0F7A50065B144 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93021A2919F0F7A50065B144 /* Main.storyboard */; };
 		93021A3319F0F7A50065B144 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93021A2B19F0F7A50065B144 /* Images.xcassets */; };
-		93021A3419F0F7A50065B144 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 93021A2C19F0F7A50065B144 /* Info.plist */; };
 		93021A3519F0F7A50065B144 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 93021A2D19F0F7A50065B144 /* main.m */; };
 		93021A3619F0F7A50065B144 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93021A2F19F0F7A50065B144 /* ViewController.m */; };
 		93DF28351A70F7E600956489 /* STAPickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 93DF28171A70F7E600956489 /* STAPickerField.m */; };
@@ -28,7 +27,6 @@
 		93DF283E1A70F7E600956489 /* STATextFieldUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 93DF282E1A70F7E600956489 /* STATextFieldUtility.m */; };
 		93DF283F1A70F7E600956489 /* STATextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93DF28311A70F7E600956489 /* STATextView.m */; };
 		93DF28401A70F7E600956489 /* STATextViewBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 93DF28341A70F7E600956489 /* STATextViewBase.m */; };
-		93DF28441A70F81300956489 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 93DF28421A70F81300956489 /* Info.plist */; };
 		93DF28451A70F81300956489 /* STATextFieldTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 93DF28431A70F81300956489 /* STATextFieldTests.m */; };
 /* End PBXBuildFile section */
 
@@ -288,7 +286,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = STA;
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Aaron Jubbal";
 				TargetAttributes = {
 					930219FA19F0F3670065B144 = {
@@ -324,7 +322,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93021A3419F0F7A50065B144 /* Info.plist in Resources */,
 				93021A3319F0F7A50065B144 /* Images.xcassets in Resources */,
 				93021A3119F0F7A50065B144 /* LaunchScreen.xib in Resources */,
 				93021A3219F0F7A50065B144 /* Main.storyboard in Resources */,
@@ -335,7 +332,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93DF28441A70F81300956489 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
