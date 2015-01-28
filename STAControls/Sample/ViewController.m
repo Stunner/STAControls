@@ -7,10 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "STAATMTextField.h"
-#import "STAResizingTextField.h"
-#import "STATextView.h"
-#import "STAPickerField.h"
+#import "STAControls.h"
 
 @interface ViewController () <UITextFieldDelegate, UITextViewDelegate>
 

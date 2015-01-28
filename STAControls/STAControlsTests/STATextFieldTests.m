@@ -9,8 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 #import <KIF/KIF.h>
-#import "STATextField.h"
-#import "STAResizingTextField.h"
+#import "STAControls.h"
 
 @interface STATextFieldTests : KIFTestCase
 
