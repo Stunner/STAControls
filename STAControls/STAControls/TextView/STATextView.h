@@ -15,4 +15,8 @@
 @property (nonatomic, assign) BOOL animatesToTopOfKeyboard;
 @property (nonatomic, assign) BOOL autoDeterminesHeight;
 
+- (NSAttributedString *)textView:(UITextView *)textView
+attributedStringForChangeOfTextinRange:(NSRange)range
+                 replacementText:(NSString *)text;
+
 @end

@@ -29,6 +29,7 @@
 		93DF28401A70F7E600956489 /* STATextViewBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 93DF28341A70F7E600956489 /* STATextViewBase.m */; };
 		93DF28451A70F81300956489 /* STATextFieldTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 93DF28431A70F81300956489 /* STATextFieldTests.m */; };
 		93F92F381A7EAE90002A37F0 /* STAExpressionTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F92F361A7EAE90002A37F0 /* STAExpressionTextView.m */; };
+		93F92F3E1A7F8D82002A37F0 /* NSMutableAttributedString+STAControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F92F3D1A7F8D82002A37F0 /* NSMutableAttributedString+STAControls.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,8 @@
 		93F92F351A7EAE90002A37F0 /* STAExpressionTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAExpressionTextView.h; sourceTree = "<group>"; };
 		93F92F361A7EAE90002A37F0 /* STAExpressionTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAExpressionTextView.m; sourceTree = "<group>"; };
 		93F92F371A7EAE90002A37F0 /* STATextView+PrivateHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "STATextView+PrivateHeaders.h"; sourceTree = "<group>"; };
+		93F92F3C1A7F8D82002A37F0 /* NSMutableAttributedString+STAControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+STAControls.h"; sourceTree = "<group>"; };
+		93F92F3D1A7F8D82002A37F0 /* NSMutableAttributedString+STAControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+STAControls.m"; sourceTree = "<group>"; };
 		93F936BDAFC29480EF8581F0 /* libPods-STAControlsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-STAControlsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DABDECF76F239E1DF0748E4B /* Pods-STAControlsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STAControlsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-STAControlsTests/Pods-STAControlsTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -174,6 +177,8 @@
 				93DF281D1A70F7E600956489 /* TextField */,
 				93DF282F1A70F7E600956489 /* TextView */,
 				934C0E911A79076D00AC0603 /* STAControls.h */,
+				93F92F3C1A7F8D82002A37F0 /* NSMutableAttributedString+STAControls.h */,
+				93F92F3D1A7F8D82002A37F0 /* NSMutableAttributedString+STAControls.m */,
 			);
 			path = STAControls;
 			sourceTree = "<group>";
@@ -386,6 +391,7 @@
 			files = (
 				93DF28401A70F7E600956489 /* STATextViewBase.m in Sources */,
 				93DF283F1A70F7E600956489 /* STATextView.m in Sources */,
+				93F92F3E1A7F8D82002A37F0 /* NSMutableAttributedString+STAControls.m in Sources */,
 				93DF28381A70F7E600956489 /* NSString+STATextField.m in Sources */,
 				93DF283D1A70F7E600956489 /* STATextFieldBase.m in Sources */,
 				93DF283C1A70F7E600956489 /* STATextField.m in Sources */,

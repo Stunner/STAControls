@@ -176,11 +176,27 @@
     }];
 }
 
+- (NSAttributedString *)textView:(UITextView *)textView
+attributedStringForChangeOfTextinRange:(NSRange)range
+                 replacementText:(NSString *)text
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    return nil;
+}
+
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
     NSString *newText = [self.text stringByReplacingCharactersInRange:range withString:text];
     [self resizeSelfForText:newText];
+    
+    NSAttributedString *newAttributedString = [self textView:textView
+                      attributedStringForChangeOfTextinRange:range
+                                             replacementText:text];
+    if (newAttributedString) {
+        self.attributedText = newAttributedString;
+    }
     
     return YES;
 }
