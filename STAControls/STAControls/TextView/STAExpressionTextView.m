@@ -9,6 +9,8 @@
 #import "STAExpressionTextView.h"
 #import "STATextView+PrivateHeaders.h"
 #import "NSMutableAttributedString+STAControls.h"
+#import "NSAttributedString+STAUtils.h"
+#import "NSMutableAttributedString+STAUtils.h"
 
 @implementation STAExpressionTextView
 
@@ -50,6 +52,19 @@ attributedStringForChangeOfTextinRange:(NSRange)range
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
+    if (text.length == 0) { // deletion
+        NSAttributedString *characterLeftOfCursor = [self.attributedText attributedSubstringFromRange:NSMakeRange(self.selectedRange.location - 1, 1)];
+        if ([[characterLeftOfCursor string] isEqualToString:@"("]) {
+            
+            NSMutableAttributedString *mutableAttributedString = [self.attributedText mutableCopy];
+            [mutableAttributedString removeFirstOccuranceOfSubstring:@")"
+                                                      beyondLocation:self.selectedRange.location];
+            self.attributedText = mutableAttributedString;
+            self.selectedRange = NSMakeRange(range.location, range.length);
+        }
+        return self.attributedText;
+    }
+    
     NSString *newText = [self.text stringByReplacingCharactersInRange:range withString:text];
     
     NSMutableAttributedString *attributedString;
@@ -73,7 +88,11 @@ attributedStringForChangeOfTextinRange:(NSRange)range
                                      range:NSMakeRange(attributedString.length - 1, 1)];
             self.attributedText = attributedString;
             self.selectedRange = NSMakeRange(range.location + 1, range.length);
+            return attributedString;
         }
+        NSMutableAttributedString *mutableAttributedString = [self.attributedText mutableCopy];
+        [mutableAttributedString replaceCharactersInRange:range withString:text];
+        self.attributedText = mutableAttributedString;
     }
     return attributedString;
 }
