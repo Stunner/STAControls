@@ -51,30 +51,27 @@ attributedStringForChangeOfTextinRange:(NSRange)range
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
     NSString *newText = [self.text stringByReplacingCharactersInRange:range withString:text];
-    NSMutableAttributedString *mutableAttributedString = [[NSMutableAttributedString alloc] initWithString:newText
-                                                                                                attributes:@{NSFontAttributeName : self.font}];
+    
     NSMutableAttributedString *attributedString;
     NSCharacterSet *expressionCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789.+-*/()"];
     if (text.length > 0 && [expressionCharacterSet characterIsMember:[text characterAtIndex:0]]) {
         if ([text isEqualToString:@"("]) {
             newText = [newText stringByAppendingString:@")"];
-            if (!self.attributedText) {
+            if (self.attributedText.length == 0) {
                 attributedString = [[NSMutableAttributedString alloc] initWithString:newText
                                                                           attributes:@{NSFontAttributeName : self.font}];
-                [attributedString addAttribute:NSForegroundColorAttributeName
-                                         value:[UIColor grayColor]
-                                         range:NSMakeRange(attributedString.length - 1, 1)];
-                self.attributedText = attributedString;
             } else {
+                NSMutableAttributedString *mutableAttributedString = [self.attributedText mutableCopy];
+                [mutableAttributedString replaceCharactersInRange:range withString:text];
                 [mutableAttributedString appendAttributedString:[[NSMutableAttributedString alloc] initWithString:@")"
                                                                                                        attributes:@{NSFontAttributeName : self.font,
                                                                                                                     NSForegroundColorAttributeName : [UIColor grayColor]}]];
                 attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:mutableAttributedString];
-                [attributedString addAttribute:NSForegroundColorAttributeName
-                                         value:[UIColor grayColor]
-                                         range:NSMakeRange(attributedString.length - 1, 1)];
-                self.attributedText = attributedString;
             }
+            [attributedString addAttribute:NSForegroundColorAttributeName
+                                     value:[UIColor grayColor]
+                                     range:NSMakeRange(attributedString.length - 1, 1)];
+            self.attributedText = attributedString;
             self.selectedRange = NSMakeRange(range.location + 1, range.length);
         }
     }
