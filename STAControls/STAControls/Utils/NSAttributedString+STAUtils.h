@@ -12,4 +12,8 @@
 
 - (NSRange)rangeOfString:(NSString *)aString;
 
+- (NSAttributedString *)characterLeftOfLocation:(NSUInteger)location;
+
+- (NSAttributedString *)characterRightOfLocation:(NSUInteger)location;
+
 @end

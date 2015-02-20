@@ -14,4 +14,18 @@
     return [[self string] rangeOfString:aString];
 }
 
+- (NSAttributedString *)characterLeftOfLocation:(NSUInteger)location {
+    if (location < 1) {
+        return nil;
+    }
+    return [self attributedSubstringFromRange:NSMakeRange(location - 1, 1)];
+}
+
+- (NSAttributedString *)characterRightOfLocation:(NSUInteger)location {
+    if (location < 1 || location > self.length - 2) {
+        return nil;
+    }
+    return [self attributedSubstringFromRange:NSMakeRange(location + 1, 1)];
+}
+
 @end
