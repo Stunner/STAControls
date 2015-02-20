@@ -71,6 +71,7 @@ attributedStringForChangeOfTextinRange:(NSRange)range
     if (text.length > 0 && [expressionCharacterSet characterIsMember:[text characterAtIndex:0]]) {
         if ([text isEqualToString:@"("]) {
             newText = [newText stringByAppendingString:@")"];
+            
             if (self.attributedText.length == 0) {
                 attributedString = [[NSMutableAttributedString alloc] initWithString:newText
                                                                           attributes:@{NSFontAttributeName : self.font}];
@@ -87,15 +88,24 @@ attributedStringForChangeOfTextinRange:(NSRange)range
                                      range:NSMakeRange(attributedString.length - 1, 1)];
             self.attributedText = attributedString;
             self.selectedRange = NSMakeRange(range.location + 1, range.length);
-        } else if ([text isEqualToString:@")"] && // consume grayed-out ")"
-                   [[[self.attributedText characterRightOfLocation:self.selectedRange.location - 1] string] isEqualToString:@")"])
-        {
-            NSMutableAttributedString *mutableAttributedString = [self.attributedText mutableCopy];
-            [mutableAttributedString setAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor],
-                                                     NSFontAttributeName : self.font}
-                                             range:NSMakeRange(self.selectedRange.location, 1)];
-            self.attributedText = mutableAttributedString;
-            self.selectedRange = NSMakeRange(range.location + 1, range.length);
+        } else if ([text isEqualToString:@")"]) { // consume grayed-out ")"
+            
+            NSAttributedString *characterRightOfSelected = [self.attributedText characterRightOfLocation:self.selectedRange.location - 1];
+            UIColor *foregroundColor = (UIColor *)[characterRightOfSelected attribute:NSForegroundColorAttributeName atIndex:0 effectiveRange:NULL];
+            if ([[characterRightOfSelected string] isEqualToString:@")"] && [foregroundColor isEqual:[UIColor grayColor]]) {
+                NSMutableAttributedString *mutableAttributedString = [self.attributedText mutableCopy];
+                [mutableAttributedString setAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor],
+                                                         NSFontAttributeName : self.font}
+                                                 range:NSMakeRange(self.selectedRange.location, 1)];
+                self.attributedText = mutableAttributedString;
+                self.selectedRange = NSMakeRange(range.location + 1, range.length);
+            } else {
+                NSMutableAttributedString *mutableAttributedString = [self.attributedText mutableCopy];
+                [mutableAttributedString replaceCharactersInRange:range withString:text];
+                self.attributedText = mutableAttributedString;
+                self.selectedRange = NSMakeRange(range.location + 1, range.length);
+            }
+            
         } else {
             NSMutableAttributedString *mutableAttributedString = [self.attributedText mutableCopy];
             [mutableAttributedString replaceCharactersInRange:range withString:text];
