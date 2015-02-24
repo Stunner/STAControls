@@ -46,9 +46,11 @@
         UIToolbar *keyboardDoneButtonView = [UIToolbar new];
         [keyboardDoneButtonView sizeToFit];
         UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:105 target:self action:@selector(prevClicked:)];
+        leftButton.accessibilityLabel = @"Previous";
         UIBarButtonItem *fixedSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
         fixedSpace.width = 25.0;
         UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:106 target:self action:@selector(nextClicked:)];
+        rightButton.accessibilityLabel = @"Next";
         UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
                                                                        style:UIBarButtonItemStyleDone target:self
                                                                       action:@selector(doneClicked:)];

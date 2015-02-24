@@ -123,7 +123,7 @@ intoViewWithAccessibilityLabel:@"ResizingTextField"
     [tester tapViewWithAccessibilityLabel:@"Next"];
     [tester waitForFirstResponderWithAccessibilityLabel:@"NextTextField"];
     [tester enterText:@"the emergency broadcast system.\n" intoViewWithAccessibilityLabel:@"NextTextField"];
-    [tester waitForAbsenceOfKeyboard];
+    [tester waitForAbsenceOfSoftwareKeyboard];
 }
 
 

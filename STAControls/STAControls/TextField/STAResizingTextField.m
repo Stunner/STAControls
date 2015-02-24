@@ -138,11 +138,9 @@ shouldChangeCharactersInRange:(NSRange)range
 - (BOOL)resignFirstResponderUponReturnKeyPress {
     BOOL resignedFirstResponderStatus = NO;
     if (self.resignsFirstResponderUponReturnKeyPress) {
+        resignedFirstResponderStatus = [self resignFirstResponder];
         if (self.nextControl) {
-            resignedFirstResponderStatus = [self resignFirstResponder];
             [self.nextControl becomeFirstResponder];
-        } else {
-            resignedFirstResponderStatus =[self resignFirstResponder];
         }
     }
     return resignedFirstResponderStatus;
