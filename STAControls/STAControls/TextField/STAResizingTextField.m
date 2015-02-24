@@ -34,9 +34,9 @@
     _initialTextFieldWidth = self.frame.size.width;
 }
 
-- (void)setNextFirstResponderUponReturnKeyPress:(UIControl *)nextFirstResponderUponReturnKeyPress {
+- (void)setNextControl:(UIControl *)nextFirstResponderUponReturnKeyPress {
     self.resignsFirstResponderUponReturnKeyPress = YES;
-    _nextFirstResponderUponReturnKeyPress = nextFirstResponderUponReturnKeyPress;
+    _nextControl = nextFirstResponderUponReturnKeyPress;
 }
 
 - (void)setClearButtonMode:(UITextFieldViewMode)clearButtonMode {
@@ -138,9 +138,9 @@ shouldChangeCharactersInRange:(NSRange)range
 - (BOOL)resignFirstResponderUponReturnKeyPress {
     BOOL resignedFirstResponderStatus = NO;
     if (self.resignsFirstResponderUponReturnKeyPress) {
-        if (self.nextFirstResponderUponReturnKeyPress) {
+        if (self.nextControl) {
             resignedFirstResponderStatus = [self resignFirstResponder];
-            [self.nextFirstResponderUponReturnKeyPress becomeFirstResponder];
+            [self.nextControl becomeFirstResponder];
         } else {
             resignedFirstResponderStatus =[self resignFirstResponder];
         }

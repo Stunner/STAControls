@@ -15,10 +15,11 @@
  */
 @property (nonatomic, assign) BOOL resignsFirstResponderUponReturnKeyPress;
 
+@property (nonatomic, strong) UIControl *prevControl;
 /**
  The next UIControl object that is to claim firstResponder status upon return key press.
  */
-@property (nonatomic, strong) UIControl *nextFirstResponderUponReturnKeyPress;
+@property (nonatomic, strong) UIControl *nextControl;
 
 /**
  Defaults to NO.

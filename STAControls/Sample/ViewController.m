@@ -30,12 +30,13 @@
     _atmTextField.placeholder = @"Hello world!";
     _atmTextField.keyboardType = UIKeyboardTypeDecimalPad;
 //    _atmTextField.atmEntryEnabled = YES;
-    _atmTextField.showDoneButton = YES;
+    _atmTextField.showBackForwardToolbar = YES;
     
     _textField.resignsFirstResponderUponReturnKeyPress = YES;
-    _textField.nextFirstResponderUponReturnKeyPress = _dateTextField;
-    _textField.showDoneButton = YES;
-    _textField.showNextButton = YES;
+    _textField.prevControl = _resizingTextField;
+    _textField.nextControl = _dateTextField;
+    _textField.showBackForwardToolbar = YES;
+//    _textField.showNextButton = YES;
     _textField.placeholder = @"placeholder text";
 
 //    _resizingTextField = [[STAResizingTextField alloc] initWithFrame:CGRectMake(200, 180, 50, 30)];
@@ -49,9 +50,10 @@
                            action:@selector(textFieldDidChange:)
                  forControlEvents:UIControlEventEditingChanged];
     
-    _dateTextField.nextFirstResponderUponReturnKeyPress = _nextTextField;
-    _dateTextField.showDoneButton = YES;
-    _dateTextField.showNextButton = YES;
+    _dateTextField.prevControl = _textField;
+    _dateTextField.nextControl = _nextTextField;
+    _dateTextField.showBackForwardToolbar = YES;
+//    _dateTextField.showNextButton = YES;
 //    _dateTextField.pickerView.titleArray = @[@[@"Geometry", @"Trigonometry", @"Calculus", @"Chemistry"]];
     
 //    _dateTextField.pickerView.pickerViewSelectionBlock = ^void(UIPickerView *pickerView, NSInteger component, NSInteger row, NSString *title){

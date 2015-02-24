@@ -27,7 +27,7 @@
  The next UIControl object that is to claim firstResponder status upon return key press.
  */
 //@property (nonatomic, strong) UIControl *nextFirstResponderUponReturnKeyPress;
-@property (nonatomic, assign) BOOL showDoneButton;
+@property (nonatomic, assign) BOOL showBackForwardToolbar;
 @property (nonatomic, assign) BOOL showNextButton;
 
 @property (nonatomic, readonly) NSString *textValue;

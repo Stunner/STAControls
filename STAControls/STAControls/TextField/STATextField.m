@@ -40,25 +40,34 @@
 }
 
 // reference: http://stackoverflow.com/a/20192857/347339
-- (void)setShowDoneButton:(BOOL)showDoneButton {
-    _showDoneButton = showDoneButton;
-    if (_showDoneButton) {
+- (void)setShowBackForwardToolbar:(BOOL)showDoneButton {
+    _showBackForwardToolbar = showDoneButton;
+    if (_showBackForwardToolbar) {
         UIToolbar *keyboardDoneButtonView = [UIToolbar new];
         [keyboardDoneButtonView sizeToFit];
+        UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:105 target:self action:@selector(prevClicked:)];
+        UIBarButtonItem *fixedSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+        fixedSpace.width = 25.0;
+        UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:106 target:self action:@selector(nextClicked:)];
         UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
                                                                        style:UIBarButtonItemStyleDone target:self
                                                                       action:@selector(doneClicked:)];
         UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-        [keyboardDoneButtonView setItems:@[flexibleSpace, doneButton]];
+        [keyboardDoneButtonView setItems:@[leftButton, fixedSpace, rightButton, flexibleSpace, doneButton]];
         self.inputAccessoryView = keyboardDoneButtonView;
     } else {
         self.inputAccessoryView = nil;
     }
 }
 
+- (void)prevClicked:(id)sender {
+    [self resignFirstResponder];
+    [self.prevControl becomeFirstResponder];
+}
+
 - (void)nextClicked:(id)sender {
     [self resignFirstResponder];
-    [self.nextFirstResponderUponReturnKeyPress becomeFirstResponder];
+    [self.nextControl becomeFirstResponder];
 }
 
 - (void)setShowNextButton:(BOOL)showNextButton {
