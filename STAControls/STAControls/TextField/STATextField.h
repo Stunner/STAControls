@@ -30,7 +30,6 @@
 
 @property (nonatomic, strong) UIControl *prevControl;
 @property (nonatomic, assign) BOOL showBackForwardToolbar;
-@property (nonatomic, assign) BOOL showNextButton;
 
 @property (nonatomic, readonly) NSString *textValue;
 

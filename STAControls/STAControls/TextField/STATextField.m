@@ -15,6 +15,8 @@
 }
 
 @property (nonatomic, strong) NSString *textValue;
+@property (nonatomic, strong) UIBarButtonItem *rightChevron;
+@property (nonatomic, strong) UIBarButtonItem *leftChevron;
 
 @end
 
@@ -25,6 +27,7 @@
     
     _internalPlaceholder = self.placeholder;
     _internalAttributedPlaceholder = self.attributedPlaceholder;
+    _showBackForwardToolbar = NO;
     
     if (_internalAttributedPlaceholder) { //TODO: consider looking at which field was set most recently to determine which placeholder gets priority
         self.textValue = [_internalAttributedPlaceholder string];
@@ -35,31 +38,49 @@
 
 #pragma mark Setters (of Catan)
 
-- (void)doneClicked:(id)sender {
-    [self endEditing:YES];
-}
-
 // reference: http://stackoverflow.com/a/20192857/347339
-- (void)setShowBackForwardToolbar:(BOOL)showDoneButton {
-    _showBackForwardToolbar = showDoneButton;
+- (void)setShowBackForwardToolbar:(BOOL)showBackForwardToolbar {
+    _showBackForwardToolbar = showBackForwardToolbar;
     if (_showBackForwardToolbar) {
         UIToolbar *keyboardDoneButtonView = [UIToolbar new];
         [keyboardDoneButtonView sizeToFit];
-        UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:105 target:self action:@selector(prevClicked:)];
-        leftButton.accessibilityLabel = @"Previous";
-        UIBarButtonItem *fixedSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+        self.leftChevron = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:105
+                                                                         target:self
+                                                                         action:@selector(prevClicked:)];
+        self.leftChevron.accessibilityLabel = @"Previous";
+        [self updateEnabledStatusForBackChevron];
+        
+        UIBarButtonItem *fixedSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+                                                                                    target:nil
+                                                                                    action:nil];
         fixedSpace.width = 25.0;
-        UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:106 target:self action:@selector(nextClicked:)];
-        rightButton.accessibilityLabel = @"Next";
+        self.rightChevron = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:106
+                                                                          target:self
+                                                                          action:@selector(nextClicked:)];
+        self.rightChevron.accessibilityLabel = @"Next";
+        [self updateEnabledStatusForForwardChevron];
+        
         UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
                                                                        style:UIBarButtonItemStyleDone target:self
                                                                       action:@selector(doneClicked:)];
-        UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-        [keyboardDoneButtonView setItems:@[leftButton, fixedSpace, rightButton, flexibleSpace, doneButton]];
+        UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                                       target:nil
+                                                                                       action:nil];
+        [keyboardDoneButtonView setItems:@[self.leftChevron, fixedSpace, self.rightChevron, flexibleSpace, doneButton]];
         self.inputAccessoryView = keyboardDoneButtonView;
     } else {
         self.inputAccessoryView = nil;
     }
+}
+
+- (void)setPrevControl:(UIControl *)prevControl {
+    _prevControl = prevControl;
+    [self updateEnabledStatusForBackChevron];
+}
+
+- (void)setNextControl:(UIControl *)nextControl {
+    [super setNextControl:nextControl];
+    [self updateEnabledStatusForBackChevron];
 }
 
 - (void)prevClicked:(id)sender {
@@ -71,27 +92,6 @@
     [self resignFirstResponder];
     [self.nextControl becomeFirstResponder];
 }
-
-- (void)setShowNextButton:(BOOL)showNextButton {
-    _showNextButton = showNextButton;
-    if (_showNextButton) {
-        UIToolbar *keyboardDoneButtonView = [UIToolbar new];
-        [keyboardDoneButtonView sizeToFit];
-        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
-                                                                       style:UIBarButtonItemStyleDone target:self
-                                                                      action:@selector(doneClicked:)];
-        UIBarButtonItem *nextButton = [[UIBarButtonItem alloc] initWithTitle:@"Next"
-                                                                       style:UIBarButtonItemStyleDone target:self
-                                                                      action:@selector(nextClicked:)];
-        UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-        [keyboardDoneButtonView setItems:@[doneButton, flexibleSpace, nextButton]];
-        self.inputAccessoryView = keyboardDoneButtonView;
-    } else {
-        self.inputAccessoryView = nil;
-    }
-}
-
-
 
 - (void)setPlaceholder:(NSString *)placeholder {
     _internalPlaceholder = placeholder;
@@ -107,18 +107,17 @@
 
 #pragma mark Helpers
 
-//- (BOOL)resignFirstResponderUponReturnKeyPress {
-//    BOOL resignedFirstResponderStatus = NO;
-//    if (self.resignsFirstResponderUponReturnKeyPress) {
-//        if (self.nextFirstResponderUponReturnKeyPress) {
-//            resignedFirstResponderStatus = [self resignFirstResponder];
-//            [self.nextFirstResponderUponReturnKeyPress becomeFirstResponder];
-//        } else {
-//            resignedFirstResponderStatus =[self resignFirstResponder];
-//        }
-//    }
-//    return resignedFirstResponderStatus;
-//}
+- (void)updateEnabledStatusForForwardChevron {
+    self.rightChevron.enabled = (self.nextControl);
+}
+
+- (void)updateEnabledStatusForBackChevron {
+    self.leftChevron.enabled = (self.prevControl);
+}
+
+- (void)doneClicked:(id)sender {
+    [self endEditing:YES];
+}
 
 #pragma mark Text Field Events
 
