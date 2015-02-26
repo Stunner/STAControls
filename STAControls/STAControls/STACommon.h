@@ -6,8 +6,6 @@
 //  Copyright (c) 2015 Aaron Jubbal. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 #define STACONTROLS_DEBUG 1
 
 #if STACONTROLS_DEBUG
@@ -15,7 +13,3 @@
 #else
 #define STALog(...)
 #endif
-
-@interface STACommon : NSObject
-
-@end
