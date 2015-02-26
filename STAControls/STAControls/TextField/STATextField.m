@@ -8,6 +8,7 @@
 
 #import "STATextField.h"
 #import "STAResizingTextField+PrivateHeaders.h"
+#import "STACommon.h"
 
 @interface STATextField () {
     NSString *_internalPlaceholder;
@@ -99,7 +100,7 @@
 }
 
 - (void)setAttributedPlaceholder:(NSAttributedString *)attributedPlaceholder {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     _internalAttributedPlaceholder = attributedPlaceholder;
     [super setAttributedPlaceholder:attributedPlaceholder];
@@ -122,7 +123,7 @@
 #pragma mark Text Field Events
 
 - (void)textFieldDidChange:(STATextFieldBase *)sender {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     if ([sender.text length] < 1) {
         if (_internalAttributedPlaceholder) { //TODO: consider looking at which field was set most recently to determine which placeholder gets priority
@@ -139,20 +140,20 @@
 shouldChangeCharactersInRange:(NSRange)range
    replacementString:(NSString *)string
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     return [super textField:textField shouldChangeCharactersInRange:range replacementString:string];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     [super resignFirstResponderUponReturnKeyPress];
     return YES;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     // hide placeholder when editing begins
     [super setPlaceholder:nil];
@@ -160,7 +161,7 @@ shouldChangeCharactersInRange:(NSRange)range
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     if ([textField.text length] < 1) {
         if (_internalAttributedPlaceholder) { //TODO: consider looking at which field was set most recently to determine which placeholder gets priority

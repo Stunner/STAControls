@@ -49,7 +49,7 @@
 //}
 
 //- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-//    NSLog(@"%s", __PRETTY_FUNCTION__);
+//    STALog(@"%s", __PRETTY_FUNCTION__);
 //    
 //    return 1;
 //}
@@ -57,7 +57,7 @@
 //- (NSInteger)pickerView:(UIPickerView *)pickerView
 //numberOfRowsInComponent:(NSInteger)component
 //{
-//    NSLog(@"%s", __PRETTY_FUNCTION__);
+//    STALog(@"%s", __PRETTY_FUNCTION__);
 //    
 //    return 0;
 //}

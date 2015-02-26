@@ -8,6 +8,7 @@
 
 #import "STAPickerViewBase.h"
 #import "STAPickerView+PrivateHeaders.h"
+#import "STACommon.h"
 
 #pragma mark - Private Delegate
 
@@ -122,7 +123,7 @@ rowHeightForComponent:(NSInteger)component
 #pragma mark Data Source Overrides
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     NSInteger numberOfComponents = [(STAPickerViewBase *)pickerView numberOfComponentsInPickerView:pickerView];
     if ([_userDataSource respondsToSelector:_cmd]) {
@@ -134,7 +135,7 @@ rowHeightForComponent:(NSInteger)component
 - (NSInteger)pickerView:(UIPickerView *)pickerView
 numberOfRowsInComponent:(NSInteger)component
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     NSInteger numberOfRows = [(STAPickerViewBase *)pickerView pickerView:pickerView numberOfRowsInComponent:component];
     if ([_userDataSource respondsToSelector:_cmd]) {
@@ -181,7 +182,7 @@ numberOfRowsInComponent:(NSInteger)component
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     if (!(self = [super initWithCoder:aDecoder])) {
         return nil;
@@ -221,7 +222,7 @@ numberOfRowsInComponent:(NSInteger)component
 - (CGFloat)pickerView:(UIPickerView *)pickerView
 rowHeightForComponent:(NSInteger)component
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     return 44.0; // TODO: make this a constant
 }
@@ -229,7 +230,7 @@ rowHeightForComponent:(NSInteger)component
 - (CGFloat)pickerView:(UIPickerView *)pickerView
     widthForComponent:(NSInteger)component
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     return [UIScreen mainScreen].bounds.size.width;
 }
@@ -238,7 +239,7 @@ rowHeightForComponent:(NSInteger)component
              titleForRow:(NSInteger)row
             forComponent:(NSInteger)component
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     return nil;
 }
@@ -247,7 +248,7 @@ rowHeightForComponent:(NSInteger)component
 //             attributedTitleForRow:(NSInteger)row
 //                      forComponent:(NSInteger)component
 //{
-//    NSLog(@"%s", __PRETTY_FUNCTION__);
+//    STALog(@"%s", __PRETTY_FUNCTION__);
 //    
 //    return nil;
 //}
@@ -257,7 +258,7 @@ rowHeightForComponent:(NSInteger)component
 //          forComponent:(NSInteger)component
 //           reusingView:(UIView *)view
 //{
-//    NSLog(@"%s", __PRETTY_FUNCTION__);
+//    STALog(@"%s", __PRETTY_FUNCTION__);
 //    
 //    return nil;
 //}
@@ -266,7 +267,7 @@ rowHeightForComponent:(NSInteger)component
       didSelectRow:(NSInteger)row
        inComponent:(NSInteger)component
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     
 }
@@ -274,7 +275,7 @@ rowHeightForComponent:(NSInteger)component
 #pragma mark Data Source Overrides
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     return 1;
 }
@@ -282,7 +283,7 @@ rowHeightForComponent:(NSInteger)component
 - (NSInteger)pickerView:(UIPickerView *)pickerView
 numberOfRowsInComponent:(NSInteger)component
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     return 0;
 }

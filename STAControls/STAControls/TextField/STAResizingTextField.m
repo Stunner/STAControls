@@ -8,6 +8,8 @@
 
 #import "STAResizingTextField.h"
 #import "STATextFieldBase+ProvideHeaders.h"
+#import "STACommon.h"
+
 #define kDynamicResizeThresholdOffset 4
 
 #define kDefaultClearTextButtonOffset 28
@@ -53,7 +55,7 @@
 }
 
 - (BOOL)becomeFirstResponder {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     [super becomeFirstResponder];
     
@@ -62,7 +64,7 @@
     } else if (self.clearButtonMode == UITextFieldViewModeUnlessEditing) {
         self.clearButtonIsVisible = NO;
     }
-    NSLog(@"clear button visible: %d", self.clearButtonIsVisible);
+    STALog(@"clear button visible: %d", self.clearButtonIsVisible);
     
     if (self.resizesForClearTextButton) {
         [self resizeSelfForClearButton:self.text];
@@ -71,7 +73,7 @@
 }
 
 - (BOOL)resignFirstResponder {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     [super resignFirstResponder];
     
@@ -81,21 +83,21 @@
         self.clearButtonIsVisible = (self.text.length > 0);;
     }
     
-    NSLog(@"clear button visible: %d", self.clearButtonIsVisible);
+    STALog(@"clear button visible: %d", self.clearButtonIsVisible);
     
     [self resizeSelfToWidthWithoutShrinking:_initialTextFieldWidth];
     return YES;
 }
 
 - (void)textFieldDidChange:(STATextFieldBase *)sender {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     if (self.clearButtonMode == UITextFieldViewModeWhileEditing) {
         self.clearButtonIsVisible = (sender.text.length > 0);
     } else if (self.clearButtonMode == UITextFieldViewModeAlways) {
         self.clearButtonIsVisible = (sender.text.length > 0);
     }
-    NSLog(@"clear button visible: %d", self.clearButtonIsVisible);
+    STALog(@"clear button visible: %d", self.clearButtonIsVisible);
     
     if (self.resizesForClearTextButton) {
         [self resizeSelfForClearButton:self.text];
@@ -106,7 +108,7 @@
 shouldChangeCharactersInRange:(NSRange)range
    replacementString:(NSString *)string
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
 //    if (self.resizesForClearTextButton) {
 //        NSString *newText = [self.text stringByReplacingCharactersInRange:range
@@ -118,14 +120,14 @@ shouldChangeCharactersInRange:(NSRange)range
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     [self resizeSelfToWidthWithoutShrinking:_initialTextFieldWidth];
     return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     if ([self resignFirstResponderUponReturnKeyPress]) {
         [self resizeSelfToWidthWithoutShrinking:_initialTextFieldWidth];
@@ -149,7 +151,7 @@ shouldChangeCharactersInRange:(NSRange)range
 #pragma mark Resizing Helpers
 
 - (void)resizeSelfToWidth:(NSInteger)width {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     dispatch_async(dispatch_get_main_queue(), ^{
         if (width == self.frame.size.width) {
@@ -179,17 +181,17 @@ shouldChangeCharactersInRange:(NSRange)range
 }
 
 - (void)resizeSelfToWidthWithoutShrinking:(CGFloat)width {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     if (width < _initialTextFieldWidth) {
         width = _initialTextFieldWidth;
     }
-    NSLog(@"resize to: %f", width);
+    STALog(@"resize to: %f", width);
     [self resizeSelfToWidth:width];
 }
 
 - (void)resizeSelfToText:(NSString *)text {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     CGFloat textWidth = [text sizeWithFont:self.font].width;
     if (self.clearButtonMode == UITextFieldViewModeNever) {
@@ -204,7 +206,7 @@ shouldChangeCharactersInRange:(NSRange)range
 }
 
 - (void)resizeSelfForClearButton:(NSString *)text {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     if (text.length > 0 && self.isEditing && self.clearButtonIsVisible) {
         [self resizeSelfToWidthWithoutShrinking:_initialTextFieldWidth + kDefaultClearTextButtonOffset];

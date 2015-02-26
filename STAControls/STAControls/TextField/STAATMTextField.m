@@ -10,6 +10,7 @@
 #import "STATextField+PrivateHeaders.h"
 #import "STATextFieldUtility.h"
 #import "NSString+STATextField.h"
+#import "STACommon.h"
 
 @implementation STAATMTextField
 
@@ -25,7 +26,7 @@
 }
 
 - (CGRect)caretRectForPosition:(UITextPosition *)position {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     if (!self.atmEntryEnabled) {
         return [super caretRectForPosition:position];
@@ -34,7 +35,7 @@
 }
 
 - (UITextPosition *)closestPositionToPoint:(CGPoint)point {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     if (!self.atmEntryEnabled) {
         return [super closestPositionToPoint:point];
@@ -44,7 +45,7 @@
 }
 
 - (void)textFieldDidChange:(STATextFieldBase *)sender {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     [super textFieldDidChange:sender];
 }
@@ -54,7 +55,7 @@
 shouldChangeCharactersInRange:(NSRange)range
 replacementString:(NSString *)string
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     if (!self.atmEntryEnabled) {
         return YES;
