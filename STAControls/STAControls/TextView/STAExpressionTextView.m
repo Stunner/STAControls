@@ -34,9 +34,11 @@
     __block NSRange foundRange = {NSNotFound, NSNotFound};
     
     NSRange selectedRange= self.selectedRange;
+    NSRange convertedSelectedTextRange = [self selectedTextRangeToRange];
+    NSLog(@"=== range %@", NSStringFromRange(convertedSelectedTextRange));
 //    NSMutableAttributedString *subStringLeftOfCursor = [[self.attributedText attributedSubstringFromRange:NSMakeRange(0, self.selectedRange.location)] mutableCopy];
     NSMutableAttributedString *subStringLeftOfCursor = [self.attributedText mutableCopy];
-    [subStringLeftOfCursor enumerateAttribute:NSForegroundColorAttributeName inRange:NSMakeRange(0, [self selectedTextRangeToRange].location) options:0
+    [subStringLeftOfCursor enumerateAttribute:NSForegroundColorAttributeName inRange:NSMakeRange(0, convertedSelectedTextRange.location) options:0
                                    usingBlock:^(id value, NSRange range, BOOL *stop) {
                                        if (value) {
                                            foundRange = range;
@@ -53,7 +55,7 @@
     if (foundRange.location != NSNotFound) {
         [subStringLeftOfCursor setAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor],
                                                NSFontAttributeName : self.font}
-                                       range:NSMakeRange(foundRange.location, 1)];
+                                       range:foundRange];
     }
     self.attributedText = subStringLeftOfCursor;
     self.selectedRange = selectedRange;
