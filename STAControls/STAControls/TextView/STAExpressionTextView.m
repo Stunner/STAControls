@@ -11,6 +11,7 @@
 #import "NSMutableAttributedString+STAControls.h"
 #import "NSAttributedString+STAUtils.h"
 #import "NSMutableAttributedString+STAUtils.h"
+#import "UITextView+STAControls.h"
 
 @interface STAExpressionTextView ()
 
@@ -20,6 +21,44 @@
 
 @implementation STAExpressionTextView
 
+- (void)setSelectedRange:(NSRange)selectedRange {
+    [super setSelectedRange:selectedRange];
+    NSLog(@"set range %@", NSStringFromRange(selectedRange));
+}
+
+- (void)setSelectedTextRange:(UITextRange *)selectedTextRange {
+    [super setSelectedTextRange:selectedTextRange];
+    
+    NSLog(@"text range: %@", selectedTextRange);
+    
+    __block NSRange foundRange = {NSNotFound, NSNotFound};
+    
+    NSRange selectedRange= self.selectedRange;
+//    NSMutableAttributedString *subStringLeftOfCursor = [[self.attributedText attributedSubstringFromRange:NSMakeRange(0, self.selectedRange.location)] mutableCopy];
+    NSMutableAttributedString *subStringLeftOfCursor = [self.attributedText mutableCopy];
+    [subStringLeftOfCursor enumerateAttribute:NSForegroundColorAttributeName inRange:NSMakeRange(0, [self selectedTextRangeToRange].location) options:0
+                                   usingBlock:^(id value, NSRange range, BOOL *stop) {
+                                       if (value) {
+                                           foundRange = range;
+                                           UIColor *fontColor = (UIColor *)value;
+                                           if ([fontColor isEqual:[UIColor grayColor]]) {
+                                               //                 [subStringLeftOfCursor removeAttribute:NSForegroundColorAttributeName range:NSMakeRange(self.selectedRange.location, 1)];
+                                               //                 [subStringLeftOfCursor addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(self.selectedRange.location, 1)];
+                                               
+                                               
+                                               *stop = YES;
+                                           }
+                                       }
+                                   }];
+    if (foundRange.location != NSNotFound) {
+        [subStringLeftOfCursor setAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor],
+                                               NSFontAttributeName : self.font}
+                                       range:NSMakeRange(foundRange.location, 1)];
+    }
+    self.attributedText = subStringLeftOfCursor;
+    self.selectedRange = selectedRange;
+}
+/*
 - (void)textViewDidChangeSelection:(UITextView *)textView {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
@@ -28,7 +67,7 @@
     }
     
 //    NSRange initialSelectedRange = self.selectedRange;
-//    NSLog(@"my range is %@", NSStringFromRange(self.selectedRange));
+    NSLog(@"my range is %@", NSStringFromRange(self.selectedRange));
     __block NSRange foundRange = {NSNotFound, NSNotFound};
     
 //    NSMutableAttributedString *subStringLeftOfCursor = [[self.attributedText attributedSubstringFromRange:NSMakeRange(0, self.selectedRange.location)] mutableCopy];
@@ -50,14 +89,14 @@
     if (foundRange.location != NSNotFound) {
         [subStringLeftOfCursor setAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor],
                                                NSFontAttributeName : self.font}
-                                       range:foundRange];
+                                       range:NSMakeRange(foundRange.location, 1)];
     }
     
 //    self.selectedRange = initialSelectedRange;
     self.attributedText = subStringLeftOfCursor;
 //    self.internallyChangingSelection = YES;
 //    [self performSelector:@selector(setInternallyChangingSelection:) withObject:@NO afterDelay:0.01];
-}
+}*/
 
 - (NSMutableAttributedString *)attributedStringByReplacingCharactersInRange:(NSRange)range withString:(NSString *)newString {
     
