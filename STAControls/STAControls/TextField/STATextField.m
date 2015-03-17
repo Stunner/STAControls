@@ -29,6 +29,7 @@
     _internalPlaceholder = self.placeholder;
     _internalAttributedPlaceholder = self.attributedPlaceholder;
     _showBackForwardToolbar = NO;
+    _maxCharacterLength = 0;
     
     if (_internalAttributedPlaceholder) { //TODO: consider looking at which field was set most recently to determine which placeholder gets priority
         self.textValue = [_internalAttributedPlaceholder string];
@@ -141,6 +142,20 @@ shouldChangeCharactersInRange:(NSRange)range
    replacementString:(NSString *)string
 {
     STALog(@"%s", __PRETTY_FUNCTION__);
+    
+    // reference: http://stackoverflow.com/a/8913595/347339
+    if (self.maxCharacterLength > 0) {
+        NSUInteger oldLength = textField.text.length;
+        NSUInteger replacementLength = string.length;
+        NSUInteger rangeLength = range.length;
+        
+        NSUInteger newLength = oldLength - rangeLength + replacementLength;
+        
+        BOOL returnKey = [string rangeOfString: @"\n"].location != NSNotFound;
+        if (!returnKey) {
+            if (newLength > self.maxCharacterLength) return NO;
+        }
+    }
     
     return [super textField:textField shouldChangeCharactersInRange:range replacementString:string];
 }

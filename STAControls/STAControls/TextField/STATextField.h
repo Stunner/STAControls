@@ -33,4 +33,6 @@
 
 @property (nonatomic, readonly) NSString *textValue;
 
+@property (nonatomic, assign) NSUInteger maxCharacterLength;
+
 @end
