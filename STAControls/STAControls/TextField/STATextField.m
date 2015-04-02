@@ -9,6 +9,7 @@
 #import "STATextField.h"
 #import "STAResizingTextField+PrivateHeaders.h"
 #import "STACommon.h"
+#import "STATextFieldUtility.h"
 
 @interface STATextField () {
     NSString *_internalPlaceholder;
@@ -156,6 +157,17 @@ shouldChangeCharactersInRange:(NSRange)range
         BOOL returnKey = [string rangeOfString: @"\n"].location != NSNotFound;
         if (!returnKey) {
             if (newLength > self.maxCharacterLength) return NO;
+        }
+    }
+    
+    if (self.currencyRepresentation) {
+        if (![STATextFieldUtility shouldChangeCharacters:textField.text
+                                                 inRange:range
+                                        toCurrencyString:string
+                                          characterLimit:self.maxCharacterLength
+                                            allowDecimal:YES])
+        {
+            return NO;
         }
     }
     

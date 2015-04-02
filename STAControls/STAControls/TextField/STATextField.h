@@ -30,6 +30,7 @@
 
 @property (nonatomic, strong) UIControl *prevControl;
 @property (nonatomic, assign) BOOL showBackForwardToolbar;
+@property (nonatomic, assign) BOOL currencyRepresentation;
 
 @property (nonatomic, readonly) NSString *textValue;
 

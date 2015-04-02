@@ -63,6 +63,10 @@
     //        NSLog(@"\npickerView: %@ \ncomponent: %lu\nrow: %lu\ntitle: %@", pickerView, component, row, title);
     //    };
     
+    _nextTextField.keyboardType = UIKeyboardTypeDecimalPad;
+    _nextTextField.maxCharacterLength = 8;
+    _nextTextField.currencyRepresentation = YES;
+    
     //    _textView.expandsUpward = YES;
     _textView.layer.borderWidth = 1.0f;
     _textView.layer.cornerRadius = 5;

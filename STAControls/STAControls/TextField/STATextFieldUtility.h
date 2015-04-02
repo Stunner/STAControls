@@ -23,7 +23,7 @@
 
 + (BOOL)shouldChangeCharacters:(NSString *)initialText
                        inRange:(NSRange)range
-                      toString:(NSString *)string
+              toCurrencyString:(NSString *)string
                 characterLimit:(NSInteger)characterLimit
                   allowDecimal:(BOOL)allowDecimal;
 
