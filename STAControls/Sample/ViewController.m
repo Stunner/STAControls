@@ -13,7 +13,7 @@
 
 @property (nonatomic, strong) IBOutlet STAATMTextField *atmTextField;
 @property (nonatomic, strong) IBOutlet STATextField *textField;
-@property (nonatomic, strong) IBOutlet STAResizingTextField *resizingTextField;
+@property (nonatomic, strong) IBOutlet STATextField *resizingTextField;
 @property (nonatomic, strong) IBOutlet STATextField *dateTextField;
 //@property (nonatomic, strong) IBOutlet STAPickerField *dateTextField;
 @property (nonatomic, strong) IBOutlet STATextField *nextTextField;
@@ -43,7 +43,7 @@
 //    _resizingTextField = [[STAResizingTextField alloc] initWithFrame:CGRectMake(200, 180, 50, 30)];
     _resizingTextField.borderStyle = UITextBorderStyleRoundedRect;
     _resizingTextField.placeholder = @"Hello world!";
-    _resizingTextField.clearButtonMode = UITextFieldViewModeUnlessEditing;
+    _resizingTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     _resizingTextField.resizesForClearTextButton = YES;
 //    [self.view addSubview:_resizingTextField];
     

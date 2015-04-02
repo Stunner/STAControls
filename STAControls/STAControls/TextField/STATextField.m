@@ -126,6 +126,8 @@
 - (void)textFieldDidChange:(STATextFieldBase *)sender {
     STALog(@"%s", __PRETTY_FUNCTION__);
     
+    [super textFieldDidChange:sender];
+    
     if ([sender.text length] < 1) {
         if (_internalAttributedPlaceholder) { //TODO: consider looking at which field was set most recently to determine which placeholder gets priority
             self.textValue = [_internalAttributedPlaceholder string];

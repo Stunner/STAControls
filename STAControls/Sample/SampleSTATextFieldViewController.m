@@ -13,7 +13,7 @@
 
 @property (nonatomic, strong) IBOutlet STAATMTextField *atmTextField;
 @property (nonatomic, strong) IBOutlet STATextField *textField;
-@property (nonatomic, strong) IBOutlet STAResizingTextField *resizingTextField;
+@property (nonatomic, strong) IBOutlet STATextField *resizingTextField;
 @property (nonatomic, strong) IBOutlet STATextField *dateTextField;
 //@property (nonatomic, strong) IBOutlet STAPickerField *dateTextField;
 @property (nonatomic, strong) IBOutlet STATextField *nextTextField;
