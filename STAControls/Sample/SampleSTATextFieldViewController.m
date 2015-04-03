@@ -66,6 +66,7 @@
     _nextTextField.keyboardType = UIKeyboardTypeDecimalPad;
     _nextTextField.maxCharacterLength = 8;
     _nextTextField.currencyRepresentation = YES;
+    _nextTextField.defaultValue = @"0.00";
     
     //    _textView.expandsUpward = YES;
     _textView.layer.borderWidth = 1.0f;

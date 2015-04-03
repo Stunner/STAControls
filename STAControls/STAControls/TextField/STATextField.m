@@ -41,6 +41,11 @@
 
 #pragma mark Setters (of Catan)
 
+- (void)setDefaultValue:(NSString *)defaultValue {
+    _defaultValue = defaultValue;
+    self.text = defaultValue;
+}
+
 // reference: http://stackoverflow.com/a/20192857/347339
 - (void)setShowBackForwardToolbar:(BOOL)showBackForwardToolbar {
     _showBackForwardToolbar = showBackForwardToolbar;
@@ -193,10 +198,14 @@ shouldChangeCharactersInRange:(NSRange)range
     STALog(@"%s", __PRETTY_FUNCTION__);
     
     if ([textField.text length] < 1) {
-        if (_internalAttributedPlaceholder) { //TODO: consider looking at which field was set most recently to determine which placeholder gets priority
-            textField.attributedPlaceholder = _internalAttributedPlaceholder;
-        } else if (_internalPlaceholder) {
-            textField.placeholder = _internalPlaceholder;
+        if (self.defaultValue) {
+            self.text = self.defaultValue;
+        } else {
+            if (_internalAttributedPlaceholder) { //TODO: consider looking at which field was set most recently to determine which placeholder gets priority
+                textField.attributedPlaceholder = _internalAttributedPlaceholder;
+            } else if (_internalPlaceholder) {
+                textField.placeholder = _internalPlaceholder;
+            }
         }
     }
 }

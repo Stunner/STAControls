@@ -31,7 +31,13 @@
 @property (nonatomic, strong) UIControl *prevControl;
 @property (nonatomic, assign) BOOL showBackForwardToolbar;
 @property (nonatomic, assign) BOOL currencyRepresentation;
-
+/**
+ Defaults text field to contain value specified by this property. Upon going empty, the text field populates with this value.
+ */
+@property (nonatomic, strong) NSString *defaultValue;
+/**
+ @returns Text displayed in text field, including that of the placeholder text.
+ */
 @property (nonatomic, readonly) NSString *textValue;
 
 @property (nonatomic, assign) NSUInteger maxCharacterLength;
