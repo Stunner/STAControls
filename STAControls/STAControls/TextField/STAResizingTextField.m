@@ -173,9 +173,9 @@ shouldChangeCharactersInRange:(NSRange)range
                              self.frame = selfFrame;
                          }
                          completion:^(BOOL finished){
-                             if (finished) {
-                                 self.frame = selfFrame;
-                             }
+//                             if (!finished) {
+//                                 self.frame = selfFrame;
+//                             }
                          }];
     });
 }
