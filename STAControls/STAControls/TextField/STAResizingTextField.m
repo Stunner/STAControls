@@ -172,7 +172,7 @@ replacementString:(NSString *)string
         selfFrame.size.width = width;
         //                         _textField.frame = textFieldFrame;
         [UIView animateWithDuration:0.15
-                              delay:0.0
+                              delay:0.01
                             options:(UIViewAnimationOptions)UIViewAnimationCurveEaseOut
                          animations:^{
                              

@@ -182,7 +182,7 @@ shouldChangeCharactersInRange:(NSRange)range
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     STALog(@"%s", __PRETTY_FUNCTION__);
     
-    [super resignFirstResponderUponReturnKeyPress];
+    [super textFieldShouldReturn:textField];
     return YES;
 }
 
