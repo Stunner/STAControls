@@ -142,6 +142,8 @@ replacementString:(NSString *)string
 #pragma mark Helpers
 
 - (BOOL)resignFirstResponderUponReturnKeyPress {
+    STALog(@"%s", __PRETTY_FUNCTION__);
+    
     BOOL resignedFirstResponderStatus = NO;
     if (self.resignsFirstResponderUponReturnKeyPress) {
         resignedFirstResponderStatus = [self resignFirstResponder];
@@ -177,9 +179,9 @@ replacementString:(NSString *)string
                              self.frame = selfFrame;
                          }
                          completion:^(BOOL finished){
-//                             if (!finished) {
-//                                 self.frame = selfFrame;
-//                             }
+                             if (finished) {
+                                 self.frame = selfFrame;
+                             }
                          }];
     });
 }
