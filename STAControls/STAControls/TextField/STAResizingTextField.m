@@ -85,7 +85,9 @@
     
     STALog(@"clear button visible: %d", self.clearButtonIsVisible);
     
-    [self resizeSelfToWidthWithoutShrinking:_initialTextFieldWidth];
+    if (self.resizesForClearTextButton) {
+        [self resizeSelfToWidthWithoutShrinking:_initialTextFieldWidth];
+    }
     return YES;
 }
 
@@ -106,7 +108,7 @@
 
 - (BOOL)textField:(UITextField *)textField
 shouldChangeCharactersInRange:(NSRange)range
-   replacementString:(NSString *)string
+replacementString:(NSString *)string
 {
     STALog(@"%s", __PRETTY_FUNCTION__);
     
@@ -122,14 +124,16 @@ shouldChangeCharactersInRange:(NSRange)range
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
     STALog(@"%s", __PRETTY_FUNCTION__);
     
-    [self resizeSelfToWidthWithoutShrinking:_initialTextFieldWidth];
+    if (self.resizesForClearTextButton) {
+        [self resizeSelfToWidthWithoutShrinking:_initialTextFieldWidth];
+    }
     return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     STALog(@"%s", __PRETTY_FUNCTION__);
     
-    if ([self resignFirstResponderUponReturnKeyPress]) {
+    if ([self resignFirstResponderUponReturnKeyPress] && self.resizesForClearTextButton) {
         [self resizeSelfToWidthWithoutShrinking:_initialTextFieldWidth];
     }
     return YES;
