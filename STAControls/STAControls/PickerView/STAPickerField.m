@@ -9,7 +9,7 @@
 #import "STAPickerField.h"
 #import "STATextField+PrivateHeaders.h"
 
-@interface STAPickerField () <UIPickerViewDataSource, UIPickerViewDelegate>
+@interface STAPickerField () //<UIPickerViewDataSource, UIPickerViewDelegate>
 
 @end
 
@@ -28,8 +28,8 @@
     
     self.pickerView = [STAPickerView new];
     
-    self.pickerView.dataSource = self;
-    self.pickerView.delegate = self;
+//    self.pickerView.dataSource = self;
+//    self.pickerView.delegate = self;
     [self setInputView:self.pickerView];
     
     __weak STAPickerField *weakSelf = self;
