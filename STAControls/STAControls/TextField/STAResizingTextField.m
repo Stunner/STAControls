@@ -197,7 +197,7 @@ replacementString:(NSString *)string
 - (void)resizeSelfToText:(NSString *)text {
     STALog(@"%s", __PRETTY_FUNCTION__);
     
-    CGFloat textWidth = [text sizeWithFont:self.font].width;
+    CGFloat textWidth = [text sizeWithAttributes:@{NSFontAttributeName : self.font}].width;
     if (self.clearButtonMode == UITextFieldViewModeNever) {
         [self resizeSelfToWidthWithoutShrinking:textWidth + kTextFieldSidesBuffer];
     } else if (self.clearButtonMode == UITextFieldViewModeWhileEditing) {
