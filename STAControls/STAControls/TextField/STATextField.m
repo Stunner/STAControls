@@ -179,15 +179,10 @@ shouldChangeCharactersInRange:(NSRange)range
     return [super textField:textField shouldChangeCharactersInRange:range replacementString:string];
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    STALog(@"%s", __PRETTY_FUNCTION__);
-    
-    [super textFieldShouldReturn:textField];
-    return YES;
-}
-
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     STALog(@"%s", __PRETTY_FUNCTION__);
+    
+    [super textFieldDidBeginEditing:textField];
     
     // hide placeholder when editing begins
     [super setPlaceholder:nil];
@@ -196,6 +191,8 @@ shouldChangeCharactersInRange:(NSRange)range
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     STALog(@"%s", __PRETTY_FUNCTION__);
+    
+    [super textFieldDidEndEditing:textField];
     
     if ([textField.text length] < 1) {
         if (self.defaultValue) {

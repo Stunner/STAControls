@@ -20,6 +20,10 @@
 shouldChangeCharactersInRange:(NSRange)range
 replacementString:(NSString *)string;
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField;
+
+- (void)textFieldDidEndEditing:(UITextField *)textField;
+
 - (BOOL)textFieldShouldClear:(UITextField *)textField;
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField;

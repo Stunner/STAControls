@@ -59,16 +59,16 @@
     
     [super becomeFirstResponder];
     
-    if (self.clearButtonMode == UITextFieldViewModeWhileEditing) {
-        self.clearButtonIsVisible = (self.text.length > 0);
-    } else if (self.clearButtonMode == UITextFieldViewModeUnlessEditing) {
-        self.clearButtonIsVisible = NO;
-    }
-    STALog(@"clear button visible: %d", self.clearButtonIsVisible);
-    
-    if (self.resizesForClearTextButton) {
-        [self resizeSelfForClearButton:self.text];
-    }
+//    if (self.clearButtonMode == UITextFieldViewModeWhileEditing) {
+//        self.clearButtonIsVisible = (self.text.length > 0);
+//    } else if (self.clearButtonMode == UITextFieldViewModeUnlessEditing) {
+//        self.clearButtonIsVisible = NO;
+//    }
+//    STALog(@"clear button visible: %d", self.clearButtonIsVisible);
+//    
+//    if (self.resizesForClearTextButton) {
+//        [self resizeSelfForClearButton:self.text];
+//    }
     return YES;
 }
 
@@ -77,17 +77,17 @@
     
     [super resignFirstResponder];
     
-    if (self.clearButtonMode == UITextFieldViewModeWhileEditing) {
-        self.clearButtonIsVisible = NO;
-    } else if (self.clearButtonMode == UITextFieldViewModeUnlessEditing) {
-        self.clearButtonIsVisible = (self.text.length > 0);;
-    }
-    
-    STALog(@"clear button visible: %d", self.clearButtonIsVisible);
-    
-    if (self.resizesForClearTextButton) {
-        [self resizeSelfToWidthWithoutShrinking:_initialTextFieldWidth];
-    }
+//    if (self.clearButtonMode == UITextFieldViewModeWhileEditing) {
+//        self.clearButtonIsVisible = NO;
+//    } else if (self.clearButtonMode == UITextFieldViewModeUnlessEditing) {
+//        self.clearButtonIsVisible = (self.text.length > 0);;
+//    }
+//    
+//    STALog(@"clear button visible: %d", self.clearButtonIsVisible);
+//    
+//    if (self.resizesForClearTextButton) {
+//        [self resizeSelfToWidthWithoutShrinking:_initialTextFieldWidth];
+//    }
     return YES;
 }
 
@@ -137,6 +137,36 @@ replacementString:(NSString *)string
         [self resizeSelfToWidthWithoutShrinking:_initialTextFieldWidth];
     }
     return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    STALog(@"%s", __PRETTY_FUNCTION__);
+    
+    if (self.clearButtonMode == UITextFieldViewModeWhileEditing) {
+        self.clearButtonIsVisible = (self.text.length > 0);
+    } else if (self.clearButtonMode == UITextFieldViewModeUnlessEditing) {
+        self.clearButtonIsVisible = NO;
+    }
+    STALog(@"clear button visible: %d", self.clearButtonIsVisible);
+    
+    if (self.resizesForClearTextButton) {
+        [self resizeSelfForClearButton:self.text];
+    }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    STALog(@"%s", __PRETTY_FUNCTION__);
+    
+    if (self.clearButtonMode == UITextFieldViewModeWhileEditing) {
+        self.clearButtonIsVisible = (self.text.length > 0);
+    } else if (self.clearButtonMode == UITextFieldViewModeUnlessEditing) {
+        self.clearButtonIsVisible = NO;
+    }
+    STALog(@"clear button visible: %d", self.clearButtonIsVisible);
+    
+    if (self.resizesForClearTextButton) {
+        [self resizeSelfForClearButton:self.text];
+    }
 }
 
 #pragma mark Helpers
