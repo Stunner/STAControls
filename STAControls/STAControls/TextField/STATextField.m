@@ -16,7 +16,7 @@
     NSAttributedString *_internalAttributedPlaceholder;
 }
 
-@property (nonatomic, strong) NSString *textValue;
+//@property (nonatomic, strong) NSString *textValue;
 @property (nonatomic, strong) UIBarButtonItem *rightChevron;
 @property (nonatomic, strong) UIBarButtonItem *leftChevron;
 
@@ -32,11 +32,24 @@
     _showBackForwardToolbar = NO;
     _maxCharacterLength = 0;
     
-    if (_internalAttributedPlaceholder) { //TODO: consider looking at which field was set most recently to determine which placeholder gets priority
-        self.textValue = [_internalAttributedPlaceholder string];
-    } else if (_internalPlaceholder) {
-        self.textValue = _internalPlaceholder;
+//    if (_internalAttributedPlaceholder) { //TODO: consider looking at which field was set most recently to determine which placeholder gets priority
+//        self.textValue = [_internalAttributedPlaceholder string];
+//    } else if (_internalPlaceholder) {
+//        self.textValue = _internalPlaceholder;
+//    }
+}
+
+#pragma mark - Getters
+
+- (NSString *)textValue {
+#ifdef LOGGING_ENABLED
+    LogTrace(@"%s", __PRETTY_FUNCTION__);
+#endif
+    
+    if (self.text.length > 0) {
+        return self.text ? self.text : @"";
     }
+    return self.placeholder ? self.placeholder : @"";
 }
 
 #pragma mark Setters (of Catan)
@@ -136,12 +149,12 @@
     
     if ([sender.text length] < 1) {
         if (_internalAttributedPlaceholder) { //TODO: consider looking at which field was set most recently to determine which placeholder gets priority
-            self.textValue = [_internalAttributedPlaceholder string];
+//            self.textValue = [_internalAttributedPlaceholder string];
         } else if (_internalPlaceholder) {
-            self.textValue = _internalPlaceholder;
+//            self.textValue = _internalPlaceholder;
         }
     } else {
-        self.textValue = sender.text;
+//        self.textValue = sender.text;
     }
 }
 
