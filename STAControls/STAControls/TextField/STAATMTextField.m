@@ -12,6 +12,14 @@
 #import "NSString+STATextField.h"
 #import "STACommon.h"
 
+@interface STAATMTextField ()
+
+@property (nonatomic, copy) NSString *lastSetText;
+// helps determine when deviating from default _atmEntryEnabled setting **for the first time**
+@property (nonatomic, assign) BOOL atmEntryHasBeenToggled; // TODO: thoroughly test
+
+@end
+
 @implementation STAATMTextField
 
 - (void)initInternal {
@@ -19,10 +27,25 @@
     
     [super setText:@"0.00"];
     _atmEntryEnabled = YES;
+    _atmEntryHasBeenToggled = NO;
 }
 
 - (void)setText:(NSString *)text {
-    // do not update placeholder text to anything
+    [super setText:text];
+    self.lastSetText = text;
+}
+
+- (void)setAtmEntryEnabled:(BOOL)atmEntryEnabled {
+    STALog(@"%s", __PRETTY_FUNCTION__);
+    
+    BOOL initialAtmEntryEnabledValue = _atmEntryEnabled;
+    _atmEntryEnabled = atmEntryEnabled;
+    if (!atmEntryEnabled && !self.atmEntryHasBeenToggled) { // when deviating from default for the first time...
+        [self setText:self.lastSetText];
+    }
+    if (initialAtmEntryEnabledValue != atmEntryEnabled) {
+        self.atmEntryHasBeenToggled = YES; // never set this back to NO
+    }
 }
 
 - (CGRect)caretRectForPosition:(UITextPosition *)position {
@@ -57,15 +80,17 @@ replacementString:(NSString *)string
 {
     STALog(@"%s", __PRETTY_FUNCTION__);
     
+    BOOL returnFromSuper = [super textField:textField shouldChangeCharactersInRange:range replacementString:string];
+    
     if (!self.atmEntryEnabled) {
-        return YES;
+        return returnFromSuper;
     }
     
     NSString *newString = [textField.text stringByReplacingCharactersInRange:range
                                                                   withString:string];
     
     [STATextFieldUtility selectTextForInput:textField
-                                   atRange:NSMakeRange(textField.text.length, 0)];
+                                    atRange:NSMakeRange(textField.text.length, 0)];
     NSCharacterSet *excludedCharacters = [NSCharacterSet characterSetWithCharactersInString:@"."];
     NSString *cleansedString = [[newString componentsSeparatedByCharactersInSet:excludedCharacters] componentsJoinedByString:@""];
     cleansedString = [cleansedString stringByTrimmingLeadingZeroes];
