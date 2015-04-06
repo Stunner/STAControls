@@ -42,9 +42,7 @@
 #pragma mark - Getters
 
 - (NSString *)textValue {
-#ifdef LOGGING_ENABLED
-    LogTrace(@"%s", __PRETTY_FUNCTION__);
-#endif
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     if (self.text.length > 0) {
         return self.text ? self.text : @"";

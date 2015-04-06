@@ -36,7 +36,7 @@
  */
 @property (nonatomic, strong) NSString *defaultValue;
 /**
- @returns Text displayed in text field, including that of the placeholder text.
+ @returns Text displayed in text field, including that of the placeholder text. Will return empty string (@"") instead of nil.
  */
 @property (nonatomic, readonly) NSString *textValue;
 
