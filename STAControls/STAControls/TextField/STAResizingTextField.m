@@ -186,21 +186,24 @@ replacementString:(NSString *)string
 
 #pragma mark Resizing Helpers
 
-- (void)resizeSelfToWidth:(NSInteger)width {
+- (void)resizeSelfToWidth:(NSNumber *)width {
     STALog(@"%s", __PRETTY_FUNCTION__);
     
+    CGFloat widthFloat = [width floatValue];
+    if (widthFloat == self.frame.size.width) {
+        return;
+    }
+    
+    CGRect selfFrame = self.frame;
+    NSInteger changeInLength = widthFloat - self.frame.size.width;
+    selfFrame.origin.x -= changeInLength;
+    selfFrame.size.width = widthFloat;
+    
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        self.frame = selfFrame;
+//        [self setNeedsLayout];
+//    });
     dispatch_async(dispatch_get_main_queue(), ^{
-        if (width == self.frame.size.width) {
-            return;
-        }
-        
-        CGRect selfFrame = self.frame;
-        //                         CGRect textFieldFrame = _textField.frame;
-        NSInteger changeInLength = width - self.frame.size.width;
-        //                         textFieldFrame.size.width = width;
-        selfFrame.origin.x -= changeInLength;
-        selfFrame.size.width = width;
-        //                         _textField.frame = textFieldFrame;
         [UIView animateWithDuration:0.15
                               delay:0.01
                             options:(UIViewAnimationOptions)UIViewAnimationCurveEaseOut
@@ -210,8 +213,10 @@ replacementString:(NSString *)string
                          }
                          completion:^(BOOL finished){
                              if (finished) {
-                                 self.frame = selfFrame;
+                                 
                              }
+                             self.frame = selfFrame;
+                             [self setNeedsLayout];
                          }];
     });
 }
@@ -223,7 +228,8 @@ replacementString:(NSString *)string
         width = _initialTextFieldWidth;
     }
     STALog(@"resize to: %f", width);
-    [self resizeSelfToWidth:width];
+    [self resizeSelfToWidth:@(width)];
+//    [self performSelector:@selector(resizeSelfToWidth:) withObject:@(width) afterDelay:0.1];
 }
 
 - (void)resizeSelfToText:(NSString *)text {
