@@ -17,6 +17,7 @@
 @property (nonatomic, copy) NSString *lastSetText;
 // helps determine when deviating from default _atmEntryEnabled setting **for the first time**
 @property (nonatomic, assign) BOOL atmEntryHasBeenToggled; // TODO: thoroughly test
+@property (nonatomic, assign) NSUInteger insertionPositionFromEnd;
 
 @end
 
@@ -28,6 +29,7 @@
     [super setText:@"0.00"];
     _atmEntryEnabled = YES;
     _atmEntryHasBeenToggled = NO;
+    self.insertionPositionFromEnd = 0;
 }
 
 - (void)setText:(NSString *)text {
@@ -88,12 +90,33 @@ replacementString:(NSString *)string
     
     NSString *newString = [textField.text stringByReplacingCharactersInRange:range
                                                                   withString:string];
-    
-    [STATextFieldUtility selectTextForInput:textField
-                                    atRange:NSMakeRange(textField.text.length, 0)];
     NSCharacterSet *excludedCharacters = [NSCharacterSet characterSetWithCharactersInString:@"."];
     NSString *cleansedString = [[newString componentsSeparatedByCharactersInSet:excludedCharacters] componentsJoinedByString:@""];
     cleansedString = [cleansedString stringByTrimmingLeadingZeroes];
+    if (self.insertionPositionFromEnd > 0) {
+        cleansedString = [[textField.text componentsSeparatedByCharactersInSet:excludedCharacters] componentsJoinedByString:@""];
+        cleansedString = [cleansedString stringByTrimmingLeadingZeroes];
+        
+        NSUInteger characterInsertionPosition = cleansedString.length - self.insertionPositionFromEnd;
+        NSString *lastTwoChars = (cleansedString.length > 2) ? [cleansedString substringFromIndex:cleansedString.length - 2] : nil;
+        if ([string isEqualToString:@"."]) {
+            if (![lastTwoChars isEqualToString:@"00"]) {
+                cleansedString = [STATextFieldUtility append:cleansedString, @"0", nil];
+                self.insertionPositionFromEnd = 2;
+            }
+        } else {
+            cleansedString = [cleansedString stringByReplacingCharactersInRange:NSMakeRange(characterInsertionPosition, 1)
+                                                                     withString:string];
+            self.insertionPositionFromEnd--;
+        }
+    } else {
+        NSString *lastTwoChars = (cleansedString.length > 2) ? [cleansedString substringFromIndex:cleansedString.length - 2] : nil;
+        if ([string isEqualToString:@"."] && ![lastTwoChars isEqualToString:@"00"]) {
+            cleansedString = [STATextFieldUtility append:cleansedString, @"00", nil];
+            self.insertionPositionFromEnd = 2;
+        }
+    }
+    // place decimal back in string
     if (cleansedString.length < 3) {
         NSUInteger zeroesCount = 3 - cleansedString.length;
         NSString *zeroes = [STATextFieldUtility insertDecimalInString:[@"0" repeatTimes:zeroesCount]
@@ -105,6 +128,8 @@ replacementString:(NSString *)string
     }
     
     [super setText:newString];
+    [STATextFieldUtility selectTextForInput:textField
+                                    atRange:NSMakeRange(textField.text.length, 0)];
     
     return NO;
 }
