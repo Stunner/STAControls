@@ -33,6 +33,7 @@
     _atmTextField.keyboardType = UIKeyboardTypeDecimalPad;
     //    _atmTextField.atmEntryEnabled = YES;
     _atmTextField.showBackForwardToolbar = YES;
+    _atmTextField.maxCharacterLength = 8;
     
     _textField.resignsFirstResponderUponReturnKeyPress = YES;
     _textField.prevControl = _resizingTextField;

@@ -113,13 +113,26 @@ replacementString:(NSString *)string
             }
         } else {
             NSString *lastTwoChars = (cleansedString.length > 2) ? [cleansedString substringFromIndex:cleansedString.length - 2] : nil;
-            if ([string isEqualToString:@"."] && ![lastTwoChars isEqualToString:@"00"]) {
-                cleansedString = [STATextFieldUtility append:cleansedString, @"0", nil];
-                lastTwoChars = (cleansedString.length > 2) ? [cleansedString substringFromIndex:cleansedString.length - 2] : nil;
-                if (![lastTwoChars isEqualToString:@"00"]) {
-                    cleansedString = [STATextFieldUtility append:cleansedString, @"0", nil];
+            BOOL willGoOverMaxCharLength = NO;
+            if (self.maxCharacterLength) {
+                if (cleansedString.length + 2 > self.maxCharacterLength) {
+                    willGoOverMaxCharLength = YES;
                 }
-                self.insertionPositionFromEnd = 2;
+            }
+            if ([string isEqualToString:@"."] && ![lastTwoChars isEqualToString:@"00"] && !willGoOverMaxCharLength) {
+                cleansedString = [STATextFieldUtility append:cleansedString, @"0", nil];
+                self.insertionPositionFromEnd++;
+                lastTwoChars = (cleansedString.length > 2) ? [cleansedString substringFromIndex:cleansedString.length - 2] : nil;
+                
+                if (self.maxCharacterLength) {
+                    if (cleansedString.length + 2 > self.maxCharacterLength) {
+                        willGoOverMaxCharLength = YES;
+                    }
+                }
+                if (![lastTwoChars isEqualToString:@"00"] && !willGoOverMaxCharLength) {
+                    cleansedString = [STATextFieldUtility append:cleansedString, @"0", nil];
+                    self.insertionPositionFromEnd++;
+                }
             }
         }
     }
@@ -132,6 +145,11 @@ replacementString:(NSString *)string
     } else {
         newString = [STATextFieldUtility insertDecimalInString:cleansedString
                                              atPositionFromEnd:2];
+    }
+    if (self.maxCharacterLength) {
+        if (newString.length > self.maxCharacterLength) {
+            return NO;
+        }
     }
     
     [super setText:newString];
