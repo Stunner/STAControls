@@ -17,6 +17,10 @@
 
 @implementation STATextFieldTests
 
+-(void)beforeAll {
+    [tester tapRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] inTableViewWithAccessibilityIdentifier:@"RootTableView"];
+}
+
 - (void)setUp {
     // Put setup code here. This method is called before the invocation of each test method in the class.
 }

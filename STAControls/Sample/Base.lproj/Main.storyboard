@@ -21,6 +21,9 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="RootTableView"/>
+                        </userDefinedRuntimeAttributes>
                         <connections>
                             <outlet property="dataSource" destination="R3r-D5-2Yn" id="M0m-p0-XHx"/>
                             <outlet property="delegate" destination="R3r-D5-2Yn" id="6bw-7e-Ciq"/>

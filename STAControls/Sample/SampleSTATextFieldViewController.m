@@ -45,7 +45,7 @@
     //    _resizingTextField = [[STAResizingTextField alloc] initWithFrame:CGRectMake(200, 180, 50, 30)];
     _resizingTextField.borderStyle = UITextBorderStyleRoundedRect;
     _resizingTextField.placeholder = @"Hello world!";
-    _resizingTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    _resizingTextField.clearButtonMode = UITextFieldViewModeUnlessEditing;
     _resizingTextField.resizesForClearTextButton = YES;
     //    [self.view addSubview:_resizingTextField];
     
@@ -64,9 +64,9 @@
     //    };
     
     _nextTextField.keyboardType = UIKeyboardTypeDecimalPad;
-    _nextTextField.maxCharacterLength = 8;
-    _nextTextField.currencyRepresentation = YES;
-    _nextTextField.defaultValue = @"0.00";
+//    _nextTextField.maxCharacterLength = 8;
+//    _nextTextField.currencyRepresentation = YES;
+//    _nextTextField.defaultValue = @"0.00";
     
     //    _textView.expandsUpward = YES;
     _textView.layer.borderWidth = 1.0f;

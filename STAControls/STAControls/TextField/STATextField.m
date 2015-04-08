@@ -47,7 +47,7 @@
     if (self.text.length > 0) {
         return self.text ? self.text : @"";
     }
-    return self.placeholder ? self.placeholder : @"";
+    return _internalPlaceholder ? _internalPlaceholder : @"";
 }
 
 #pragma mark Setters (of Catan)
