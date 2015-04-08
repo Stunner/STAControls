@@ -114,7 +114,11 @@ replacementString:(NSString *)string
         } else {
             NSString *lastTwoChars = (cleansedString.length > 2) ? [cleansedString substringFromIndex:cleansedString.length - 2] : nil;
             if ([string isEqualToString:@"."] && ![lastTwoChars isEqualToString:@"00"]) {
-                cleansedString = [STATextFieldUtility append:cleansedString, @"00", nil];
+                cleansedString = [STATextFieldUtility append:cleansedString, @"0", nil];
+                lastTwoChars = (cleansedString.length > 2) ? [cleansedString substringFromIndex:cleansedString.length - 2] : nil;
+                if (![lastTwoChars isEqualToString:@"00"]) {
+                    cleansedString = [STATextFieldUtility append:cleansedString, @"0", nil];
+                }
                 self.insertionPositionFromEnd = 2;
             }
         }
