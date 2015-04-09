@@ -9,6 +9,7 @@
 #import "STAATMTextField.h"
 #import "STATextField+PrivateHeaders.h"
 #import "STATextFieldUtility.h"
+#import "STATextFieldBase+ProvideHeaders.h"
 #import "NSString+STATextField.h"
 #import "STACommon.h"
 
@@ -18,6 +19,7 @@
 // helps determine when deviating from default _atmEntryEnabled setting **for the first time**
 @property (nonatomic, assign) BOOL atmEntryHasBeenToggled; // TODO: thoroughly test
 @property (nonatomic, assign) NSUInteger insertionPositionFromEnd;
+@property (nonatomic, copy) NSString *committedText;
 
 @end
 
@@ -152,11 +154,17 @@ replacementString:(NSString *)string
         }
     }
     
-    [super setText:newString];
+    self.committedText = newString;
     [STATextFieldUtility selectTextForInput:textField
                                     atRange:NSMakeRange(textField.text.length, 0)];
     
     return NO;
+}
+
+- (void)commitTextChanges {
+    STALog(@"%s", __PRETTY_FUNCTION__);
+    
+    [super setText:self.committedText];
 }
 
 @end

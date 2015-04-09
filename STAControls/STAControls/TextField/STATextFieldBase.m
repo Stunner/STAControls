@@ -47,6 +47,7 @@ replacementString:(NSString *)string
             shouldChangeCharacters = [_userDelegate textField:textField shouldChangeCharactersInRange:range replacementString:string];
         }
     }
+    [(STATextFieldBase *)textField commitTextChanges];
     return shouldChangeCharacters;
 }
 
@@ -162,6 +163,10 @@ shouldChangeCharactersInRange:(NSRange)range
 replacementString:(NSString *)string
 {
     return YES;
+}
+
+- (void)commitTextChanges {
+    
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
