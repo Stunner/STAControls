@@ -164,7 +164,9 @@ replacementString:(NSString *)string
 - (void)commitTextChanges {
     STALog(@"%s", __PRETTY_FUNCTION__);
     
-    [super setText:self.committedText];
+    if (self.atmEntryEnabled) {
+        [super setText:self.committedText];
+    }
 }
 
 @end
