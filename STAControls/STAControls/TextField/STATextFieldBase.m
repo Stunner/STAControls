@@ -52,23 +52,17 @@ replacementString:(NSString *)string
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
-    BOOL returnable = YES;
+    BOOL returnable = [(STATextFieldBase *)textField textFieldShouldClear:textField];
     if ([_userDelegate respondsToSelector:_cmd]) {
         returnable = [_userDelegate textFieldShouldClear:textField];
-    }
-    if (returnable) {
-        returnable = [(STATextFieldBase *)textField textFieldShouldClear:textField];
     }
     return returnable;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    BOOL returnable = YES;
+    BOOL returnable = [(STATextFieldBase *)textField textFieldShouldReturn:textField];
     if ([_userDelegate respondsToSelector:_cmd]) {
         returnable = [_userDelegate textFieldShouldReturn:textField];
-    }
-    if (returnable) {
-        returnable = [(STATextFieldBase *)textField textFieldShouldReturn:textField];
     }
     return returnable;
 }
