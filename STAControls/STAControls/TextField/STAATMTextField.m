@@ -78,8 +78,9 @@
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
     STALog(@"%s", __PRETTY_FUNCTION__);
     
-    [super textFieldShouldClear:textField];
     [super setText:@"0.00"];
+    
+    [super textFieldShouldClear:textField];
     return NO;
 }
 

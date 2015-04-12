@@ -125,7 +125,9 @@ replacementString:(NSString *)string
     STALog(@"%s", __PRETTY_FUNCTION__);
     
     if (self.resizesForClearTextButton) {
-        [self resizeSelfToWidthWithoutShrinking:_initialTextFieldWidth];
+        if (self.text.length < 1) {
+            [self resizeSelfToWidthWithoutShrinking:_initialTextFieldWidth];
+        }
     }
     return YES;
 }
