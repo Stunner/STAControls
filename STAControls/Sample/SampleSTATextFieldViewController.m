@@ -34,6 +34,7 @@
     //    _atmTextField.atmEntryEnabled = YES;
     _atmTextField.showBackForwardToolbar = YES;
     _atmTextField.maxCharacterLength = 8;
+    _atmTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     
     _textField.resignsFirstResponderUponReturnKeyPress = YES;
     _textField.prevControl = _resizingTextField;

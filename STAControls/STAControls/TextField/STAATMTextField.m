@@ -75,6 +75,14 @@
     [super textFieldDidChange:sender];
 }
 
+- (BOOL)textFieldShouldClear:(UITextField *)textField {
+    STALog(@"%s", __PRETTY_FUNCTION__);
+    
+    [super textFieldShouldClear:textField];
+    [super setText:@"0.00"];
+    return NO;
+}
+
 - (BOOL)textField:(UITextField *)textField
 shouldChangeCharactersInRange:(NSRange)range
 replacementString:(NSString *)string

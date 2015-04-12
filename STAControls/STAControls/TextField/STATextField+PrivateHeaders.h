@@ -26,4 +26,6 @@ shouldChangeCharactersInRange:(NSRange)range
 
 - (void)textFieldDidEndEditing:(UITextField *)textField;
 
+- (BOOL)textFieldShouldClear:(UITextField *)textField;
+
 @end
