@@ -20,6 +20,10 @@
 @property (nonatomic, strong) UIBarButtonItem *rightChevron;
 @property (nonatomic, strong) UIBarButtonItem *leftChevron;
 
+@property (nonatomic, assign, readwrite) BOOL textChanged;
+// used to determine value of textChanged property
+@property (nonatomic, strong) NSString *initialText;
+
 @end
 
 @implementation STATextField
@@ -198,6 +202,8 @@ shouldChangeCharactersInRange:(NSRange)range
     // hide placeholder when editing begins
     [super setPlaceholder:nil];
     [super setAttributedPlaceholder:nil];
+    
+    self.initialText = textField.text;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
@@ -216,6 +222,8 @@ shouldChangeCharactersInRange:(NSRange)range
             }
         }
     }
+    
+    self.textChanged = (![textField.text isEqualToString:self.initialText]);
 }
 
 @end

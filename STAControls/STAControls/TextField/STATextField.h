@@ -39,7 +39,13 @@
  @returns Text displayed in text field, including that of the placeholder text. Will return empty string (@"") instead of nil.
  */
 @property (nonatomic, readonly) NSString *textValue;
-
+/**
+ Maximum amount of characters that can be displayed by the text field.
+ */
 @property (nonatomic, assign) NSUInteger maxCharacterLength;
+/**
+ @returns Value denoting if edits between `textFieldDidBeginEditing:` and `textFieldDidEndEditing:` caused change in text.
+ */
+@property (nonatomic, assign, readonly) BOOL textChanged;
 
 @end

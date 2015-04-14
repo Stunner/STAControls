@@ -9,7 +9,7 @@
 #import "SampleSTATextFieldViewController.h"
 #import "STAControls.h"
 
-@interface SampleSTATextFieldViewController ()
+@interface SampleSTATextFieldViewController () <UITextFieldDelegate>
 
 @property (nonatomic, strong) IBOutlet STAATMTextField *atmTextField;
 @property (nonatomic, strong) IBOutlet STATextField *textField;
@@ -35,6 +35,7 @@
     _atmTextField.showBackForwardToolbar = YES;
     _atmTextField.maxCharacterLength = 8;
     _atmTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    _atmTextField.delegate = self;
     
     _textField.resignsFirstResponderUponReturnKeyPress = YES;
     _textField.prevControl = _resizingTextField;
@@ -96,14 +97,10 @@
     [_textView resignFirstResponder];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    NSLog(@"text changed: %d", ((STATextField *)textField).textChanged);
 }
-*/
 
 @end
