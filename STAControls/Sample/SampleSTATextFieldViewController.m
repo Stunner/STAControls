@@ -58,7 +58,7 @@
     
     _dateTextField.prevControl = _textField;
     _dateTextField.nextControl = _nextTextField;
-    _dateTextField.showBackForwardToolbar = YES;
+//    _dateTextField.showBackForwardToolbar = YES;
     //    _dateTextField.showNextButton = YES;
     //    _dateTextField.pickerView.titleArray = @[@[@"Geometry", @"Trigonometry", @"Calculus", @"Chemistry"]];
     
