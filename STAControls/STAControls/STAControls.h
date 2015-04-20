@@ -13,5 +13,6 @@
     #import "STAResizingTextField.h"
     #import "STATextView.h"
     #import "STAPickerField.h"
+    #import "STASegmentedControl.h"
 
 #endif

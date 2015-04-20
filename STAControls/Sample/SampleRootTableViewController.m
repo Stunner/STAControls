@@ -9,6 +9,7 @@
 #import "SampleRootTableViewController.h"
 #import "ViewController.h"
 #import "SampleSTATextFieldViewController.h"
+#import "SampleSTASegmentedControlViewController.h"
 
 @interface SampleRootTableViewController ()
 
@@ -51,6 +52,8 @@
     // Configure the cell...
     if (indexPath.row == 0) {
         cell.textLabel.text = @"STATextField";
+    } else if (indexPath.row == 1) {
+        cell.textLabel.text = @"STASegmentedControl";
     }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
@@ -59,7 +62,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
-        SampleSTATextFieldViewController *vc = [[SampleSTATextFieldViewController alloc] initWithNibName:@"SampleSTATextFieldViewController" bundle:nil];
+        SampleSTATextFieldViewController *vc = [[SampleSTATextFieldViewController alloc] initWithNibName:@"SampleSTATextFieldViewController"
+                                                                                                  bundle:nil];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if (indexPath.row == 1) {
+        SampleSTASegmentedControlViewController *vc = [[SampleSTASegmentedControlViewController alloc] initWithNibName:@"SampleSTASegmentedControlViewController"
+                                                                                                                bundle:nil];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
