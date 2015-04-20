@@ -13,6 +13,7 @@
 // reference: http://stackoverflow.com/a/21459772/347339
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    [super touchesEnded:touches withEvent:event];
     
     CGPoint locationPoint = [[touches anyObject] locationInView:self];
     CGPoint viewPoint = [self convertPoint:locationPoint fromView:self];
@@ -28,7 +29,6 @@
     } else {
         [self sendActionsForControlEvents:UIControlEventTouchUpOutside];
     }
-    [super touchesEnded:touches withEvent:event];
 }
 
 @end

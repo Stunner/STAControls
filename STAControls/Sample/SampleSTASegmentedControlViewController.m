@@ -29,6 +29,8 @@
 
 - (IBAction)touchUpInside:(id)sender {
     NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    NSLog(@"%lu", self.segmentedControl.selectedSegmentIndex);
 }
 
 - (IBAction)touchUpOutside:(id)sender {
@@ -37,6 +39,8 @@
 
 - (IBAction)valueChanged:(id)sender {
     NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    NSLog(@"%lu", self.segmentedControl.selectedSegmentIndex);
 }
 
 /*
