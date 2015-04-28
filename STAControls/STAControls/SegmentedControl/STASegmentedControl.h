@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ Adds `UIControlEventTouchUpInside` and `UIControlEventTouchUpOutside` events to `UISegmentedControl`.
+ */
 @interface STASegmentedControl : UISegmentedControl
 
 /**
  Denotes if selected segments can be tapped to deselect them (consequently 
- setting `selectedSegmentIndex` to `UISegmentedControlNoSegment`).
+ setting `selectedSegmentIndex` to `UISegmentedControlNoSegment`). Defaults to NO.
  */
 @property (nonatomic, assign) BOOL toggleableSegments;
 

@@ -11,19 +11,19 @@
 @implementation STASegmentedControl
 
 // reference: http://stackoverflow.com/a/21459772/347339
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     NSInteger previousSelectedSegmentIndex = self.selectedSegmentIndex;
     
     [super touchesEnded:touches withEvent:event];
     
-    if (self.toggleableSegments) {
+    if (self.toggleableSegments) { // toggle selected segment on/off
         if (previousSelectedSegmentIndex == self.selectedSegmentIndex) {
             self.selectedSegmentIndex = UISegmentedControlNoSegment;
             [self sendActionsForControlEvents:UIControlEventValueChanged];
         }
     }
     
+    // add touch up inside/outside events
     CGPoint locationPoint = [[touches anyObject] locationInView:self];
     CGPoint viewPoint = [self convertPoint:locationPoint fromView:self];
     if ([self pointInside:viewPoint withEvent:event]) {
