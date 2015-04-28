@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SampleSTASegmentedControlViewController">
             <connections>
                 <outlet property="segmentedControl" destination="Li0-xc-jd6" id="1In-LE-3Ji"/>
+                <outlet property="toggleableSegmentedControl" destination="8w5-H3-RGv" id="oaL-CR-crw"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -21,13 +22,27 @@
                     <segments>
                         <segment title="First"/>
                         <segment title="Second"/>
-                        <segment title=""/>
-                        <segment title=""/>
+                        <segment title="Third"/>
+                        <segment title="Fourth"/>
                     </segments>
                     <connections>
                         <action selector="touchUpInside:" destination="-1" eventType="touchUpInside" id="Ecl-0E-Ut9"/>
                         <action selector="touchUpOutside:" destination="-1" eventType="touchUpOutside" id="OOM-U2-C3R"/>
                         <action selector="valueChanged:" destination="-1" eventType="valueChanged" id="Mus-eY-FSt"/>
+                    </connections>
+                </segmentedControl>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="8w5-H3-RGv" customClass="STASegmentedControl">
+                    <rect key="frame" x="50" y="158" width="225" height="29"/>
+                    <segments>
+                        <segment title="First"/>
+                        <segment title="Second"/>
+                        <segment title="Third"/>
+                        <segment title="Fourth"/>
+                    </segments>
+                    <connections>
+                        <action selector="touchUpInside:" destination="-1" eventType="touchUpInside" id="rqv-fZ-Tkc"/>
+                        <action selector="touchUpOutside:" destination="-1" eventType="touchUpOutside" id="ksm-ki-YiI"/>
+                        <action selector="valueChanged:" destination="-1" eventType="valueChanged" id="oLN-J0-jeV"/>
                     </connections>
                 </segmentedControl>
             </subviews>

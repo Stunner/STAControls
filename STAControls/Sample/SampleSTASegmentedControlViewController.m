@@ -12,6 +12,7 @@
 @interface SampleSTASegmentedControlViewController ()
 
 @property (nonatomic, strong) IBOutlet STASegmentedControl *segmentedControl;
+@property (nonatomic, strong) IBOutlet STASegmentedControl *toggleableSegmentedControl;
 
 @end
 
@@ -20,6 +21,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.toggleableSegmentedControl.toggleableSegments = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -27,20 +30,20 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)touchUpInside:(id)sender {
+- (IBAction)touchUpInside:(STASegmentedControl *)sender {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    NSLog(@"%lu", self.segmentedControl.selectedSegmentIndex);
+    NSLog(@"%ld", (long)sender.selectedSegmentIndex);
 }
 
-- (IBAction)touchUpOutside:(id)sender {
+- (IBAction)touchUpOutside:(STASegmentedControl *)sender {
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
-- (IBAction)valueChanged:(id)sender {
+- (IBAction)valueChanged:(STASegmentedControl *)sender {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    NSLog(@"%lu", self.segmentedControl.selectedSegmentIndex);
+    NSLog(@"%ld", (long)sender.selectedSegmentIndex);
 }
 
 /*

@@ -10,4 +10,10 @@
 
 @interface STASegmentedControl : UISegmentedControl
 
+/**
+ Denotes if selected segments can be tapped to deselect them (consequently 
+ setting `selectedSegmentIndex` to `UISegmentedControlNoSegment`).
+ */
+@property (nonatomic, assign) BOOL toggleableSegments;
+
 @end

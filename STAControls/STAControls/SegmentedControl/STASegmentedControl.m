@@ -13,19 +13,21 @@
 // reference: http://stackoverflow.com/a/21459772/347339
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    NSInteger previousSelectedSegmentIndex = self.selectedSegmentIndex;
+    
     [super touchesEnded:touches withEvent:event];
+    
+    if (self.toggleableSegments) {
+        if (previousSelectedSegmentIndex == self.selectedSegmentIndex) {
+            self.selectedSegmentIndex = UISegmentedControlNoSegment;
+            [self sendActionsForControlEvents:UIControlEventValueChanged];
+        }
+    }
     
     CGPoint locationPoint = [[touches anyObject] locationInView:self];
     CGPoint viewPoint = [self convertPoint:locationPoint fromView:self];
     if ([self pointInside:viewPoint withEvent:event]) {
-//        NSInteger oldValue = self.selectedSegmentIndex;
-        
         [self sendActionsForControlEvents:UIControlEventTouchUpInside];
-//        if (oldValue == self.selectedSegmentIndex)
-//        {
-//            [super setSelectedSegmentIndex:UISegmentedControlNoSegment];
-//            [self sendActionsForControlEvents:UIControlEventValueChanged];
-//        }
     } else {
         [self sendActionsForControlEvents:UIControlEventTouchUpOutside];
     }
