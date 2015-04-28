@@ -16,16 +16,16 @@
     
     [super touchesEnded:touches withEvent:event];
     
+    CGPoint locationPoint = [[touches anyObject] locationInView:self];
+    CGPoint viewPoint = [self convertPoint:locationPoint fromView:self];
     if (self.toggleableSegments) { // toggle selected segment on/off
-        if (previousSelectedSegmentIndex == self.selectedSegmentIndex) {
+        if ([self pointInside:viewPoint withEvent:event] && previousSelectedSegmentIndex == self.selectedSegmentIndex) {
             self.selectedSegmentIndex = UISegmentedControlNoSegment;
             [self sendActionsForControlEvents:UIControlEventValueChanged];
         }
     }
     
     // add touch up inside/outside events
-    CGPoint locationPoint = [[touches anyObject] locationInView:self];
-    CGPoint viewPoint = [self convertPoint:locationPoint fromView:self];
     if ([self pointInside:viewPoint withEvent:event]) {
         [self sendActionsForControlEvents:UIControlEventTouchUpInside];
     } else {
