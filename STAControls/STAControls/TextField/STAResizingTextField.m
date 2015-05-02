@@ -54,6 +54,11 @@
     [super setClearButtonMode:clearButtonMode];
 }
 
+- (void)setResizesForClearTextButton:(BOOL)resizesForClearTextButton {
+    _resizesForClearTextButton = resizesForClearTextButton;
+    self.translatesAutoresizingMaskIntoConstraints = resizesForClearTextButton;
+}
+
 - (BOOL)becomeFirstResponder {
     STALog(@"%s", __PRETTY_FUNCTION__);
     
