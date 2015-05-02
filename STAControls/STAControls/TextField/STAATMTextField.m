@@ -28,6 +28,7 @@
     [super initInternal];
     
     [super setText:@"0.00"];
+    self.keyboardType = UIKeyboardTypeDecimalPad;
     _atmEntryEnabled = YES;
     _atmEntryHasBeenToggled = NO;
 }
