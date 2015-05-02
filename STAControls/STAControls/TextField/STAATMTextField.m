@@ -28,6 +28,7 @@
     [super initInternal];
     
     [super setText:@"0.00"];
+    self.keyboardType = UIKeyboardTypeDecimalPad;
     _atmEntryEnabled = YES;
     _atmEntryHasBeenToggled = NO;
 }
@@ -78,10 +79,13 @@
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
     STALog(@"%s", __PRETTY_FUNCTION__);
     
-    [super setText:@"0.00"];
+    BOOL returnable = !self.atmEntryEnabled;
+    if (self.atmEntryEnabled) {
+        [super setText:@"0.00"];
+    }
     
     [super textFieldShouldClear:textField];
-    return NO;
+    return returnable;
 }
 
 - (BOOL)textField:(UITextField *)textField
