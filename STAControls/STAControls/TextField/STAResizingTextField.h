@@ -28,3 +28,12 @@
 @property (nonatomic, readonly) BOOL clearButtonIsVisible;
 
 @end
+
+
+@protocol STAResizingTextFieldDelegate <UITextFieldDelegate>
+
+- (BOOL)shouldResizeTextField:(STAResizingTextField *)textField
+                    fromWidth:(CGFloat)initialWidth
+                      toWidth:(CGFloat)newWidth;
+
+@end

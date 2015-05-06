@@ -24,9 +24,14 @@
 
 @property (nonatomic, assign) BOOL clearButtonIsVisible;
 
+// hack to get around compiler error
+@property (nonatomic, unsafe_unretained) id <STAResizingTextFieldDelegate> delegate;
+
 @end
 
 @implementation STAResizingTextField
+
+@dynamic delegate;
 
 - (void)initInternal {
     [super initInternal];
@@ -70,7 +75,7 @@
         self.clearButtonIsVisible = NO;
     }
 //    STALog(@"clear button visible: %d", self.clearButtonIsVisible);
-//    
+//
 //    if (self.resizesForClearTextButton) {
 //        [self resizeSelfForClearButton:self.text];
 //    }
@@ -89,7 +94,7 @@
     }
 //
 //    STALog(@"clear button visible: %d", self.clearButtonIsVisible);
-//    
+//
 //    if (self.resizesForClearTextButton) {
 //        [self resizeSelfToWidthWithoutShrinking:_initialTextFieldWidth];
 //    }
@@ -200,16 +205,18 @@ replacementString:(NSString *)string
     if (widthFloat == self.frame.size.width) {
         return;
     }
+    // check with delegate if resizing is appropriate
+    if ([self.delegate respondsToSelector:@selector(shouldResizeTextField:fromWidth:toWidth:)]) {
+        if (![self.delegate shouldResizeTextField:self fromWidth:self.frame.size.width toWidth:widthFloat]) {
+            return;
+        }
+    }
     
     CGRect selfFrame = self.frame;
     NSInteger changeInLength = widthFloat - self.frame.size.width;
     selfFrame.origin.x -= changeInLength;
     selfFrame.size.width = widthFloat;
     
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        self.frame = selfFrame;
-//        [self setNeedsLayout];
-//    });
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIView animateWithDuration:0.15
                               delay:0.01
