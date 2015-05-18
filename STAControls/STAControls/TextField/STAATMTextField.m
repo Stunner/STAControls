@@ -23,6 +23,7 @@
 // decimal behavior
 @property (nonatomic, strong) NSMutableString *afterDecimalString;
 @property (nonatomic, assign) BOOL isInDecimalInputMode;
+@property (nonatomic, assign) NSUInteger overageAmount; // amount of chars over the max char limit
 
 @end
 
@@ -109,7 +110,7 @@
     if (string.length < 4) { // acommodate for case where string could be less than 4 characters (i.e. user enters '.3' for instance)
         string = [STATextFieldUtility append:[@"0" repeatTimes:4 - string.length], string, nil];
     }
-    NSString *shiftedString = [string substringToIndex:string.length - 3];
+    NSString *shiftedString = [string substringToIndex:self.overageAmount ? string.length - 2 : string.length - 3];
     string = [STATextFieldUtility append:shiftedString, rightOfDecimalText, [@"0" repeatTimes:zeroesCount], nil];
     return string;
 }
@@ -132,6 +133,7 @@ replacementString:(NSString *)string
     NSString *cleansedString = [[newString componentsSeparatedByCharactersInSet:excludedCharacters] componentsJoinedByString:@""];
     cleansedString = [cleansedString stringByTrimmingLeadingZeroes];
     
+    ////////////////////////////////////////////////
     // decimal character behavior:
     // logic for the capability to type . and have text field compensate by shifting without having to enter '0'
     if ([string isEqualToString:@""]) self.isInDecimalInputMode = NO; // backspace
@@ -151,6 +153,16 @@ replacementString:(NSString *)string
         cleansedString = [self shiftStringForDecimalEntry:cleansedString];
         [self.afterDecimalString setString:@""];
     }
+    
+    if (self.maxCharacterLength) {
+        if (cleansedString.length + 1 > self.maxCharacterLength) { // +1 for the decimal point that will be added in
+            self.overageAmount = cleansedString.length + 1 - self.maxCharacterLength;
+            cleansedString = [cleansedString substringToIndex:cleansedString.length - self.overageAmount];
+        } else {
+            self.overageAmount = 0;
+        }
+    }
+    //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     
     // place decimal back in string
     if (cleansedString.length < 3) {

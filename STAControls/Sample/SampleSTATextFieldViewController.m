@@ -32,6 +32,7 @@
     _atmTextField.placeholder = @"Hello world!";
     _atmTextField.keyboardType = UIKeyboardTypeDecimalPad;
     //    _atmTextField.atmEntryEnabled = YES;
+    _atmTextField.resizesForClearTextButton = YES;
     _atmTextField.showBackForwardToolbar = YES;
     _atmTextField.maxCharacterLength = 8;
     _atmTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
