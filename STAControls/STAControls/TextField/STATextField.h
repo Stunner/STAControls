@@ -29,7 +29,13 @@
 //@property (nonatomic, strong) UIControl *nextFirstResponderUponReturnKeyPress;
 
 @property (nonatomic, strong) UIControl *prevControl;
+/**
+ Attach toolbar to top of keyboard which contains buttons to switch to adjacent responders and dismiss the keyboard.
+ */
 @property (nonatomic, assign) BOOL showBackForwardToolbar;
+/**
+ Ensures no more than one decimal point is entered and that no more than 2 digits are entered to the right of said decimal point.
+ */
 @property (nonatomic, assign) BOOL currencyRepresentation;
 /**
  Defaults text field to contain value specified by this property. Upon going empty, the text field populates with this value.
