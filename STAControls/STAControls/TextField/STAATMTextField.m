@@ -20,6 +20,11 @@
 @property (nonatomic, assign) BOOL atmEntryHasBeenToggled; // TODO: thoroughly test
 @property (nonatomic, copy) NSString *committedText;
 
+// decimal behavior
+@property (nonatomic, strong) NSMutableString *afterDecimalString;
+@property (nonatomic, assign) BOOL isInDecimalInputMode;
+@property (nonatomic, assign) NSUInteger overageAmount; // amount of chars over the max char limit
+
 @end
 
 @implementation STAATMTextField
@@ -31,6 +36,7 @@
     self.keyboardType = UIKeyboardTypeDecimalPad;
     _atmEntryEnabled = YES;
     _atmEntryHasBeenToggled = NO;
+    self.afterDecimalString = [[NSMutableString alloc] initWithCapacity:2];
 }
 
 - (void)setText:(NSString *)text {
@@ -82,10 +88,31 @@
     BOOL returnable = !self.atmEntryEnabled;
     if (self.atmEntryEnabled) {
         [super setText:@"0.00"];
+        self.isInDecimalInputMode = NO;
     }
     
     [super textFieldShouldClear:textField];
     return returnable;
+}
+
+- (NSString *)shiftStringForDecimalEntry:(NSString *)string {
+    STALog(@"%s", __PRETTY_FUNCTION__);
+    
+    NSUInteger zeroesCount = (self.afterDecimalString.length > 0) ? self.afterDecimalString.length : 2;
+    string = [STATextFieldUtility append:string, [@"0" repeatTimes:zeroesCount], nil];
+    return string;
+}
+
+- (NSString *)shiftString:(NSString *)string untilTextAfterDecimalMatches:(NSString *)rightOfDecimalText {
+    STALog(@"%s", __PRETTY_FUNCTION__);
+    
+    NSUInteger zeroesCount = (rightOfDecimalText.length > 0) ? 2 - rightOfDecimalText.length : 0;
+    if (string.length < 4) { // acommodate for case where string could be less than 4 characters (i.e. user enters '.3' for instance)
+        string = [STATextFieldUtility append:[@"0" repeatTimes:4 - string.length], string, nil];
+    }
+    NSString *shiftedString = [string substringToIndex:self.overageAmount ? string.length - 2 : string.length - 3];
+    string = [STATextFieldUtility append:shiftedString, rightOfDecimalText, [@"0" repeatTimes:zeroesCount], nil];
+    return string;
 }
 
 - (BOOL)textField:(UITextField *)textField
@@ -105,6 +132,37 @@ replacementString:(NSString *)string
     NSCharacterSet *excludedCharacters = [NSCharacterSet characterSetWithCharactersInString:@"."];
     NSString *cleansedString = [[newString componentsSeparatedByCharactersInSet:excludedCharacters] componentsJoinedByString:@""];
     cleansedString = [cleansedString stringByTrimmingLeadingZeroes];
+    
+    ////////////////////////////////////////////////
+    // decimal character behavior:
+    // logic for the capability to type . and have text field compensate by shifting without having to enter '0'
+    if ([string isEqualToString:@""]) self.isInDecimalInputMode = NO; // backspace
+    if (self.isInDecimalInputMode && ![string isEqualToString:@"."]) {
+        [self.afterDecimalString appendString:string];
+        if (self.afterDecimalString.length > 2) {
+            self.isInDecimalInputMode = NO;
+            [self.afterDecimalString setString:@""];
+        } else {
+            cleansedString = [self shiftString:cleansedString untilTextAfterDecimalMatches:self.afterDecimalString];
+        }
+    }
+    
+    NSString *lastTwoDigits = (cleansedString.length > 2) ? [cleansedString substringFromIndex:cleansedString.length - 2] : nil;
+    if ([string isEqualToString:@"."] && ![lastTwoDigits isEqualToString:@"00"]) {
+        self.isInDecimalInputMode = YES;
+        cleansedString = [self shiftStringForDecimalEntry:cleansedString];
+        [self.afterDecimalString setString:@""];
+    }
+    
+    if (self.maxCharacterLength) {
+        if (cleansedString.length + 1 > self.maxCharacterLength) { // +1 for the decimal point that will be added in
+            self.overageAmount = cleansedString.length + 1 - self.maxCharacterLength;
+            cleansedString = [cleansedString substringToIndex:cleansedString.length - self.overageAmount];
+        } else {
+            self.overageAmount = 0;
+        }
+    }
+    //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     
     // place decimal back in string
     if (cleansedString.length < 3) {
