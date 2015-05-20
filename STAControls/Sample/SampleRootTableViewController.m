@@ -10,6 +10,7 @@
 #import "ViewController.h"
 #import "SampleSTATextFieldViewController.h"
 #import "SampleSTASegmentedControlViewController.h"
+#import "SampleSTAButtonViewController.h"
 
 @interface SampleRootTableViewController ()
 
@@ -42,7 +43,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 2;
+    return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -54,6 +55,8 @@
         cell.textLabel.text = @"STATextField";
     } else if (indexPath.row == 1) {
         cell.textLabel.text = @"STASegmentedControl";
+    } else if (indexPath.row == 2) {
+        cell.textLabel.text = @"STAButton";
     }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
@@ -67,6 +70,10 @@
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.row == 1) {
         SampleSTASegmentedControlViewController *vc = [[SampleSTASegmentedControlViewController alloc] initWithNibName:@"SampleSTASegmentedControlViewController"
+                                                                                                                bundle:nil];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if (indexPath.row == 2) {
+        SampleSTAButtonViewController *vc = [[SampleSTAButtonViewController alloc] initWithNibName:@"SampleSTAButtonViewController"
                                                                                                                 bundle:nil];
         [self.navigationController pushViewController:vc animated:YES];
     }
