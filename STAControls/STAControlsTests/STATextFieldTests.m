@@ -17,9 +17,13 @@
 
 @implementation STATextFieldTests
 
--(void)beforeAll {
+- (void)beforeAll {
     [tester tapRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] inTableViewWithAccessibilityIdentifier:@"RootTableView"];
 }
+
+//- (void)afterAll {
+//    [tester tapViewWithAccessibilityLabel:@"Back"];
+//}
 
 - (void)setUp {
     // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -37,6 +41,27 @@
     CGFloat textFieldRightEdge = textField.frame.origin.x + textField.frame.size.width;
     CGFloat textFieldYCenter = textField.frame.origin.y + textField.frame.size.height / 2;
     [tester tapScreenAtPoint:CGPointMake(textFieldRightEdge - 3.0, textFieldYCenter)]; // tap clear button
+}
+
+- (void)testDecimalEntryTextField {
+    NSString *atmTextFieldAccessibilityLabel = @"ATMTextField";
+    STATextField *atmTextField = (STATextField *)[tester waitForViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel];
+    
+    [tester enterText:@"1234" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"12.34"];
+    [self tapClearButtonInTextField:atmTextField];
+    [tester waitForViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel value:@"0.00" traits:UIAccessibilityTraitNone];
+    
+    [tester enterText:@".8" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"0.80"];
+    [tester enterText:@"." intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"8.00"];
+    [tester enterText:@"3" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"8.30"];
+    [tester enterText:@"5" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"8.35"];
+    [tester enterText:@"8" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"83.58"];
+    [tester enterText:@"0." intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"83580.00"];
+    [tester enterText:@"\b" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"8358.00"];
+    [tester enterText:@"." intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"8358.00"];
+    [tester enterText:@"4" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"83580.04"]; // this should be '83580.40'
+                                                                                                                                            // adding a '.7' changes it to '83580.07' which is incorrect
+    [tester enterText:@"." intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"83580.04"];
 }
 
 - (void)testClearButtonState {
@@ -119,8 +144,7 @@ intoViewWithAccessibilityLabel:@"ResizingTextField"
 
 // general test case, should be split up into separate functions as tests get more elaborate/complex
 - (void)testFields {
-    // This is an example of a functional test case.
-    [tester enterText:@"1234" intoViewWithAccessibilityLabel:@"ATMTextField" traits:UIAccessibilityTraitNone expectedResult:@"12.34"];
+//    [tester enterText:@"1234" intoViewWithAccessibilityLabel:@"ATMTextField" traits:UIAccessibilityTraitNone expectedResult:@"12.34"];
     [tester enterText:@"This is a test of\n" intoViewWithAccessibilityLabel:@"TextField"];
     [tester waitForFirstResponderWithAccessibilityLabel:@"DateTextField"];
     [tester selectDatePickerValue:@[@"Nov 7", @"1", @"28", @"PM"]];
