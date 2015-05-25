@@ -147,10 +147,12 @@ replacementString:(NSString *)string
         }
     }
     
-    NSString *lastTwoDigits = (cleansedString.length > 2) ? [cleansedString substringFromIndex:cleansedString.length - 2] : nil;
-    if ([string isEqualToString:@"."] && ![lastTwoDigits isEqualToString:@"00"]) {
+    NSString *lastTwoDigits = (cleansedString.length >= 2) ? [cleansedString substringFromIndex:cleansedString.length - 2] : nil;
+    if ([string isEqualToString:@"."]) {
         self.isInDecimalInputMode = YES;
-        cleansedString = [self shiftStringForDecimalEntry:cleansedString];
+        if (lastTwoDigits && ![lastTwoDigits isEqualToString:@"00"]) {
+            cleansedString = [self shiftStringForDecimalEntry:cleansedString];
+        }
         [self.afterDecimalString setString:@""];
     }
     
