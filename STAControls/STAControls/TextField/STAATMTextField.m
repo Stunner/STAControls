@@ -106,6 +106,27 @@
 - (NSString *)shiftString:(NSString *)string untilTextAfterDecimalMatches:(NSString *)rightOfDecimalText {
     STALog(@"%s", __PRETTY_FUNCTION__);
     
+    if (rightOfDecimalText.length < 2) {
+        rightOfDecimalText = [STATextFieldUtility append:rightOfDecimalText, @"0", nil];
+    }
+    
+    NSString *lastTwoChars = [string substringFromIndex:string.length - 2];
+    if ([lastTwoChars isEqualToString:rightOfDecimalText]) {
+        return string;
+    }
+    
+    NSString *stringVariant1 = [string stringByAppendingString:@"0"];
+    NSString *stringVariant2 = [@"0" stringByAppendingString:string];
+    NSString *lastTwoChars1 = [stringVariant1 substringFromIndex:stringVariant1.length - 2];
+    NSString *lastTwoChars2 = [stringVariant2 substringFromIndex:stringVariant2.length - 2];
+    if ([lastTwoChars1 isEqualToString:rightOfDecimalText]) {
+        return stringVariant1;
+    }
+    if ([lastTwoChars2 isEqualToString:rightOfDecimalText]) {
+        return stringVariant2;
+    }
+//    return nil;
+    
     NSUInteger zeroesCount = (rightOfDecimalText.length > 0) ? 2 - rightOfDecimalText.length : 0;
     if (string.length < 4) { // acommodate for case where string could be less than 4 characters (i.e. user enters '.3' for instance)
         string = [STATextFieldUtility append:[@"0" repeatTimes:4 - string.length], string, nil];
@@ -136,6 +157,7 @@ replacementString:(NSString *)string
     ////////////////////////////////////////////////
     // decimal character behavior:
     // logic for the capability to type . and have text field compensate by shifting without having to enter '0'
+    STALog(@"afterDecimalString: %@", self.afterDecimalString);
     if ([string isEqualToString:@""]) self.isInDecimalInputMode = NO; // backspace
     if (self.isInDecimalInputMode && ![string isEqualToString:@"."]) {
         [self.afterDecimalString appendString:string];
@@ -143,7 +165,9 @@ replacementString:(NSString *)string
             self.isInDecimalInputMode = NO;
             [self.afterDecimalString setString:@""];
         } else {
-            cleansedString = [self shiftString:cleansedString untilTextAfterDecimalMatches:self.afterDecimalString];
+            NSString *stringToBeShifted = [[cleansedString substringToIndex:cleansedString.length - 3] stringByAppendingString:self.afterDecimalString];
+            cleansedString = [self shiftString:stringToBeShifted
+                  untilTextAfterDecimalMatches:self.afterDecimalString];
         }
     }
     
