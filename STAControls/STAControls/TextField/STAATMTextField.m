@@ -165,7 +165,7 @@ replacementString:(NSString *)string
             self.isInDecimalInputMode = NO;
             [self.afterDecimalString setString:@""];
         } else {
-            NSString *stringToBeShifted = [[cleansedString substringToIndex:cleansedString.length - 3] stringByAppendingString:self.afterDecimalString];
+            NSString *stringToBeShifted = [[cleansedString substringToIndex:cleansedString.length - ((cleansedString.length > 2) ? 3 : 1)] stringByAppendingString:self.afterDecimalString];
             cleansedString = [self shiftString:stringToBeShifted
                   untilTextAfterDecimalMatches:self.afterDecimalString];
         }
