@@ -18,6 +18,8 @@
 		9320F6361ACA7ADC00F4DAB2 /* SampleRootTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9320F6351ACA7ADC00F4DAB2 /* SampleRootTableViewController.m */; };
 		9320F63C1ACA865C00F4DAB2 /* SampleSTATextFieldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9320F63A1ACA865C00F4DAB2 /* SampleSTATextFieldViewController.m */; };
 		9320F63D1ACA865C00F4DAB2 /* SampleSTATextFieldViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9320F63B1ACA865C00F4DAB2 /* SampleSTATextFieldViewController.xib */; };
+		935021A71B148A7200480DEA /* STASegmentedControlTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 935021A61B148A7200480DEA /* STASegmentedControlTests.m */; };
+		935021A91B148C8200480DEA /* STAButtonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 935021A81B148C8200480DEA /* STAButtonTests.m */; };
 		936CC7B41AE482F7005BD11F /* STASegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 936CC7B31AE482F7005BD11F /* STASegmentedControl.m */; };
 		936CC7BF1AE4F62E005BD11F /* SampleSTASegmentedControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 936CC7BD1AE4F62E005BD11F /* SampleSTASegmentedControlViewController.m */; };
 		936CC7C01AE4F62E005BD11F /* SampleSTASegmentedControlViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 936CC7BE1AE4F62E005BD11F /* SampleSTASegmentedControlViewController.xib */; };
@@ -68,6 +70,8 @@
 		9320F63A1ACA865C00F4DAB2 /* SampleSTATextFieldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleSTATextFieldViewController.m; sourceTree = "<group>"; };
 		9320F63B1ACA865C00F4DAB2 /* SampleSTATextFieldViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SampleSTATextFieldViewController.xib; sourceTree = "<group>"; };
 		934C0E911A79076D00AC0603 /* STAControls.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STAControls.h; sourceTree = "<group>"; };
+		935021A61B148A7200480DEA /* STASegmentedControlTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STASegmentedControlTests.m; sourceTree = "<group>"; };
+		935021A81B148C8200480DEA /* STAButtonTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAButtonTests.m; sourceTree = "<group>"; };
 		936CC7B21AE482F7005BD11F /* STASegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STASegmentedControl.h; sourceTree = "<group>"; };
 		936CC7B31AE482F7005BD11F /* STASegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STASegmentedControl.m; sourceTree = "<group>"; };
 		936CC7BC1AE4F62E005BD11F /* SampleSTASegmentedControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleSTASegmentedControlViewController.h; sourceTree = "<group>"; };
@@ -276,6 +280,8 @@
 			isa = PBXGroup;
 			children = (
 				93DF28431A70F81300956489 /* STATextFieldTests.m */,
+				935021A61B148A7200480DEA /* STASegmentedControlTests.m */,
+				935021A81B148C8200480DEA /* STAButtonTests.m */,
 				93DF28461A70F84300956489 /* Supporting Files */,
 			);
 			path = STAControlsTests;
@@ -466,6 +472,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				93DF28451A70F81300956489 /* STATextFieldTests.m in Sources */,
+				935021A91B148C8200480DEA /* STAButtonTests.m in Sources */,
+				935021A71B148A7200480DEA /* STASegmentedControlTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
