@@ -175,17 +175,24 @@ replacementString:(NSString *)string
     
     NSString *lastTwoDigits = (cleansedString.length >= 2) ? [cleansedString substringFromIndex:cleansedString.length - 2] : nil;
     if ([string isEqualToString:@"."]) {
-        self.isInDecimalInputMode = YES;
-        if (![lastTwoDigits isEqualToString:@"00"]) {
-            cleansedString = [self shiftStringForDecimalEntry:cleansedString];
+        if (cleansedString.length + 1 < self.maxCharacterLength) {
+            self.isInDecimalInputMode = YES;
+            if (![lastTwoDigits isEqualToString:@"00"]) {
+                cleansedString = [self shiftStringForDecimalEntry:cleansedString];
+            }
+            [self.afterDecimalString setString:@""];
         }
-        [self.afterDecimalString setString:@""];
     }
     
     if (self.maxCharacterLength) {
         if (cleansedString.length + 1 > self.maxCharacterLength) { // +1 for the decimal point that will be added in
             self.overageAmount = cleansedString.length + 1 - self.maxCharacterLength;
             cleansedString = [cleansedString substringToIndex:cleansedString.length - self.overageAmount];
+            if (self.isInDecimalInputMode) {
+                [self.afterDecimalString setString:@""];
+                NSString *lastTwoDigits = [cleansedString substringFromIndex:cleansedString.length - 2];
+                [self.afterDecimalString appendString:[lastTwoDigits substringToIndex:1]];
+            }
         } else {
             self.overageAmount = 0;
         }
