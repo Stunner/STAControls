@@ -176,7 +176,7 @@ replacementString:(NSString *)string
     NSString *lastTwoDigits = (cleansedString.length >= 2) ? [cleansedString substringFromIndex:cleansedString.length - 2] : nil;
     if ([string isEqualToString:@"."]) {
         self.isInDecimalInputMode = YES;
-        if (lastTwoDigits && ![lastTwoDigits isEqualToString:@"00"]) {
+        if (![lastTwoDigits isEqualToString:@"00"]) {
             cleansedString = [self shiftStringForDecimalEntry:cleansedString];
         }
         [self.afterDecimalString setString:@""];
