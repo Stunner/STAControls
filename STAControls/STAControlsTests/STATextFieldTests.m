@@ -21,17 +21,11 @@
     [tester tapRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] inTableViewWithAccessibilityIdentifier:@"RootTableView"];
 }
 
-//- (void)afterAll {
-//    [tester tapViewWithAccessibilityLabel:@"Back"];
-//}
-
-- (void)setUp {
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+- (void)afterAll {
+    [tester tapViewWithAccessibilityLabel:@"Back"];
 }
 
-- (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    
+- (void)afterEach {
     STATextField *textField = (STATextField *)[tester waitForViewWithAccessibilityLabel:@"TextField"];
     textField.clearButtonMode = UITextFieldViewModeAlways;
     [self tapClearButtonInTextField:textField];
