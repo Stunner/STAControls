@@ -34,6 +34,10 @@
     
     [tester longPressViewWithAccessibilityLabel:@"Button" duration:1.0];
     XCTAssert(!button.backgroundColor, @"background color is non-nil!");
+    
+    button.backgroundColor = [UIColor blueColor];
+    [tester longPressViewWithAccessibilityLabel:@"Button" duration:1.0];
+    XCTAssert([button.backgroundColor isEqual:[UIColor blueColor]], @"background colors don't match!");
 }
 
 @end

@@ -95,6 +95,13 @@
 
 #pragma mark Public Methods
 
+- (void)setBackgroundColor:(UIColor *)backgroundColor {
+    [super setBackgroundColor:backgroundColor];
+    
+    [self.backgroundColorDictionary setObject:(self.backgroundColor) ? self.backgroundColor : [NSNull null]
+                                       forKey:@"default"];
+}
+
 - (void)setBackgroundColor:(UIColor *)backgroundColor forState:(UIControlState)state {
     [self.backgroundColorDictionary setObject:backgroundColor forKey:@(state)];
 }
@@ -104,13 +111,13 @@
 - (void)stateChangedFrom:(UIControlState)oldState to:(UIControlState)newState {
     UIColor *backgroundColor = [self.backgroundColorDictionary objectForKey:@(newState)];
     if (backgroundColor) {
-        self.backgroundColor = backgroundColor;
+        super.backgroundColor = backgroundColor;
     } else {
         UIColor *defaultColor = [self.backgroundColorDictionary objectForKey:@"default"];
         if ([defaultColor isMemberOfClass:[NSNull class]]) {
             defaultColor = nil;
         }
-        self.backgroundColor = defaultColor;
+        super.backgroundColor = defaultColor;
     }
 }
 
