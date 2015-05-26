@@ -43,7 +43,7 @@
 
 - (void)initInternal {
     self.backgroundColorDictionary = [[NSMutableDictionary alloc] initWithCapacity:5];
-    [self.backgroundColorDictionary setObject:(self.backgroundColor) ? self.backgroundColor : [UIColor clearColor]
+    [self.backgroundColorDictionary setObject:(self.backgroundColor) ? self.backgroundColor : [NSNull null]
                                        forKey:@"default"];
 }
 
@@ -106,7 +106,11 @@
     if (backgroundColor) {
         self.backgroundColor = backgroundColor;
     } else {
-        self.backgroundColor = [self.backgroundColorDictionary objectForKey:@"default"];
+        UIColor *defaultColor = [self.backgroundColorDictionary objectForKey:@"default"];
+        if ([defaultColor isMemberOfClass:[NSNull class]]) {
+            defaultColor = nil;
+        }
+        self.backgroundColor = defaultColor;
     }
 }
 

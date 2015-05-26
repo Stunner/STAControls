@@ -25,9 +25,15 @@
     [tester tapViewWithAccessibilityLabel:@"Back"];
 }
 
-- (void)testExample {
+- (void)testButton {
     // This is an example of a functional test case.
-    XCTAssert(YES, @"Pass");
+    STAButton *button = (STAButton *)[tester waitForViewWithAccessibilityLabel:@"Button"];
+    XCTAssert(!button.backgroundColor, @"background color is non-nil!");
+    [tester tapViewWithAccessibilityLabel:@"Button"];
+    XCTAssert(!button.backgroundColor, @"background color is non-nil!");
+    
+    [tester longPressViewWithAccessibilityLabel:@"Button" duration:1.0];
+    XCTAssert(!button.backgroundColor, @"background color is non-nil!");
 }
 
 @end
