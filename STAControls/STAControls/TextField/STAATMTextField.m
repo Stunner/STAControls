@@ -110,7 +110,7 @@
         rightOfDecimalText = [STATextFieldUtility append:rightOfDecimalText, @"0", nil];
     }
     
-    NSString *lastTwoChars = [string substringFromIndex:string.length - 2];
+    NSString *lastTwoChars = (string.length > 1) ? [string substringFromIndex:string.length - 2] : nil;
     if ([lastTwoChars isEqualToString:rightOfDecimalText]) {
         return string;
     }
@@ -165,9 +165,11 @@ replacementString:(NSString *)string
             self.isInDecimalInputMode = NO;
             [self.afterDecimalString setString:@""];
         } else {
-            NSString *stringToBeShifted = [[cleansedString substringToIndex:cleansedString.length - ((cleansedString.length > 2) ? 3 : 1)] stringByAppendingString:self.afterDecimalString];
-            cleansedString = [self shiftString:stringToBeShifted
-                  untilTextAfterDecimalMatches:self.afterDecimalString];
+            if (cleansedString.length > 0) {
+                NSString *stringToBeShifted = [[cleansedString substringToIndex:cleansedString.length - ((cleansedString.length > 2) ? 3 : 1)] stringByAppendingString:self.afterDecimalString];
+                cleansedString = [self shiftString:stringToBeShifted
+                      untilTextAfterDecimalMatches:self.afterDecimalString];
+            }
         }
     }
     
