@@ -47,21 +47,62 @@
     NSString *atmTextFieldAccessibilityLabel = @"ATMTextField";
     STATextField *atmTextField = (STATextField *)[tester waitForViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel];
     
-    [tester enterText:@"1234" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"12.34"];
+    // test ATM text entry behavior
+    [tester enterText:@"1" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"0.01"];
+    [tester enterText:@"\b" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"0.00"];
+    [tester enterText:@"\b" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"0.00"];
+    [tester enterText:@"1" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"0.01"];
+    [tester enterText:@"2" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"0.12"];
+    [tester enterText:@"3" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"1.23"];
+    [tester enterText:@"4" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"12.34"];
+    [tester enterText:@"\b" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"1.23"];
+    [tester enterText:@"\b" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"0.12"];
+    [tester enterText:@"5" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"1.25"];
+    [tester enterText:@"6" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"12.56"];
+    [tester enterText:@"7" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"125.67"];
+    [tester enterText:@"0" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"1256.70"];
+    [tester enterText:@"8" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"12567.08"];
+    [tester enterText:@"9" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"12567.08"]; // shouldn't change, hit max char limit
+    
     [self tapClearButtonInTextField:atmTextField];
     [tester waitForViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel value:@"0.00" traits:UIAccessibilityTraitNone];
     
+    // test decimal button behavior
     [tester enterText:@".8" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"0.80"];
     [tester enterText:@"." intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"8.00"];
     [tester enterText:@"3" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"8.30"];
     [tester enterText:@"5" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"8.35"];
+    
+    [self tapClearButtonInTextField:atmTextField];
+    [tester waitForViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel value:@"0.00" traits:UIAccessibilityTraitNone];
+    
+    [tester enterText:@"." intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"0.00"];
+    [tester enterText:@"0" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"0.00"];
+    [tester enterText:@"8" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"0.08"];
+    [tester enterText:@"." intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"8.00"];
+    [tester enterText:@"3" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"8.30"];
+    [tester enterText:@"5" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"8.35"];
     [tester enterText:@"8" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"83.58"];
-    [tester enterText:@"0." intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"83580.00"];
+    [tester enterText:@"0" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"835.80"];
+    [tester enterText:@"." intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"83580.00"];
     [tester enterText:@"\b" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"8358.00"];
     [tester enterText:@"." intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"8358.00"];
     [tester enterText:@"4" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"8358.40"];
-                                                                                                                                            // adding a '.7' changes it to '83580.07' which is incorrect
+    
     [tester enterText:@"." intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"83584.00"];
+    [tester enterText:@"6" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"83584.60"];
+    [tester enterText:@"2" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"83584.62"];
+    [tester enterText:@"3" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"83584.62"]; // shouldn't change, hit max char limit
+    [tester enterText:@"\b" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"8358.46"];
+    [tester enterText:@"." intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"83584.60"];
+    [tester enterText:@"1" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"83584.61"];
+    [tester enterText:@"3" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"83584.61"]; // shouldn't change, hit max char limit
+    [tester enterText:@"\b" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"8358.46"];
+    [tester enterText:@"\b" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"835.84"];
+    [tester enterText:@"." intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"83584.00"];
+    [tester enterText:@"\b" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"8358.40"];
+    [tester enterText:@"." intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"83584.00"];
+    [tester enterText:@"9" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"83584.09"];
 }
 
 - (void)testClearButtonState {
