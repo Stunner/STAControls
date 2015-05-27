@@ -15,6 +15,8 @@
  */
 @property (nonatomic, assign) BOOL resignsFirstResponderUponReturnKeyPress;
 
+// this needs to be here as opposed to STATextField so that proper resizing occurs upon
+// return key press 
 /**
  The next UIControl object that is to claim firstResponder status upon return key press.
  */

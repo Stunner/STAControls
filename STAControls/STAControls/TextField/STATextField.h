@@ -54,4 +54,10 @@
  */
 @property (nonatomic, assign, readonly) BOOL textChanged;
 
+/**
+ Sets text fields' nextControl and prevControl properties corresponding to the
+ order the text fields are passed in in `controlsArray`.
+ */
++ (void)chainTextFieldsInArray:(NSArray *)controlsArray;
+
 @end

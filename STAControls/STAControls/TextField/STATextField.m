@@ -28,6 +28,27 @@
 
 @implementation STATextField
 
+#pragma mark - Class Methods
+
++ (void)chainTextFieldsInArray:(NSArray *)controlsArray {
+    STATextField *prevControl = nil;
+    STATextField *currControl = nil;
+    for (NSUInteger i = 0; i < controlsArray.count; i++) {
+        if (!prevControl) {
+            prevControl = controlsArray[i];
+            continue;
+        }
+        currControl = controlsArray[i];
+        if ([currControl isKindOfClass:[STATextField class]] && [prevControl isKindOfClass:[STATextField class]]) {
+            prevControl.nextControl = currControl;
+            currControl.prevControl = prevControl;
+        }
+        prevControl = currControl;
+    }
+}
+
+#pragma mark - Instance Methods
+
 - (void)initInternal {
     [super initInternal];
     
@@ -43,7 +64,7 @@
 //    }
 }
 
-#pragma mark - Getters
+#pragma mark Getters
 
 - (NSString *)textValue {
     STALog(@"%s", __PRETTY_FUNCTION__);
@@ -103,7 +124,7 @@
 
 - (void)setNextControl:(UIControl *)nextControl {
     [super setNextControl:nextControl];
-    [self updateEnabledStatusForBackChevron];
+    [self updateEnabledStatusForForwardChevron];
 }
 
 - (void)prevClicked:(id)sender {
