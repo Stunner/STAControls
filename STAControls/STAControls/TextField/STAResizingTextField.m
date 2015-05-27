@@ -61,7 +61,10 @@
 
 - (void)setResizesForClearTextButton:(BOOL)resizesForClearTextButton {
     _resizesForClearTextButton = resizesForClearTextButton;
-    self.translatesAutoresizingMaskIntoConstraints = resizesForClearTextButton;
+    if ([[UIDevice currentDevice].systemVersion intValue] >= 8) {
+        // iOS 8.0 and above
+        self.translatesAutoresizingMaskIntoConstraints = resizesForClearTextButton;
+    }
 }
 
 - (BOOL)becomeFirstResponder {
