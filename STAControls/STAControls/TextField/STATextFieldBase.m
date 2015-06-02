@@ -47,27 +47,22 @@ replacementString:(NSString *)string
             shouldChangeCharacters = [_userDelegate textField:textField shouldChangeCharactersInRange:range replacementString:string];
         }
     }
+    [(STATextFieldBase *)textField commitTextChanges];
     return shouldChangeCharacters;
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
-    BOOL returnable = YES;
+    BOOL returnable = [(STATextFieldBase *)textField textFieldShouldClear:textField];
     if ([_userDelegate respondsToSelector:_cmd]) {
         returnable = [_userDelegate textFieldShouldClear:textField];
-    }
-    if (returnable) {
-        returnable = [(STATextFieldBase *)textField textFieldShouldClear:textField];
     }
     return returnable;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    BOOL returnable = YES;
+    BOOL returnable = [(STATextFieldBase *)textField textFieldShouldReturn:textField];
     if ([_userDelegate respondsToSelector:_cmd]) {
         returnable = [_userDelegate textFieldShouldReturn:textField];
-    }
-    if (returnable) {
-        returnable = [(STATextFieldBase *)textField textFieldShouldReturn:textField];
     }
     return returnable;
 }
@@ -162,6 +157,10 @@ shouldChangeCharactersInRange:(NSRange)range
 replacementString:(NSString *)string
 {
     return YES;
+}
+
+- (void)commitTextChanges {
+    
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {

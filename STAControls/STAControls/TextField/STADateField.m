@@ -23,6 +23,7 @@
     _dateFormatString = @"M/d/yy h:mm a";
     _dateFormatter = [[NSDateFormatter alloc] init];
     [_dateFormatter setDateFormat:_dateFormatString];
+    self.showBackForwardToolbar = YES;
     
     [_datePicker addTarget:self
                     action:@selector(datePickerValueChanged:)

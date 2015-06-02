@@ -14,8 +14,18 @@
 
 - (BOOL)resignFirstResponderUponReturnKeyPress;
 
+- (void)textFieldDidChange:(STATextFieldBase *)sender;
+
 - (BOOL)textField:(UITextField *)textField
 shouldChangeCharactersInRange:(NSRange)range
 replacementString:(NSString *)string;
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField;
+
+- (void)textFieldDidEndEditing:(UITextField *)textField;
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField;
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField;
 
 @end

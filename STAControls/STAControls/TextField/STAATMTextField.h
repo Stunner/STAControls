@@ -10,6 +10,10 @@
 
 /**
  Provides a text field that mimics ATM machine input behavior.
+ 
+ By default the `keyboardType` is set to `UIKeyboardTypeDecimalPad` as this text field does 
+ exhibit special behavior when a decimal is entered. If you wish to disable decimal entry behavior,
+ set the `keyboardType` to `UIKeyboardTypeNumberPad`.
  */
 @interface STAATMTextField : STATextField
 

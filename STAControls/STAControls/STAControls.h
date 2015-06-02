@@ -14,5 +14,7 @@
     #import "STATextView.h"
     #import "STAPickerField.h"
     #import "STAExpressionTextView.h"
+    #import "STASegmentedControl.h"
+    #import "STAButton.h"
 
 #endif

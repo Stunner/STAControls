@@ -8,6 +8,7 @@
 
 #import "STATextViewBase.h"
 #import "STATextViewBase+PrivateHeaders.h"
+#import "STACommon.h"
 
 #pragma mark - STATextField
 
@@ -30,7 +31,7 @@
 // Responding to Editing Notifications
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     BOOL shouldChangeText = [(STATextViewBase *)textView textViewShouldBeginEditing:textView];
     if ([_userDelegate respondsToSelector:_cmd]) {
@@ -44,7 +45,7 @@
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     [(STATextViewBase *)textView textViewDidBeginEditing:textView];
     if ([_userDelegate respondsToSelector:_cmd]) {
@@ -53,7 +54,7 @@
 }
 
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     BOOL shouldChangeText = [(STATextViewBase *)textView textViewShouldEndEditing:textView];
     if ([_userDelegate respondsToSelector:_cmd]) {
@@ -67,7 +68,7 @@
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     [(STATextViewBase *)textView textViewDidEndEditing:textView];
     if ([_userDelegate respondsToSelector:_cmd]) {
@@ -78,7 +79,7 @@
 // Responding to Text Changes
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     BOOL shouldChangeText = [(STATextViewBase *)textView textView:textView
                                                 shouldChangeTextInRange:range
@@ -98,7 +99,7 @@
 }
 
 - (void)textViewDidChange:(UITextView *)textView {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     [(STATextViewBase *)textView textViewDidChange:textView];
     if ([_userDelegate respondsToSelector:_cmd]) {
@@ -109,7 +110,7 @@
 // Responding to Selection Changes
 
 - (void)textViewDidChangeSelection:(UITextView *)textView {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     [(STATextViewBase *)textView textViewDidChangeSelection:textView];
     if ([_userDelegate respondsToSelector:_cmd]) {
@@ -123,7 +124,7 @@
 shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment
          inRange:(NSRange)characterRange
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     BOOL shouldInteractWithText = [(STATextViewBase *)textView textView:textView
                                        shouldInteractWithTextAttachment:textAttachment
@@ -146,7 +147,7 @@ shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment
 shouldInteractWithURL:(NSURL *)URL
          inRange:(NSRange)characterRange
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     BOOL shouldInteractWithURL = [(STATextViewBase *)textView textView:textView
                                                  shouldInteractWithURL:URL
@@ -201,7 +202,7 @@ shouldInteractWithURL:(NSURL *)URL
 #pragma mark - Initialization
 
 - (void)initInternal {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     if (!_internalDelegate) {
         _internalDelegate = [[STATextViewPrivateDelegate alloc] init];
@@ -251,7 +252,7 @@ shouldInteractWithURL:(NSURL *)URL
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     if (!(self = [super initWithCoder:aDecoder])) {
         return nil;
@@ -298,44 +299,44 @@ shouldInteractWithURL:(NSURL *)URL
 // Responding to Editing Notifications
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     return YES;
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
 }
 
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     return YES;
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
 }
 
 // Responding to Text Changes
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     return YES;
 }
 
 - (void)textViewDidChange:(UITextView *)textView {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
 }
 
 // Responding to Selection Changes
 
 - (void)textViewDidChangeSelection:(UITextView *)textView {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     
 }
@@ -346,7 +347,7 @@ shouldInteractWithURL:(NSURL *)URL
 shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment
          inRange:(NSRange)characterRange
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     return YES;
 }
@@ -355,7 +356,7 @@ shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment
 shouldInteractWithURL:(NSURL *)URL
          inRange:(NSRange)characterRange
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     return YES;
 }

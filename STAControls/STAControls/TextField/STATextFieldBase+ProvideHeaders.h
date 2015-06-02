@@ -23,6 +23,13 @@
 shouldChangeCharactersInRange:(NSRange)range
 replacementString:(NSString *)string;
 
+/**
+ Where any text updates should occur for subclasses.
+ 
+ Update text within this method instead of in `textField:shouldChangeCharactersInRange:replacementString:`.
+ */
+- (void)commitTextChanges;
+
 - (BOOL)textFieldShouldClear:(UITextField *)textField;
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField;

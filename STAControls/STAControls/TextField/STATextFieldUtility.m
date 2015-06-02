@@ -97,12 +97,13 @@
 
 + (BOOL)shouldChangeCharacters:(NSString *)initialText
                        inRange:(NSRange)range
-                      toString:(NSString *)string
+              toCurrencyString:(NSString *)string
                 characterLimit:(NSInteger)characterLimit
                   allowDecimal:(BOOL)allowDecimal
 {
     NSString *newString = [initialText stringByReplacingCharactersInRange:range
                                                                withString:string];
+    characterLimit = (characterLimit == 0) ? ULONG_MAX : characterLimit;
     NSUInteger activeCharacterLimit = characterLimit;
     NSUInteger decimalCount = [STATextFieldUtility numberOfOccurrencesOfString:@"." inString:newString];
     if (allowDecimal) {

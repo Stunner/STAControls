@@ -13,7 +13,7 @@
 
 @property (nonatomic, strong) IBOutlet STAATMTextField *atmTextField;
 @property (nonatomic, strong) IBOutlet STATextField *textField;
-@property (nonatomic, strong) IBOutlet STAResizingTextField *resizingTextField;
+@property (nonatomic, strong) IBOutlet STATextField *resizingTextField;
 @property (nonatomic, strong) IBOutlet STATextField *dateTextField;
 //@property (nonatomic, strong) IBOutlet STAPickerField *dateTextField;
 @property (nonatomic, strong) IBOutlet STATextField *nextTextField;
@@ -29,18 +29,20 @@
     _atmTextField.placeholder = @"Hello world!";
     _atmTextField.keyboardType = UIKeyboardTypeDecimalPad;
 //    _atmTextField.atmEntryEnabled = YES;
-    _atmTextField.showDoneButton = YES;
+    _atmTextField.showBackForwardToolbar = YES;
     
     _textField.resignsFirstResponderUponReturnKeyPress = YES;
-    _textField.nextFirstResponderUponReturnKeyPress = _dateTextField;
-    _textField.showDoneButton = YES;
-    _textField.showNextButton = YES;
+    _textField.prevControl = _resizingTextField;
+    _textField.nextControl = _dateTextField;
+    _textField.showBackForwardToolbar = YES;
+//    _textField.showNextButton = YES;
     _textField.placeholder = @"placeholder text";
+//    _textField.maxCharacterLength = 15;
 
 //    _resizingTextField = [[STAResizingTextField alloc] initWithFrame:CGRectMake(200, 180, 50, 30)];
     _resizingTextField.borderStyle = UITextBorderStyleRoundedRect;
     _resizingTextField.placeholder = @"Hello world!";
-    _resizingTextField.clearButtonMode = UITextFieldViewModeUnlessEditing;
+    _resizingTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     _resizingTextField.resizesForClearTextButton = YES;
 //    [self.view addSubview:_resizingTextField];
     
@@ -48,9 +50,10 @@
                            action:@selector(textFieldDidChange:)
                  forControlEvents:UIControlEventEditingChanged];
     
-    _dateTextField.nextFirstResponderUponReturnKeyPress = _nextTextField;
-    _dateTextField.showDoneButton = YES;
-    _dateTextField.showNextButton = YES;
+    _dateTextField.prevControl = _textField;
+    _dateTextField.nextControl = _nextTextField;
+    _dateTextField.showBackForwardToolbar = YES;
+//    _dateTextField.showNextButton = YES;
 //    _dateTextField.pickerView.titleArray = @[@[@"Geometry", @"Trigonometry", @"Calculus", @"Chemistry"]];
     
 //    _dateTextField.pickerView.pickerViewSelectionBlock = ^void(UIPickerView *pickerView, NSInteger component, NSInteger row, NSString *title){

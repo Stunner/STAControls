@@ -9,7 +9,7 @@
 #import "STAPickerField.h"
 #import "STATextField+PrivateHeaders.h"
 
-@interface STAPickerField () <UIPickerViewDataSource, UIPickerViewDelegate>
+@interface STAPickerField () //<UIPickerViewDataSource, UIPickerViewDelegate>
 
 @end
 
@@ -28,9 +28,10 @@
     
     self.pickerView = [STAPickerView new];
     
-    self.pickerView.dataSource = self;
-    self.pickerView.delegate = self;
+//    self.pickerView.dataSource = self;
+//    self.pickerView.delegate = self;
     [self setInputView:self.pickerView];
+    self.showBackForwardToolbar = YES;
     
     __weak STAPickerField *weakSelf = self;
     self.pickerView.pickerViewSelectionBlock = ^void(UIPickerView *pickerView, NSInteger component, NSInteger row, NSString *title){
@@ -49,7 +50,7 @@
 //}
 
 //- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-//    NSLog(@"%s", __PRETTY_FUNCTION__);
+//    STALog(@"%s", __PRETTY_FUNCTION__);
 //    
 //    return 1;
 //}
@@ -57,7 +58,7 @@
 //- (NSInteger)pickerView:(UIPickerView *)pickerView
 //numberOfRowsInComponent:(NSInteger)component
 //{
-//    NSLog(@"%s", __PRETTY_FUNCTION__);
+//    STALog(@"%s", __PRETTY_FUNCTION__);
 //    
 //    return 0;
 //}

@@ -18,6 +18,14 @@
 		9373EA281A95FF6E00CA3CA0 /* NSAttributedString+STAUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9373EA251A95FF6E00CA3CA0 /* NSAttributedString+STAUtils.m */; };
 		9373EA291A95FF6E00CA3CA0 /* NSMutableAttributedString+STAUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9373EA271A95FF6E00CA3CA0 /* NSMutableAttributedString+STAUtils.m */; };
 		937998601AA2AD04004C3E3D /* UITextView+STAControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 9379985F1AA2AD04004C3E3D /* UITextView+STAControls.m */; };
+		9320F6361ACA7ADC00F4DAB2 /* SampleRootTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9320F6351ACA7ADC00F4DAB2 /* SampleRootTableViewController.m */; };
+		9320F63C1ACA865C00F4DAB2 /* SampleSTATextFieldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9320F63A1ACA865C00F4DAB2 /* SampleSTATextFieldViewController.m */; };
+		9320F63D1ACA865C00F4DAB2 /* SampleSTATextFieldViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9320F63B1ACA865C00F4DAB2 /* SampleSTATextFieldViewController.xib */; };
+		935021A71B148A7200480DEA /* STASegmentedControlTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 935021A61B148A7200480DEA /* STASegmentedControlTests.m */; };
+		935021A91B148C8200480DEA /* STAButtonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 935021A81B148C8200480DEA /* STAButtonTests.m */; };
+		936CC7B41AE482F7005BD11F /* STASegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 936CC7B31AE482F7005BD11F /* STASegmentedControl.m */; };
+		936CC7BF1AE4F62E005BD11F /* SampleSTASegmentedControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 936CC7BD1AE4F62E005BD11F /* SampleSTASegmentedControlViewController.m */; };
+		936CC7C01AE4F62E005BD11F /* SampleSTASegmentedControlViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 936CC7BE1AE4F62E005BD11F /* SampleSTASegmentedControlViewController.xib */; };
 		93DF28351A70F7E600956489 /* STAPickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 93DF28171A70F7E600956489 /* STAPickerField.m */; };
 		93DF28361A70F7E600956489 /* STAPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93DF281A1A70F7E600956489 /* STAPickerView.m */; };
 		93DF28371A70F7E600956489 /* STAPickerViewBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 93DF281C1A70F7E600956489 /* STAPickerViewBase.m */; };
@@ -33,6 +41,9 @@
 		93DF28451A70F81300956489 /* STATextFieldTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 93DF28431A70F81300956489 /* STATextFieldTests.m */; };
 		93F92F381A7EAE90002A37F0 /* STAExpressionTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F92F361A7EAE90002A37F0 /* STAExpressionTextView.m */; };
 		93F92F3E1A7F8D82002A37F0 /* NSMutableAttributedString+STAControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F92F3D1A7F8D82002A37F0 /* NSMutableAttributedString+STAControls.m */; };
+		93E35CA91B0AADC900E3B673 /* STAButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E35CA81B0AADC900E3B673 /* STAButton.m */; };
+		93E35CAD1B0C3B5400E3B673 /* SampleSTAButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E35CAB1B0C3B5400E3B673 /* SampleSTAButtonViewController.m */; };
+		93E35CAE1B0C3B5400E3B673 /* SampleSTAButtonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93E35CAC1B0C3B5400E3B673 /* SampleSTAButtonViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +69,11 @@
 		93021A2D19F0F7A50065B144 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		93021A2E19F0F7A50065B144 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		93021A2F19F0F7A50065B144 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		9320F6341ACA7ADC00F4DAB2 /* SampleRootTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleRootTableViewController.h; sourceTree = "<group>"; };
+		9320F6351ACA7ADC00F4DAB2 /* SampleRootTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleRootTableViewController.m; sourceTree = "<group>"; };
+		9320F6391ACA865C00F4DAB2 /* SampleSTATextFieldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleSTATextFieldViewController.h; sourceTree = "<group>"; };
+		9320F63A1ACA865C00F4DAB2 /* SampleSTATextFieldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleSTATextFieldViewController.m; sourceTree = "<group>"; };
+		9320F63B1ACA865C00F4DAB2 /* SampleSTATextFieldViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SampleSTATextFieldViewController.xib; sourceTree = "<group>"; };
 		934C0E911A79076D00AC0603 /* STAControls.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STAControls.h; sourceTree = "<group>"; };
 		9373EA241A95FF6E00CA3CA0 /* NSAttributedString+STAUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+STAUtils.h"; sourceTree = "<group>"; };
 		9373EA251A95FF6E00CA3CA0 /* NSAttributedString+STAUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+STAUtils.m"; sourceTree = "<group>"; };
@@ -65,6 +81,14 @@
 		9373EA271A95FF6E00CA3CA0 /* NSMutableAttributedString+STAUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+STAUtils.m"; sourceTree = "<group>"; };
 		9379985E1AA2AD04004C3E3D /* UITextView+STAControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+STAControls.h"; sourceTree = "<group>"; };
 		9379985F1AA2AD04004C3E3D /* UITextView+STAControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+STAControls.m"; sourceTree = "<group>"; };
+		935021A61B148A7200480DEA /* STASegmentedControlTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STASegmentedControlTests.m; sourceTree = "<group>"; };
+		935021A81B148C8200480DEA /* STAButtonTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAButtonTests.m; sourceTree = "<group>"; };
+		936CC7B21AE482F7005BD11F /* STASegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STASegmentedControl.h; sourceTree = "<group>"; };
+		936CC7B31AE482F7005BD11F /* STASegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STASegmentedControl.m; sourceTree = "<group>"; };
+		936CC7BC1AE4F62E005BD11F /* SampleSTASegmentedControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleSTASegmentedControlViewController.h; sourceTree = "<group>"; };
+		936CC7BD1AE4F62E005BD11F /* SampleSTASegmentedControlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleSTASegmentedControlViewController.m; sourceTree = "<group>"; };
+		936CC7BE1AE4F62E005BD11F /* SampleSTASegmentedControlViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SampleSTASegmentedControlViewController.xib; sourceTree = "<group>"; };
+		9373EA2A1A9F23DE00CA3CA0 /* STACommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STACommon.h; sourceTree = "<group>"; };
 		93DF28161A70F7E600956489 /* STAPickerField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAPickerField.h; sourceTree = "<group>"; };
 		93DF28171A70F7E600956489 /* STAPickerField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAPickerField.m; sourceTree = "<group>"; };
 		93DF28181A70F7E600956489 /* STAPickerView+PrivateHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "STAPickerView+PrivateHeaders.h"; sourceTree = "<group>"; };
@@ -101,6 +125,11 @@
 		93F92F371A7EAE90002A37F0 /* STATextView+PrivateHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "STATextView+PrivateHeaders.h"; sourceTree = "<group>"; };
 		93F92F3C1A7F8D82002A37F0 /* NSMutableAttributedString+STAControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+STAControls.h"; sourceTree = "<group>"; };
 		93F92F3D1A7F8D82002A37F0 /* NSMutableAttributedString+STAControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+STAControls.m"; sourceTree = "<group>"; };
+		93E35CA71B0AADC900E3B673 /* STAButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAButton.h; sourceTree = "<group>"; };
+		93E35CA81B0AADC900E3B673 /* STAButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAButton.m; sourceTree = "<group>"; };
+		93E35CAA1B0C3B5400E3B673 /* SampleSTAButtonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleSTAButtonViewController.h; sourceTree = "<group>"; };
+		93E35CAB1B0C3B5400E3B673 /* SampleSTAButtonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleSTAButtonViewController.m; sourceTree = "<group>"; };
+		93E35CAC1B0C3B5400E3B673 /* SampleSTAButtonViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SampleSTAButtonViewController.xib; sourceTree = "<group>"; };
 		93F936BDAFC29480EF8581F0 /* libPods-STAControlsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-STAControlsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DABDECF76F239E1DF0748E4B /* Pods-STAControlsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STAControlsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-STAControlsTests/Pods-STAControlsTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -175,6 +204,17 @@
 				93021A2D19F0F7A50065B144 /* main.m */,
 				93021A2E19F0F7A50065B144 /* ViewController.h */,
 				93021A2F19F0F7A50065B144 /* ViewController.m */,
+				9320F6341ACA7ADC00F4DAB2 /* SampleRootTableViewController.h */,
+				9320F6351ACA7ADC00F4DAB2 /* SampleRootTableViewController.m */,
+				9320F6391ACA865C00F4DAB2 /* SampleSTATextFieldViewController.h */,
+				9320F63A1ACA865C00F4DAB2 /* SampleSTATextFieldViewController.m */,
+				9320F63B1ACA865C00F4DAB2 /* SampleSTATextFieldViewController.xib */,
+				936CC7BC1AE4F62E005BD11F /* SampleSTASegmentedControlViewController.h */,
+				936CC7BD1AE4F62E005BD11F /* SampleSTASegmentedControlViewController.m */,
+				936CC7BE1AE4F62E005BD11F /* SampleSTASegmentedControlViewController.xib */,
+				93E35CAA1B0C3B5400E3B673 /* SampleSTAButtonViewController.h */,
+				93E35CAB1B0C3B5400E3B673 /* SampleSTAButtonViewController.m */,
+				93E35CAC1B0C3B5400E3B673 /* SampleSTAButtonViewController.xib */,
 			);
 			path = Sample;
 			sourceTree = "<group>";
@@ -190,10 +230,21 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		936CC7B11AE48254005BD11F /* SegmentedControl */ = {
+			isa = PBXGroup;
+			children = (
+				936CC7B21AE482F7005BD11F /* STASegmentedControl.h */,
+				936CC7B31AE482F7005BD11F /* STASegmentedControl.m */,
+			);
+			path = SegmentedControl;
+			sourceTree = "<group>";
+		};
 		93DF28141A70F7E600956489 /* STAControls */ = {
 			isa = PBXGroup;
 			children = (
 				9373EA231A95FF6E00CA3CA0 /* Utils */,
+				93E35CA61B0AAD6E00E3B673 /* Button */,
+				936CC7B11AE48254005BD11F /* SegmentedControl */,
 				93DF28151A70F7E600956489 /* PickerView */,
 				93DF281D1A70F7E600956489 /* TextField */,
 				93DF282F1A70F7E600956489 /* TextView */,
@@ -202,6 +253,7 @@
 				93F92F3D1A7F8D82002A37F0 /* NSMutableAttributedString+STAControls.m */,
 				9379985E1AA2AD04004C3E3D /* UITextView+STAControls.h */,
 				9379985F1AA2AD04004C3E3D /* UITextView+STAControls.m */,
+				9373EA2A1A9F23DE00CA3CA0 /* STACommon.h */,
 			);
 			path = STAControls;
 			sourceTree = "<group>";
@@ -263,6 +315,8 @@
 			isa = PBXGroup;
 			children = (
 				93DF28431A70F81300956489 /* STATextFieldTests.m */,
+				935021A61B148A7200480DEA /* STASegmentedControlTests.m */,
+				935021A81B148C8200480DEA /* STAButtonTests.m */,
 				93DF28461A70F84300956489 /* Supporting Files */,
 			);
 			path = STAControlsTests;
@@ -274,6 +328,15 @@
 				93DF28421A70F81300956489 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		93E35CA61B0AAD6E00E3B673 /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				93E35CA71B0AADC900E3B673 /* STAButton.h */,
+				93E35CA81B0AADC900E3B673 /* STAButton.m */,
+			);
+			path = Button;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -360,8 +423,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				93021A3319F0F7A50065B144 /* Images.xcassets in Resources */,
+				93E35CAE1B0C3B5400E3B673 /* SampleSTAButtonViewController.xib in Resources */,
 				93021A3119F0F7A50065B144 /* LaunchScreen.xib in Resources */,
+				936CC7C01AE4F62E005BD11F /* SampleSTASegmentedControlViewController.xib in Resources */,
 				93021A3219F0F7A50065B144 /* Main.storyboard in Resources */,
+				9320F63D1ACA865C00F4DAB2 /* SampleSTATextFieldViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,21 +479,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				93DF28401A70F7E600956489 /* STATextViewBase.m in Sources */,
+				93E35CAD1B0C3B5400E3B673 /* SampleSTAButtonViewController.m in Sources */,
 				93DF283F1A70F7E600956489 /* STATextView.m in Sources */,
 				9373EA291A95FF6E00CA3CA0 /* NSMutableAttributedString+STAUtils.m in Sources */,
 				9373EA281A95FF6E00CA3CA0 /* NSAttributedString+STAUtils.m in Sources */,
 				937998601AA2AD04004C3E3D /* UITextView+STAControls.m in Sources */,
 				93F92F3E1A7F8D82002A37F0 /* NSMutableAttributedString+STAControls.m in Sources */,
 				93DF28381A70F7E600956489 /* NSString+STATextField.m in Sources */,
+				936CC7BF1AE4F62E005BD11F /* SampleSTASegmentedControlViewController.m in Sources */,
 				93DF283D1A70F7E600956489 /* STATextFieldBase.m in Sources */,
 				93DF283C1A70F7E600956489 /* STATextField.m in Sources */,
 				93DF28371A70F7E600956489 /* STAPickerViewBase.m in Sources */,
 				93DF28361A70F7E600956489 /* STAPickerView.m in Sources */,
+				9320F6361ACA7ADC00F4DAB2 /* SampleRootTableViewController.m in Sources */,
 				93021A3619F0F7A50065B144 /* ViewController.m in Sources */,
 				93DF283A1A70F7E600956489 /* STADateField.m in Sources */,
 				93DF28351A70F7E600956489 /* STAPickerField.m in Sources */,
 				93F92F381A7EAE90002A37F0 /* STAExpressionTextView.m in Sources */,
 				93021A3519F0F7A50065B144 /* main.m in Sources */,
+				9320F63C1ACA865C00F4DAB2 /* SampleSTATextFieldViewController.m in Sources */,
+				93E35CA91B0AADC900E3B673 /* STAButton.m in Sources */,
+				936CC7B41AE482F7005BD11F /* STASegmentedControl.m in Sources */,
 				93DF283B1A70F7E600956489 /* STAResizingTextField.m in Sources */,
 				93021A3019F0F7A50065B144 /* AppDelegate.m in Sources */,
 				93DF283E1A70F7E600956489 /* STATextFieldUtility.m in Sources */,
@@ -440,6 +512,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				93DF28451A70F81300956489 /* STATextFieldTests.m in Sources */,
+				935021A91B148C8200480DEA /* STAButtonTests.m in Sources */,
+				935021A71B148A7200480DEA /* STASegmentedControlTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

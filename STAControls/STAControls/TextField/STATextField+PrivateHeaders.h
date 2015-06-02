@@ -16,7 +16,7 @@
 
 - (void)textFieldDidChange:(STATextFieldBase *)sender;
 
-- (BOOL)staTextField:(UITextField *)textField
+- (BOOL)textField:(UITextField *)textField
 shouldChangeCharactersInRange:(NSRange)range
    replacementString:(NSString *)string;
 
@@ -25,5 +25,7 @@ shouldChangeCharactersInRange:(NSRange)range
 - (void)textFieldDidBeginEditing:(UITextField *)textField;
 
 - (void)textFieldDidEndEditing:(UITextField *)textField;
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField;
 
 @end

@@ -8,6 +8,7 @@
 
 #import "STATextView.h"
 #import "STATextViewBase+PrivateHeaders.h"
+#import "STACommon.h"
 
 @interface STATextView () {
     NSString *_internalPlaceholder;
@@ -50,7 +51,7 @@
 #pragma mark - Subclassed Methods
 
 - (void)layoutSubviews {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     [super layoutSubviews];
     
@@ -64,37 +65,37 @@
 }
 
 - (void)textChanged:(NSNotification *)notification {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     
 }
 
 - (void)textViewBeganEditing:(NSNotification *)notification {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     
 }
 
 - (void)textViewStoppedEditing:(NSNotification *)notification {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     
 }
 
 - (BOOL)becomeFirstResponder {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     [super becomeFirstResponder];
     
@@ -102,7 +103,7 @@
 }
 
 - (BOOL)resignFirstResponder {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     [super resignFirstResponder];
     
@@ -110,7 +111,7 @@
 }
 
 - (void)initInternal {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     [super initInternal];
     
@@ -123,7 +124,7 @@
 }
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     self.nextShowKeyboardNotificationForSelf = YES;
     
@@ -131,7 +132,7 @@
 }
 
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     self.nextHideKeyboardNotificationForSelf = YES;
     
