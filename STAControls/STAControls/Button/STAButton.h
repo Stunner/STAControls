@@ -10,7 +10,11 @@
 
 @interface STAButton : UIButton
 
+typedef void (^ StateChangeBlock)(UIControlState, UIControlState);
+
 - (void)setBackgroundColor:(UIColor *)backgroundColor
                   forState:(UIControlState)state;
+
+-(void)registerForStateChangesWithBlock:(StateChangeBlock)block;
 
 @end
