@@ -7,6 +7,7 @@
 //
 
 #import "STATextFieldBase.h"
+#import "STAButton.h"
 
 @interface STAResizingTextField : STATextFieldBase
 
@@ -28,6 +29,12 @@
 @property (nonatomic, assign) BOOL resizesForClearTextButton;
 
 @property (nonatomic, readonly) BOOL clearButtonIsVisible;
+/**
+ Only returns a valid object after `setClearButtonImage:forState:` is called.
+ */
+@property (nonatomic, readonly) STAButton *customClearButton;
+
+- (void)setClearButtonImage:(UIImage *)image forState:(UIControlState)state;
 
 @end
 

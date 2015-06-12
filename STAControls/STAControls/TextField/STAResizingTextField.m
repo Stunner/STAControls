@@ -9,6 +9,7 @@
 #import "STAResizingTextField.h"
 #import "STATextFieldBase+ProvideHeaders.h"
 #import "STACommon.h"
+#import "STAButton.h"
 
 #define kDynamicResizeThresholdOffset 4
 
@@ -25,7 +26,9 @@
 @property (nonatomic, assign) BOOL clearButtonIsVisible;
 
 // hack to get around compiler error
-@property (nonatomic, unsafe_unretained) id <STAResizingTextFieldDelegate> delegate;
+@property (nonatomic, weak) id <STAResizingTextFieldDelegate> delegate;
+
+@property (nonatomic, assign) UITextFieldViewMode realRightViewMode;
 
 @end
 
@@ -39,6 +42,7 @@
     _resizesForClearTextButton = NO;
     _resignsFirstResponderUponReturnKeyPress = YES;
     _initialTextFieldWidth = self.frame.size.width;
+    _realRightViewMode = self.rightViewMode;
 }
 
 - (void)setNextControl:(UIControl *)nextFirstResponderUponReturnKeyPress {
@@ -46,7 +50,17 @@
     _nextControl = nextFirstResponderUponReturnKeyPress;
 }
 
+- (void)setRightViewMode:(UITextFieldViewMode)rightViewMode {
+    STALog(@"%s", __PRETTY_FUNCTION__);
+    
+    [super setRightViewMode:rightViewMode];
+    
+    self.realRightViewMode = rightViewMode;
+}
+
 - (void)setClearButtonMode:(UITextFieldViewMode)clearButtonMode {
+    [super setClearButtonMode:clearButtonMode];
+    
     if (clearButtonMode == UITextFieldViewModeAlways) {
         self.clearButtonIsVisible = YES;
     } else if (clearButtonMode == UITextFieldViewModeNever) {
@@ -56,7 +70,7 @@
     } else if (clearButtonMode == UITextFieldViewModeUnlessEditing) {
         self.clearButtonIsVisible = (!self.isEditing && self.text.length > 0);
     }
-    [super setClearButtonMode:clearButtonMode];
+    self.rightViewMode = clearButtonMode;
 }
 
 - (void)setResizesForClearTextButton:(BOOL)resizesForClearTextButton {
@@ -64,6 +78,44 @@
     if ([[UIDevice currentDevice].systemVersion intValue] >= 8) {
         // iOS 8.0 and above
         self.translatesAutoresizingMaskIntoConstraints = resizesForClearTextButton;
+    }
+}
+
+- (STAButton *)customClearButton {
+    if ([self.rightView isKindOfClass:[STAButton class]]) {
+        return (STAButton *)self.rightView;
+    }
+    return nil;
+}
+
+- (void)setClearButtonImage:(UIImage *)image forState:(UIControlState)state {
+    
+    if (!self.rightView) {
+        UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.height, self.frame.size.height)];
+        STAButton *clearButton = [STAButton buttonWithType:UIButtonTypeCustom];
+        [clearButton setImage:image forState:state];
+        clearButton.frame = CGRectMake(6, 6, 18, 18);
+        [clearButton addTarget:self
+                        action:@selector(customClearButtonTapped:)
+              forControlEvents:UIControlEventTouchUpInside];
+//        [clearButton setBackgroundColor:[UIColor yellowColor]];
+//        self.rightView.contentMode = UIViewContentModeCenter;
+        
+//        UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+//        imageView.frame = CGRectMake(10, 5, 26, 26);
+        
+//        paddingView.backgroundColor = [UIColor redColor];
+        [paddingView addSubview:clearButton];
+        self.rightView = paddingView;
+    }
+    
+}
+
+- (void)customClearButtonTapped:(STAButton *)sender {
+    BOOL shouldClear = [super clearTextField];
+    if (shouldClear) {
+        self.text = @"";
+        [self updateRightViewMode];
     }
 }
 
@@ -77,6 +129,8 @@
     } else if (self.clearButtonMode == UITextFieldViewModeUnlessEditing) {
         self.clearButtonIsVisible = NO;
     }
+    
+    [self updateRightViewMode];
 //    STALog(@"clear button visible: %d", self.clearButtonIsVisible);
 //
 //    if (self.resizesForClearTextButton) {
@@ -104,6 +158,14 @@
     return YES;
 }
 
+- (void)updateRightViewMode {
+    if (self.text.length == 0) {
+        super.rightViewMode = UITextFieldViewModeNever;
+    } else {
+        super.rightViewMode = self.realRightViewMode;
+    }
+}
+
 - (void)textFieldDidChange:(STATextFieldBase *)sender {
     STALog(@"%s", __PRETTY_FUNCTION__);
     
@@ -117,6 +179,8 @@
     if (self.resizesForClearTextButton) {
         [self resizeSelfForClearButton:self.text];
     }
+    
+    [self updateRightViewMode];
 }
 
 - (BOOL)textField:(UITextField *)textField

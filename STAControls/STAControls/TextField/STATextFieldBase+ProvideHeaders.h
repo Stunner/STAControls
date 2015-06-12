@@ -17,6 +17,8 @@
  */
 - (void)initInternal;
 
+- (BOOL)clearTextField;
+
 - (void)textFieldDidChange:(STATextFieldBase *)sender;
 
 - (BOOL)textField:(UITextField *)textField

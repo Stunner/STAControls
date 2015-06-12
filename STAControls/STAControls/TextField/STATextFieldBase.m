@@ -179,4 +179,8 @@ replacementString:(NSString *)string
     
 }
 
+- (BOOL)clearTextField {
+    return [_internalDelegate textFieldShouldClear:self];
+}
+
 @end

@@ -61,6 +61,9 @@
 //        NSLog(@"\npickerView: %@ \ncomponent: %lu\nrow: %lu\ntitle: %@", pickerView, component, row, title);
 //    };
     
+    [self.nextTextField setClearButtonImage:[UIImage imageNamed:@"CameraImage"]
+                                   forState:UIControlStateNormal];
+    
 //    _textView.expandsUpward = YES;
     _textView.layer.borderWidth = 1.0f;
     _textView.layer.cornerRadius = 5;
