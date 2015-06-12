@@ -30,6 +30,8 @@
 
 @property (nonatomic, assign) UITextFieldViewMode realRightViewMode;
 
+@property (nonatomic, strong, readwrite) STAButton *customClearButton;
+
 @end
 
 @implementation STAResizingTextField
@@ -81,31 +83,19 @@
     }
 }
 
-- (STAButton *)customClearButton {
-    if ([self.rightView isKindOfClass:[STAButton class]]) {
-        return (STAButton *)self.rightView;
-    }
-    return nil;
-}
-
 - (void)setClearButtonImage:(UIImage *)image forState:(UIControlState)state {
+    STALog(@"%s", __PRETTY_FUNCTION__);
     
     if (!self.rightView) {
         UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.height, self.frame.size.height)];
-        STAButton *clearButton = [STAButton buttonWithType:UIButtonTypeCustom];
-        [clearButton setImage:image forState:state];
-        clearButton.frame = CGRectMake(6, 6, 18, 18);
-        [clearButton addTarget:self
-                        action:@selector(customClearButtonTapped:)
-              forControlEvents:UIControlEventTouchUpInside];
-//        [clearButton setBackgroundColor:[UIColor yellowColor]];
-//        self.rightView.contentMode = UIViewContentModeCenter;
-        
-//        UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-//        imageView.frame = CGRectMake(10, 5, 26, 26);
-        
-//        paddingView.backgroundColor = [UIColor redColor];
-        [paddingView addSubview:clearButton];
+        paddingView.backgroundColor = [UIColor clearColor];
+        self.customClearButton = [STAButton buttonWithType:UIButtonTypeCustom];
+        [self.customClearButton setImage:image forState:state];
+        self.customClearButton.frame = CGRectMake(6, 6, 18, 18);
+        [self.customClearButton addTarget:self
+                                   action:@selector(customClearButtonTapped:)
+                         forControlEvents:UIControlEventTouchUpInside];
+        [paddingView addSubview:self.customClearButton];
         self.rightView = paddingView;
     }
     

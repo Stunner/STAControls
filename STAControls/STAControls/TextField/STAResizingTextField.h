@@ -32,7 +32,7 @@
 /**
  Only returns a valid object after `setClearButtonImage:forState:` is called.
  */
-@property (nonatomic, readonly) STAButton *customClearButton;
+@property (nonatomic, strong, readonly) STAButton *customClearButton;
 
 - (void)setClearButtonImage:(UIImage *)image forState:(UIControlState)state;
 
