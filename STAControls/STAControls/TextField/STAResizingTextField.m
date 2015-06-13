@@ -83,7 +83,6 @@
     }
 }
 
-// TODO: ensure it does shit the next time
 - (void)setClearButtonImage:(UIImage *)image forState:(UIControlState)state {
     STALog(@"%s", __PRETTY_FUNCTION__);
     
@@ -91,7 +90,6 @@
         UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.height, self.frame.size.height)];
         paddingView.backgroundColor = [UIColor clearColor];
         self.customClearButton = [STAButton buttonWithType:UIButtonTypeCustom];
-        [self.customClearButton setImage:image forState:state];
         self.customClearButton.frame = CGRectMake(6, 6, 18, 18);
         [self.customClearButton addTarget:self
                                    action:@selector(customClearButtonTapped:)
@@ -99,6 +97,7 @@
         [paddingView addSubview:self.customClearButton];
         self.rightView = paddingView;
     }
+    [self.customClearButton setImage:image forState:state];
     
 }
 
