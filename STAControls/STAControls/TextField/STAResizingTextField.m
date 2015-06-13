@@ -83,6 +83,7 @@
     }
 }
 
+// TODO: ensure it does shit the next time
 - (void)setClearButtonImage:(UIImage *)image forState:(UIControlState)state {
     STALog(@"%s", __PRETTY_FUNCTION__);
     
@@ -111,7 +112,7 @@
 - (BOOL)becomeFirstResponder {
     STALog(@"%s", __PRETTY_FUNCTION__);
     
-    [super becomeFirstResponder];
+    BOOL returnValue = [super becomeFirstResponder];
     
     if (self.clearButtonMode == UITextFieldViewModeWhileEditing) {
         self.clearButtonIsVisible = (self.text.length > 0);
@@ -125,13 +126,13 @@
 //    if (self.resizesForClearTextButton) {
 //        [self resizeSelfForClearButton:self.text];
 //    }
-    return YES;
+    return returnValue;
 }
 
 - (BOOL)resignFirstResponder {
     STALog(@"%s", __PRETTY_FUNCTION__);
     
-    [super resignFirstResponder];
+    BOOL returnValue = [super resignFirstResponder];
     
     if (self.clearButtonMode == UITextFieldViewModeWhileEditing) {
         self.clearButtonIsVisible = NO;
@@ -144,7 +145,7 @@
 //    if (self.resizesForClearTextButton) {
 //        [self resizeSelfToWidthWithoutShrinking:_initialTextFieldWidth];
 //    }
-    return YES;
+    return returnValue;
 }
 
 - (void)updateRightViewMode {
