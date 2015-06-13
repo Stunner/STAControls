@@ -104,7 +104,6 @@
 - (void)customClearButtonTapped:(STAButton *)sender {
     BOOL shouldClear = [super clearTextField];
     if (shouldClear) {
-        self.text = @"";
         [self updateRightViewMode];
     }
 }

@@ -31,11 +31,13 @@
 //    self.pickerView.dataSource = self;
 //    self.pickerView.delegate = self;
     [self setInputView:self.pickerView];
-    self.showBackForwardToolbar = YES;
+//    self.showBackForwardToolbar = YES;
     
     __weak STAPickerField *weakSelf = self;
     self.pickerView.pickerViewSelectionBlock = ^void(UIPickerView *pickerView, NSInteger component, NSInteger row, NSString *title){
-        weakSelf.text = title;
+        __strong STAPickerField *strongSelf = weakSelf;
+        strongSelf.text = title;
+        [strongSelf sendActionsForControlEvents:UIControlEventEditingChanged];
     };
 }
 

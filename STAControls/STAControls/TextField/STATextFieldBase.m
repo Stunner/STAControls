@@ -96,26 +96,23 @@ replacementString:(NSString *)string
 @implementation STATextFieldBase
 
 - (instancetype)init {
-    if (!(self = [super init])) {
-        return nil;
+    if ((self = [super init])) {
+        [self initInternal];
     }
-    [self initInternal];
     return self;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
-    if (!(self = [super initWithFrame:frame])) {
-        return nil;
+    if ((self = [super initWithFrame:frame])) {
+        [self initInternal];
     }
-    [self initInternal];
     return self;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    if (!(self = [super initWithCoder:aDecoder])) {
-        return nil;
+    if ((self = [super initWithCoder:aDecoder])) {
+        [self initInternal];
     }
-    [self initInternal];
     return self;
 }
 
@@ -180,7 +177,12 @@ replacementString:(NSString *)string
 }
 
 - (BOOL)clearTextField {
-    return [_internalDelegate textFieldShouldClear:self];
+    BOOL shouldClear = [_internalDelegate textFieldShouldClear:self];
+    if (shouldClear) {
+        self.text = @"";
+        [self sendActionsForControlEvents:UIControlEventEditingChanged];
+    }
+    return shouldClear;
 }
 
 @end
