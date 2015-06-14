@@ -71,6 +71,8 @@
     self.nextTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     [self.nextTextField setClearButtonImage:[UIImage imageNamed:@"Clear Button Image"]
                                    forState:UIControlStateNormal];
+    [self.nextTextField setClearButtonImage:[UIImage imageNamed:@"Clear Button Image 2"]
+                                   forState:UIControlStateHighlighted];
 //    _nextTextField.maxCharacterLength = 8;
 //    _nextTextField.currencyRepresentation = YES;
 //    _nextTextField.defaultValue = @"0.00";
