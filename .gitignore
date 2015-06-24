@@ -45,7 +45,7 @@
 #   (lock files are usually local-only file-synchronization on the local FS that should NOT go in git)
 # c.f. the "OPTIONAL" section at bottom though, for tool-specific variations!
  
-*.lock
+#*.lock
  
  
 #
