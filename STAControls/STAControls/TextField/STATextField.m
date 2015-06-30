@@ -10,6 +10,7 @@
 #import "STAResizingTextField+PrivateHeaders.h"
 #import "STACommon.h"
 #import "STATextFieldUtility.h"
+#import "STATextView.h"
 
 @interface STATextField () {
     NSString *_internalPlaceholder;
@@ -39,7 +40,9 @@
             continue;
         }
         currControl = controlsArray[i];
-        if ([currControl isKindOfClass:[STATextField class]] && [prevControl isKindOfClass:[STATextField class]]) {
+        if (([currControl isKindOfClass:[STATextField class]] || [currControl isKindOfClass:[STATextView class]]) &&
+            ([prevControl isKindOfClass:[STATextField class]] || [prevControl isKindOfClass:[STATextView class]]))
+        {
             prevControl.nextControl = currControl;
             currControl.prevControl = prevControl;
         }
@@ -231,6 +234,12 @@ shouldChangeCharactersInRange:(NSRange)range
     STALog(@"%s", __PRETTY_FUNCTION__);
     
     [super textFieldDidEndEditing:textField];
+    
+    if (self.currencyRepresentation) {
+        if (textField.text.length > 0) {
+            self.text = [NSString stringWithFormat:@"%.2f", [textField.text floatValue]];
+        }
+    }
     
     if ([textField.text length] < 1) {
         if (self.defaultValue) {

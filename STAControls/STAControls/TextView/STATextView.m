@@ -20,6 +20,9 @@
     CGFloat _keyboardYPosition;
 }
 
+@property (nonatomic, strong) UIBarButtonItem *rightChevron;
+@property (nonatomic, strong) UIBarButtonItem *leftChevron;
+
 @property (nonatomic, assign) BOOL nextShowKeyboardNotificationForSelf;
 @property (nonatomic, assign) BOOL nextHideKeyboardNotificationForSelf;
 @property (nonatomic, assign) BOOL layoutSubviewsHasBeenCalled;
@@ -30,11 +33,60 @@
 
 @implementation STATextView
 
+// reference: http://stackoverflow.com/a/20192857/347339
+- (void)setShowBackForwardToolbar:(BOOL)showBackForwardToolbar {
+    _showBackForwardToolbar = showBackForwardToolbar;
+    if (_showBackForwardToolbar) {
+        UIToolbar *keyboardDoneButtonView = [UIToolbar new];
+        [keyboardDoneButtonView sizeToFit];
+        self.leftChevron = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:105
+                                                                         target:self
+                                                                         action:@selector(prevClicked:)];
+        self.leftChevron.accessibilityLabel = @"Previous";
+        [self updateEnabledStatusForBackChevron];
+        
+        UIBarButtonItem *fixedSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+                                                                                    target:nil
+                                                                                    action:nil];
+        fixedSpace.width = 25.0;
+        self.rightChevron = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:106
+                                                                          target:self
+                                                                          action:@selector(nextClicked:)];
+        self.rightChevron.accessibilityLabel = @"Next";
+        [self updateEnabledStatusForForwardChevron];
+        
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+                                                                       style:UIBarButtonItemStyleDone target:self
+                                                                      action:@selector(doneClicked:)];
+        UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                                       target:nil
+                                                                                       action:nil];
+        [keyboardDoneButtonView setItems:@[self.leftChevron, fixedSpace, self.rightChevron, flexibleSpace, doneButton]];
+        self.inputAccessoryView = keyboardDoneButtonView;
+    } else {
+        self.inputAccessoryView = nil;
+    }
+}
+
+- (void)prevClicked:(id)sender {
+    [self resignFirstResponder];
+    [self.prevControl becomeFirstResponder];
+}
+
+- (void)nextClicked:(id)sender {
+    [self resignFirstResponder];
+    [self.nextControl becomeFirstResponder];
+}
+
 - (CGSize)sizeForText:(NSString *)text {
     //TODO: override text inset in order to update appropriately
     //TODO: compensate for default text being more than one line long
     // TODO: look at typing attributes
-    NSDictionary *attributes = @{NSFontAttributeName : self.font}; //scan through nsttributed text and acount for characters with nsattributed font
+    NSDictionary *attributes = nil;
+    if (self.font) {
+        // scan through nsttributed text and acount for characters with nsattributed font
+        attributes = @{NSFontAttributeName : self.font};
+    }
     UIEdgeInsets textContainerInset = self.textContainerInset;
     UIEdgeInsets contentInset = self.contentInset;
     UIEdgeInsets totalInsets = UIEdgeInsetsMake(textContainerInset.top + contentInset.top,
@@ -46,6 +98,20 @@
                                          attributes:attributes context:nil].size;
     CGSize size = CGSizeMake(ceil(boundingBox.width + (totalInsets.left + totalInsets.right)), ceil(boundingBox.height + totalInsets.top + totalInsets.bottom));
     return size;
+}
+
+#pragma mark Helpers
+
+- (void)updateEnabledStatusForForwardChevron {
+    self.rightChevron.enabled = (self.nextControl);
+}
+
+- (void)updateEnabledStatusForBackChevron {
+    self.leftChevron.enabled = (self.prevControl);
+}
+
+- (void)doneClicked:(id)sender {
+    [self endEditing:YES];
 }
 
 #pragma mark - Subclassed Methods
@@ -143,6 +209,9 @@
     STALog(@"%s", __PRETTY_FUNCTION__);
     
     NSString *newText = [self.text stringByReplacingCharactersInRange:range withString:text];
+    if (!self.autoDeterminesHeight) {
+        return YES;
+    }
     CGSize size = [self sizeForText:newText];
     
     __weak STATextView *weakSelf = self;
