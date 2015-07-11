@@ -108,6 +108,9 @@
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor forState:(UIControlState)state {
     [self.backgroundColorDictionary setObject:backgroundColor forKey:@(state)];
+    if (self.state == state) {
+        super.backgroundColor = backgroundColor;
+    }
 }
 
 #pragma mark Helper Methods
@@ -133,7 +136,7 @@
     }
 }
 
--(void)registerForStateChangesWithBlock:(StateChangeBlock)block{
+- (void)registerForStateChangesWithBlock:(StateChangeBlock)block{
     if (block!=nil){
         if (self.blocks==nil) {
             self.blocks = [NSMutableArray new];
@@ -142,7 +145,7 @@
     }
 }
 
--(void)executeBlocks{
+- (void)executeBlocks{
     if (self.blocks){
         for (StateChangeBlock block in self.blocks){
             block(self.priorState,self.state);
