@@ -12,9 +12,6 @@
 
 @property (nonatomic, assign) UIControlState priorState;
 @property (nonatomic, strong) NSMutableDictionary *backgroundColorDictionary;
-@property (nonatomic, strong) NSMutableArray *blocks;
-
--(void)executeBlocks;
 
 @end
 
@@ -48,7 +45,6 @@
     self.backgroundColorDictionary = [[NSMutableDictionary alloc] initWithCapacity:5];
     [self.backgroundColorDictionary setObject:(self.backgroundColor) ? self.backgroundColor : [NSNull null]
                                        forKey:@"default"];
-    
 }
 
 #pragma mark Setters
@@ -131,25 +127,8 @@
 - (void)checkForStateChange {
     if (self.state != self.priorState) {
         [self stateChangedFrom:self.priorState to:self.state];
-        [self executeBlocks];
         self.priorState = self.state;
     }
 }
 
-- (void)registerForStateChangesWithBlock:(StateChangeBlock)block{
-    if (block!=nil){
-        if (self.blocks==nil) {
-            self.blocks = [NSMutableArray new];
-        }
-        [self.blocks addObject:block];
-    }
-}
-
-- (void)executeBlocks{
-    if (self.blocks){
-        for (StateChangeBlock block in self.blocks){
-            block(self.priorState,self.state);
-        }
-    }
-}
 @end
