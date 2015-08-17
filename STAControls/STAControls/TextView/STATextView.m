@@ -149,12 +149,16 @@
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification {
+	self.isEditing = YES;
+	
     STALog(@"%s", __PRETTY_FUNCTION__);
     
     
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
+	self.isEditing = NO;
+	
     STALog(@"%s", __PRETTY_FUNCTION__);
     
     
