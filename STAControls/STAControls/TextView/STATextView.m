@@ -137,18 +137,6 @@
 }
 
 - (void)textViewBeganEditing:(NSNotification *)notification {
-    STALog(@"%s", __PRETTY_FUNCTION__);
-    
-    
-}
-
-- (void)textViewStoppedEditing:(NSNotification *)notification {
-    STALog(@"%s", __PRETTY_FUNCTION__);
-    
-    
-}
-
-- (void)keyboardWillShow:(NSNotification *)notification {
 	self.isEditing = YES;
 	
     STALog(@"%s", __PRETTY_FUNCTION__);
@@ -156,9 +144,21 @@
     
 }
 
-- (void)keyboardWillHide:(NSNotification *)notification {
+- (void)textViewStoppedEditing:(NSNotification *)notification {
 	self.isEditing = NO;
 	
+    STALog(@"%s", __PRETTY_FUNCTION__);
+    
+    
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    STALog(@"%s", __PRETTY_FUNCTION__);
+    
+    
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
     STALog(@"%s", __PRETTY_FUNCTION__);
     
     
