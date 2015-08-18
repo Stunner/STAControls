@@ -89,6 +89,7 @@
     if (self.atmEntryEnabled) {
         [super setText:@"0.00"];
         self.isInDecimalInputMode = NO;
+        [self.afterDecimalString setString:@""];
     }
     
     [super textFieldShouldClear:textField];
