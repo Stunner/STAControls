@@ -22,4 +22,5 @@
 @property (nonatomic, assign) BOOL animatesToTopOfKeyboard;
 @property (nonatomic, assign) BOOL autoDeterminesHeight;
 
+@property (nonatomic, assign) BOOL isEditing;
 @end

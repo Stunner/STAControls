@@ -137,12 +137,16 @@
 }
 
 - (void)textViewBeganEditing:(NSNotification *)notification {
+	self.isEditing = YES;
+	
     STALog(@"%s", __PRETTY_FUNCTION__);
     
     
 }
 
 - (void)textViewStoppedEditing:(NSNotification *)notification {
+	self.isEditing = NO;
+	
     STALog(@"%s", __PRETTY_FUNCTION__);
     
     
