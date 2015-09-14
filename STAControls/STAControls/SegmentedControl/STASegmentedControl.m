@@ -20,7 +20,7 @@
     CGPoint viewPoint = [self convertPoint:locationPoint fromView:self];
     if (self.toggleableSegments) { // toggle selected segment on/off
         if ([self pointInside:viewPoint withEvent:event] && previousSelectedSegmentIndex == self.selectedSegmentIndex) {
-            self.selectedSegmentIndex = UISegmentedControlNoSegment;
+            [self setSelectedSegmentIndex:UISegmentedControlNoSegment];
             [self sendActionsForControlEvents:UIControlEventValueChanged];
         }
     }
