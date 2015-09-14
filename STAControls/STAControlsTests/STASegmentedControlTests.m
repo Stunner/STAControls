@@ -27,6 +27,58 @@
 
 - (void)testSegmentedControl {
     
+    STASegmentedControl *segmentedControl = (STASegmentedControl *)[tester waitForViewWithAccessibilityLabel:@"SegmentedControl"];
+    
+    [tester tapViewWithAccessibilityLabel:@"First"];
+    XCTAssertEqual(segmentedControl.selectedSegmentIndex, 0, @"Selected segment index mismatch!");
+    [tester tapViewWithAccessibilityLabel:@"First"];
+    XCTAssertEqual(segmentedControl.selectedSegmentIndex, 0, @"Selected segment index mismatch!");
+    
+    [tester tapViewWithAccessibilityLabel:@"Second"];
+    XCTAssertEqual(segmentedControl.selectedSegmentIndex, 1, @"Selected segment index mismatch!");
+     [tester tapViewWithAccessibilityLabel:@"Second"];
+    
+    [tester tapViewWithAccessibilityLabel:@"Third"];
+    XCTAssertEqual(segmentedControl.selectedSegmentIndex, 2, @"Selected segment index mismatch!");
+    [tester tapViewWithAccessibilityLabel:@"Third"];
+    XCTAssertEqual(segmentedControl.selectedSegmentIndex, 2, @"Selected segment index mismatch!");
+    
+    [tester tapViewWithAccessibilityLabel:@"Fourth"];
+    XCTAssertEqual(segmentedControl.selectedSegmentIndex, 3, @"Selected segment index mismatch!");
+    [tester tapViewWithAccessibilityLabel:@"Fourth"];
+    XCTAssertEqual(segmentedControl.selectedSegmentIndex, 3, @"Selected segment index mismatch!");
+    
+    [tester tapViewWithAccessibilityLabel:@"Third"];
+    XCTAssertEqual(segmentedControl.selectedSegmentIndex, 2, @"Selected segment index mismatch!");
+    
+    
+    STASegmentedControl *toggleableSegmentedControl = (STASegmentedControl *)[tester waitForViewWithAccessibilityLabel:@"ToggleableSegmentedControl"];
+    
+    [tester tapViewWithAccessibilityLabel:@"First2"];
+    XCTAssertEqual(toggleableSegmentedControl.selectedSegmentIndex, UISegmentedControlNoSegment, @"Selected segment index mismatch!");
+    [tester tapViewWithAccessibilityLabel:@"First2"];
+    XCTAssertEqual(toggleableSegmentedControl.selectedSegmentIndex, 0, @"Selected segment index mismatch!");
+    
+    [tester tapViewWithAccessibilityLabel:@"Second2"];
+    XCTAssertEqual(toggleableSegmentedControl.selectedSegmentIndex, 1, @"Selected segment index mismatch!");
+    [tester tapViewWithAccessibilityLabel:@"Second2"];
+    XCTAssertEqual(toggleableSegmentedControl.selectedSegmentIndex, UISegmentedControlNoSegment, @"Selected segment index mismatch!");
+    
+    [tester tapViewWithAccessibilityLabel:@"Third2"];
+    XCTAssertEqual(toggleableSegmentedControl.selectedSegmentIndex, 2, @"Selected segment index mismatch!");
+    [tester tapViewWithAccessibilityLabel:@"Third2"];
+    XCTAssertEqual(toggleableSegmentedControl.selectedSegmentIndex, UISegmentedControlNoSegment, @"Selected segment index mismatch!");
+    [tester tapViewWithAccessibilityLabel:@"Third2"];
+    XCTAssertEqual(toggleableSegmentedControl.selectedSegmentIndex, 2, @"Selected segment index mismatch!");
+    
+    [tester tapViewWithAccessibilityLabel:@"Fourth2"];
+    XCTAssertEqual(toggleableSegmentedControl.selectedSegmentIndex, 3, @"Selected segment index mismatch!");
+    [tester tapViewWithAccessibilityLabel:@"Fourth2"];
+    XCTAssertEqual(toggleableSegmentedControl.selectedSegmentIndex, UISegmentedControlNoSegment, @"Selected segment index mismatch!");
+    [tester tapViewWithAccessibilityLabel:@"Fourth2"];
+    XCTAssertEqual(toggleableSegmentedControl.selectedSegmentIndex, 3, @"Selected segment index mismatch!");
+    
+
 }
 
 @end
