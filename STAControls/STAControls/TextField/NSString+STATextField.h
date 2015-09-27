@@ -13,5 +13,6 @@
 - (NSString *)repeatTimes:(NSUInteger)times;
 - (NSString*)stringByTrimmingLeadingZeroes;
 - (BOOL)isNumeral;
+- (NSString *)append:(NSString *)string untilMaxCharacterCount:(NSUInteger)maxCharacterCount;
 
 @end

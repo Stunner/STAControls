@@ -28,6 +28,98 @@
 
 #pragma mark Delegate Overrides
 
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    STALog(@"%s", __PRETTY_FUNCTION__);
+    
+    
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    STALog(@"%s", __PRETTY_FUNCTION__);
+    
+    
+}
+
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView
+                     withVelocity:(CGPoint)velocity
+              targetContentOffset:(inout CGPoint *)targetContentOffset
+{
+    STALog(@"%s", __PRETTY_FUNCTION__);
+    
+    
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView
+                  willDecelerate:(BOOL)decelerate
+{
+    STALog(@"%s", __PRETTY_FUNCTION__);
+    
+    
+}
+
+- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView {
+    STALog(@"%s", __PRETTY_FUNCTION__);
+    
+    return YES;
+}
+
+- (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView {
+    STALog(@"%s", __PRETTY_FUNCTION__);
+    
+    
+}
+
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
+    STALog(@"%s", __PRETTY_FUNCTION__);
+    
+    
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    STALog(@"%s", __PRETTY_FUNCTION__);
+    
+    
+}
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+    STALog(@"%s", __PRETTY_FUNCTION__);
+    
+    return scrollView; // TODO: is this right?
+}
+
+- (void)scrollViewWillBeginZooming:(UIScrollView *)scrollView
+                          withView:(UIView *)view
+{
+    STALog(@"%s", __PRETTY_FUNCTION__);
+    
+    
+}
+
+- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView
+                       withView:(UIView *)view
+                        atScale:(CGFloat)scale
+{
+    STALog(@"%s", __PRETTY_FUNCTION__);
+    
+    
+}
+
+- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
+    STALog(@"%s", __PRETTY_FUNCTION__);
+    
+    
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
+    STALog(@"%s", __PRETTY_FUNCTION__);
+    
+    
+}
+
+#pragma mark - UITextViewDelegate
+
 // Responding to Editing Notifications
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {

@@ -40,7 +40,9 @@
 + (NSString *)insertDecimalInString:(NSString *)string
                   atPositionFromEnd:(NSUInteger)position
 {
-    
+    if (string.length < position) {
+        return [@"." stringByAppendingString:string];
+    }
     NSUInteger decimalPosition = string.length - position;
     NSString *leftOfDecimal = [string substringToIndex:decimalPosition];
     NSString *rightOfDecimal = [string substringFromIndex:decimalPosition];

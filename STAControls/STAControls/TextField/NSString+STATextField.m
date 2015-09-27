@@ -42,4 +42,16 @@
     return NO;
 }
 
+- (NSString *)append:(NSString *)string untilMaxCharacterCount:(NSUInteger)maxCharacterCount {
+    NSString *returnable = self;
+    for (NSUInteger i = 0; i < string.length; i++) {
+        if (returnable.length >= maxCharacterCount) {
+            return returnable;
+        }
+        NSString *substring = [string substringWithRange:NSMakeRange(i, 1)];
+        returnable = [returnable stringByAppendingString:substring];
+    }
+    return returnable;
+}
+
 @end
