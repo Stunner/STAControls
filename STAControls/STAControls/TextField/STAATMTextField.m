@@ -178,9 +178,9 @@ replacementString:(NSString *)string
     if ([string isEqualToString:@"."]) {
         if (cleansedString.length + 1 < self.maxCharacterLength) {
             self.isInDecimalInputMode = YES;
-            if (![lastTwoDigits isEqualToString:@"00"]) {
+//            if (![lastTwoDigits isEqualToString:@"00"]) {
                 cleansedString = [self shiftStringForDecimalEntry:cleansedString];
-            }
+//            }
             [self.afterDecimalString setString:@""];
         }
     }
@@ -189,9 +189,9 @@ replacementString:(NSString *)string
         if (cleansedString.length + 1 > self.maxCharacterLength) { // +1 for the decimal point that will be added in
             self.overageAmount = cleansedString.length + 1 - self.maxCharacterLength;
             cleansedString = [cleansedString substringToIndex:cleansedString.length - self.overageAmount];
-            if (self.isInDecimalInputMode) {
+            NSString *lastTwoDigits = [cleansedString substringFromIndex:cleansedString.length - 2];
+            if (self.isInDecimalInputMode && ![lastTwoDigits isEqualToString:@"00"]) {
                 [self.afterDecimalString setString:@""];
-                NSString *lastTwoDigits = [cleansedString substringFromIndex:cleansedString.length - 2];
                 [self.afterDecimalString appendString:[lastTwoDigits substringToIndex:1]];
             }
         } else {
