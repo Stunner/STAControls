@@ -351,7 +351,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = STA;
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Aaron Jubbal";
 				TargetAttributes = {
 					930219FA19F0F3670065B144 = {
@@ -527,6 +527,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -592,6 +593,7 @@
 				INFOPLIST_FILE = Sample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.aaronjubbal.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = STAControls;
 			};
 			name = Debug;
@@ -603,6 +605,7 @@
 				INFOPLIST_FILE = Sample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.aaronjubbal.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = STAControls;
 			};
 			name = Release;
@@ -622,6 +625,7 @@
 				);
 				INFOPLIST_FILE = STAControlsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.aaronjubbal.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = STAControlsTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
@@ -638,6 +642,7 @@
 				);
 				INFOPLIST_FILE = STAControlsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.aaronjubbal.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = STAControlsTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
