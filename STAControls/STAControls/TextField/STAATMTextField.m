@@ -53,6 +53,9 @@
         [self setText:self.lastSetText];
     }
     if (initialAtmEntryEnabledValue != atmEntryEnabled) {
+        
+        // TODO: need to investigate to see if this affects toggling of this setting without reinitialization of text field
+        
         self.atmEntryHasBeenToggled = YES; // never set this back to NO
     }
 }
@@ -108,6 +111,9 @@
     STALog(@"%s", __PRETTY_FUNCTION__);
     
     if (rightOfDecimalText.length < 2) {
+        if ([rightOfDecimalText isEqualToString:@"0"]) {
+            string = [string stringByAppendingString:@"0"];
+        }
         rightOfDecimalText = [STATextFieldUtility append:rightOfDecimalText, @"0", nil];
     }
     
