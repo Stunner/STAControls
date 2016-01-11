@@ -39,6 +39,33 @@ typedef NS_ENUM(NSUInteger, KIFPickerType) {
     KIFUIDatePicker
 };
 
+/*!
+ @enum KIFStepperDirection
+ @abstract Direction in which to increment or decrement the stepper.
+ @constant KIFStepperDirectionIncrement Increment the stepper
+ @constant KIFUIDatePicker Decrement the stepper
+ */
+typedef NS_ENUM(NSUInteger, KIFStepperDirection) {
+	KIFStepperDirectionIncrement,
+	KIFStepperDirectionDecrement
+};
+
+/*!
+ @enum KIFPullToRefreshTiming
+ @discussion The approximate time in which the pull to refresh travels downward.
+ @abstract Timing in which to perform the pull down before release.
+ @constant KIFPullToRefreshInAboutAHalfSecond about half a second
+ @constant KIFPullToRefreshInAboutOneSecond about one second
+ @constant KIFPullToRefreshInAboutTwoSeconds about two seconds
+ @constant KIFPullToRefreshInAboutThreeSeconds about three seconds.
+ */
+typedef NS_ENUM(NSUInteger, KIFPullToRefreshTiming) {
+	KIFPullToRefreshInAboutAHalfSecond = 20, //faster
+	KIFPullToRefreshInAboutOneSecond = 100,
+	KIFPullToRefreshInAboutTwoSeconds = 150,
+	KIFPullToRefreshInAboutThreeSeconds = 200, //slower
+};
+
 #define kKIFMajorSwipeDisplacement 200
 #define kKIFMinorSwipeDisplacement 5
 
@@ -221,6 +248,14 @@ static inline KIFDisplacement KIFDisplacementForSwipingInDirection(KIFSwipeDirec
  @param view The view containing the accessibility element.
  */
 - (void)tapAccessibilityElement:(UIAccessibilityElement *)element inView:(UIView *)view;
+
+/*!
+ @abstract Taps the increment|decrement button of a UIStepper view in the view heirarchy.
+ @discussion Unlike the -tapViewWithAccessibilityLabel: family of methods, this method allows you to tap an arbitrary element.  Combined with -waitForAccessibilityElement:view:withLabel:value:traits:tappable: or +[UIAccessibilityElement accessibilityElement:view:withLabel:value:traits:tappable:error:] this provides an opportunity for more complex logic.
+ @param element The accessibility element to tap.
+ @param view The view containing the accessibility element.
+ */
+- (void)tapStepperWithAccessibilityElement:(UIAccessibilityElement *)element increment: (KIFStepperDirection) stepperDirection inView:(UIView *)view;
 
 /*!
  @abstract Taps the screen at a particular point.
@@ -406,12 +441,20 @@ static inline KIFDisplacement KIFDisplacementForSwipingInDirection(KIFSwipeDirec
  */
 - (void)tapItemAtIndexPath:(NSIndexPath *)indexPath inCollectionViewWithAccessibilityIdentifier:(NSString *)identifier;
 
+/*!
+ @abstract Taps a stepper to either increment or decrement the stepper. Presumed that - (minus) to decrement is on the left.
+ @discussion This will locate the left or right half of the stepper and perform a calculated click.
+ @param label The accessibility identifier of the view to interact with.
+ @param stepperDirection The direction in which to change the value of the stepper (KIFStepperDirectionIncrement | KIFStepperDirectionDecrement)
+ */
+-(void) tapStepperWithAccessibilityLabel: (NSString *)accessibilityLabel increment: (KIFStepperDirection) stepperDirection;
+
 #if TARGET_IPHONE_SIMULATOR
 /*!
- @abstract If present, dismisses a system alert with the last button, usually 'Allow'.
+ @abstract If present, dismisses a system alert with the last button, usually 'Allow'. Returns YES if a dialog was dismissed, NO otherwise.
  @discussion Use this to dissmiss a location services authorization dialog or a photos access dialog by tapping the 'Allow' button. No action is taken if no alert is present.
  */
-- (void)acknowledgeSystemAlert;
+- (BOOL)acknowledgeSystemAlert;
 #endif
 
 /*!
@@ -448,6 +491,31 @@ static inline KIFDisplacement KIFDisplacementForSwipingInDirection(KIFSwipeDirec
  @param viewToSwipe The view containing the accessibility element.
  */
 - (void)swipeAccessibilityElement:(UIAccessibilityElement *)element inView:(UIView *)viewToSwipe inDirection:(KIFSwipeDirection)direction;
+
+/*!
+ @abstract Pulls down on the view that enables the pull to refresh.
+ @discussion This will enact the pull to refresh by pulling down the distance of 1/2 the height of the view found by the accessibility label.
+ @param label The accessibility label of the view to swipe.
+ @param pullDownDuration The enum describing the approximate time for the pull down to travel the entire distance
+ */
+- (void)pullToRefreshViewWithAccessibilityLabel:(NSString *)label pullDownDuration:(KIFPullToRefreshTiming) pullDownDuration;
+
+/*!
+ @abstract Pulls down on the view that enables the pull to refresh.
+ @discussion This will enact the pull to refresh by pulling down the distance of 1/2 the height of the view found by the accessibility label.
+ @param label The accessibility label of the view to swipe.
+ @param value The accessibility value of the view to swipe.
+ */
+- (void)pullToRefreshViewWithAccessibilityLabel:(NSString *)label value:(NSString *)value;
+
+/*!
+ @abstract Pulls down on the view that enables the pull to refresh.
+ @discussion This will enact the pull to refresh by pulling down the distance of 1/2 the height of the view found by the accessibility label.
+ @param element The accessibility element to perform the pull down on.
+ @param viewToSwipe The view containing the accessibility element.
+ @param pullDownDuration The enum describing the approximate time for the pull down to travel the entire distance
+ */
+- (void)pullToRefreshAccessibilityElement:(UIAccessibilityElement *)element inView:(UIView *)viewToSwipe pullDownDuration:(KIFPullToRefreshTiming) pullDownDuration;
 
 /*!
  @abstract Scrolls a particular view in the view hierarchy by an amount indicated as a fraction of its size.
