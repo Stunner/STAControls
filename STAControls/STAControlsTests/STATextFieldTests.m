@@ -10,8 +10,11 @@
 #import <XCTest/XCTest.h>
 #import <KIF/KIF.h>
 #import "STAControls.h"
+#import "STATextFieldBase+ProvideHeaders.h"
 
-@interface STATextFieldTests : KIFTestCase
+@interface STATextFieldTests : KIFTestCase <UITextFieldDelegate>
+
+@property (nonatomic, strong) NSInvocation *calledDelegateInvocation;
 
 @end
 
@@ -47,23 +50,41 @@
     return foundClearButton;
 }
 
+- (void)delegateMethodCalled:(NSString *)selectorString {
+    XCTAssert([NSStringFromSelector(self.calledDelegateInvocation.selector) isEqualToString:selectorString], @"selectors not equal!");
+    XCTAssert(self.calledDelegateInvocation.target == self, @"targets not equal!");
+    self.calledDelegateInvocation = nil;
+}
+
 - (void)testDecimalEntryTextField {
     NSString *atmTextFieldAccessibilityLabel = @"ATMTextField";
     STATextField *atmTextField = (STATextField *)[tester waitForViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel];
+    atmTextField.delegate = self;
     
     // test ATM text entry behavior
+    [tester tapViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel];
+    [self delegateMethodCalled:@"textFieldDidBeginEditing:"];
     [tester enterText:@"2" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"0.02"];
+    [self delegateMethodCalled:@"textField:shouldChangeCharactersInRange:replacementString:"];
+    
     [tester enterText:@"." intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"2.00"];
+    [self delegateMethodCalled:@"textField:shouldChangeCharactersInRange:replacementString:"];
     [tester enterText:@"5" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"2.50"];
+    [self delegateMethodCalled:@"textField:shouldChangeCharactersInRange:replacementString:"];
     
     [self tapClearButtonInTextField:atmTextField];
+    [self delegateMethodCalled:@"textFieldShouldClear:"];
     [tester waitForViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel value:@"0.00" traits:UIAccessibilityTraitNone];
     
     [tester enterText:@"2" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"0.02"];
+    [self delegateMethodCalled:@"textField:shouldChangeCharactersInRange:replacementString:"];
     [tester enterText:@"." intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"2.00"];
+    [self delegateMethodCalled:@"textField:shouldChangeCharactersInRange:replacementString:"];
     [tester enterText:@"5" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"2.50"];
+    [self delegateMethodCalled:@"textField:shouldChangeCharactersInRange:replacementString:"];
     
     [self tapClearButtonInTextField:atmTextField];
+    [self delegateMethodCalled:@"textFieldShouldClear:"];
     [tester waitForViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel value:@"0.00" traits:UIAccessibilityTraitNone];
     
     [tester enterText:@"1" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"0.01"];
@@ -144,6 +165,10 @@
     [tester enterText:@"0" intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"100.00"];
     [tester enterText:@"." intoViewWithAccessibilityLabel:atmTextFieldAccessibilityLabel traits:UIAccessibilityTraitNone expectedResult:@"10000.00"];
     
+    [tester tapViewWithAccessibilityLabel:@"Done"];
+//    [self delegateMethodCalled:@"textFieldShouldReturn:"];
+    [tester waitForAbsenceOfSoftwareKeyboard]; // buy some time for the delegate method to be called
+    [self delegateMethodCalled:@"textFieldDidEndEditing:"];
 }
 
 - (void)testClearButtonState {
@@ -260,5 +285,68 @@ intoViewWithAccessibilityLabel:@"ResizingTextField"
     [tester waitForAbsenceOfSoftwareKeyboard];
 }
 
+#pragma mark - UITextFieldDelegate Methods
+
+- (BOOL)textField:(STATextFieldBase *)textField
+shouldChangeCharactersInRange:(NSRange)range
+replacementString:(NSString *)string
+{
+    NSMethodSignature *sig = [[self class] instanceMethodSignatureForSelector:_cmd];
+    NSInvocation *inv = [NSInvocation invocationWithMethodSignature:sig];
+    [inv setTarget:self];
+    [inv setSelector:_cmd];
+    [inv setArgument:&textField atIndex:2];
+    [inv setArgument:&range atIndex:3];
+    [inv setArgument:&string atIndex:4];
+    
+    self.calledDelegateInvocation = inv;
+    
+    return YES;
+//    return [textField textField:textField shouldChangeCharactersInRange:range replacementString:string];
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    NSMethodSignature *sig = [[self class] instanceMethodSignatureForSelector:_cmd];
+    NSInvocation *inv = [NSInvocation invocationWithMethodSignature:sig];
+    [inv setTarget:self];
+    [inv setSelector:_cmd];
+    [inv setArgument:&textField atIndex:2];
+    
+    self.calledDelegateInvocation = inv;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    NSMethodSignature *sig = [[self class] instanceMethodSignatureForSelector:_cmd];
+    NSInvocation *inv = [NSInvocation invocationWithMethodSignature:sig];
+    [inv setTarget:self];
+    [inv setSelector:_cmd];
+    [inv setArgument:&textField atIndex:2];
+    
+    self.calledDelegateInvocation = inv;
+}
+
+- (BOOL)textFieldShouldClear:(STATextFieldBase *)textField {
+    NSMethodSignature *sig = [[self class] instanceMethodSignatureForSelector:_cmd];
+    NSInvocation *inv = [NSInvocation invocationWithMethodSignature:sig];
+    [inv setTarget:self];
+    [inv setSelector:_cmd];
+    [inv setArgument:&textField atIndex:2];
+    
+    self.calledDelegateInvocation = inv;
+    
+    return [textField textFieldShouldClear:textField];
+}
+
+- (BOOL)textFieldShouldReturn:(STATextFieldBase *)textField {
+    NSMethodSignature *sig = [[self class] instanceMethodSignatureForSelector:_cmd];
+    NSInvocation *inv = [NSInvocation invocationWithMethodSignature:sig];
+    [inv setTarget:self];
+    [inv setSelector:_cmd];
+    [inv setArgument:&textField atIndex:2];
+    
+    self.calledDelegateInvocation = inv;
+    
+    return [textField textFieldShouldReturn:textField];
+}
 
 @end

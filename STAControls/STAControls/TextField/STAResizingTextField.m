@@ -158,6 +158,8 @@
 - (void)textFieldDidChange:(STATextFieldBase *)sender {
     STALog(@"%s", __PRETTY_FUNCTION__);
     
+    // do not call on super as it is an empty implementation
+    
     if (self.clearButtonMode == UITextFieldViewModeWhileEditing) {
         self.clearButtonIsVisible = (sender.text.length > 0);
     } else if (self.clearButtonMode == UITextFieldViewModeAlways) {
