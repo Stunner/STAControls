@@ -1,5 +1,5 @@
 //
-//  STATextFieldBase+ProvideHeaders.h
+//  STATextFieldBase+PrivateHeaders.h
 //  STATextField
 //
 //  Created by Aaron Jubbal on 11/23/14.
@@ -8,7 +8,7 @@
 
 #import "STATextFieldBase.h"
 
-@interface STATextFieldBase (ProvideHeaders)
+@interface STATextFieldBase (PrivateHeaders)
 
 /**
  Called after initialization occurs (any init... method called).

@@ -97,7 +97,7 @@
 		93DF28271A70F7E600956489 /* STATextField+PrivateHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "STATextField+PrivateHeaders.h"; sourceTree = "<group>"; };
 		93DF28281A70F7E600956489 /* STATextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STATextField.h; sourceTree = "<group>"; };
 		93DF28291A70F7E600956489 /* STATextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STATextField.m; sourceTree = "<group>"; };
-		93DF282A1A70F7E600956489 /* STATextFieldBase+ProvideHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "STATextFieldBase+ProvideHeaders.h"; sourceTree = "<group>"; };
+		93DF282A1A70F7E600956489 /* STATextFieldBase+PrivateHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "STATextFieldBase+PrivateHeaders.h"; sourceTree = "<group>"; };
 		93DF282B1A70F7E600956489 /* STATextFieldBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STATextFieldBase.h; sourceTree = "<group>"; };
 		93DF282C1A70F7E600956489 /* STATextFieldBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STATextFieldBase.m; sourceTree = "<group>"; };
 		93DF282D1A70F7E600956489 /* STATextFieldUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STATextFieldUtility.h; sourceTree = "<group>"; };
@@ -255,7 +255,7 @@
 				93DF28271A70F7E600956489 /* STATextField+PrivateHeaders.h */,
 				93DF28281A70F7E600956489 /* STATextField.h */,
 				93DF28291A70F7E600956489 /* STATextField.m */,
-				93DF282A1A70F7E600956489 /* STATextFieldBase+ProvideHeaders.h */,
+				93DF282A1A70F7E600956489 /* STATextFieldBase+PrivateHeaders.h */,
 				93DF282B1A70F7E600956489 /* STATextFieldBase.h */,
 				93DF282C1A70F7E600956489 /* STATextFieldBase.m */,
 				93DF282D1A70F7E600956489 /* STATextFieldUtility.h */,

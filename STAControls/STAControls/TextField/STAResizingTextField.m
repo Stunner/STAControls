@@ -7,7 +7,7 @@
 //
 
 #import "STAResizingTextField.h"
-#import "STATextFieldBase+ProvideHeaders.h"
+#import "STATextFieldBase+PrivateHeaders.h"
 #import "STACommon.h"
 #import "STAButton.h"
 

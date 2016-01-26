@@ -7,7 +7,7 @@
 //
 
 #import "STATextFieldBase.h"
-#import "STATextFieldBase+ProvideHeaders.h"
+#import "STATextFieldBase+PrivateHeaders.h"
 
 // reference: http://stackoverflow.com/a/9986842/347339
 #pragma mark - STATextFieldPrivateDelegate

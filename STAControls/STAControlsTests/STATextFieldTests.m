@@ -10,7 +10,7 @@
 #import <XCTest/XCTest.h>
 #import <KIF/KIF.h>
 #import "STAControls.h"
-#import "STATextFieldBase+ProvideHeaders.h"
+#import "STATextFieldBase+PrivateHeaders.h"
 
 @interface STATextFieldTests : KIFTestCase <UITextFieldDelegate>
 

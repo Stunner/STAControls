@@ -9,7 +9,7 @@
 #import "STAATMTextField.h"
 #import "STATextField+PrivateHeaders.h"
 #import "STATextFieldUtility.h"
-#import "STATextFieldBase+ProvideHeaders.h"
+#import "STATextFieldBase+PrivateHeaders.h"
 #import "NSString+STATextField.h"
 #import "STACommon.h"
 
