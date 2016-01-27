@@ -103,11 +103,11 @@
 #pragma mark Helpers
 
 - (void)updateEnabledStatusForForwardChevron {
-    self.rightChevron.enabled = (self.nextControl);
+    self.rightChevron.enabled = (BOOL)(self.nextControl);
 }
 
 - (void)updateEnabledStatusForBackChevron {
-    self.leftChevron.enabled = (self.prevControl);
+    self.leftChevron.enabled = (BOOL)(self.prevControl);
 }
 
 - (void)doneClicked:(id)sender {

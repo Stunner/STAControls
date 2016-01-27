@@ -180,6 +180,7 @@ replacementString:(NSString *)string
         }
     }
     
+    // TODO: use a category method for this!
     NSString *lastTwoDigits = (cleansedString.length >= 2) ? [cleansedString substringFromIndex:cleansedString.length - 2] : nil;
     if ([string isEqualToString:@"."]) {
         if (cleansedString.length + 1 < self.maxCharacterLength) {
