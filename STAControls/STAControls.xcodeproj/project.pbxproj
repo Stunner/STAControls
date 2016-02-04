@@ -14,7 +14,6 @@
 		93021A3219F0F7A50065B144 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93021A2919F0F7A50065B144 /* Main.storyboard */; };
 		93021A3319F0F7A50065B144 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93021A2B19F0F7A50065B144 /* Images.xcassets */; };
 		93021A3519F0F7A50065B144 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 93021A2D19F0F7A50065B144 /* main.m */; };
-		93021A3619F0F7A50065B144 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93021A2F19F0F7A50065B144 /* ViewController.m */; };
 		9320F6361ACA7ADC00F4DAB2 /* SampleRootTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9320F6351ACA7ADC00F4DAB2 /* SampleRootTableViewController.m */; };
 		9320F63C1ACA865C00F4DAB2 /* SampleSTATextFieldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9320F63A1ACA865C00F4DAB2 /* SampleSTATextFieldViewController.m */; };
 		9320F63D1ACA865C00F4DAB2 /* SampleSTATextFieldViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9320F63B1ACA865C00F4DAB2 /* SampleSTATextFieldViewController.xib */; };
@@ -62,8 +61,6 @@
 		93021A2B19F0F7A50065B144 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		93021A2C19F0F7A50065B144 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		93021A2D19F0F7A50065B144 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		93021A2E19F0F7A50065B144 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		93021A2F19F0F7A50065B144 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		9320F6341ACA7ADC00F4DAB2 /* SampleRootTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleRootTableViewController.h; sourceTree = "<group>"; };
 		9320F6351ACA7ADC00F4DAB2 /* SampleRootTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleRootTableViewController.m; sourceTree = "<group>"; };
 		9320F6391ACA865C00F4DAB2 /* SampleSTATextFieldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleSTATextFieldViewController.h; sourceTree = "<group>"; };
@@ -186,8 +183,6 @@
 				93021A2B19F0F7A50065B144 /* Images.xcassets */,
 				93021A2C19F0F7A50065B144 /* Info.plist */,
 				93021A2D19F0F7A50065B144 /* main.m */,
-				93021A2E19F0F7A50065B144 /* ViewController.h */,
-				93021A2F19F0F7A50065B144 /* ViewController.m */,
 				9320F6341ACA7ADC00F4DAB2 /* SampleRootTableViewController.h */,
 				9320F6351ACA7ADC00F4DAB2 /* SampleRootTableViewController.m */,
 				9320F6391ACA865C00F4DAB2 /* SampleSTATextFieldViewController.h */,
@@ -469,7 +464,6 @@
 				93DF28371A70F7E600956489 /* STAPickerViewBase.m in Sources */,
 				93DF28361A70F7E600956489 /* STAPickerView.m in Sources */,
 				9320F6361ACA7ADC00F4DAB2 /* SampleRootTableViewController.m in Sources */,
-				93021A3619F0F7A50065B144 /* ViewController.m in Sources */,
 				93DF283A1A70F7E600956489 /* STADateField.m in Sources */,
 				93DF28351A70F7E600956489 /* STAPickerField.m in Sources */,
 				93021A3519F0F7A50065B144 /* main.m in Sources */,

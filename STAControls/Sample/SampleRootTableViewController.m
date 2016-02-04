@@ -7,7 +7,6 @@
 //
 
 #import "SampleRootTableViewController.h"
-#import "ViewController.h"
 #import "SampleSTATextFieldViewController.h"
 #import "SampleSTASegmentedControlViewController.h"
 #import "SampleSTAButtonViewController.h"
