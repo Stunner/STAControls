@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Aaron Jubbal. All rights reserved.
 //
 
-#define STACONTROLS_DEBUG 1
+#define STACONTROLS_DEBUG 0
 
 #if STACONTROLS_DEBUG
 #define STALog(fmt, ...) NSLog((@"[STAControls] " fmt), ##__VA_ARGS__)
