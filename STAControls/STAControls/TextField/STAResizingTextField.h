@@ -24,6 +24,11 @@
 @property (nonatomic, strong) UIControl *nextControl;
 
 /**
+ Defaults to YES.
+ */
+@property (nonatomic, assign) BOOL mayBecomeFirstResponder;
+
+/**
  Defaults to NO.
  */
 @property (nonatomic, assign) BOOL resizesForClearTextButton;

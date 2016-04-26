@@ -60,13 +60,35 @@
     }
 }
 
+#pragma mark Overrides
+
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
+    if (action == @selector(paste:) ||
+        action == @selector(copy:))
+    {
+        return YES;
+    }
+    return NO;
+}
+
+- (void)copy:(id)sender {
+    [[UIPasteboard generalPasteboard] setString:self.text];
+}
+
+- (void)paste:(id)sender {
+    NSString *stringToPaste = [[UIPasteboard generalPasteboard] string];
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    [formatter setAllowsFloats:YES];
+    if ([formatter numberFromString:stringToPaste]) {
+        self.text = stringToPaste;
+    }
+}
+
 - (CGRect)caretRectForPosition:(UITextPosition *)position {
     STALog(@"%s", __PRETTY_FUNCTION__);
     
-    if (!self.atmEntryEnabled) {
-        return [super caretRectForPosition:position];
-    }
-    return CGRectZero;
+    CGRect caretRect = [super caretRectForPosition:position];
+    return caretRect;
 }
 
 - (UITextPosition *)closestPositionToPoint:(CGPoint)point {

@@ -45,6 +45,7 @@
     _resignsFirstResponderUponReturnKeyPress = YES;
     _initialTextFieldWidth = self.frame.size.width;
     _realRightViewMode = self.rightViewMode;
+    _mayBecomeFirstResponder = YES;
 }
 
 - (void)setNextControl:(UIControl *)nextFirstResponderUponReturnKeyPress {
@@ -108,6 +109,12 @@
     }
 }
 
+- (BOOL)canBecomeFirstResponder {
+    STALog(@"%s", __PRETTY_FUNCTION__);
+    
+    return self.mayBecomeFirstResponder;
+}
+
 - (BOOL)becomeFirstResponder {
     STALog(@"%s", __PRETTY_FUNCTION__);
     
@@ -157,8 +164,6 @@
 
 - (void)textFieldDidChange:(STATextFieldBase *)sender {
     STALog(@"%s", __PRETTY_FUNCTION__);
-    
-    // do not call on super as it is an empty implementation
     
     if (self.clearButtonMode == UITextFieldViewModeWhileEditing) {
         self.clearButtonIsVisible = (sender.text.length > 0);
