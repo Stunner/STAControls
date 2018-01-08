@@ -22,6 +22,8 @@
     // Do any additional setup after loading the view from its nib.
     
     [self.button setBackgroundColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+    [self.button setBackgroundColor:[UIColor redColor] forState:UIControlStateNormal];
+    
 }
 
 - (void)didReceiveMemoryWarning {

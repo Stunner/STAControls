@@ -7,6 +7,7 @@
 //
 
 #import "STAButton.h"
+#import "STACommon.h"
 
 @interface STAButton ()
 
@@ -112,14 +113,11 @@
 #pragma mark Helper Methods
 
 - (void)stateChangedFrom:(UIControlState)oldState to:(UIControlState)newState {
-    UIColor *backgroundColor = [self.backgroundColorDictionary objectForKey:@(newState)];
+    UIColor *backgroundColor = [self.backgroundColorDictionary objectForKeyNotNull:@(newState)];
     if (backgroundColor) {
         super.backgroundColor = backgroundColor;
     } else {
-        UIColor *defaultColor = [self.backgroundColorDictionary objectForKey:@"default"];
-        if ([defaultColor isMemberOfClass:[NSNull class]]) {
-            defaultColor = nil;
-        }
+        UIColor *defaultColor = [self.backgroundColorDictionary objectForKeyNotNull:@"default"];
         super.backgroundColor = defaultColor;
     }
 }

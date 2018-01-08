@@ -13,3 +13,5 @@
 #else
 #define STALog(...)
 #endif
+
+#import "NSDictionary+Utility.h"
