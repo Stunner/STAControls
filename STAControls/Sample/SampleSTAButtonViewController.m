@@ -12,6 +12,7 @@
 @interface SampleSTAButtonViewController ()
 
 @property (nonatomic, strong) IBOutlet STAButton *button;
+@property (strong, nonatomic) IBOutlet STAButton *multilineButton;
 
 @end
 
@@ -24,6 +25,12 @@
     [self.button setBackgroundColor:[UIColor grayColor] forState:UIControlStateHighlighted];
     [self.button setBackgroundColor:[UIColor redColor] forState:UIControlStateNormal];
     
+    [self.multilineButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
+    self.multilineButton.titleLabel.numberOfLines = 0;
+    NSArray *attributes = @[@{NSForegroundColorAttributeName : [UIColor redColor]},
+                            @{NSForegroundColorAttributeName : [UIColor greenColor]},
+                            @{NSForegroundColorAttributeName : [UIColor orangeColor]}];
+    [self.multilineButton setMultilineTitle:@"123\n45\n678" withLineAttributes:attributes forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning {
