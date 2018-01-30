@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		06455B5E8FB37EB009B44709 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
-		21DED687A4DD04037734377A /* libPods-STAControlsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F936BDAFC29480EF8581F0 /* libPods-STAControlsTests.a */; };
+		4A75D5205A91051A134FFA2E /* libPods-STAControlsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67ADC5D907FC2BF44E91D053 /* libPods-STAControlsTests.a */; };
 		93021A3019F0F7A50065B144 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 93021A2619F0F7A50065B144 /* AppDelegate.m */; };
 		93021A3119F0F7A50065B144 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93021A2719F0F7A50065B144 /* LaunchScreen.xib */; };
 		93021A3219F0F7A50065B144 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93021A2919F0F7A50065B144 /* Main.storyboard */; };
@@ -52,7 +51,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2C1BA466BE4F3A687AD837BE /* Pods-STAControlsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STAControlsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-STAControlsTests/Pods-STAControlsTests.release.xcconfig"; sourceTree = "<group>"; };
+		67ADC5D907FC2BF44E91D053 /* libPods-STAControlsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-STAControlsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		721F37697643A85CE76CEA0D /* Pods-STAControlsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STAControlsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-STAControlsTests/Pods-STAControlsTests.release.xcconfig"; sourceTree = "<group>"; };
 		930219FB19F0F3670065B144 /* STAControls.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STAControls.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93021A1419F0F3670065B144 /* STAControlsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = STAControlsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		93021A2519F0F7A50065B144 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -114,8 +114,7 @@
 		93E35CAA1B0C3B5400E3B673 /* SampleSTAButtonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleSTAButtonViewController.h; sourceTree = "<group>"; };
 		93E35CAB1B0C3B5400E3B673 /* SampleSTAButtonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleSTAButtonViewController.m; sourceTree = "<group>"; };
 		93E35CAC1B0C3B5400E3B673 /* SampleSTAButtonViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SampleSTAButtonViewController.xib; sourceTree = "<group>"; };
-		93F936BDAFC29480EF8581F0 /* libPods-STAControlsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-STAControlsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DABDECF76F239E1DF0748E4B /* Pods-STAControlsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STAControlsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-STAControlsTests/Pods-STAControlsTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F39BE01B996A587411D98467 /* Pods-STAControlsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STAControlsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-STAControlsTests/Pods-STAControlsTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,29 +129,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				06455B5E8FB37EB009B44709 /* (null) in Frameworks */,
-				21DED687A4DD04037734377A /* libPods-STAControlsTests.a in Frameworks */,
+				4A75D5205A91051A134FFA2E /* libPods-STAControlsTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		39C257CD713E7FBC0BA7AAEE /* Frameworks */ = {
+		09CB3FB97FD1F1B7A96D7B2E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				93F936BDAFC29480EF8581F0 /* libPods-STAControlsTests.a */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		7E44DDC7364F0D8A4EA85A1E /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				DABDECF76F239E1DF0748E4B /* Pods-STAControlsTests.debug.xcconfig */,
-				2C1BA466BE4F3A687AD837BE /* Pods-STAControlsTests.release.xcconfig */,
+				F39BE01B996A587411D98467 /* Pods-STAControlsTests.debug.xcconfig */,
+				721F37697643A85CE76CEA0D /* Pods-STAControlsTests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		0F6E6B26B2941DCE96CB4CF5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				67ADC5D907FC2BF44E91D053 /* libPods-STAControlsTests.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		930219F219F0F3670065B144 = {
@@ -162,8 +160,8 @@
 				93021A2419F0F7A50065B144 /* Sample */,
 				93DF28411A70F81300956489 /* STAControlsTests */,
 				930219FC19F0F3670065B144 /* Products */,
-				39C257CD713E7FBC0BA7AAEE /* Frameworks */,
-				7E44DDC7364F0D8A4EA85A1E /* Pods */,
+				09CB3FB97FD1F1B7A96D7B2E /* Pods */,
+				0F6E6B26B2941DCE96CB4CF5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -336,12 +334,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 93021A2119F0F3670065B144 /* Build configuration list for PBXNativeTarget "STAControlsTests" */;
 			buildPhases = (
-				65A9AE7ECCAC47BA3A426CDD /* Check Pods Manifest.lock */,
+				08D15B553DD69BF5E9E5E9E3 /* [CP] Check Pods Manifest.lock */,
 				93021A1019F0F3670065B144 /* Sources */,
 				93021A1119F0F3670065B144 /* Frameworks */,
 				93021A1219F0F3670065B144 /* Resources */,
-				077228B4838094DE6F2E2ECF /* Copy Pods Resources */,
-				753388D2CEC634781AFC3D02 /* Embed Pods Frameworks */,
+				93E541F5DE080EDB7362039F /* [CP] Embed Pods Frameworks */,
+				5E7CD76884767E54608F87AC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -415,14 +413,32 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		077228B4838094DE6F2E2ECF /* Copy Pods Resources */ = {
+		08D15B553DD69BF5E9E5E9E3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-STAControlsTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5E7CD76884767E54608F87AC /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -430,29 +446,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-STAControlsTests/Pods-STAControlsTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		65A9AE7ECCAC47BA3A426CDD /* Check Pods Manifest.lock */ = {
+		93E541F5DE080EDB7362039F /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		753388D2CEC634781AFC3D02 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -656,7 +657,7 @@
 		};
 		93021A2219F0F3670065B144 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DABDECF76F239E1DF0748E4B /* Pods-STAControlsTests.debug.xcconfig */;
+			baseConfigurationReference = F39BE01B996A587411D98467 /* Pods-STAControlsTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/STAControls.app/STAControls";
 				DEVELOPMENT_TEAM = "";
@@ -678,7 +679,7 @@
 		};
 		93021A2319F0F3670065B144 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2C1BA466BE4F3A687AD837BE /* Pods-STAControlsTests.release.xcconfig */;
+			baseConfigurationReference = 721F37697643A85CE76CEA0D /* Pods-STAControlsTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/STAControls.app/STAControls";
 				DEVELOPMENT_TEAM = "";

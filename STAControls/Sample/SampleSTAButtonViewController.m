@@ -23,7 +23,7 @@
     // Do any additional setup after loading the view from its nib.
     
     [self.button setBackgroundColor:[UIColor grayColor] forState:UIControlStateHighlighted];
-    [self.button setBackgroundColor:[UIColor redColor] forState:UIControlStateNormal];
+//    [self.button setBackgroundColor:[UIColor redColor] forState:UIControlStateNormal];
     
     [self.multilineButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
     self.multilineButton.titleLabel.numberOfLines = 0;

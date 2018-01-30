@@ -48,22 +48,16 @@ The testing target will add a header and implementation file, likely "Acceptance
 Once your test target set up, add the following to your Podfile file. Use your target's name as appropriate.
 
 ```Ruby
-target 'Acceptance Tests', :exclusive => true do
+target 'Your Apps' do
+  ...
+end
+
+target 'Acceptance Tests' do
   pod 'KIF', '~> 3.0', :configurations => ['Debug']
 end
 ```
 
-The `:exclusive => true` option will prevent Cocoapods from including dependencies from your main target in your test target causing double-linking issues when you test link against the app.
-
 After running `pod install` complete the tasks in [**Final Test Target Configurations**](#final-test-target-configurations) below for the final details on getting your tests to run.
-
-Note: if you are using KIF with OCUnit, you need to use the OCUnit version of KIF as follows:
-
-```Ruby
-target 'Acceptance Tests', :exclusive => true do
-  pod 'KIF/OCUnit', '~> 3.0'
-end
-```
 
 Installation (from GitHub)
 --------------------------
@@ -100,7 +94,7 @@ Select your project in Xcode and click on "Add Target" in the bottom left corner
 The testing target will add a header and implementation file, likely "Acceptance_Tests.m/h" to match your target name. Delete those.
 
 ### Configure the Testing Target
-Now that you have a target for your tests, add the tests to that target. With the project settings still selected in the Project Navigator, and the new integration tests target selected in the project settings, select the "Build Phases" tab. Under the "Link Binary With Libraries" section, hit the "+" button. In the sheet that appears, select "libKIF.a" and click "Add".  Repeat the process for CoreGraphics.framework. 
+Now that you have a target for your tests, add the tests to that target. With the project settings still selected in the Project Navigator, and the new integration tests target selected in the project settings, select the "Build Phases" tab. Under the "Link Binary With Libraries" section, hit the "+" button. In the sheet that appears, select "libKIF.a" and click "Add".  Repeat the process for CoreGraphics.framework and QuartzCore.framework. 
 
 KIF requires the IOKit.framework, but it is not located with the other system frameworks. To link to it, add "-framework IOKit" to the "Other Linker Flags" build setting.
 
@@ -256,21 +250,21 @@ If you want to write your test cases in Swift, you'll need to keep two things in
 import KIF
  
 extension XCTestCase {
-    func tester(_ file : String = __FILE__, _ line : Int = __LINE__) -> KIFUITestActor {
+    func tester(file : String = __FILE__, _ line : Int = __LINE__) -> KIFUITestActor {
         return KIFUITestActor(inFile: file, atLine: line, delegate: self)
     }
 
-    func system(_ file : String = __FILE__, _ line : Int = __LINE__) -> KIFSystemTestActor {
+    func system(file : String = __FILE__, _ line : Int = __LINE__) -> KIFSystemTestActor {
         return KIFSystemTestActor(inFile: file, atLine: line, delegate: self)
     }
 }
 
 extension KIFTestActor {
-    func tester(_ file : String = __FILE__, _ line : Int = __LINE__) -> KIFUITestActor {
+    func tester(file : String = __FILE__, _ line : Int = __LINE__) -> KIFUITestActor {
         return KIFUITestActor(inFile: file, atLine: line, delegate: self)
     }
 
-    func system(_ file : String = __FILE__, _ line : Int = __LINE__) -> KIFSystemTestActor {
+    func system(file : String = __FILE__, _ line : Int = __LINE__) -> KIFSystemTestActor {
         return KIFSystemTestActor(inFile: file, atLine: line, delegate: self)
     }
 }

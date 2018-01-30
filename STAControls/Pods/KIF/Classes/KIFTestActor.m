@@ -18,14 +18,6 @@
 
 @implementation KIFTestActor
 
-+ (void)load
-{
-    @autoreleasepool {
-        NSLog(@"KIFTester loaded");
-        [UIApplication swizzleRunLoop];
-    }
-}
-
 - (instancetype)initWithFile:(NSString *)file line:(NSInteger)line delegate:(id<KIFTestActorDelegate>)delegate
 {
     self = [super init];
@@ -145,6 +137,16 @@ static NSTimeInterval KIFTestStepDelay = 0.1;
     }];
 }
 
+- (void)failWithMessage:(NSString *)message, ...;
+{
+    va_list args;
+    va_start(args, message);
+    NSString *formattedMessage = [[NSString alloc] initWithFormat:message arguments:args];
+    NSError *error = [NSError errorWithDomain:@"KIFTest" code:KIFTestStepResultFailure userInfo:[NSDictionary dictionaryWithObjectsAndKeys:formattedMessage, NSLocalizedDescriptionKey, nil]];
+    [self failWithError:error stopTest:YES];
+    va_end(args);
+}
+
 - (void)failWithError:(NSError *)error stopTest:(BOOL)stopTest
 {
     [self.delegate failWithException:[NSException failureInFile:self.file atLine:(int)self.line withDescription:error.localizedDescription] stopTest:stopTest];
@@ -175,6 +177,22 @@ static NSTimeInterval KIFTestStepDelay = 0.1;
     NSException *newException = [NSException failureInFile:self.file atLine:(int)self.line withDescription:@"Failure in child step: %@", firstException.description];
 
     [self.delegate failWithExceptions:[exceptions arrayByAddingObject:newException] stopTest:stop];
+}
+
+@end
+
+@interface UIApplication (KIFTestActorLoading)
+
+@end
+
+@implementation UIApplication (KIFTestActorLoading)
+
++ (void)load
+{
+    @autoreleasepool {
+        NSLog(@"KIFTester loaded");
+        [UIApplication swizzleRunLoop];
+    }
 }
 
 @end

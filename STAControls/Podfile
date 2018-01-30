@@ -1,6 +1,6 @@
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '6.0'
 
-target 'STAControlsTests', :exclusive => true do
-  pod 'KIF', '~> 3.3'
+target 'STAControlsTests' do
+  pod 'KIF', :configurations => ['Debug']
 end
