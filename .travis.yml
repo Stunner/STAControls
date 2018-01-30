@@ -30,5 +30,65 @@ matrix:
       env: DEVICE="iPad Air 2" VERSION=9.1
     - osx_image: xcode7.1
       env: DEVICE="iPad Pro" VERSION=9.1
+    - osx_image: xcode8
+      env: DEVICE="iPhone 6" VERSION=9.3
+    - osx_image: xcode8
+      env: DEVICE="iPhone 6 Plus" VERSION=9.3
+    - osx_image: xcode8
+      env: DEVICE="iPhone 6s" VERSION=9.3
+    - osx_image: xcode8
+      env: DEVICE="iPhone 6s Plus" VERSION=9.3
+    - osx_image: xcode8
+      env: DEVICE="iPhone SE" VERSION=9.3
+    - osx_image: xcode8
+      env: DEVICE="iPad Air 2" VERSION=9.3
+    - osx_image: xcode8.3
+      env: DEVICE="iPhone 6" VERSION=9.3
+    - osx_image: xcode8.3
+      env: DEVICE="iPhone 6 Plus" VERSION=9.3
+    - osx_image: xcode8.3
+      env: DEVICE="iPhone 6s" VERSION=9.3
+    - osx_image: xcode8.3
+      env: DEVICE="iPhone 6s Plus" VERSION=9.3
+    - osx_image: xcode8.3
+      env: DEVICE="iPhone SE" VERSION=9.3
+    - osx_image: xcode8.3
+      env: DEVICE="iPad Air 2" VERSION=9.3
+    - osx_image: xcode8.3
+      env: DEVICE="iPhone 6" VERSION=10.3
+    - osx_image: xcode8.3
+      env: DEVICE="iPhone 6 Plus" VERSION=10.3
+    - osx_image: xcode8.3
+      env: DEVICE="iPhone 6s" VERSION=10.3
+    - osx_image: xcode8.3
+      env: DEVICE="iPhone 6s Plus" VERSION=10.3
+    - osx_image: xcode8.3
+      env: DEVICE="iPhone SE" VERSION=10.3
+    - osx_image: xcode8.3
+      env: DEVICE="iPad Air 2" VERSION=10.3
+    - osx_image: xcode9.2
+      env: DEVICE="iPhone 6" VERSION=10.3
+    - osx_image: xcode9.2
+      env: DEVICE="iPhone 6 Plus" VERSION=10.3
+    - osx_image: xcode9.2
+      env: DEVICE="iPhone 6s" VERSION=10.3
+    - osx_image: xcode9.2
+      env: DEVICE="iPhone 6s Plus" VERSION=10.3
+    - osx_image: xcode9.2
+      env: DEVICE="iPhone SE" VERSION=10.3
+    - osx_image: xcode9.2
+      env: DEVICE="iPad Air 2" VERSION=10.3
+    - osx_image: xcode9.2
+      env: DEVICE="iPhone 6" VERSION=11.2
+    - osx_image: xcode9.2
+      env: DEVICE="iPhone 6 Plus" VERSION=11.2
+    - osx_image: xcode9.2
+      env: DEVICE="iPhone 6s" VERSION=11.2
+    - osx_image: xcode9.2
+      env: DEVICE="iPhone 6s Plus" VERSION=11.2
+    - osx_image: xcode9.2
+      env: DEVICE="iPhone SE" VERSION=11.2
+    - osx_image: xcode9.2
+      env: DEVICE="iPad Air 2" VERSION=11.2
 script:
   - xctool -sdk iphonesimulator -workspace STAControls/STAControls.xcworkspace -scheme STAControlsTests -destination "platform=iOS Simulator,name=$DEVICE,OS=$VERSION" clean test
