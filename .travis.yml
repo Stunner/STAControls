@@ -91,4 +91,4 @@ matrix:
     - osx_image: xcode9.2
       env: DEVICE="iPad Air 2" VERSION=11.2
 script:
-  - xctool -sdk iphonesimulator -workspace STAControls/STAControls.xcworkspace -scheme STAControlsTests -destination "platform=iOS Simulator,name=$DEVICE,OS=$VERSION" clean test
+  - xcodebuild -sdk iphonesimulator -workspace STAControls/STAControls.xcworkspace -scheme STAControlsTests -destination "platform=iOS Simulator,name=$DEVICE,OS=$VERSION" clean test
