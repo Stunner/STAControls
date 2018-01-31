@@ -21,9 +21,12 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Li0-xc-jd6" customClass="STASegmentedControl">
-                    <rect key="frame" x="50" y="90" width="225" height="29"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Li0-xc-jd6" customClass="STASegmentedControl">
+                    <rect key="frame" x="66" y="90" width="243" height="29"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="243" id="MUC-Zy-LdZ"/>
+                        <constraint firstAttribute="height" constant="28" id="u9h-IB-A7N"/>
+                    </constraints>
                     <segments>
                         <segment title="First"/>
                         <segment title="Second"/>
@@ -39,9 +42,12 @@
                         <action selector="valueChanged:" destination="-1" eventType="valueChanged" id="Mus-eY-FSt"/>
                     </connections>
                 </segmentedControl>
-                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="8w5-H3-RGv" customClass="STASegmentedControl">
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="8w5-H3-RGv" customClass="STASegmentedControl">
                     <rect key="frame" x="50" y="158" width="275" height="29"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="28" id="AJv-dC-1h9"/>
+                        <constraint firstAttribute="width" constant="275" id="Cp0-e5-UsU"/>
+                    </constraints>
                     <segments>
                         <segment title="First2"/>
                         <segment title="Second2"/>
@@ -57,15 +63,26 @@
                         <action selector="valueChanged:" destination="-1" eventType="valueChanged" id="oLN-J0-jeV"/>
                     </connections>
                 </segmentedControl>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="toggleable:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lXB-02-qIL">
-                    <rect key="frame" x="119" y="134" width="86" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="toggleable:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lXB-02-qIL">
+                    <rect key="frame" x="144.5" y="134" width="86" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="86" id="bMT-qj-Ky1"/>
+                        <constraint firstAttribute="height" constant="21" id="xRx-iY-bz1"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Li0-xc-jd6" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="90" id="34W-vG-fKY"/>
+                <constraint firstItem="Li0-xc-jd6" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="4sw-PJ-ob3"/>
+                <constraint firstItem="lXB-02-qIL" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="H6Q-5p-aUM"/>
+                <constraint firstItem="8w5-H3-RGv" firstAttribute="top" secondItem="lXB-02-qIL" secondAttribute="bottom" constant="3" id="qF6-F1-b8B"/>
+                <constraint firstItem="8w5-H3-RGv" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="rRJ-gs-Rgl"/>
+                <constraint firstItem="lXB-02-qIL" firstAttribute="top" secondItem="Li0-xc-jd6" secondAttribute="bottom" constant="16" id="zRZ-gu-meH"/>
+            </constraints>
         </view>
     </objects>
 </document>
