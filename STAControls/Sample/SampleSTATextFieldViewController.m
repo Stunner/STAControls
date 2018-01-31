@@ -25,9 +25,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    
+
     self.title = @"STATextField";
+    self.navigationItem.leftBarButtonItem.accessibilityLabel = @"Back";
     
     _atmTextField.placeholder = @"Hello world!";
     _atmTextField.keyboardType = UIKeyboardTypeDecimalPad;

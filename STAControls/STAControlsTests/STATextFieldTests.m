@@ -11,6 +11,7 @@
 #import <KIF/KIF.h>
 #import "STAControls.h"
 #import "STATextFieldBase+PrivateHeaders.h"
+#import "STAControlsTests.h"
 
 @interface STATextFieldTests : KIFTestCase <UITextFieldDelegate>
 
@@ -25,7 +26,11 @@
 }
 
 - (void)afterAll {
-    [tester tapViewWithAccessibilityLabel:@"Back"];
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"11.0")) {
+        [tester tapViewWithAccessibilityLabel:kRootViewControllerTitle];
+    } else {
+        [tester tapViewWithAccessibilityLabel:@"Back"];
+    }
 }
 
 - (void)afterEach {

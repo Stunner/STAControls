@@ -20,6 +20,12 @@ MAKE_CATEGORIES_LOADABLE(UIApplication_KIFAdditions)
 static BOOL _KIF_UIApplicationMockOpenURL = NO;
 static BOOL _KIF_UIApplicationMockOpenURL_returnValue = NO;
 
+SInt32 KIFRunLoopRunInModeRelativeToAnimationSpeed(CFStringRef mode, CFTimeInterval seconds, Boolean returnAfterSourceHandled)
+{
+    CFTimeInterval scaledSeconds = seconds / [UIApplication sharedApplication].animationSpeed;
+    return CFRunLoopRunInMode(mode, scaledSeconds, returnAfterSourceHandled);
+}
+
 @interface UIApplication (Undocumented)
 - (void)pushRunLoopMode:(id)arg1;
 - (void)pushRunLoopMode:(id)arg1 requester:(id)requester;
@@ -41,6 +47,9 @@ static const void *KIFRunLoopModesKey = &KIFRunLoopModesKey;
     // Go through the array of windows in reverse order to process the frontmost window first.
     // When several elements with the same accessibilitylabel are present the one in front will be picked.
     for (UIWindow *window in [self.windowsWithKeyWindow reverseObjectEnumerator]) {
+        if (window.hidden) {
+            continue;
+        }
         UIAccessibilityElement *element = [window accessibilityElementWithLabel:label accessibilityValue:value traits:traits];
         if (element) {
             return element;
@@ -110,6 +119,19 @@ static const void *KIFRunLoopModesKey = &KIFRunLoopModesKey;
         [windows addObject:keyWindow];
     }
     return windows;
+}
+
+- (float)animationSpeed
+{
+    if (!self.keyWindow) {
+        return 1.0f;
+    }
+    return self.keyWindow.layer.speed;
+}
+
+- (void)setAnimationSpeed:(float)animationSpeed
+{
+    self.keyWindow.layer.speed = animationSpeed;
 }
 
 #pragma mark - Screenshotting
@@ -250,6 +272,18 @@ static const void *KIFRunLoopModesKey = &KIFRunLoopModesKey;
     }
 }
 
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 100000
+- (BOOL)KIF_openURL:(NSURL *)URL options:(NSDictionary<NSString *, id> *)options completionHandler:(void (^ __nullable)(BOOL success))completionHandler;
+{
+    if (_KIF_UIApplicationMockOpenURL) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:UIApplicationDidMockOpenURLNotification object:self userInfo:@{UIApplicationOpenedURLKey: URL}];
+        return _KIF_UIApplicationMockOpenURL_returnValue;
+    } else {
+        return [self KIF_openURL:URL options: options completionHandler: completionHandler];
+    }
+}
+#endif
+
 - (BOOL)KIF_canOpenURL:(NSURL *)URL;
 {
     if (_KIF_UIApplicationMockOpenURL) {
@@ -288,6 +322,9 @@ static inline void Swizzle(Class c, SEL orig, SEL new)
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         Swizzle(self, @selector(openURL:), @selector(KIF_openURL:));
+        #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 100000
+            Swizzle(self, @selector(openURL:options:completionHandler:), @selector(KIF_openURL:options:completionHandler:));
+        #endif
         Swizzle(self, @selector(canOpenURL:), @selector(KIF_canOpenURL:));
     });
 

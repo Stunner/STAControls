@@ -20,7 +20,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    self.navigationItem.leftBarButtonItem.accessibilityLabel = @"Back";
+    self.navigationItem.leftBarButtonItem.accessibilityHint = @"Back";
     
     [self.button setBackgroundColor:[UIColor grayColor] forState:UIControlStateHighlighted];
 //    [self.button setBackgroundColor:[UIColor redColor] forState:UIControlStateNormal];

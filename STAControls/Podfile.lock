@@ -1,14 +1,17 @@
 PODS:
-  - KIF (3.4.2):
-    - KIF/Core (= 3.4.2)
-  - KIF/Core (3.4.2)
+  - KIF (3.6.0):
+    - KIF/Core (= 3.6.0)
+  - KIF/Core (3.6.0)
+  - KIF/IdentifierTests (3.6.0):
+    - KIF/Core
 
 DEPENDENCIES:
   - KIF
+  - KIF/IdentifierTests
 
 SPEC CHECKSUMS:
-  KIF: b518c9831453abea5afdbbde3908ec47832d6d56
+  KIF: bd770edd8ce49bc7308501e4871e58a02d137be3
 
-PODFILE CHECKSUM: ce3f13d25629c9eedd13d5e6c9d48bf493ef7225
+PODFILE CHECKSUM: 59dd7bf219a2e3f52de7d1358cb2ee9f10dd7125
 
 COCOAPODS: 1.4.0

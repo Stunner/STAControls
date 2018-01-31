@@ -8,20 +8,30 @@
 //  which Square, Inc. licenses this file to you.
 
 #import "KIFUITestActor.h"
-#import "KIFSystemTestActor.h"
-#import "UIApplication-KIFAdditions.h"
-#import "UIWindow-KIFAdditions.h"
-#import "UIAccessibilityElement-KIFAdditions.h"
-#import "UIScreen+KIFAdditions.h"
-#import "UIView-KIFAdditions.h"
+
 #import "CALayer-KIFAdditions.h"
-#import "UITableView-KIFAdditions.h"
 #import "CGGeometry-KIFAdditions.h"
-#import "NSError-KIFAdditions.h"
+#import "KIFSystemTestActor.h"
+#import "KIFTestActor_Private.h"
 #import "KIFTypist.h"
+#import "NSError-KIFAdditions.h"
+#import "UIAccessibilityElement-KIFAdditions.h"
+#import "UIApplication-KIFAdditions.h"
 #import "UIAutomationHelper.h"
+#import "UIScreen+KIFAdditions.h"
+#import "UITableView-KIFAdditions.h"
+#import "UIView-KIFAdditions.h"
+#import "UIWindow-KIFAdditions.h"
 
 #define kKIFMinorSwipeDisplacement 5
+
+
+@interface KIFUITestActor ()
+
+@property (nonatomic, assign) BOOL validateEnteredText;
+
+@end
+
 
 @implementation KIFUITestActor
 
@@ -30,6 +40,20 @@
     if (self == [KIFUITestActor class]) {
         [KIFTypist registerForNotifications];
     }
+}
+
+- (instancetype)initWithFile:(NSString *)file line:(NSInteger)line delegate:(id<KIFTestActorDelegate>)delegate;
+{
+    self = [super initWithFile:file line:line delegate:delegate];
+    NSParameterAssert(self);
+    _validateEnteredText = YES;
+    return self;
+}
+
+- (instancetype)validateEnteredText:(BOOL)validateEnteredText;
+{
+    self.validateEnteredText = validateEnteredText;
+    return self;
 }
 
 - (UIView *)waitForViewWithAccessibilityLabel:(NSString *)label
@@ -80,6 +104,13 @@
     }];
 }
 
+- (void)waitForAccessibilityElement:(UIAccessibilityElement **)element view:(out UIView **)view withLabel:(NSString *)label value:(NSString *)value traits:(UIAccessibilityTraits)traits fromRootView:(UIView *)fromView tappable:(BOOL)mustBeTappable
+{
+    [self runBlock:^KIFTestStepResult(NSError **error) {
+        return [UIAccessibilityElement accessibilityElement:element view:view withLabel:label value:value traits:traits fromRootView:fromView tappable:mustBeTappable error:error];
+    }];
+}
+
 - (void)waitForAccessibilityElement:(UIAccessibilityElement **)element view:(out UIView **)view withIdentifier:(NSString *)identifier tappable:(BOOL)mustBeTappable
 {
     if (![UIAccessibilityElement instancesRespondToSelector:@selector(accessibilityIdentifier)]) {
@@ -87,6 +118,13 @@
     }
 
     [self waitForAccessibilityElement:element view:view withElementMatchingPredicate:[NSPredicate predicateWithFormat:@"accessibilityIdentifier = %@", identifier] tappable:mustBeTappable];
+}
+
+- (void)waitForAccessibilityElement:(UIAccessibilityElement *__autoreleasing *)element view:(out UIView *__autoreleasing *)view withIdentifier:(NSString *)identifier fromRootView:(UIView *)fromView tappable:(BOOL)mustBeTappable
+{
+    [self runBlock:^KIFTestStepResult(NSError **error) {
+        return [UIAccessibilityElement accessibilityElement:element view:view withElementMatchingPredicate:[NSPredicate predicateWithFormat:@"accessibilityIdentifier = %@", identifier] fromRootView:fromView tappable:mustBeTappable error:error] ? KIFTestStepResultSuccess : KIFTestStepResultWait;
+    }];
 }
 
 - (void)waitForAccessibilityElement:(UIAccessibilityElement **)element view:(out UIView **)view withElementMatchingPredicate:(NSPredicate *)predicate tappable:(BOOL)mustBeTappable
@@ -158,20 +196,22 @@
 }
 
 - (void)waitForAnimationsToFinishWithTimeout:(NSTimeInterval)timeout {
-    static const CGFloat kStabilizationWait = 0.5f;
-    
+    [self waitForAnimationsToFinishWithTimeout:timeout stabilizationTime:self.animationStabilizationTimeout];
+}
+
+- (void)waitForAnimationsToFinishWithTimeout:(NSTimeInterval)timeout stabilizationTime:(NSTimeInterval)stabilizationTime {
     NSTimeInterval maximumWaitingTimeInterval = timeout;
-    if (maximumWaitingTimeInterval <= kStabilizationWait) {
+    if (maximumWaitingTimeInterval <= stabilizationTime) {
         if(maximumWaitingTimeInterval >= 0) {
-            [self waitForTimeInterval:maximumWaitingTimeInterval];
+            [self waitForTimeInterval:maximumWaitingTimeInterval relativeToAnimationSpeed:YES];
         }
         
         return;
     }
     
     // Wait for the view to stabilize and give them a chance to start animations before we wait for them.
-    [self waitForTimeInterval:kStabilizationWait];
-    maximumWaitingTimeInterval -= kStabilizationWait;
+    [self waitForTimeInterval:stabilizationTime relativeToAnimationSpeed:YES];
+    maximumWaitingTimeInterval -= stabilizationTime;
     
     NSTimeInterval startTime = [NSDate timeIntervalSinceReferenceDate];
     [self runBlock:^KIFTestStepResult(NSError **error) {
@@ -189,8 +229,18 @@
                 }
             }];
         }
+
+        if (runningAnimationFound) {
+            BOOL hasTimeRemainingToWait = ([NSDate timeIntervalSinceReferenceDate] - startTime) < maximumWaitingTimeInterval;
+            if (hasTimeRemainingToWait) {
+                return KIFTestStepResultWait;
+            } else {
+                // Animations appear to still exist, but we've hit our time limit
+                return KIFTestStepResultSuccess;
+            }
+        }
         
-        return runningAnimationFound && ([NSDate timeIntervalSinceReferenceDate] - startTime) < maximumWaitingTimeInterval ? KIFTestStepResultWait : KIFTestStepResultSuccess;
+        return KIFTestStepResultSuccess;
     } timeout:maximumWaitingTimeInterval + 1];
 }
 
@@ -220,16 +270,8 @@
     [self runBlock:^KIFTestStepResult(NSError **error) {
         
         KIFTestWaitCondition(view.isUserInteractionActuallyEnabled, error, @"View is not enabled for interaction: %@", view);
-        
-        // If the accessibilityFrame is not set, fallback to the view frame.
-        CGRect elementFrame;
-        if (CGRectEqualToRect(CGRectZero, element.accessibilityFrame)) {
-            elementFrame.origin = CGPointZero;
-            elementFrame.size = view.frame.size;
-        } else {
-            elementFrame = [view.windowOrIdentityWindow convertRect:element.accessibilityFrame toView:view];
-        }
-        CGPoint tappablePointInElement = [view tappablePointInRect:elementFrame];
+
+        CGPoint tappablePointInElement = [self tappablePointInElement:element andView:view];
         
         // This is mostly redundant of the test in _accessibilityElementWithLabel:
         KIFTestWaitCondition(!isnan(tappablePointInElement.x), error, @"View is not tappable: %@", view);
@@ -307,9 +349,8 @@
     [self runBlock:^KIFTestStepResult(NSError **error) {
         
         KIFTestWaitCondition(view.isUserInteractionActuallyEnabled, error, @"View is not enabled for interaction: %@", view);
-        
-        CGRect elementFrame = [view.windowOrIdentityWindow convertRect:element.accessibilityFrame toView:view];
-        CGPoint tappablePointInElement = [view tappablePointInRect:elementFrame];
+
+        CGPoint tappablePointInElement = [self tappablePointInElement:element andView:view];
         
         // This is mostly redundant of the test in _accessibilityElementWithLabel:
         KIFTestWaitCondition(!isnan(tappablePointInElement.x), error, @"View is not tappable: %@", view);
@@ -321,7 +362,7 @@
     }];
 
     // Wait for view to settle.
-    [self waitForTimeInterval:0.5];
+    [self waitForTimeInterval:0.5 relativeToAnimationSpeed:YES];
 }
 
 - (void)waitForKeyboard
@@ -370,30 +411,34 @@
 
 - (void)enterTextIntoCurrentFirstResponder:(NSString *)text fallbackView:(UIView *)fallbackView
 {
-	[text enumerateSubstringsInRange:NSMakeRange(0, text.length)
-							 options:NSStringEnumerationByComposedCharacterSequences
-						  usingBlock: ^(NSString *characterString,NSRange substringRange,NSRange enclosingRange,BOOL * stop)
+    [text enumerateSubstringsInRange:NSMakeRange(0, text.length)
+                             options:NSStringEnumerationByComposedCharacterSequences
+                          usingBlock: ^(NSString *characterString,NSRange substringRange,NSRange enclosingRange,BOOL * stop)
+    {
+        if (![KIFTypist enterCharacter:characterString]) {
+            // Attempt to cheat if we couldn't find the character
+            UIView * fallback = fallbackView;
+            if (!fallback) {
+                UIResponder *firstResponder = [[[UIApplication sharedApplication] keyWindow] firstResponder];
 
-	 {
-		 if (![KIFTypist enterCharacter:characterString]) {
-			 // Attempt to cheat if we couldn't find the character
-			 UIView * fallback = fallbackView;
-			 if (!fallback) {
-				 UIResponder *firstResponder = [[[UIApplication sharedApplication] keyWindow] firstResponder];
+                if ([firstResponder isKindOfClass:[UIView class]]) {
+                    fallback = (UIView *)firstResponder;
+                }
+            }
 
-				 if ([firstResponder isKindOfClass:[UIView class]]) {
-					 fallback = (UIView *)firstResponder;
-				 }
-			 }
+            if ([fallback isKindOfClass:[UITextField class]] || [fallback isKindOfClass:[UITextView class]] || [fallback isKindOfClass:[UISearchBar class]]) {
+                NSLog(@"KIF: Unable to find keyboard key for %@. Inserting manually.", characterString);
+                [(UITextField *)fallback setText:[[(UITextField *)fallback text] stringByAppendingString:characterString]];
+            } else {
+                [self failWithError:[NSError KIFErrorWithFormat:@"Failed to find key for character \"%@\"", characterString] stopTest:YES];
+            }
+        }
+    }];
 
-			 if ([fallback isKindOfClass:[UITextField class]] || [fallback isKindOfClass:[UITextView class]] || [fallback isKindOfClass:[UISearchBar class]]) {
-				 NSLog(@"KIF: Unable to find keyboard key for %@. Inserting manually.", characterString);
-				 [(UITextField *)fallback setText:[[(UITextField *)fallback text] stringByAppendingString:characterString]];
-			 } else {
-				 [self failWithError:[NSError KIFErrorWithFormat:@"Failed to find key for character \"%@\"", characterString] stopTest:YES];
-			 }
-		 }
-	 }];
+    NSTimeInterval remainingWaitTime = 0.01 - [KIFTypist keystrokeDelay];
+    if (remainingWaitTime > 0) {
+        CFRunLoopRunInMode(UIApplicationCurrentRunMode, remainingWaitTime, false);
+    }
 }
 
 - (void)enterText:(NSString *)text intoViewWithAccessibilityLabel:(NSString *)label
@@ -416,11 +461,13 @@
     // In iOS7, tapping a field that is already first responder moves the cursor to the front of the field
     if (view.window.firstResponder != view) {
         [self tapAccessibilityElement:element inView:view];
-        [self waitForTimeInterval:0.25];
+        [self waitForTimeInterval:0.25 relativeToAnimationSpeed:YES];
     }
 
     [self enterTextIntoCurrentFirstResponder:text fallbackView:view];
-    [self expectView:view toContainText:expectedResult ?: text];
+    if (self.validateEnteredText) {
+        [self expectView:view toContainText:expectedResult ?: text];
+    }
 }
 
 - (void)expectView:(UIView *)view toContainText:(NSString *)expectedResult
@@ -444,7 +491,7 @@
         KIFTestWaitCondition([actual isEqualToString:expected], error, @"Failed to get text \"%@\" in field; instead, it was \"%@\"", expected, actual);
         
         return KIFTestStepResultSuccess;
-    } timeout:1.0];
+    } timeout:[KIFTestActor defaultTimeout]];
 }
 
 - (void)clearTextFromFirstResponder
@@ -478,7 +525,7 @@
         id<UITextInput> textInput = (id<UITextInput>)view;
         [textInput setSelectedTextRange:[textInput textRangeFromPosition:textInput.beginningOfDocument toPosition:textInput.endOfDocument]];
         
-        [self waitForTimeInterval:0.1];
+        [self waitForTimeInterval:0.1 relativeToAnimationSpeed:YES];
         [self enterTextIntoCurrentFirstResponder:@"\b" fallbackView:view];
     } else {
         NSUInteger numberOfCharacters = [view respondsToSelector:@selector(text)] ? [(UITextField *)view text].length : element.accessibilityValue.length;
@@ -510,31 +557,92 @@
     [self enterTextIntoCurrentFirstResponder:text];
 }
 
-- (void)selectDatePickerValue:(NSArray *)datePickerColumnValues
+- (void)setText:(NSString *)text intoViewWithAccessibilityLabel:(NSString *)label
 {
-    [self selectPickerValue:datePickerColumnValues pickerType:KIFUIDatePicker];
+    UIView *view = nil;
+    UIAccessibilityElement *element = nil;
+
+    [self waitForAccessibilityElement:&element view:&view withLabel:label value:nil traits:UIAccessibilityTraitNone tappable:YES];
+    if ([view respondsToSelector:@selector(setText:)]) {
+        [view performSelector:@selector(setText:) withObject:text];
+    }
+}
+
+- (NSString *)textFromView:(UIView *)view {
+    if ([view isKindOfClass:[UILabel class]]) {
+        UILabel *label = (UILabel *)view;
+        return label.text ? : @"";
+    } else if ([view isKindOfClass:[UITextField class]]) {
+        UITextField *textField = (UITextField *)view;
+        return [textField.text isEqual: @""] ? textField.placeholder : textField.text;
+    } else if ([view isKindOfClass:[UITextView class]]) {
+        UITextView *textView = (UITextView *)view;
+        return textView.text;
+    }
+    return @"";
 }
 
 - (void)selectPickerViewRowWithTitle:(NSString *)title
 {
     NSArray *dataToSelect = @[ title ];
-    [self selectPickerValue:dataToSelect pickerType:KIFUIPickerView];
+    [self selectPickerValue:dataToSelect fromPicker:nil pickerType:KIFUIPickerView withSearchOrder:KIFPickerSearchForwardFromStart];
 }
 
 - (void)selectPickerViewRowWithTitle:(NSString *)title inComponent:(NSInteger)component
 {
+    [self selectPickerViewRowWithTitle:title inComponent:component fromPicker:nil withSearchOrder:KIFPickerSearchForwardFromStart];
+}
+
+- (void)selectPickerViewRowWithTitle:(NSString *)title inComponent:(NSInteger)component withSearchOrder:(KIFPickerSearchOrder)searchOrder
+{
+    [self selectPickerViewRowWithTitle:title inComponent:component fromPicker:nil withSearchOrder:searchOrder];
+}
+
+- (void)selectDatePickerValue:(NSArray *)datePickerColumnValues
+{
+    [self selectPickerValue:datePickerColumnValues fromPicker:nil pickerType:KIFUIDatePicker withSearchOrder:KIFPickerSearchForwardFromStart];
+}
+- (void)selectDatePickerValue:(NSArray *)datePickerColumnValues withSearchOrder:(KIFPickerSearchOrder)searchOrder
+{
+    [self selectPickerValue:datePickerColumnValues fromPicker:nil pickerType:KIFUIDatePicker withSearchOrder:searchOrder];
+}
+
+- (void)selectDatePickerValue:(NSArray *)datePickerColumnValues fromPicker:(UIPickerView *)picker withSearchOrder:(KIFPickerSearchOrder)searchOrder
+{
+    [self selectPickerValue:datePickerColumnValues fromPicker:picker pickerType:KIFUIDatePicker withSearchOrder:searchOrder];
+}
+
+- (void)selectPickerViewRowWithTitle:(NSString *)title inComponent:(NSInteger)component fromPicker:(UIPickerView *)picker
+{
+    [self selectPickerViewRowWithTitle:title inComponent:component fromPicker:picker withSearchOrder:KIFPickerSearchForwardFromStart];
+}
+
+- (void)selectPickerViewRowWithTitle:(NSString *)title inComponent:(NSInteger)component fromPicker:(UIPickerView *)picker withSearchOrder:(KIFPickerSearchOrder)searchOrder
+{
     NSMutableArray *dataToSelect = [[NSMutableArray alloc] init];
 
-    // Assume it is datePicker and then test our hypothesis later!
-    UIPickerView *pickerView = [[[[UIApplication sharedApplication] datePickerWindow] subviewsWithClassNameOrSuperClassNamePrefix:@"UIPickerView"] lastObject];
-
-    // Check which type of UIPickerVIew is visible on current window.
+    UIPickerView *pickerView = picker;
     KIFPickerType pickerType = 0;
-    if ([pickerView respondsToSelector:@selector(setDate:animated:)]) {
-        pickerType = KIFUIDatePicker;
+
+    if (pickerView == nil) {
+        // Find all pickers in view. Either UIDatePickerView or UIPickerView
+        NSArray *datePickerViews = [[[UIApplication sharedApplication] datePickerWindow] subviewsWithClassNameOrSuperClassNamePrefix:@"UIPickerView"];
+        NSArray *pickerViews = [[[UIApplication sharedApplication] pickerViewWindow] subviewsWithClassNameOrSuperClassNamePrefix:@"UIPickerView"];
+
+        // Grab one picker and assume it is datePicker and then test our hypothesis later!
+        pickerView = [datePickerViews lastObject];
+        if ([pickerView respondsToSelector:@selector(setDate:animated:)]) {
+            pickerType = KIFUIDatePicker;
+        } else {
+            pickerView = [pickerViews lastObject];
+            pickerType = KIFUIPickerView;
+        }
     } else {
-        pickerType = KIFUIPickerView;
-        pickerView = [[[[UIApplication sharedApplication] pickerViewWindow] subviewsWithClassNameOrSuperClassNamePrefix:@"UIPickerView"] lastObject];
+        if ([pickerView respondsToSelector:@selector(setDate:animated:)]) {
+            pickerType = KIFUIDatePicker;
+        } else {
+            pickerType = KIFUIPickerView;
+        }
     }
 
     // Add title at component index and add empty strings for other.
@@ -554,7 +662,6 @@
                 UILabel *label = (labels.count > 0 ? labels[0] : nil);
                 rowTitle = label.text;
             }
-            
             if (rowTitle) {
                 [dataToSelect addObject: rowTitle];
             } else {
@@ -562,11 +669,10 @@
             }
         }
     }
-
-    [self selectPickerValue:dataToSelect pickerType:pickerType];
+    [self selectPickerValue:dataToSelect fromPicker:pickerView pickerType:pickerType withSearchOrder:searchOrder];
 }
 
-- (void)selectPickerValue:(NSArray *)pickerColumnValues pickerType:(KIFPickerType)pickerType
+- (void)selectPickerValue:(NSArray *)pickerColumnValues fromPicker:(UIPickerView *)picker pickerType:(KIFPickerType)pickerType withSearchOrder:(KIFPickerSearchOrder)searchOrder
 {
     [self runBlock:^KIFTestStepResult(NSError **error) {
         NSInteger columnCount = [pickerColumnValues count];
@@ -575,23 +681,50 @@
             [found_values addObject:[NSNumber numberWithBool:NO]];
         }
         // Find the picker view
-        UIPickerView *pickerView = nil;
-        switch (pickerType)
-        {
-            case KIFUIDatePicker:
-                pickerView = [[[[UIApplication sharedApplication] datePickerWindow] subviewsWithClassNameOrSuperClassNamePrefix:@"UIPickerView"] lastObject];
-                KIFTestCondition(pickerView, error, @"No picker view is present");
-                break;
-            case KIFUIPickerView:
-                pickerView = [[[[UIApplication sharedApplication] pickerViewWindow] subviewsWithClassNameOrSuperClassNamePrefix:@"UIPickerView"] lastObject];
+        UIPickerView *pickerView = picker;
+        if (pickerView == nil) {
+            switch (pickerType)
+            {
+                case KIFUIDatePicker:
+                {
+                    pickerView = [[[[UIApplication sharedApplication] datePickerWindow] subviewsWithClassNameOrSuperClassNamePrefix:@"UIPickerView"] lastObject];
+                    KIFTestCondition(pickerView, error, @"No picker view is present");
+                    break;
+                }
+                case KIFUIPickerView:
+                {
+                    pickerView = [[[[UIApplication sharedApplication] pickerViewWindow] subviewsWithClassNameOrSuperClassNamePrefix:@"UIPickerView"] lastObject];
+                }
+            }
         }
         
         NSInteger componentCount = [pickerView.dataSource numberOfComponentsInPickerView:pickerView];
-        KIFTestCondition(componentCount == columnCount, error, @"The UIDatePicker does not have the expected column count.");
+        KIFTestCondition(componentCount == columnCount, error, @"The Picker does not have the expected column count.");
         
         for (NSInteger componentIndex = 0; componentIndex < componentCount; componentIndex++) {
+
+            // Set search order
+            NSInteger firstIndex;
             NSInteger rowCount = [pickerView.dataSource pickerView:pickerView numberOfRowsInComponent:componentIndex];
-            for (NSInteger rowIndex = 0; rowIndex < rowCount; rowIndex++) {
+            NSInteger indexProgress = (searchOrder == KIFPickerSearchBackwardFromCurrentValue ||
+                                       searchOrder == KIFPickerSearchBackwardFromEnd) ? -1 : 1;
+            switch (searchOrder) {
+                case KIFPickerSearchForwardFromCurrentValue:
+                case KIFPickerSearchBackwardFromCurrentValue:
+                    firstIndex = [pickerView selectedRowInComponent:componentIndex];
+                    break;
+                case KIFPickerSearchBackwardFromEnd:
+                    firstIndex = rowCount - 1;
+                    break;
+                default:
+                    firstIndex = 0;
+                    break;
+            }
+            
+            //Fix issue with AM:PM
+            if (rowCount == 2) { indexProgress = 1; firstIndex = 0; }
+
+            for (NSInteger rowIndex = firstIndex; rowIndex < rowCount && rowIndex >= 0; rowIndex += indexProgress) {
                 NSString *rowTitle = nil;
                 if ([pickerView.delegate respondsToSelector:@selector(pickerView:titleForRow:forComponent:)]) {
                     rowTitle = [pickerView.delegate pickerView:pickerView titleForRow:rowIndex forComponent:componentIndex];
@@ -616,12 +749,14 @@
                     break;
                 }
                 else if ([rowTitle isEqual:pickerColumnValues[componentIndex]]) {
-                    [pickerView selectRow:rowIndex inComponent:componentIndex animated:false];
-                    CFRunLoopRunInMode(kCFRunLoopDefaultMode, 1, false);
+                    [pickerView selectRow:rowIndex inComponent:componentIndex animated:NO];
+                    KIFRunLoopRunInModeRelativeToAnimationSpeed(kCFRunLoopDefaultMode, 1.0f, NO);
+                    // Even though selectRow says it's not animated - it really is. We need to wait for them to finish before continuing.
+                    [tester waitForAnimationsToFinish];
                     
                     // Tap in the middle of the picker view to select the item
                     [pickerView tap];
-                    [self waitForTimeInterval:0.5];
+                    [self waitForTimeInterval:0.5 relativeToAnimationSpeed:YES];
                     
                     // The combination of selectRow:inComponent:animated: and tap does not consistently result in
                     // pickerView:didSelectRow:inComponent: being called on the delegate. We need to do it explicitly.
@@ -688,7 +823,7 @@
     NSLog(@"Faking turning switch %@", switchIsOn ? @"ON" : @"OFF");
     [switchView setOn:switchIsOn animated:YES];
     [switchView sendActionsForControlEvents:UIControlEventValueChanged];
-    [self waitForTimeInterval:0.5];
+    [self waitForTimeInterval:0.5 relativeToAnimationSpeed:YES];
 
     // We gave it our best shot.  Fail the test.
     if (switchView.isOn != switchIsOn) {
@@ -742,7 +877,7 @@
     }
     UIView *dimmingView = [[window subviewsWithClassNamePrefix:@"UIDimmingView"] lastObject];
     [dimmingView tapAtPoint:CGPointMake(50.0f, 50.0f)];
-    CFRunLoopRunInMode(kCFRunLoopDefaultMode, tapDelay, false);
+    KIFRunLoopRunInModeRelativeToAnimationSpeed(kCFRunLoopDefaultMode, tapDelay, false);
 }
 
 - (void)choosePhotoInAlbum:(NSString *)albumName atRow:(NSInteger)row column:(NSInteger)column
@@ -766,17 +901,15 @@
             }
             return KIFTestStepResultWait;
         }
-        
-        CGRect elementFrame = [view.windowOrIdentityWindow convertRect:element.accessibilityFrame toView:view];
-        CGPoint tappablePointInElement = [view tappablePointInRect:elementFrame];
-        
+
+        CGPoint tappablePointInElement = [self tappablePointInElement:element andView:view];
         [view tapAtPoint:tappablePointInElement];
         
         return KIFTestStepResultSuccess;
     }];
 
     // Wait for media picker view controller to be pushed.
-    [self waitForTimeInterval:1];
+    [self waitForTimeInterval:1 relativeToAnimationSpeed:YES];
 
     // Tap the desired photo in the grid
     // TODO: This currently only works for the first page of photos. It should scroll appropriately at some point.
@@ -827,8 +960,21 @@
     [tableView dragFromPoint:swipeStart displacement:swipeDisplacement steps:kNumberOfPointsInSwipePath];
     
     // Wait for the view to stabilize.
-    [tester waitForTimeInterval:0.5];
+    [tester waitForTimeInterval:0.5 relativeToAnimationSpeed:YES];
     
+}
+
+- (void)waitForDeleteStateForCellAtIndexPath:(NSIndexPath*)indexPath inTableView:(UITableView*)tableView {
+    UITableViewCell *cell = [self waitForCellAtIndexPath:indexPath inTableView:tableView];
+    [self waitForDeleteStateForCell:cell];
+}
+
+- (void)waitForDeleteStateForCell:(UITableViewCell*)cell {
+    [self runBlock:^KIFTestStepResult(NSError **error) {
+        KIFTestWaitCondition(cell.showingDeleteConfirmation, error,
+                             @"Expected cell to get in the delete confirmation state: %@", cell);
+        return KIFTestStepResultSuccess;
+    }];
 }
 
 - (void)tapItemAtIndexPath:(NSIndexPath *)indexPath inCollectionViewWithAccessibilityIdentifier:(NSString *)identifier
@@ -885,9 +1031,10 @@
     const NSUInteger kNumberOfPointsInSwipePath = 20;
   
     // Within this method, all geometry is done in the coordinate system of the view to swipe.
-  
-    CGRect elementFrame = [viewToSwipe.windowOrIdentityWindow convertRect:element.accessibilityFrame toView:viewToSwipe];
+    CGRect elementFrame = [self elementFrameForElement:element andView:viewToSwipe];
+
     CGPoint swipeStart = CGPointCenteredInRect(elementFrame);
+
     KIFDisplacement swipeDisplacement = [self _displacementForSwipingInDirection:direction];
   
     [viewToSwipe dragFromPoint:swipeStart displacement:swipeDisplacement steps:kNumberOfPointsInSwipePath];
@@ -953,8 +1100,7 @@
     const NSUInteger kNumberOfPointsInScrollPath = 5;
 
     // Within this method, all geometry is done in the coordinate system of the view to scroll.
-
-    CGRect elementFrame = [viewToScroll.windowOrIdentityWindow convertRect:element.accessibilityFrame toView:viewToScroll];
+    CGRect elementFrame = [self elementFrameForElement:element andView:viewToScroll];
 
     KIFDisplacement scrollDisplacement = CGPointMake(elementFrame.size.width * horizontalFraction, elementFrame.size.height * verticalFraction);
 
@@ -997,12 +1143,22 @@
 
 - (UITableViewCell *)waitForCellAtIndexPath:(NSIndexPath *)indexPath inTableViewWithAccessibilityIdentifier:(NSString *)identifier
 {
+    return [self waitForCellAtIndexPath:indexPath inTableViewWithAccessibilityIdentifier:identifier atPosition:UITableViewScrollPositionMiddle];
+}
+
+- (UITableViewCell *)waitForCellAtIndexPath:(NSIndexPath *)indexPath inTableViewWithAccessibilityIdentifier:(NSString *)identifier atPosition:(UITableViewScrollPosition)position
+{
     UITableView *tableView;
     [self waitForAccessibilityElement:NULL view:&tableView withIdentifier:identifier tappable:NO];
-    return [self waitForCellAtIndexPath:indexPath inTableView:tableView];
+    return [self waitForCellAtIndexPath:indexPath inTableView:tableView atPosition:position];
 }
 
 - (UITableViewCell *)waitForCellAtIndexPath:(NSIndexPath *)indexPath inTableView:(UITableView *)tableView
+{
+    return [self waitForCellAtIndexPath:indexPath inTableView:tableView atPosition:UITableViewScrollPositionMiddle];
+}
+
+- (UITableViewCell *)waitForCellAtIndexPath:(NSIndexPath *)indexPath inTableView:(UITableView *)tableView atPosition:(UITableViewScrollPosition)position
 {
     if (![tableView isKindOfClass:[UITableView class]]) {
         [self failWithError:[NSError KIFErrorWithFormat:@"View is not a table view"] stopTest:YES];
@@ -1030,7 +1186,7 @@
     __block UITableViewCell *cell = nil;
     __block CGFloat lastYOffset = CGFLOAT_MAX;
     [self runBlock:^KIFTestStepResult(NSError **error) {
-        [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+        [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:position animated:YES];
         cell = [tableView cellForRowAtIndexPath:indexPath];
         KIFTestWaitCondition(!!cell, error, @"Table view cell at index path %@ not found", indexPath);
         
@@ -1042,7 +1198,7 @@
         return KIFTestStepResultSuccess;
     }];
 
-    [self waitForTimeInterval:0.1]; // Let things settle.
+    [self waitForTimeInterval:0.1 relativeToAnimationSpeed:YES]; // Let things settle.
 
 
     return cell;
@@ -1089,7 +1245,10 @@
                            atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally | UICollectionViewScrollPositionCenteredVertically
                                    animated:YES];
 
-    [self waitForAnimationsToFinish];
+    // waitForAnimationsToFinish doesn't allow collection view to settle when animations are sped up
+    // So use waitForTimeInterval instead
+    const NSTimeInterval animationWaitTime = 0.5f;
+    [self waitForTimeInterval:animationWaitTime relativeToAnimationSpeed:YES];
     UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
 
     //For big collection views with many cells the cell might not be ready yet. Relayout and try again.
@@ -1097,8 +1256,9 @@
         [collectionView layoutIfNeeded];
         [collectionView scrollToItemAtIndexPath:indexPath
                                atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally | UICollectionViewScrollPositionCenteredVertically
-                                       animated:YES];
-        [self waitForAnimationsToFinish];
+                                       animated:NO];
+        // waitForAnimationsToFinish doesn't allow collection view to settle when animations are sped up
+        [self waitForTimeInterval:animationWaitTime relativeToAnimationSpeed:YES];
         cell = [collectionView cellForItemAtIndexPath:indexPath];
     }
     
@@ -1164,16 +1324,7 @@
 
 		KIFTestWaitCondition(view.isUserInteractionActuallyEnabled, error, @"View is not enabled for interaction: %@", view);
 
-		// If the accessibilityFrame is not set, fallback to the view frame.
-		CGRect elementFrame;
-		if (CGRectEqualToRect(CGRectZero, element.accessibilityFrame)) {
-			elementFrame.origin = CGPointZero;
-			elementFrame.size = view.frame.size;
-		} else {
-			elementFrame = [view.windowOrIdentityWindow convertRect:element.accessibilityFrame toView:view];
-		}
-
-		CGPoint stepperPointToTap = [view tappablePointInRect:elementFrame];
+        CGPoint stepperPointToTap = [self tappablePointInElement:element andView:view];
 
 		switch (stepperDirection)
 		{
@@ -1195,6 +1346,28 @@
 	}];
 
 	[self waitForAnimationsToFinish];
+}
+
+- (CGRect) elementFrameForElement:(UIAccessibilityElement *)element andView:(UIView *)view
+{
+    CGRect elementFrame;
+
+    // If the accessibilityFrame is not set, fallback to the view frame.
+    if (CGRectEqualToRect(CGRectZero, element.accessibilityFrame)) {
+        elementFrame.origin = CGPointZero;
+        elementFrame.size = view.frame.size;
+    } else {
+        elementFrame = [view.windowOrIdentityWindow convertRect:element.accessibilityFrame toView:view];
+    }
+    return elementFrame;
+}
+
+- (CGPoint) tappablePointInElement:(UIAccessibilityElement *)element andView:(UIView *)view
+{
+    CGRect elementFrame = [self elementFrameForElement:element andView:view];
+    CGPoint tappablePoint = [view tappablePointInRect:elementFrame];
+
+    return tappablePoint;
 }
 
 - (KIFDisplacement)_displacementForSwipingInDirection:(KIFSwipeDirection)direction;

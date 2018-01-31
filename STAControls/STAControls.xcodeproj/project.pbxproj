@@ -78,6 +78,7 @@
 		9373EA2A1A9F23DE00CA3CA0 /* STACommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STACommon.h; sourceTree = "<group>"; };
 		93BD6EA42003A7170063144D /* NSDictionary+Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Utility.h"; sourceTree = "<group>"; };
 		93BD6EA52003A7170063144D /* NSDictionary+Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Utility.m"; sourceTree = "<group>"; };
+		93DDF6942020775B003B1ACA /* STAControlsTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STAControlsTests.h; sourceTree = "<group>"; };
 		93DF28161A70F7E600956489 /* STAPickerField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAPickerField.h; sourceTree = "<group>"; };
 		93DF28171A70F7E600956489 /* STAPickerField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAPickerField.m; sourceTree = "<group>"; };
 		93DF28181A70F7E600956489 /* STAPickerView+PrivateHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "STAPickerView+PrivateHeaders.h"; sourceTree = "<group>"; };
@@ -289,6 +290,7 @@
 				935021A61B148A7200480DEA /* STASegmentedControlTests.m */,
 				935021A81B148C8200480DEA /* STAButtonTests.m */,
 				93DF28461A70F84300956489 /* Supporting Files */,
+				93DDF6942020775B003B1ACA /* STAControlsTests.h */,
 			);
 			path = STAControlsTests;
 			sourceTree = "<group>";

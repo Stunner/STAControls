@@ -7,16 +7,30 @@
 //  See the LICENSE file distributed with this work for the terms under
 //  which Square, Inc. licenses this file to you.
 
-#import <XCTest/XCTest.h>
-#import "NSException-KIFAdditions.h"
-#import "KIFTestActor.h"
-#import "NSError-KIFAdditions.h"
 #import <dlfcn.h>
 #import <objc/runtime.h>
+#import <XCTest/XCTest.h>
+
+#import "KIFTestActor_Private.h"
+
+#import "NSError-KIFAdditions.h"
+#import "NSException-KIFAdditions.h"
 #import "UIApplication-KIFAdditions.h"
 #import "UIView-KIFAdditions.h"
 
 @implementation KIFTestActor
+
++ (void)load
+{
+    @autoreleasepool {
+        if (NSClassFromString(@"UIApplication")) {
+            [UIApplication swizzleRunLoop];
+            NSLog(@"KIFTester loaded");
+        } else {
+            NSLog(@"KIFTester skipping runloop swizzling, no UIApplication class found.");
+        }
+    }
+}
 
 - (instancetype)initWithFile:(NSString *)file line:(NSInteger)line delegate:(id<KIFTestActorDelegate>)delegate
 {
@@ -27,6 +41,7 @@
         _delegate = delegate;
         _executionBlockTimeout = [[self class] defaultTimeout];
         _animationWaitingTimeout = [[self class] defaultAnimationWaitingTimeout];
+        _animationStabilizationTimeout = [[self class] defaultAnimationStabilizationTimeout];
     }
     return self;
 }
@@ -39,6 +54,18 @@
 - (instancetype)usingTimeout:(NSTimeInterval)executionBlockTimeout
 {
     self.executionBlockTimeout = executionBlockTimeout;
+    return self;
+}
+
+- (instancetype)usingAnimationWaitingTimeout:(NSTimeInterval)animationWaitingTimeout;
+{
+    self.animationWaitingTimeout = animationWaitingTimeout;
+    return self;
+}
+
+- (instancetype)usingAnimationStabilizationTimeout:(NSTimeInterval)animationStabilizationTimeout;
+{
+    self.animationStabilizationTimeout = animationStabilizationTimeout;
     return self;
 }
 
@@ -95,6 +122,7 @@
 #pragma mark Class Methods
 
 static NSTimeInterval KIFTestStepDefaultAnimationWaitingTimeout = 0.5;
+static NSTimeInterval KIFTestStepDefaultAnimationStabilizationTimeout = 0.5;
 static NSTimeInterval KIFTestStepDefaultTimeout = 10.0;
 static NSTimeInterval KIFTestStepDelay = 0.1;
 
@@ -106,6 +134,16 @@ static NSTimeInterval KIFTestStepDelay = 0.1;
 + (void)setDefaultAnimationWaitingTimeout:(NSTimeInterval)newDefaultAnimationWaitingTimeout;
 {
     KIFTestStepDefaultAnimationWaitingTimeout = newDefaultAnimationWaitingTimeout;
+}
+
++ (NSTimeInterval)defaultAnimationStabilizationTimeout
+{
+    return KIFTestStepDefaultAnimationStabilizationTimeout;
+}
+
++ (void)setDefaultAnimationStabilizationTimeout:(NSTimeInterval)newDefaultAnimationStabilizationTimeout;
+{
+    KIFTestStepDefaultAnimationStabilizationTimeout = newDefaultAnimationStabilizationTimeout;
 }
 
 + (NSTimeInterval)defaultTimeout;
@@ -154,6 +192,15 @@ static NSTimeInterval KIFTestStepDelay = 0.1;
 
 - (void)waitForTimeInterval:(NSTimeInterval)timeInterval
 {
+    [self waitForTimeInterval:timeInterval relativeToAnimationSpeed:NO];
+}
+
+- (void)waitForTimeInterval:(NSTimeInterval)timeInterval relativeToAnimationSpeed:(BOOL)scaleTime
+{
+    if (scaleTime) {
+        timeInterval /= [UIApplication sharedApplication].animationSpeed;
+    }
+    
     NSTimeInterval startTime = [NSDate timeIntervalSinceReferenceDate];
     
     [self runBlock:^KIFTestStepResult(NSError **error) {
@@ -177,22 +224,6 @@ static NSTimeInterval KIFTestStepDelay = 0.1;
     NSException *newException = [NSException failureInFile:self.file atLine:(int)self.line withDescription:@"Failure in child step: %@", firstException.description];
 
     [self.delegate failWithExceptions:[exceptions arrayByAddingObject:newException] stopTest:stop];
-}
-
-@end
-
-@interface UIApplication (KIFTestActorLoading)
-
-@end
-
-@implementation UIApplication (KIFTestActorLoading)
-
-+ (void)load
-{
-    @autoreleasepool {
-        NSLog(@"KIFTester loaded");
-        [UIApplication swizzleRunLoop];
-    }
 }
 
 @end

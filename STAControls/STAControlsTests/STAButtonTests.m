@@ -10,6 +10,7 @@
 #import <XCTest/XCTest.h>
 #import <KIF/KIF.h>
 #import "STAControls.h"
+#import "STAControlsTests.h"
 
 @interface STAButtonTests : KIFTestCase
 
@@ -22,7 +23,11 @@
 }
 
 - (void)afterAll {
-    [tester tapViewWithAccessibilityLabel:@"Back"];
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"11.0")) {
+        [tester tapViewWithAccessibilityLabel:kRootViewControllerTitle];
+    } else {
+        [tester tapViewWithAccessibilityLabel:@"Back"];
+    }
 }
 
 - (void)testButton {
