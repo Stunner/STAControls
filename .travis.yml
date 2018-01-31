@@ -171,6 +171,8 @@ matrix:
     - osx_image: xcode9.2
       env: DEVICE="iPhone SE" VERSION=10.3.1
     - osx_image: xcode9.2
+      env: DEVICE="iPhone SE" VERSION=11.0.1
+    - osx_image: xcode9.2
       env: DEVICE="iPhone SE" VERSION=11.2
     - osx_image: xcode9.2
       env: DEVICE="iPhone 8" VERSION=11.0.1
