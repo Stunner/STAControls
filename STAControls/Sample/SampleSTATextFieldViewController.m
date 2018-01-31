@@ -29,37 +29,30 @@
     self.title = @"STATextField";
     self.navigationItem.leftBarButtonItem.accessibilityLabel = @"Back";
     
-    _atmTextField.placeholder = @"Hello world!";
-    _atmTextField.keyboardType = UIKeyboardTypeDecimalPad;
-    //    _atmTextField.atmEntryEnabled = YES;
-    _atmTextField.resizesForClearTextButton = YES;
-    _atmTextField.showBackForwardToolbar = YES;
-    _atmTextField.maxCharacterLength = 8;
-    _atmTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
-    _atmTextField.delegate = self;
+    self.atmTextField.placeholder = @"Hello world!";
+    self.atmTextField.keyboardType = UIKeyboardTypeDecimalPad;
+    //    self.atmTextField.atmEntryEnabled = YES;
+    self.atmTextField.resizesForClearTextButton = YES;
+    self.atmTextField.maxCharacterLength = 8;
+    self.atmTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    self.atmTextField.delegate = self;
     
-    _textField.resignsFirstResponderUponReturnKeyPress = YES;
-    _textField.prevControl = _resizingTextField;
-    _textField.nextControl = _dateTextField;
-    _textField.showBackForwardToolbar = YES;
-    //    _textField.showNextButton = YES;
-    _textField.placeholder = @"placeholder text";
-    //    _textField.maxCharacterLength = 15;
+    self.textField.resignsFirstResponderUponReturnKeyPress = YES;
+    //    self.textField.showNextButton = YES;
+    self.textField.placeholder = @"placeholder text";
+    //    self.textField.maxCharacterLength = 15;
     
-    //    _resizingTextField = [[STAResizingTextField alloc] initWithFrame:CGRectMake(200, 180, 50, 30)];
-    _resizingTextField.borderStyle = UITextBorderStyleRoundedRect;
-    _resizingTextField.placeholder = @"Hello world!";
-    _resizingTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
-    _resizingTextField.resizesForClearTextButton = YES;
+    //    self.resizingTextField = [[STAResizingTextField alloc] initWithFrame:CGRectMake(200, 180, 50, 30)];
+    self.resizingTextField.borderStyle = UITextBorderStyleRoundedRect;
+    self.resizingTextField.placeholder = @"Hello world!";
+    self.resizingTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    self.resizingTextField.resizesForClearTextButton = YES;
     //    [self.view addSubview:_resizingTextField];
     
-    [_resizingTextField addTarget:self
-                           action:@selector(textFieldDidChange:)
-                 forControlEvents:UIControlEventEditingChanged];
+    [self.resizingTextField addTarget:self
+                               action:@selector(textFieldDidChange:)
+                     forControlEvents:UIControlEventEditingChanged];
     
-    self.dateTextField.prevControl = self.textField;
-    self.dateTextField.nextControl = self.nextTextField;
-    self.dateTextField.showBackForwardToolbar = YES;
     //    _dateTextField.showNextButton = YES;
     //    _dateTextField.pickerView.titleArray = @[@[@"Geometry", @"Trigonometry", @"Calculus", @"Chemistry"]];
     
@@ -67,7 +60,7 @@
     //        NSLog(@"\npickerView: %@ \ncomponent: %lu\nrow: %lu\ntitle: %@", pickerView, component, row, title);
     //    };
     
-    _nextTextField.keyboardType = UIKeyboardTypeAlphabet;
+    self.nextTextField.keyboardType = UIKeyboardTypeAlphabet;
     self.nextTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     [self.nextTextField setClearButtonImage:[UIImage imageNamed:@"Clear Button Image"]
                                    forState:UIControlStateNormal];
@@ -78,10 +71,24 @@
 //    _nextTextField.defaultValue = @"0.00";
     
     //    _textView.expandsUpward = YES;
-    _textView.layer.borderWidth = 1.0f;
-    _textView.layer.cornerRadius = 5;
-    _textView.layer.borderColor = [[UIColor grayColor] CGColor];
-    _textView.autoDeterminesHeight = YES;
+    self.textView.layer.borderWidth = 1.0f;
+    self.textView.layer.cornerRadius = 5;
+    self.textView.layer.borderColor = [[UIColor grayColor] CGColor];
+    self.textView.autoDeterminesHeight = YES;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    self.atmTextField.showBackForwardToolbar = YES;
+    
+    self.textField.prevControl = self.resizingTextField;
+    self.textField.nextControl = self.dateTextField;
+    self.textField.showBackForwardToolbar = YES;
+    
+    self.dateTextField.prevControl = self.textField;
+    self.dateTextField.nextControl = self.nextTextField;
+    self.dateTextField.showBackForwardToolbar = YES;
 }
 
 - (void)didReceiveMemoryWarning {
