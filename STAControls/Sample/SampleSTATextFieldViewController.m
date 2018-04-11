@@ -36,6 +36,7 @@
     self.atmTextField.maxCharacterLength = 8;
     self.atmTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.atmTextField.delegate = self;
+    self.atmTextField.translatesAutoresizingMaskIntoConstraints = NO;
     
     self.textField.resignsFirstResponderUponReturnKeyPress = YES;
     //    self.textField.showNextButton = YES;
@@ -47,6 +48,7 @@
     self.resizingTextField.placeholder = @"Hello world!";
     self.resizingTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.resizingTextField.resizesForClearTextButton = YES;
+    self.resizingTextField.translatesAutoresizingMaskIntoConstraints = NO;
     //    [self.view addSubview:_resizingTextField];
     
     [self.resizingTextField addTarget:self
