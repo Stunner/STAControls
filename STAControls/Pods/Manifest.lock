@@ -1,8 +1,8 @@
 PODS:
-  - KIF (3.6.0):
-    - KIF/Core (= 3.6.0)
-  - KIF/Core (3.6.0)
-  - KIF/IdentifierTests (3.6.0):
+  - KIF (3.7.3):
+    - KIF/Core (= 3.7.3)
+  - KIF/Core (3.7.3)
+  - KIF/IdentifierTests (3.7.3):
     - KIF/Core
 
 DEPENDENCIES:
@@ -10,7 +10,7 @@ DEPENDENCIES:
   - KIF/IdentifierTests
 
 SPEC CHECKSUMS:
-  KIF: bd770edd8ce49bc7308501e4871e58a02d137be3
+  KIF: 4c23b5d24dba24d3cb6dbb9c7d325b31e526ba4a
 
 PODFILE CHECKSUM: 59dd7bf219a2e3f52de7d1358cb2ee9f10dd7125
 
