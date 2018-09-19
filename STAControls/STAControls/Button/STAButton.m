@@ -144,6 +144,9 @@
         super.backgroundColor = backgroundColor;
     } else {
         UIColor *defaultColor = [self.backgroundColorDictionary objectForKeyNotNull:kDefaultBackgroundKey];
+        if ([defaultColor isMemberOfClass:[NSNull class]]) {
+            defaultColor = nil;
+        }
         super.backgroundColor = defaultColor;
     }
 }
