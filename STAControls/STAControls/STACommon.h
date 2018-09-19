@@ -14,4 +14,4 @@
 #define STALog(...)
 #endif
 
-#import "NSDictionary+Utility.h"
+#import "NSDictionary+STAControls.h"

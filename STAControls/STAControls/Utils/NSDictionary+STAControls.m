@@ -6,9 +6,9 @@
 //  Copyright © 2016 Aaron Jubbal. All rights reserved.
 //
 
-#import "NSDictionary+Utility.h"
+#import "NSDictionary+STAControls.h"
 
-@implementation NSDictionary (Utility)
+@implementation NSDictionary (STAControls)
 
 - (id)objectForKeyNotNull:(id)key {
     

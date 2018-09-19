@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSDictionary (Utility)
+@interface NSDictionary (STAControls)
 
 // Returns nil instead of [NSNull null].
 - (id)objectForKeyNotNull:(id)key;
