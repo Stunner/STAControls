@@ -29,8 +29,6 @@ matrix:
     - osx_image: xcode8
       env: DEVICE="iPhone 7 Plus" VERSION=10.0
     - osx_image: xcode8.3 # xcode 8.3
-      env: DEVICE="iPad 2" VERSION=9.3
-    - osx_image: xcode8.3
       env: DEVICE="iPad (5th generation)" VERSION=10.3.1
     - osx_image: xcode8.3
       env: DEVICE="iPad Air 2" VERSION=9.3
@@ -46,10 +44,6 @@ matrix:
       env: DEVICE="iPad Pro (9.7-inch)" VERSION=10.3.1
     - osx_image: xcode8.3
       env: DEVICE="iPad Pro (10.5-inch)" VERSION=10.3.1
-    - osx_image: xcode8.3
-      env: DEVICE="iPhone 5" VERSION=9.3
-    - osx_image: xcode8.3
-      env: DEVICE="iPhone 5" VERSION=10.3.1
     - osx_image: xcode8.3
       env: DEVICE="iPhone 5s" VERSION=9.3
     - osx_image: xcode8.3
@@ -124,8 +118,6 @@ matrix:
       env: DEVICE="iPad Pro (12.9-inch) (2nd generation)" VERSION=11.0.1
     - osx_image: xcode9.2
       env: DEVICE="iPad Pro (12.9-inch) (2nd generation)" VERSION=11.2
-    - osx_image: xcode9.2
-      env: DEVICE="iPhone 5" VERSION=10.3.1
     - osx_image: xcode9.2
       env: DEVICE="iPhone 5s" VERSION=10.3.1
     - osx_image: xcode9.2
