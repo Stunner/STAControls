@@ -76,107 +76,107 @@ matrix:
       env: DEVICE="iPhone SE" VERSION=9.3
     - osx_image: xcode8.3
       env: DEVICE="iPhone SE" VERSION=10.3.1
-    - osx_image: xcode9.2 # xcode 9.2
+    - osx_image: xcode9.4 # xcode 9.4
       env: DEVICE="iPad (5th generation)" VERSION=10.3.1
-    - osx_image: xcode9.2
-      env: DEVICE="iPad (5th generation)" VERSION=11.0.1
-    - osx_image: xcode9.2
+    - osx_image: xcode9.4
       env: DEVICE="iPad (5th generation)" VERSION=11.2
-    - osx_image: xcode9.2
+    - osx_image: xcode9.4
+      env: DEVICE="iPad (5th generation)" VERSION=11.4
+    - osx_image: xcode9.4
       env: DEVICE="iPad Air" VERSION=10.3.1
-    - osx_image: xcode9.2
-      env: DEVICE="iPad Air" VERSION=11.0.1
-    - osx_image: xcode9.2
+    - osx_image: xcode9.4
       env: DEVICE="iPad Air" VERSION=11.2
-    - osx_image: xcode9.2
+    - osx_image: xcode9.4
+      env: DEVICE="iPad Air" VERSION=11.4
+    - osx_image: xcode9.4
       env: DEVICE="iPad Air 2" VERSION=10.3.1
-    - osx_image: xcode9.2
-      env: DEVICE="iPad Air 2" VERSION=11.0.1
-    - osx_image: xcode9.2
+    - osx_image: xcode9.4
       env: DEVICE="iPad Air 2" VERSION=11.2
-    - osx_image: xcode9.2
+    - osx_image: xcode9.4
+      env: DEVICE="iPad Air 2" VERSION=11.4
+    - osx_image: xcode9.4
       env: DEVICE="iPad Pro (9.7-inch)" VERSION=10.3.1
-    - osx_image: xcode9.2
-      env: DEVICE="iPad Pro (9.7-inch)" VERSION=11.0.1
-    - osx_image: xcode9.2
+    - osx_image: xcode9.4
       env: DEVICE="iPad Pro (9.7-inch)" VERSION=11.2
-    - osx_image: xcode9.2
+    - osx_image: xcode9.4
+      env: DEVICE="iPad Pro (9.7-inch)" VERSION=11.4
+    - osx_image: xcode9.4
       env: DEVICE="iPad Pro (10.5-inch)" VERSION=10.3.1
-    - osx_image: xcode9.2
-      env: DEVICE="iPad Pro (10.5-inch)" VERSION=11.0.1
-    - osx_image: xcode9.2
+    - osx_image: xcode9.4
       env: DEVICE="iPad Pro (10.5-inch)" VERSION=11.2
-    - osx_image: xcode9.2
+    - osx_image: xcode9.4
+      env: DEVICE="iPad Pro (10.5-inch)" VERSION=11.4
+    - osx_image: xcode9.4
       env: DEVICE="iPad Pro (12.9-inch)" VERSION=10.3.1
-    - osx_image: xcode9.2
-      env: DEVICE="iPad Pro (12.9-inch)" VERSION=11.0.1
-    - osx_image: xcode9.2
+    - osx_image: xcode9.4
       env: DEVICE="iPad Pro (12.9-inch)" VERSION=11.2
-    - osx_image: xcode9.2
+    - osx_image: xcode9.4
+      env: DEVICE="iPad Pro (12.9-inch)" VERSION=11.4
+    - osx_image: xcode9.4
       env: DEVICE="iPad Pro (12.9-inch) (2nd generation)" VERSION=10.3.1
-    - osx_image: xcode9.2
-      env: DEVICE="iPad Pro (12.9-inch) (2nd generation)" VERSION=11.0.1
-    - osx_image: xcode9.2
+    - osx_image: xcode9.4
       env: DEVICE="iPad Pro (12.9-inch) (2nd generation)" VERSION=11.2
-    - osx_image: xcode9.2
+    - osx_image: xcode9.4
+      env: DEVICE="iPad Pro (12.9-inch) (2nd generation)" VERSION=11.4
+    - osx_image: xcode9.4
       env: DEVICE="iPhone 5s" VERSION=10.3.1
-    - osx_image: xcode9.2
-      env: DEVICE="iPhone 5s" VERSION=11.0.1
-    - osx_image: xcode9.2
+    - osx_image: xcode9.4
       env: DEVICE="iPhone 5s" VERSION=11.2
-    - osx_image: xcode9.2
+    - osx_image: xcode9.4
+      env: DEVICE="iPhone 5s" VERSION=11.4
+    - osx_image: xcode9.4
       env: DEVICE="iPhone 6" VERSION=10.3.1
-    - osx_image: xcode9.2
-      env: DEVICE="iPhone 6" VERSION=11.0.1
-    - osx_image: xcode9.2
+    - osx_image: xcode9.4
       env: DEVICE="iPhone 6" VERSION=11.2
-    - osx_image: xcode9.2
+    - osx_image: xcode9.4
+      env: DEVICE="iPhone 6" VERSION=11.4
+    - osx_image: xcode9.4
       env: DEVICE="iPhone 6 Plus" VERSION=10.3.1
-    - osx_image: xcode9.2
-      env: DEVICE="iPhone 6 Plus" VERSION=11.0.1
-    - osx_image: xcode9.2
+    - osx_image: xcode9.4
       env: DEVICE="iPhone 6 Plus" VERSION=11.2
-    - osx_image: xcode9.2
+    - osx_image: xcode9.4
+      env: DEVICE="iPhone 6 Plus" VERSION=11.4
+    - osx_image: xcode9.4
       env: DEVICE="iPhone 6s" VERSION=10.3.1
-    - osx_image: xcode9.2
-      env: DEVICE="iPhone 6s" VERSION=11.0.1
-    - osx_image: xcode9.2
+    - osx_image: xcode9.4
       env: DEVICE="iPhone 6s" VERSION=11.2
-    - osx_image: xcode9.2
+    - osx_image: xcode9.4
+      env: DEVICE="iPhone 6s" VERSION=11.4
+    - osx_image: xcode9.4
       env: DEVICE="iPhone 6s Plus" VERSION=10.3.1
-    - osx_image: xcode9.2
-      env: DEVICE="iPhone 6s Plus" VERSION=11.0.1
-    - osx_image: xcode9.2
+    - osx_image: xcode9.4
       env: DEVICE="iPhone 6s Plus" VERSION=11.2
-    - osx_image: xcode9.2
+    - osx_image: xcode9.4
+      env: DEVICE="iPhone 6s Plus" VERSION=11.4
+    - osx_image: xcode9.4
       env: DEVICE="iPhone 7" VERSION=10.3.1
-    - osx_image: xcode9.2
-      env: DEVICE="iPhone 7" VERSION=11.0.1
-    - osx_image: xcode9.2
+    - osx_image: xcode9.4
       env: DEVICE="iPhone 7" VERSION=11.2
-    - osx_image: xcode9.2
+    - osx_image: xcode9.4
+      env: DEVICE="iPhone 7" VERSION=11.4
+    - osx_image: xcode9.4
       env: DEVICE="iPhone 7 Plus" VERSION=10.3.1
-    - osx_image: xcode9.2
-      env: DEVICE="iPhone 7 Plus" VERSION=11.0.1
-    - osx_image: xcode9.2
+    - osx_image: xcode9.4
       env: DEVICE="iPhone 7 Plus" VERSION=11.2
-    - osx_image: xcode9.2
+    - osx_image: xcode9.4
+      env: DEVICE="iPhone 7 Plus" VERSION=11.4
+    - osx_image: xcode9.4
       env: DEVICE="iPhone SE" VERSION=10.3.1
-    - osx_image: xcode9.2
-      env: DEVICE="iPhone SE" VERSION=11.0.1
-    - osx_image: xcode9.2
+    - osx_image: xcode9.4
       env: DEVICE="iPhone SE" VERSION=11.2
-    - osx_image: xcode9.2
-      env: DEVICE="iPhone 8" VERSION=11.0.1
-    - osx_image: xcode9.2
+    - osx_image: xcode9.4
+      env: DEVICE="iPhone SE" VERSION=11.4
+    - osx_image: xcode9.4
       env: DEVICE="iPhone 8" VERSION=11.2
-    - osx_image: xcode9.2
-      env: DEVICE="iPhone 8 Plus" VERSION=11.0.1
-    - osx_image: xcode9.2
+    - osx_image: xcode9.4
+      env: DEVICE="iPhone 8" VERSION=11.4
+    - osx_image: xcode9.4
       env: DEVICE="iPhone 8 Plus" VERSION=11.2
-    - osx_image: xcode9.2
-      env: DEVICE="iPhone X" VERSION=11.0.1
-    - osx_image: xcode9.2
+    - osx_image: xcode9.4
+      env: DEVICE="iPhone 8 Plus" VERSION=11.4
+    - osx_image: xcode9.4
       env: DEVICE="iPhone X" VERSION=11.2
+    - osx_image: xcode9.4
+      env: DEVICE="iPhone X" VERSION=11.4
 script:
   - xcodebuild -sdk iphonesimulator -workspace STAControls/STAControls.xcworkspace -scheme STAControlsTests -destination "platform=iOS Simulator,name=$DEVICE,OS=$VERSION" clean test
