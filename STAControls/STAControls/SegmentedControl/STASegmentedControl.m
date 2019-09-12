@@ -8,7 +8,32 @@
 
 #import "STASegmentedControl.h"
 
+@interface STASegmentedControl ()
+
+/**
+ Used to prevent infinite recursion when handling the no segment case.
+ */
+@property (nonatomic, assign) BOOL handlingNoSegment;
+
+@end
+
 @implementation STASegmentedControl
+
+- (void)setSelectedSegmentIndex:(NSInteger)selectedSegmentIndex {
+    if (@available(iOS 13.0, *)) {
+        if (selectedSegmentIndex == UISegmentedControlNoSegment && self.selectedSegmentIndex >= 0
+            && !self.handlingNoSegment)
+        {
+            self.handlingNoSegment = YES;
+            NSUInteger index = self.selectedSegmentIndex;
+            NSString *title = [self titleForSegmentAtIndex:self.selectedSegmentIndex];
+            [self removeSegmentAtIndex:self.selectedSegmentIndex animated:NO];
+            [self insertSegmentWithTitle:title atIndex:index animated:NO];
+        }
+        self.handlingNoSegment = NO;
+    }
+    [super setSelectedSegmentIndex:selectedSegmentIndex];
+}
 
 // reference: http://stackoverflow.com/a/21459772/347339
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
