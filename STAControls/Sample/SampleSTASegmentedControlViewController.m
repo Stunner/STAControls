@@ -8,9 +8,11 @@
 
 #import "SampleSTASegmentedControlViewController.h"
 #import "STASegmentedControl.h"
+#import "STATextField.h"
 
-@interface SampleSTASegmentedControlViewController ()
+@interface SampleSTASegmentedControlViewController () <UITextFieldDelegate>
 
+@property (strong, nonatomic) IBOutlet STATextField *selectedIndexTextField;
 @property (nonatomic, strong) IBOutlet STASegmentedControl *segmentedControl;
 @property (nonatomic, strong) IBOutlet STASegmentedControl *toggleableSegmentedControl;
 
@@ -24,11 +26,10 @@
     self.navigationItem.leftBarButtonItem.accessibilityLabel = @"Back";
     
     self.toggleableSegmentedControl.toggleableSegments = YES;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
+    self.selectedIndexTextField.showBackForwardToolbar = YES;
+    self.selectedIndexTextField.text = @"0";
+    self.selectedIndexTextField.delegate = self;
 }
 
 - (IBAction)touchUpInside:(STASegmentedControl *)sender {
@@ -44,17 +45,19 @@
 - (IBAction)valueChanged:(STASegmentedControl *)sender {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
+    if (sender.tag == 1) {
+        self.selectedIndexTextField.text = [NSString stringWithFormat:@"%lu", sender.selectedSegmentIndex];
+    }
     NSLog(@"%ld", (long)sender.selectedSegmentIndex);
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    NSInteger integer = [textField.text integerValue];
+    if (integer < 0 || integer >= self.segmentedControl.numberOfSegments) {
+        self.segmentedControl.selectedSegmentIndex = UISegmentedControlNoSegment;
+    } else {
+        self.segmentedControl.selectedSegmentIndex = integer;
+    }
 }
-*/
 
 @end
